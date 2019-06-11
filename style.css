@@ -7,11 +7,16 @@ h1 {
     font-size: 300%;
     text-align: center;
 }
+h2 {
+    color: black;
+    font-family: Arial;
+    font-size: 200%;
+    text-align: center;   
+}
 p {
-    text-align: center;
     color: black;
     font-family: Times;
-    font-size: 150%;
+    font-size: 100%;
 }
 header {
     background-color: rgb(46, 46, 46);
