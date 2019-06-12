@@ -24,6 +24,7 @@ header {
     top: 0px;
     width: 100%;
     background-color: rgb(46, 46, 46);
+    font-family: Times;
     font-size: 200%;
     text-align: center;
     color: white;
@@ -35,6 +36,7 @@ footer {
     bottom: 0px;
     width: 100%;
     background-color: rgb(46, 46, 46);
+    font-family: Times;
     font-size: 200%;
     text-align: center;
     color: white;
