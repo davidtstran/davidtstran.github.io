@@ -27,7 +27,7 @@ header {
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 50px;
+    padding: 30px;
 }
 footer {
     position: fixed;
@@ -38,5 +38,5 @@ footer {
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 50px;
+    padding: 30px;
 }
