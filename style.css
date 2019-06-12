@@ -28,7 +28,7 @@ header {
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 0px;
+    padding: 15px;
 }
 footer {
     position: fixed;
@@ -40,7 +40,7 @@ footer {
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 0px;
+    padding: 15px;
 }
 a:link, a:visited { 
   color: gray;
