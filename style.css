@@ -42,3 +42,8 @@ footer {
     color: white;
     padding: 0px;
 }
+a:link, a:visited { 
+  color: gray;
+  text-decoration: underline;
+  cursor: auto;
+}
