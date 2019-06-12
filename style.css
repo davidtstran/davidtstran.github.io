@@ -23,14 +23,15 @@ header {
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 30px;
+    padding: 0px;
 }
 footer {
     position: fixed;
-    bottom: 0;
+    left: 0px;
+    bottom: 0px;
     background-color: rgb(46, 46, 46);
     font-size: 200%;
     text-align: center;
     color: white;
-    padding: 30px;
+    padding: 0px;
 }
