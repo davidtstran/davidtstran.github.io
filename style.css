@@ -42,4 +42,9 @@ footer {
     color: white;
     padding: 10px;
 }
-
+a:link {
+  color: gold;
+}
+a:visited {
+  color: gold;
+}
