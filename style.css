@@ -19,8 +19,8 @@ p {
     font-size: 100%;
 }
 canvas {
-    width: "500";
-    height: "500";
+    width: 500%;
+    height: 500%;
     text-align: center; 
     background-color: red;"   
 }
