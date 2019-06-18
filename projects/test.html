@@ -11,6 +11,16 @@
 	
 	<p align = "center">
 		<canvas = "test" width = 500 height = 500 style="text-align:center;background-color:white;"> </p>
+		
+	<script> 
+		//var canvas = document.getElementById("myCanvas");
+		//var c = canvas.getContext("2d");
+		circle = new Circle(START_RADIUS);
+		circle.setPosition(getWidth()/2, getHeight()/2);
+		add(circle);
+	
+		setTimer(growCircle, 50);
+	</script>
 	
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Footer
