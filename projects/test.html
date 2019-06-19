@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/style.css">
-    <title>dtst Test Project</title>
+    <title>dtstt Test Project</title>
 </head>
 <body>
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
@@ -12,7 +12,7 @@
 	<p align = "center">
 		<canvas id="test" width=500 height=500 style="text-align:center;background-color:white;"> </p>
 		
-	<script> 
+	<script src="/script.js"> 
 	function main() {
 		var c = document.getElementById("test");
 		var ctx = c.getContext("2d");
@@ -20,6 +20,7 @@
 		ctx.stroke();
 	}
 	main();
+	createCircle(ctx, 20, 20, 50);
 	</script>
 	
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
