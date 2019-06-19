@@ -12,11 +12,16 @@
 	<p align = "center">
 		<canvas id="test" width=500 height=500 style="text-align:center;background-color:white;"> </p>
 		
-	<script src="/script.js"> 
-	function main() {
+	<script> 
+	function createCircle(ctx, xCenter, yCenter, radius){
 		var c = document.getElementById("test");
 		var ctx = c.getContext("2d");
-		createCircle(ctx, 20, 20, 50);
+		ctx.beginPath();
+		ctx.arc(xCenter, yCenter, radius, 0, 2 * Math.PI);
+		ctx.stroke();
+	}
+	function main() {
+		createCircle(20, 20, 50);
 	}
 	main();
 	</script>
