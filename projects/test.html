@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/style.css">
-    <title>dtstt Test Project</title>
+    <title>dtst Test Project</title>
 </head>
 <body>
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
@@ -10,16 +10,16 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	
 	<p align = "center">
-		<canvas = "test" width = 500 height = 500 style="text-align:center;background-color:white;"> </p>
+		<canvas id = "test" width = 500 height = 500 style="text-align:center;background-color:white;"> </p>
 		
 	<script> 
-	//function main() {
+	function main() {
 		var c = document.getElementById("test");
 		var ctx = c.getContext("2d");
 		ctx.rect(20, 20, 150, 100);
 		ctx.stroke();
-	//}
-	//main();
+	}
+	main();
 	</script>
 	
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
