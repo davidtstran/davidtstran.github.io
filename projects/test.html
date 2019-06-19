@@ -32,7 +32,7 @@
 		var canvasHeight = 500;
 		var growR = 0;
 		while (growR <= 200){
-			setTimeout(createCircle(canvas, canvasWidth/2, canvasHeight/2, growR), 1000);
+			setTimeout(function(){createCircle(canvas, canvasWidth/2, canvasHeight/2, growR);}, 1000);
 			growR += 50;
 		}
 		//createRectangle(canvas, 0, 0, 50, 50); 
