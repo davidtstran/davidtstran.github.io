@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/style.css">
     <title>dtst Test Project</title>
 </head>
-<body>
+<body onload = "main()">
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
@@ -14,12 +14,11 @@
 		
 	<script> 
 	function main() {
-		var c = document.getElementById("myCanvas");
+		var c = document.getElementById("test");
 		var ctx = c.getContext("2d");
 		ctx.rect(20, 20, 150, 100);
 		ctx.stroke();
 	}
-	main();
 	</script>
 	
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
