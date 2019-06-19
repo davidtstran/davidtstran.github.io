@@ -13,15 +13,23 @@
 		<canvas id="test" width=500 height=500 style="text-align:center;background-color:white;"> </p>
 		
 	<script> 
-	function createCircle(xCenter, yCenter, radius){
-		var c = document.getElementById("test");
+	function createCircle(canvas, xCenter, yCenter, radius){
+		var c = document.getElementById(canvas);
 		var ctx = c.getContext("2d");
 		ctx.beginPath();
 		ctx.arc(xCenter, yCenter, radius, 0, 2 * Math.PI);
 		ctx.stroke();
 	}
+	function createRectangle(canvas, xL, yL, width, height){
+		var c = document.getElementById(canvas);
+		var ctx = c.getContext("2d");
+		ctx.rect(xL, yL, width, height);
+		ctx.stroke();
+	}
 	function main() {
-		createCircle(20, 20, 50);
+		var canvas = "test";
+		createCircle(canvas, 0, 0, 50);
+		createRectangle(canvas, 0, 0, 50, 50); 
 	}
 	main();
 	</script>
