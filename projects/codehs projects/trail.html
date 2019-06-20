@@ -26,7 +26,7 @@ canvas {
 <script>
 window.onload = function() {
 
-	var MAX_BOUNCES = 20;
+    	var MAX_BOUNCES = 20;
 
 	var ball;
 	var dx = 4;
@@ -57,7 +57,7 @@ window.onload = function() {
 
 	function trail(){
 		var trail = new Circle (ball.getRadius() / 2);
-		trail.setColor(Color.yellow);
+		trail.setColor(Color.cyan);
 		trail.setPosition(ball.getX(), ball.getY());
 		add(trail);
 	}
