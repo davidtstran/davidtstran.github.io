@@ -1,0 +1,219 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>CodeHS Breakout</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+
+
+<style>
+canvas {
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: top;
+}
+</style>
+
+</head>
+
+<body>
+
+<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+
+<script>
+window.onload = function() {
+
+    /* Constants for bricks */
+	var NUM_ROWS = 10;
+	var BRICK_TOP_OFFSET = 10;
+	var BRICK_SPACING = 2;
+	var NUM_BRICKS_PER_ROW = 10;
+	var BRICK_HEIGHT = 10;
+	var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
+	var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
+
+	/* Constants for ball and paddle */
+	var PADDLE_WIDTH = 80;
+	var PADDLE_HEIGHT = 15;
+	var PADDLE_OFFSET = 10;
+
+	var BALL_RADIUS = 15;
+
+	//added
+	var brick;
+	var ball;
+	var dx = 4;
+	var dy = 4;
+	var paddle;
+	var yPos = BRICK_TOP_OFFSET;
+	var f;  // = # of row
+	var ballStopped = false;
+	var tries = 3;
+	var totalBricks = 80;
+
+	function start(){
+		bricks();
+		ball();
+		setTimer(bounceBall, 20);
+		paddle();
+		mouseMoveMethod (paddleMove);
+	}
+
+	function rowOfBricks(){
+		for (var i = 0; i < NUM_BRICKS_PER_ROW; i++){
+			brick = new Rectangle (BRICK_WIDTH, BRICK_HEIGHT);
+			brick.setPosition (BRICK_SPACING + i * (BRICK_WIDTH + BRICK_SPACING), yPos);
+			color();
+			add(brick);
+		}
+	}
+
+	function bricks(){
+		for (f = 1; f <= NUM_ROWS; f++){
+			rowOfBricks();
+			yPos = BRICK_TOP_OFFSET + f * (BRICK_HEIGHT + BRICK_SPACING);
+		}
+	}
+
+	function color(){
+		if (f == 1 || f == 2){
+			brick.setColor (Color.red);
+		}
+		else if (f == 3 || f == 4){
+			brick.setColor (Color.orange);
+		}
+		else if (f == 5 || f == 6){
+			brick.setColor (Color.green);
+		}
+		else if (f == 7 || f == 8){
+			brick.setColor (Color.blue);
+		}
+		else {
+			brick.setColor (Color.black);
+		}
+	}
+
+	function ball(){
+		ball = new Circle (BALL_RADIUS);
+		ball.setPosition (getWidth()/2, getHeight()/2);
+		add(ball);
+	}
+
+	function bounceBall(){
+		if (ballStopped == false){
+			checkWalls();
+			checkObjects();
+			ball.move(dx, dy);
+			youLose();
+		}
+	}
+
+	function checkObjects(){
+		var element = getCollidingObjects();
+		if (element != null){
+			if (element != paddle){
+				remove(element);
+				totalBricks--;
+					youWin();
+			}
+			dy = -dy;
+		}
+	}
+
+	function getCollidingObjects(){
+		var topLeft = getElementAt (ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
+		var topRight = getElementAt (ball.getX() + ball.getRadius(), ball.getY() - ball.getRadius());
+		var botLeft = getElementAt (ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
+		var botRight = getElementAt (ball.getX() + ball.getRadius(), ball.getY() + ball.getRadius());
+		if (topLeft){
+			return topLeft;
+		}
+		else if (topRight){
+			return topRight;
+		}
+		else if (botLeft){
+			return botLeft;
+		}
+		else if (botRight){
+			return botRight;
+		}
+	}
+
+	function checkWalls(){
+		// Bounce off right wall
+		if(ball.getX() + ball.getRadius() > getWidth()){
+			dx = -dx;
+		}
+	
+		// Bounce off left wall
+		if(ball.getX() - ball.getRadius() < 0){
+			dx = -dx;
+		}
+	
+		// Bounce off bottom wall
+		if(ball.getY() + ball.getRadius() > getHeight()){
+			ball.setPosition(getWidth()/2, getHeight()/2);
+			ballStopped = true;
+			tries--;
+			mouseClickMethod(beginBall);
+		}
+	
+		// Bounce off top wall
+		if(ball.getY() - ball.getRadius() < 0){
+			dy = -dy;
+		}
+	}
+
+	function beginBall(e){
+		ballStopped = false;
+	}
+
+	function paddle(){
+		paddle = new Rectangle (PADDLE_WIDTH, PADDLE_HEIGHT);
+		paddle.setPosition (getWidth()/2 - PADDLE_WIDTH / 2, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
+		add(paddle);
+	}
+
+	function paddleMove(e){
+		var paddleX = e.getX() - paddle.getWidth()/2;
+    
+		if (paddleX < 0){
+			paddleX = 0;
+		}
+    
+		if (paddleX + PADDLE_WIDTH > getWidth()){
+			paddleX = getWidth() - PADDLE_WIDTH;
+		}
+		paddle.setPosition (paddleX, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
+	}
+
+	function youLose(){
+		if (tries == 0){
+			stopTimer(bounceBall);
+			remove(ball);
+			var txt = new Text ("Game over");
+			txt.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+			add(txt);
+		}
+	}
+
+	function youWin(){
+		if (totalBricks == 0){
+			stopTimer(bounceBall);
+			var txt = new Text ("You Win!");
+			txt.setPosition (getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+			add(txt);
+		}
+	}
+
+
+    if (typeof start === 'function') {
+        start();
+    }
+};
+</script>
+
+</body>
+</html>
