@@ -18,11 +18,6 @@ p {
     font-family: Times;
     font-size: 100%;
 }
-canvas {
-    border: 1px solid black;
-    display: inline-block;
-    vertical-align: top;
-}
 header {
     position: fixed;
     left: 0px;
