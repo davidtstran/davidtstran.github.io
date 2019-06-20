@@ -34,9 +34,11 @@ window.onload = function() {
 
 	function start(){
 		horizLine = new Line (0, getHeight()/2, getWidth(), getHeight()/2);
+		horizLine.setColor(Color.white);
 		add(horizLine);
     
 		verticLine = new Line (getWidth()/2, 0, getWidth()/2, getHeight());
+		verticLine.setColor(Color.white);
 		add(verticLine);
     
 		mouseMoveMethod(moveLines);
