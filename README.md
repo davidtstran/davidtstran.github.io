@@ -1,5 +1,10 @@
 # davidtstran.github.io
 
 Projects: 
-  - A
+  - Projects from CodeHS:
+        Breakout
+        Drag and Drop
+        Paint Splatter
+        Target
+        Trail
   - B
