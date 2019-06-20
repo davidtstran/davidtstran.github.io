@@ -1,0 +1,70 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>CodeHS Target</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+
+
+<style>
+canvas {
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: top;
+}
+</style>
+
+</head>
+
+<body>
+
+<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+
+<script>
+window.onload = function() {
+
+    // This program draws a target that follows the mouse
+	var RADIUS = 10;
+
+	var horizLine;
+	var verticLine;
+
+	function start(){
+		horizLine = new Line (0, getHeight()/2, getWidth(), getHeight()/2);
+		horizLine.setColor(Color.white);
+		add(horizLine);
+    
+		verticLine = new Line (getWidth()/2, 0, getWidth()/2, getHeight());
+		verticLine.setColor(Color.white);
+		add(verticLine);
+    
+		mouseMoveMethod(moveLines);
+		mouseClickMethod(addRedBalls);
+	}
+
+	function moveLines(e){
+		horizLine.setPosition(0, e.getY());
+		horizLine.setEndpoint(getWidth(), e.getY());
+    
+		verticLine.setPosition(e.getX(), 0);
+		verticLine.setEndpoint(e.getX(), getHeight());
+	}
+
+	function addRedBalls(e){
+		var ball = new Circle (RADIUS);
+		ball.setColor (Color.red);
+		ball.setPosition (e.getX(), e.getY());
+		add (ball);
+	}
+
+    if (typeof start === 'function') {
+        start();
+    }
+};
+</script>
+
+</body>
+</html>

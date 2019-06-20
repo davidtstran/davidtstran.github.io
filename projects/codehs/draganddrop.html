@@ -1,0 +1,71 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>CodeHS Drag and Drop</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+
+
+<style>
+canvas {
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: top;
+}
+</style>
+
+</head>
+
+<body>
+
+<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+
+<script>
+window.onload = function() {
+
+    var NUM_CIRCLES = 3;
+	var RADIUS = 30;
+	var element;
+
+	function start(){
+		drawCircles();
+		mouseDownMethod(pickUpBall);
+		mouseDragMethod(moveBall);
+	
+	}
+
+	function pickUpBall(e){
+		element = getElementAt(e.getX(), e.getY());
+	}
+
+	function moveBall(e){
+		if (element != null){
+			element.setPosition(e.getX(), e.getY());
+		}
+	}
+
+
+	function drawCircles(){
+		for (var i = 0; i < NUM_CIRCLES; i++){
+			var circle = new Circle(RADIUS);
+			var x = Randomizer.nextInt(RADIUS, getWidth() - RADIUS);
+			var y = Randomizer.nextInt(RADIUS, getHeight() - RADIUS);
+			circle.setPosition(x, y);
+			circle.setColor(Randomizer.nextColor());
+			add(circle);
+		}
+	}
+
+
+
+    if (typeof start === 'function') {
+        start();
+    }
+};
+</script>
+
+</body>
+</html>
