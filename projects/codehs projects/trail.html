@@ -29,8 +29,8 @@ window.onload = function() {
     	var MAX_BOUNCES = 20;
 
 	var ball;
-	var dx = 4;
-	var dy = 4;
+	var dx = 5;
+	var dy = 5;
 
 	var counter = 0;
 	/* This program has a ball bounce around the screen. 
@@ -57,7 +57,7 @@ window.onload = function() {
 
 	function trail(){
 		var trail = new Circle (ball.getRadius() / 2);
-		trail.setColor(Color.cyan);
+		trail.setColor(Color.gold);
 		trail.setPosition(ball.getX(), ball.getY());
 		add(trail);
 	}
