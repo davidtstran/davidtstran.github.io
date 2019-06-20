@@ -50,9 +50,10 @@ window.onload = function() {
 	}
 
 	function draw(){
-		trail();
+		//trail();
 		checkWalls();
 		ball.move(dx, dy);
+		trail();
 	
 		// Ball will stop after bouncing MAX_BOUNCES of times
 		if (counter == MAX_BOUNCES){
