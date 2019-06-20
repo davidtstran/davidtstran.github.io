@@ -31,14 +31,19 @@ window.onload = function() {
 	var ball;
 	var dx = 5;
 	var dy = 5;
-
+	
+	var ballRadius = 20;
+	var trailColor = Randomizer.nextColor();
+	var ballX = Randomizer.nextInt(ballRadius, getWidth() - ballRadius);
+	var ballY = Randomizer.nextInt(ballRadius, getHeight() - ballRadius);
+	
 	var counter = 0;
 	/* This program has a ball bounce around the screen. 
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
-		ball = new Circle(20);
-		ball.setPosition(100, 100);
+		ball = new Circle(ballRadius);
+		ball.setPosition(ballX, ballY);
 		add(ball);
 	
 		setTimer(draw, 20);
@@ -57,7 +62,7 @@ window.onload = function() {
 
 	function trail(){
 		var trail = new Circle (ball.getRadius() / 2);
-		trail.setColor(Color.randomRed());
+		trail.setColor(trailColor);
 		trail.setPosition(ball.getX(), ball.getY());
 		add(trail);
 	}
