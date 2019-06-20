@@ -42,6 +42,7 @@ window.onload = function() {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
+		print("Begin");
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
 		add(ball);
@@ -50,7 +51,6 @@ window.onload = function() {
 	}
 
 	function draw(){
-		//trail();
 		checkWalls();
 		ball.move(dx, dy);
 		trail();
