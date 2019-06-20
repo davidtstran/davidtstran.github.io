@@ -57,7 +57,7 @@ window.onload = function() {
 
 	function trail(){
 		var trail = new Circle (ball.getRadius() / 2);
-		trail.setColor(Color.gold);
+		trail.setColor(Color.randomRed());
 		trail.setPosition(ball.getX(), ball.getY());
 		add(trail);
 	}
