@@ -24,6 +24,7 @@ canvas {
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
+	<h2 id = "bounces" align = "center"></h2>
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
@@ -47,6 +48,7 @@ window.onload = function() {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
+		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
 		add(ball);
@@ -77,24 +79,28 @@ window.onload = function() {
 		if(ball.getX() + ball.getRadius() > getWidth()){
 			dx = -dx;
 			counter++;
+			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	
 		// Bounce off left wall
 		if(ball.getX() - ball.getRadius() < 0){
 			dx = -dx;
 			counter++;
+			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	
 		// Bounce off bottom wall
 		if(ball.getY() + ball.getRadius() > getHeight()){
 			dy = -dy;
 			counter++;
+			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	
 		// Bounce off top wall
 		if(ball.getY() - ball.getRadius() < 0){
 			dy = -dy;
 			counter++;
+			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	}
 	if (typeof start === 'function') {
