@@ -24,6 +24,7 @@ canvas {
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<p align = "center">
+		Lives: <p id = "lives"></p>
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
 
@@ -59,6 +60,7 @@ window.onload = function() {
 	var totalBricks = 80;
 
 	function start(){
+		document.getElementById("lives").innerHTML = tries.toString(2);
 		bricks();
 		ball();
 		setTimer(bounceBall, 20);
@@ -162,6 +164,7 @@ window.onload = function() {
 			ball.setPosition(getWidth()/2, getHeight()/2);
 			ballStopped = true;
 			tries--;
+			document.getElementById("lives").innerHTML = tries.toString(2);
 			mouseClickMethod(beginBall);
 		}
 	
