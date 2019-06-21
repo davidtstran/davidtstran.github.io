@@ -66,10 +66,12 @@ window.onload = function() {
 	}
 
 	function trail(){
-		var trail = new Circle (ball.getRadius() / 2);
-		trail.setColor(trailColor);
-		trail.setPosition(ball.getX(), ball.getY());
-		add(trail);
+		for (var i = 0; i < Math.max(dx,dy); i++){
+			var trail = new Circle (ball.getRadius() / 2);
+			trail.setColor(trailColor);
+			trail.setPosition(ball.getX(), ball.getY());
+			add(trail);
+		}
 	}
 
 	function checkWalls(){
