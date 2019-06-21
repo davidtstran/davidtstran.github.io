@@ -47,7 +47,7 @@ window.onload = function() {
 		add(verticLine);
     
 		mouseMoveMethod(moveLines);
-		mouseClickMethod(addRedBalls);
+		mouseClickMethod(addHitMarkers);
 	}
 
 	function moveLines(e){
@@ -58,11 +58,15 @@ window.onload = function() {
 		verticLine.setEndpoint(e.getX(), getHeight());
 	}
 
-	function addRedBalls(e){
+	function addHitMarkers(e){
 		var ball = new Circle (RADIUS);
 		ball.setColor (Color.red);
 		ball.setPosition (e.getX(), e.getY());
 		add (ball);
+		var center = new Circle (RADIUS/10);
+		center.setColor (Color.black);
+		center.estPosition (e.getX(), e.getY());
+		add (center);
 	}
 
     if (typeof start === 'function') {
