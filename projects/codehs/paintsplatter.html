@@ -44,6 +44,7 @@ window.onload = function() {
  
 	function start(){
 		setTimer(createSplatter, DELAY);
+		mouseClickMethod(endSplatter);
 	}
 
 	function drawCircle(radius, color, x, y){
@@ -58,6 +59,10 @@ window.onload = function() {
 		for (var i = 0; i < CIRCLES_PER_SPLATTER; i++){
 			drawCircle(Randomizer.nextInt(MIN_RADIUS, MAX_RADIUS), color, Randomizer.nextInt(0, getWidth()), Randomizer.nextInt(0, getHeight()));
 		}
+	}
+	
+	function endSplatter(e){
+		stopTimer(createSplatter);	
 	}
 
 
