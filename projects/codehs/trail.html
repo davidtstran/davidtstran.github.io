@@ -34,8 +34,8 @@ window.onload = function() {
 	var MAX_BOUNCES = 20;
 
 	var ball;
-	var dx = Randomizer.nextInt(-100, 100);
-	var dy = Randomizer.nextInt(-100, 100);
+	var dx = Randomizer.nextInt(-10, 10);
+	var dy = Randomizer.nextInt(-10, 10);
 	
 	var ballRadius = 20;
 	var trailColor = Randomizer.nextColor();
@@ -66,12 +66,10 @@ window.onload = function() {
 	}
 
 	function trail(){
-		for (var i = 0; i < Math.max(dx,dy); i++){
-			var trail = new Circle (ball.getRadius() / 2);
-			trail.setColor(trailColor);
-			trail.setPosition(ball.getX(), ball.getY());
-			add(trail);
-		}
+		var trail = new Circle (ball.getRadius() / 2);
+		trail.setColor(trailColor);
+		trail.setPosition(ball.getX(), ball.getY());
+		add(trail);
 	}
 
 	function checkWalls(){
