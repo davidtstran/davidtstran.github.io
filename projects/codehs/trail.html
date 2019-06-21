@@ -34,8 +34,8 @@ window.onload = function() {
 	var MAX_BOUNCES = 20;
 
 	var ball;
-	var dx = 5;
-	var dy = 5;
+	var dx = Randomizer.nextInt(-100, 100);
+	var dy = Randomizer.nextInt(-100, 100);
 	
 	var ballRadius = 20;
 	var trailColor = Randomizer.nextColor();
