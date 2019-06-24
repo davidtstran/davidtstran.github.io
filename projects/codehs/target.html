@@ -60,7 +60,6 @@ window.onload = function() {
 	
 	function getColor(x, y){
 		if (x == document.getElementById("cv").width/2 && y == document.getElementById("cv").height/2) {
-			document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10) + " (CENTER HIT)";
 			return Color.black;
 		} else if (x >= 100 && x <= 300 && y >= 150 && y <= 350) {
 			return Color.red;
@@ -75,7 +74,10 @@ window.onload = function() {
 		ball.setColor(getColor(e.getX(), e.getY()));
 		add (ball);
 		shot++;
-		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
+		if (e.getX() == document.getElementById("cv").width/2 && e.getY() == document.getElementById("cv").height/2)
+			document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10) + " (CENTER HIT)";
+		else
+			document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
 	}
 
 	if (typeof start === 'function') {
