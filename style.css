@@ -18,6 +18,13 @@ p {
     font-family: Times;
     font-size: 100%;
 }
+canvas {
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    background-color: white;
+}
 header {
     position: fixed;
     left: 0px;
