@@ -24,6 +24,7 @@ canvas {
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
+	<input type="number" id="bnc">
 	<h2 id = "bounces" align = "center"></h2>
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
@@ -32,7 +33,7 @@ canvas {
 <script>
 window.onload = function() {
 
-	var MAX_BOUNCES = 20;
+	var MAX_BOUNCES = document.getElementById("bnc").value;;
 
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
