@@ -64,7 +64,7 @@ window.onload = function() {
 	function addHitMarkers(e){
 		var ball = new Circle (RADIUS);
 		ball.setPosition (e.getX(), e.getY());
-		ball.setColor(getColor(e.getX(), e.getY());
+		ball.setColor(getColor(e.getX(), e.getY()));
 		add (ball);
 		shot++;
 		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
