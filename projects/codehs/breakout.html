@@ -31,7 +31,8 @@ canvas {
 
 <script>
 window.onload = function() {
-
+	var lvs = prompt("Number of Lives:", "3");
+						   
 	/* Constants for bricks */
 	var NUM_ROWS = 10;
 	var BRICK_TOP_OFFSET = 10;
@@ -57,7 +58,7 @@ window.onload = function() {
 	var yPos = BRICK_TOP_OFFSET;
 	var f;  // = # of row
 	var ballStopped = false;
-	var tries = 3;
+	var tries = lvs.toString(10);;
 	var totalBricks = 80;
 
 	function start(){
