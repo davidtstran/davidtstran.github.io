@@ -25,7 +25,7 @@ canvas {
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<input type="number" id="bnc">
-	<button onclick="myFunction()">Enter</button>
+	<button onclick="start()">Enter</button>
 	<h2 id = "bounces" align = "center"></h2>
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
@@ -50,7 +50,6 @@ window.onload = function() {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
-		var MAX_BOUNCES = document.getElementById("bnc").value;
 		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
