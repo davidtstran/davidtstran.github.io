@@ -46,7 +46,7 @@ canvas {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
-		var MAX_BOUNCES = document.getElementById("dnc").value
+		var MAX_BOUNCES = document.getElementById("bnc").value
 		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
