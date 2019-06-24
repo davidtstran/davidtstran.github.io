@@ -24,13 +24,15 @@ canvas {
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2 id = "bounces" align = "center"></h2>
+	<input type = "number" name = "bnc">
+	
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
 	
 <script>
-window.onload = function() {
-	var MAX_BOUNCES = 30;
+bnc.onchange = function() {
+	var MAX_BOUNCES = document.getElementById("bnc").value;
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
 	var dy = Randomizer.nextInt(-10, 10);
