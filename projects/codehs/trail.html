@@ -31,7 +31,7 @@ canvas {
 	</p>
 	
 <script>
-bnc.onchange = function() {
+bnc.addEventListener(onchange, function() {
 	var MAX_BOUNCES = document.getElementById("bnc").value;
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
@@ -102,7 +102,7 @@ bnc.onchange = function() {
 	if (typeof start === 'function') {
         	start();
     	}
-};
+});
 </script>
 
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
