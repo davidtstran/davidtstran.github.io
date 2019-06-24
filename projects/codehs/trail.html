@@ -24,16 +24,14 @@ canvas {
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
+	<input type = "number" id = "bnc">
+	<button onClick = "start()">Begin</button>
 	<h2 id = "bounces" align = "center"></h2>
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
 	
 <script>
-window.onload = function() {
-
-	var MAX_BOUNCES = 20;
-
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
 	var dy = Randomizer.nextInt(-10, 10);
@@ -48,6 +46,7 @@ window.onload = function() {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
+		var MAX_BOUNCES = document.getElementById("dnc").value
 		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
@@ -103,10 +102,6 @@ window.onload = function() {
 			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	}
-	if (typeof start === 'function') {
-        	start();
-    	}
-};
 </script>
 
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
