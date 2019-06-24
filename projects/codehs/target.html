@@ -16,6 +16,7 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Move Mouse to Move Crosshair<br>Click to Add Hit Marker</h2>
 	<h2 id = "shots"></h2>
+	<h2 id = "pos"></h2>
 	
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
@@ -34,6 +35,7 @@ window.onload = function() {
 
 	function start(){
 		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
+		document.getElementById("pos").innerHTML = "Position:";
 		horizLine = new Line (0, getHeight()/2, getWidth(), getHeight()/2);
 		horizLine.setColor(Color.black);
 		add(horizLine);
@@ -52,6 +54,8 @@ window.onload = function() {
     
 		verticLine.setPosition(e.getX(), 0);
 		verticLine.setEndpoint(e.getX(), getHeight());
+		
+		document.getElementById("pos").innerHTML = "Position: (" + e.getX().toString(10) + ", " + e.getY().toString(10) + ")";
 	}
 	
 	function getColor(x, y){
