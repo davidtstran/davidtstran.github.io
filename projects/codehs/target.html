@@ -15,7 +15,7 @@
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Move Mouse to Move Crosshair<br>Click to Add Hit Marker</h2>
-	<h2 id = "hits"></h2>
+	<h2 id = "shots"></h2>
 	
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
@@ -27,13 +27,13 @@ window.onload = function() {
     // This program draws a target that follows the mouse
 	var RADIUS = 10;
 	
-	var hit = 0;
+	var shot = 0;
 	
 	var horizLine;
 	var verticLine;
 
 	function start(){
-		document.getElementById("hits").innerHTML = "Hits: " + hit.toString(10);
+		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
 		horizLine = new Line (0, getHeight()/2, getWidth(), getHeight()/2);
 		horizLine.setColor(Color.black);
 		add(horizLine);
@@ -59,8 +59,8 @@ window.onload = function() {
 		ball.setColor (Color.red);
 		ball.setPosition (e.getX(), e.getY());
 		add (ball);
-		hit++;
-		document.getElementById("hits").innerHTML = "Hits: " + hit.toString(10);
+		shot++;
+		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
 	}
 
 	if (typeof start === 'function') {
