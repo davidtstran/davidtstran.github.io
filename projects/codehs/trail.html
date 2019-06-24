@@ -1,4 +1,3 @@
-
 <html>
 <head>
 	<link rel="stylesheet" href="/style.css">
@@ -32,6 +31,8 @@ canvas {
 	</p>
 	
 <script>
+window.addEventListener("click", function(event)) {
+	var MAX_BOUNCES = 20;
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
 	var dy = Randomizer.nextInt(-10, 10);
@@ -46,7 +47,6 @@ canvas {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
-		var MAX_BOUNCES = document.getElementById("bnc").value;
 		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
@@ -54,7 +54,6 @@ canvas {
 	
 		setTimer(draw, 20);
 	}
-
 	function draw(){
 		trail();
 		checkWalls();
@@ -65,14 +64,12 @@ canvas {
 			stopTimer(draw);
 		}
 	}
-
 	function trail(){
 		var trail = new Circle (ball.getRadius() / 2);
 		trail.setColor(trailColor);
 		trail.setPosition(ball.getX(), ball.getY());
 		add(trail);
 	}
-
 	function checkWalls(){
 		// Bounce off right wall
 		if(ball.getX() + ball.getRadius() > getWidth()){
@@ -102,6 +99,10 @@ canvas {
 			document.getElementById("bounces").innerHTML = "Bounces Left: " + (MAX_BOUNCES-counter).toString(10);
 		}
 	}
+	if (typeof start === 'function') {
+        	start();
+    	}
+};
 </script>
 
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
