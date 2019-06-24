@@ -2,43 +2,14 @@
 <html>
 <head>
     <link rel="stylesheet" href="/style.css">
-    <title>dtst Test Project</title>
+    <title>dtst Test</title>
 </head>
 <body>
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	
-	<p align = "center">
-		<canvas id="test" width=500 height=500 style="text-align:center;background-color:white;"> </p>
-		
-	<script> 
-	function createCircle(canvas, xCenter, yCenter, radius){
-		var c = document.getElementById(canvas);
-		var ctx = c.getContext("2d");
-		ctx.beginPath();
-		ctx.arc(xCenter, yCenter, radius, 0, 2 * Math.PI);
-		ctx.stroke();
-	}
-	function createRectangle(canvas, xL, yL, width, height){
-		var c = document.getElementById(canvas);
-		var ctx = c.getContext("2d");
-		ctx.rect(xL, yL, width, height);
-		ctx.stroke();
-	}
-	function main() {
-		var canvas = "test";
-		var canvasWidth = 500;
-		var canvasHeight = 500;
-		var growR = 50;
-		while (growR <= 200){
-			createRectangle(canvas, canvasWidth/2, canvasHeight/2, growR, growR);
-			growR += 50;
-		}
-		//createRectangle(canvas, 0, 0, 50, 50); 
-	}
-	main();
-	</script>
+	<p style="center"> Test File </p>
 	
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Footer
