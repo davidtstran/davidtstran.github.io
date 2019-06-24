@@ -53,11 +53,18 @@ window.onload = function() {
 		verticLine.setPosition(e.getX(), 0);
 		verticLine.setEndpoint(e.getX(), getHeight());
 	}
+	
+	function getColor(x, y){
+		if (x == getWidth() && y == getHeight())
+			return Color.black;
+		else
+			return Color.red;
+	}
 
 	function addHitMarkers(e){
 		var ball = new Circle (RADIUS);
-		ball.setColor (Color.red);
 		ball.setPosition (e.getX(), e.getY());
+		ball.setColor(getColor(e.getX(), e.getY());
 		add (ball);
 		shot++;
 		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
