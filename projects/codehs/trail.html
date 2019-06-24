@@ -34,7 +34,7 @@ canvas {
 <script>
 window.onload = function() {
 
-	var MAX_BOUNCES = document.getElementById("bnc").value;;
+	var MAX_BOUNCES = document.getElementById("bnc").value;
 
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
@@ -50,6 +50,7 @@ window.onload = function() {
 	* It's path is drawn by drawing different colored balls everywhere it goes.
 	*/
 	function start(){
+		var MAX_BOUNCES = document.getElementById("bnc").value;
 		document.getElementById("bounces").innerHTML = "Bounces Left: " + MAX_BOUNCES.toString(10);
 		ball = new Circle(ballRadius);
 		ball.setPosition(ballX, ballY);
