@@ -16,7 +16,7 @@
 	<h2 id = "bounces"></h2>
 	
 	<p align = "center">
-		<input type = "button" value = "Start" onclick = "start()"> <br>
+		<input type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="800" height="400" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
@@ -30,10 +30,21 @@ function start(){
 	var ballX = getWidth()/2;
 	var ballY = getHeight()/2;
 	
+	var paddleL, paddleR;
+	var pWidth = 10;
+	var pHeight = 150;
+	
 	ball = new Circle (ballRadius);
 	ball.setColor(Color.white);
 	ball.setPosition(ballX, ballY);
 	add(ball);
+	
+	paddleL = new Rectangle (pWidth, pHeight);
+	paddleL = setColor(Color.white);
+	paddleL.setPosition(0,0);
+	add(paddleL);
+	
+	
 	
 
 }
