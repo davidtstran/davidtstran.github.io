@@ -41,17 +41,13 @@ function start(){
 	
 	paddleL = new Rectangle (pWidth, pHeight);
 	paddleL.setColor(Color.white);
-	paddleL.setPosition(0,getHeight()/2+pHeight/2);
+	paddleL.setPosition(0,getHeight()/2-pHeight/2);
 	add(paddleL);
 	
 	paddleR = new Rectangle (pWidth, pHeight);
 	paddleR.setColor(Color.white);
-	paddleR.setPosition(getWidth()-pWidth,getHeight()-pHeight);
+	paddleR.setPosition(getWidth()-pWidth,getHeight()/2-pHeight/2);
 	add(paddleR);
-	
-	
-	
-
 }
 </script>
 
