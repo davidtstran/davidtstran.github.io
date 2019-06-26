@@ -1,4 +1,3 @@
-
 <html>
 <head>
 	<link rel="stylesheet" href="/style.css">
@@ -16,35 +15,31 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Drag and Drop to Move Objects</h2>
 	<p align = "center">
+		<input type = "text" id = "number" name = "number"> 
+		<input type = "button" value = "Change" onclick = "start()"> 
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
 
 <script>
-window.onload = function() {
-	var nb = prompt("Number of Circles:", "3");
+function start(){
+	removeAll();
+	var nb = document.getElementById("number").value;
 									     
 	var NUM_CIRCLES = nb.toString(10);;
 	var RADIUS = 30;
 	var element;
-
-	function start(){
-		drawCircles();
-		mouseDownMethod(pickUpBall);
-		mouseDragMethod(moveBall);
+	drawCircles();
+	mouseDownMethod(pickUpBall);
+	mouseDragMethod(moveBall);
 	
-	}
-
 	function pickUpBall(e){
 		element = getElementAt(e.getX(), e.getY());
 	}
-
 	function moveBall(e){
 		if (element != null){
 			element.setPosition(e.getX(), e.getY());
 		}
 	}
-
-
 	function drawCircles(){
 		for (var i = 0; i < NUM_CIRCLES; i++){
 			var circle = new Circle(RADIUS);
@@ -55,13 +50,8 @@ window.onload = function() {
 			add(circle);
 		}
 	}
+}
 
-
-
-    	if (typeof start === 'function') {
-        	start();
-    	}
-};
 </script>
 
 	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
