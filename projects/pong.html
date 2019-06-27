@@ -26,6 +26,7 @@ function start() {
 	var ball;
 	var dx = 0;
 	var dy = 0;
+	var SPEED = 5;
 	
 	var ballRadius = 10;
 	var ballX = getWidth()/2;
@@ -47,16 +48,16 @@ function start() {
 		var lr = Randomizer.nextInt(0, 1); // Left or Right
 		var ud = Randomizer.nextInt(0, 1); // Up or Down
 		if (lr == 0) { // Left
-			dx = -5;
+			dx = -SPEED;
 		}
 		else if (lr == 1) { // Right
-			dx = 5;				
+			dx = SPEED;				
 		}
 		if (ud == 0) { // Up
-			dy = -5;
+			dy = -SPEED;
 		}
 		else if (ud == 1) { // Down
-			dy = 5;
+			dy = SPEED;
 		}
 	}
 	
