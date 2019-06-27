@@ -113,7 +113,7 @@ function start() {
 	
 	function getCollidingObjects() {
 		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
-		var right = getElementAt (ball.getX() + ball.getRadius() + 1, ball.getY());
+		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
 		var top = getElementAt (ball.getX(), ball.getY() - ball.getRadius());
 		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius());
 		if (left)
