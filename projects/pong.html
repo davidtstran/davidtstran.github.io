@@ -28,7 +28,7 @@ function start() {
 	var dy = 0;
 	var SPEED = 5;
 	
-	var ballRadius = 10;
+	var ballRadius = 5;
 	var ballX = getWidth()/2;
 	var ballY = getHeight()/2;
 	
@@ -37,11 +37,13 @@ function start() {
 	var pHeight = 100;
 	
 	var pause = false;
+	var OBJECT_COLOR = Color.white;
+	var DELAY = 20;
 	
 	randomizeDir();
 	addBall();
 	addPaddles();
-	setTimer(bounceBall, 20);
+	setTimer(bounceBall, DELAY);
 	mouseClickMethod(pauseGame);
 	
 	function randomizeDir() {
@@ -63,19 +65,19 @@ function start() {
 	
 	function addBall() {
 		ball = new Circle (ballRadius);
-		ball.setColor(Color.white);
+		ball.setColor(OBJECT_COLOR);
 		ball.setPosition(ballX, ballY);
 		add(ball);
 	}
 	
 	function addPaddles() {
 		paddleL = new Rectangle (pWidth, pHeight);
-		paddleL.setColor(Color.white);
+		paddleL.setColor(OBJECT_COLOR);
 		paddleL.setPosition(0+pWidth,getHeight()/2-pHeight/2);
 		add(paddleL);
 	
 		paddleR = new Rectangle (pWidth, pHeight);
-		paddleR.setColor(Color.white);
+		paddleR.setColor(OBJECT_COLOR);
 		paddleR.setPosition(getWidth()-pWidth-pWidth,getHeight()/2-pHeight/2);
 		add(paddleR);	
 	}
@@ -101,7 +103,7 @@ function start() {
 			stopTimer(bounceBall);
 			addBall();
 			randomizeDir();
-			setTimer(bounceBall, 20);
+			setTimer(bounceBall, DELAY);
 		}
 	}
 	
@@ -124,7 +126,7 @@ function start() {
 	function pauseGame(e) {
 		if (pause == true) {
 			pause = false;
-			setTimer(bounceBall, 20);
+			setTimer(bounceBall, DELAY);
 		}
 		else if (pause == false) {
 			pause = true;
