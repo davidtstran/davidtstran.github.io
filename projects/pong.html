@@ -35,11 +35,6 @@ function start() {
 	var pWidth = 10;
 	var pHeight = 100;
 	
-	ball = new Circle (ballRadius);
-	ball.setColor(Color.white);
-	ball.setPosition(ballX, ballY);
-	add(ball);
-	
 	paddleL = new Rectangle (pWidth, pHeight);
 	paddleL.setColor(Color.white);
 	paddleL.setPosition(0+pWidth,getHeight()/2-pHeight/2);
@@ -52,8 +47,16 @@ function start() {
 	
 	var pause = false;
 	
+	addBall();
 	setTimer(bounceBall, 20);
 	mouseClickMethod(pauseGame);
+	
+	function addBall() {
+		ball = new Circle (ballRadius);
+		ball.setColor(Color.white);
+		ball.setPosition(ballX, ballY);
+		add(ball);
+	}
 	
 	function bounceBall() {
 		checkWalls();
@@ -62,13 +65,18 @@ function start() {
 	}
 	
 	function checkWalls() {
-		// Bounce off bottom wall
-		if(ball.getY() + ball.getRadius() > getHeight()){
+		// Bounce Off Top Wall
+		if (ball.getY() - ball.getRadius() < 0){
 			dy = -dy;
 		}
-		// Bounce off top wall
-		if(ball.getY() - ball.getRadius() < 0){
+		// Bounce Off Bottom Wall
+		else if (ball.getY() + ball.getRadius() > getHeight()){
 			dy = -dy;
+		}
+		// Reset Past Left or Right Wall
+		else if ((ball.getX() - ball.getRadius() < 0) || (ball.getX() + ball.getRadius() > getWidth())){
+			remove(ball);
+			addBall();
 		}
 	}
 	
