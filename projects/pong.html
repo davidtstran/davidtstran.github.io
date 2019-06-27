@@ -37,8 +37,6 @@ function start() {
 	
 	var pause = false;
 	
-	var BUFFER = 1;
-	
 	randomizeDir();
 	addBall();
 	addPaddles();
@@ -114,10 +112,10 @@ function start() {
 	}
 	
 	function getCollidingObjects() {
-		var left = getElementAt (ball.getX() - ball.getRadius() + BUFFER, ball.getY());
-		var right = getElementAt (ball.getX() + ball.getRadius() + BUFFER, ball.getY());
-		var top = getElementAt (ball.getX(), ball.getY() - ball.getRadius() + BUFFER);
-		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius() + BUFFER);
+		var left = getElementAt (ball.getX() - ball.getRadius() + 1, ball.getY());
+		var right = getElementAt (ball.getX() + ball.getRadius() + 1, ball.getY());
+		var top = getElementAt (ball.getX(), ball.getY() - ball.getRadius() + 1);
+		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius() + 1);
 		if (left)
 			return left;
 		else if (right)
