@@ -108,8 +108,8 @@ function start() {
 		}
 		// Reset Past Left Wall
 		else if (ball.getX() - ball.getRadius() < 0){
-			leftScore++;
-			document.getElementById("lScore").innerHTML = leftScore.toString(10);
+			rightScore++;
+			document.getElementById("lScore").innerHTML = rightScore.toString(10);
 			remove(ball);
 			stopTimer(bounceBall);
 			addBall();
@@ -118,8 +118,8 @@ function start() {
 		}
 		// Reset Past Right Wall
 		else if (ball.getX() + ball.getRadius() > getWidth()){
-			rightScore++;
-			document.getElementById("rScore").innerHTML = rightScore.toString(10);
+			leftScore++;
+			document.getElementById("rScore").innerHTML = leftScore.toString(10);
 			remove(ball);
 			stopTimer(bounceBall);
 			addBall();
