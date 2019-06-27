@@ -4,13 +4,13 @@ body {
 h1 {
     color: black;
     font-family: Arial;
-    font-size: 50px;
+    font-size: 300%;
     text-align: center;
 }
 h2 {
     color: black;
     font-family: Times;
-    font-size: 20px;
+    font-size: 125%;
     text-align: center;   
 }
 p {
