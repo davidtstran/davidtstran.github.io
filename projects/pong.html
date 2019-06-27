@@ -148,11 +148,11 @@ function start() {
 	}
 	
 	function movementL(e){
-		if (e.keyCode == Keyboard.letter('W')) {
+		if (e.keyCode == Keyboard.LEFT) { // .letter('W')
 			if (paddleL.getY() > 0)
 				paddleL.move(0, -pDy);
 		}
-		else if (e.keyCode == Keyboard.letter('S')) {
+		else if (e.keyCode == Keyboard.RIGHT) { // .letter('S')
 			if (paddleL.getY() < (getHeight() - pHeight))
 				paddleL.move(0, pDy);
 		}
