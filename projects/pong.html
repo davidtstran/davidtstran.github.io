@@ -21,12 +21,18 @@
 		</tr>
 	</table>
 	<p align = "center">
-		<input type = "button" value = "Start" onclick = "start()"> <br> <br>
+		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="800" height="400" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
 <script>
 function start() {
+	var x = document.getElementById("start"); // hide start button after click
+ 	if (x.style.display === "none")
+    		x.style.display = "block";
+  	else
+    		x.style.display = "none";
+	
 	removeAll();
 	var ball;
 	var dx = 0;
