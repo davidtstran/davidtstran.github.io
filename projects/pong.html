@@ -76,10 +76,14 @@ function start() {
 	}
 	
 	function pauseGame(e) {
-		if (pause == true)
+		if (pause == true) {
+			pause = false;
 			setTimer(bounceBall, 20);
-		else if (pause == false)
+		}
+		else if (pause == false) {
+			pause = true;
 			stopTimer(bounceBall);
+		}
 	}
 }
 </script>
