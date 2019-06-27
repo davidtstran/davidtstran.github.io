@@ -24,8 +24,8 @@
 function start() {
 	removeAll();
 	var ball;
-	var dx = 10;
-	var dy = 10;
+	var dx = 0;
+	var dy = 0;
 	
 	var ballRadius = 10;
 	var ballX = getWidth()/2;
@@ -37,14 +37,27 @@ function start() {
 	
 	var pause = false;
 	
+	randomizerDir();
 	addBall();
 	addPaddles();
 	setTimer(bounceBall, 20);
 	mouseClickMethod(pauseGame);
 	
-	function randomizeDXDY() {
-		dx = Randomizer.nextInt(-10, 10);
-		dy = Randomizer.nextInt(-10, 10);
+	function randomizeDir() {
+		var lr = Randomizer.nextInt(0, 1); // Left or Right
+		var ud = Randomizer.nextInt(0, 1); // Up or Down
+		if (lr == 0) { // Left
+			dx = Randomizer.nextInt(-10,-5);
+		}
+		else if (lr == 1) { // Right
+			dx = Randomizer.nextInt(5,10);				
+		}
+		if (ud == 0) { // Up
+			dy = Randomizer.nextInt(-10,-5);
+		}
+		else if (ud == 1) { // Down
+			dy = Randomizer.nextInt(5,10);
+		}
 	}
 	
 	function addBall() {
@@ -86,6 +99,7 @@ function start() {
 			remove(ball);
 			stopTimer(bounceBall);
 			addBall();
+			randomizeDir();
 			setTimer(bounceBall, 20);
 		}
 	}
