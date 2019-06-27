@@ -27,12 +27,6 @@
 	
 <script>
 function start() {
-	var x = document.getElementById("start"); // hide start button after click
- 	if (x.style.display === "none")
-    		x.style.display = "block";
-  	else
-    		x.style.display = "none";
-	
 	removeAll();
 	var ball;
 	var dx = 0;
@@ -55,11 +49,20 @@ function start() {
 	
 	var leftScore = 0, rightScore = 0;
 	
+	hideStartButton();
 	randomizeDir();
 	addBall();
 	addPaddles();
 	setTimer(bounceBall, DELAY);
 	mouseClickMethod(pauseGame);
+	
+	function hideStartButton() {
+		var x = document.getElementById("start"); // hide start button after click
+ 		if (x.style.display === "none")
+    			x.style.display = "block";
+  		else
+    			x.style.display = "none";
+	}
 	
 	function randomizeDir() {
 		var lr = Randomizer.nextInt(0, 1); // Left or Right
