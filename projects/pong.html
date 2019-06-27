@@ -28,16 +28,18 @@ function start() {
 	var dy = 0;
 	var SPEED = 5;
 	
-	var ballRadius = 5;
+	var OBJECT_COLOR = Color.white;
+	var OBJECT_SIZE = 5;
+	
+	var ballRadius = OBJECT_SIZE;
 	var ballX = getWidth()/2;
 	var ballY = getHeight()/2;
 	
 	var paddleL, paddleR;
-	var pWidth = 5;
+	var pWidth = OBJECT_SIZE;
 	var pHeight = 100;
 	
 	var pause = false;
-	var OBJECT_COLOR = Color.white;
 	var DELAY = 20;
 	
 	randomizeDir();
