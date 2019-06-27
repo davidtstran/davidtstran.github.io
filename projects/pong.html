@@ -16,8 +16,8 @@
 	<h2>Click Start to Begin Game<br>Click Screen to Pause/Unpause Game<br>Score:<br></h2>
 	<table align = "center">
 		<tr>
-			<td align = "right"><h2>0</h2></td>
-			<td align = "left"><h2>0</h2></td>
+			<td align = "right"><h2 id = lScore>0</h2></td>
+			<td align = "left"><h2 id = rScore>0</h2></td>
 		</tr>
 	</table>
 	<p align = "center">
@@ -47,7 +47,7 @@ function start() {
 	var pause = false;
 	var DELAY = 20;
 	
-	var leftScore, rightScore;
+	var leftScore = 0, rightScore = 0;
 	
 	randomizeDir();
 	addBall();
@@ -106,8 +106,20 @@ function start() {
 		else if (ball.getY() + ball.getRadius() > getHeight()){
 			dy = -dy;
 		}
-		// Reset Past Left or Right Wall
-		else if ((ball.getX() - ball.getRadius() < 0) || (ball.getX() + ball.getRadius() > getWidth())){
+		// Reset Past Left Wall
+		else if (ball.getX() - ball.getRadius() < 0){
+			leftScore++;
+			document.getElementById("lScore").innerHTML = leftScore.toString(10);
+			remove(ball);
+			stopTimer(bounceBall);
+			addBall();
+			randomizeDir();
+			setTimer(bounceBall, DELAY);
+		}
+		// Reset Past Right Wall
+		else if (ball.getX() + ball.getRadius() > getWidth()){
+			rightScore++;
+			document.getElementById("rScore").innerHTML = rightScore.toString(10);
 			remove(ball);
 			stopTimer(bounceBall);
 			addBall();
