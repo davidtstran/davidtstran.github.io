@@ -21,7 +21,7 @@
 	</p>
 	
 <script>
-function start(){
+function start() {
 	var ball;
 	var dx = Randomizer.nextInt(-10, 10);
 	var dy = Randomizer.nextInt(-10, 10);
@@ -48,6 +48,32 @@ function start(){
 	paddleR.setColor(Color.white);
 	paddleR.setPosition(getWidth()-pWidth-pWidth,getHeight()/2-pHeight/2);
 	add(paddleR);
+	
+	var pause = false;
+	
+	setTimer(bounceBall, 20);
+	mouseClickMethod(e);
+	
+	function bounceBall() {
+		checkWalls();
+		checkObjects();
+		ball.move(dx, dy);	
+	}
+	
+	function checkWalls() {
+		
+	}
+	
+	function checkObjects() {
+		
+	}
+	
+	function mouseClickMethod(e) {
+		if (pause)
+			setTimer(bounceBall, 20);
+		else
+			stopTimer(bounceBall);
+	}
 }
 </script>
 
