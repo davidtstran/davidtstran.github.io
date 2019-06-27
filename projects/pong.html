@@ -13,7 +13,7 @@
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2 id = "bounces"></h2>
+	<h2>Click Start to Begin Game<br>Click Screen to Pause/Unpause Game<br></h2>
 	
 	<p align = "center">
 		<input type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -52,7 +52,7 @@ function start() {
 	var pause = false;
 	
 	setTimer(bounceBall, 20);
-	mouseClickMethod(e);
+	mouseClickMethod(pauseGame);
 	
 	function bounceBall() {
 		checkWalls();
@@ -75,7 +75,7 @@ function start() {
 		
 	}
 	
-	function mouseClickMethod(e) {
+	function pauseGame(e) {
 		if (pause == true)
 			setTimer(bounceBall, 20);
 		else if (pause == false)
