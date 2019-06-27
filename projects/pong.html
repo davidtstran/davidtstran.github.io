@@ -43,7 +43,7 @@ function start() {
 	var paddleL, paddleR;
 	var pWidth = OBJECT_SIZE;
 	var pHeight = 100;
-	var pDy = 10;
+	var pDy = 15;
 	
 	var pause = false;
 	var DELAY = 20;
@@ -55,7 +55,8 @@ function start() {
 	addBall();
 	addPaddles();
 	setTimer(bounceBall, DELAY);
-	keyDownMethod(movement);
+	keyDownMethod(movementL);
+	keyDownMethod(movementR);
 	mouseClickMethod(pauseGame);
 	
 	function hideStartButton() {
@@ -146,7 +147,18 @@ function start() {
 		}
 	}
 	
-	function movement(e){
+	function movementL(e){
+		if (e.keyCode == Keyboard.letter('W')) {
+			if (paddleL.getY() > 0)
+				paddleL.move(0, -pDy);
+		}
+		else if (e.keyCode == Keyboard.letter('S')) {
+			if (paddleL.getY() < (getHeight() - pHeight))
+				paddleL.move(0, pDy);
+		}
+	}
+	
+	function movementR(e){
 		if (e.keyCode == Keyboard.UP) {
 			if (paddleR.getY() > 0)
 				paddleR.move(0, -pDy);
