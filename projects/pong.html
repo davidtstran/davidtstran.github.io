@@ -147,14 +147,15 @@ function start() {
 	}
 		
 	function movement(e){
-		if (e.keyCode == Keyboard.LEFT) { // .letter('W')
+		if (e.keyCode == Keyboard.letter('W')) {
 			if (paddleL.getY() > 0)
 				paddleL.move(0, -pDy);
 		}
-		if (e.keyCode == Keyboard.RIGHT) { // .letter('S')
+		if (e.keyCode == Keyboard.letter('S')) {
 			if (paddleL.getY() < (getHeight() - pHeight))
 				paddleL.move(0, pDy);
 		}
+		/////
 		if (e.keyCode == Keyboard.UP) {
 			if (paddleR.getY() > 0)
 				paddleR.move(0, -pDy);
