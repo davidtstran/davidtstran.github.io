@@ -24,8 +24,8 @@
 function start() {
 	removeAll();
 	var ball;
-	var dx = Randomizer.nextInt(-10, 10);
-	var dy = Randomizer.nextInt(-10, 10);
+	var dx;
+	var dy;
 	
 	var ballRadius = 10;
 	var ballX = getWidth()/2;
@@ -47,10 +47,15 @@ function start() {
 	
 	var pause = false;
 	
+	randomizeDXDY();
 	addBall();
 	setTimer(bounceBall, 20);
 	mouseClickMethod(pauseGame);
 	
+	function randomizeDXDY() {
+		dx = Randomizer.nextInt(-10, 10);
+		dy = Randomizer.nextInt(-10, 10);
+	}
 	function addBall() {
 		ball = new Circle (ballRadius);
 		ball.setColor(Color.white);
@@ -76,6 +81,7 @@ function start() {
 		// Reset Past Left or Right Wall
 		else if ((ball.getX() - ball.getRadius() < 0) || (ball.getX() + ball.getRadius() > getWidth())){
 			remove(ball);
+			stopTimer(bounceBall);
 			addBall();
 		}
 	}
