@@ -61,7 +61,14 @@ function start() {
 	}
 	
 	function checkWalls() {
-		
+		// Bounce off bottom wall
+		if(ball.getY() + ball.getRadius() > getHeight()){
+			dy = -dy;
+		}
+		// Bounce off top wall
+		if(ball.getY() - ball.getRadius() < 0){
+			dy = -dy;
+		}
 	}
 	
 	function checkObjects() {
