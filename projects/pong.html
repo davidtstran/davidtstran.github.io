@@ -148,11 +148,11 @@ function start() {
 	
 	function movement(e){
 		if (e.keyCode == Keyboard.UP) {
-			if (paddleR.getY() >= 0)
+			if (paddleR.getY() > 0)
 				paddleR.move(0, -pDy);
 		}
 		else if (e.keyCode == Keyboard.DOWN) {
-			if (paddleR.getY() <= (getHeight() - pHeight))
+			if (paddleR.getY() < (getHeight() - pHeight))
 				paddleR.move(0, pDy);
 		}
 	}
