@@ -146,12 +146,12 @@ window.onload = function() {
 		}
 	
 		// Bounce off left wall
-		if(ball.getX() - ball.getRadius() < 0){
+		else if(ball.getX() - ball.getRadius() < 0){
 			dx = -dx;
 		}
 	
 		// Bounce off bottom wall
-		if(ball.getY() + ball.getRadius() > getHeight()){
+		else if(ball.getY() + ball.getRadius() > getHeight()){
 			ball.setPosition(getWidth()/2, getHeight()/2);
 			ballStopped = true;
 			tries--;
@@ -160,7 +160,7 @@ window.onload = function() {
 		}
 	
 		// Bounce off top wall
-		if(ball.getY() - ball.getRadius() < 0){
+		else if(ball.getY() - ball.getRadius() < 0){
 			dy = -dy;
 		}
 	}
