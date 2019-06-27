@@ -114,7 +114,7 @@ window.onload = function() {
 			if (element != paddle){
 				remove(element);
 				totalBricks--;
-					youWin();
+				youWin();
 			}
 			dy = -dy;
 		}
@@ -199,7 +199,7 @@ window.onload = function() {
 	}
 
 	function youWin(){
-		if (totalBricks == 0){
+		if (totalBricks <= 0){
 			stopTimer(bounceBall);
 			var txt = new Text ("You Win!");
 			txt.setPosition (getWidth()/2 - txt.getWidth()/2, getHeight()/2);
