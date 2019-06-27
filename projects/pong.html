@@ -55,8 +55,7 @@ function start() {
 	addBall();
 	addPaddles();
 	setTimer(bounceBall, DELAY);
-	keyDownMethod(movementL);
-	keyDownMethod(movementR);
+	keyDownMethod(movement);
 	mouseClickMethod(pauseGame);
 	
 	function hideStartButton() {
@@ -146,24 +145,21 @@ function start() {
 			ballDx = -ballDx;
 		}
 	}
-	
-	function movementL(e){
+		
+	function movement(e){
 		if (e.keyCode == Keyboard.LEFT) { // .letter('W')
 			if (paddleL.getY() > 0)
 				paddleL.move(0, -pDy);
 		}
-		else if (e.keyCode == Keyboard.RIGHT) { // .letter('S')
+		if (e.keyCode == Keyboard.RIGHT) { // .letter('S')
 			if (paddleL.getY() < (getHeight() - pHeight))
 				paddleL.move(0, pDy);
 		}
-	}
-	
-	function movementR(e){
 		if (e.keyCode == Keyboard.UP) {
 			if (paddleR.getY() > 0)
 				paddleR.move(0, -pDy);
 		}
-		else if (e.keyCode == Keyboard.DOWN) {
+		if (e.keyCode == Keyboard.DOWN) {
 			if (paddleR.getY() < (getHeight() - pHeight))
 				paddleR.move(0, pDy);
 		}
