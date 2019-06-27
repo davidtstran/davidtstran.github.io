@@ -43,6 +43,7 @@ function start() {
 	var paddleL, paddleR;
 	var pWidth = OBJECT_SIZE;
 	var pHeight = 100;
+	var pDy = 10;
 	
 	var pause = false;
 	var DELAY = 20;
@@ -147,7 +148,7 @@ function start() {
 	
 	function movement(e){
 		if(e.keyCode == Keyboard.UP){
-			paddleR.move;
+			paddleR.move(0, pDy);
 		}
 	}
 	
