@@ -24,8 +24,8 @@
 function start() {
 	removeAll();
 	var ball;
-	var dx;
-	var dy;
+	var dx = 10;
+	var dy = 10;
 	
 	var ballRadius = 10;
 	var ballX = getWidth()/2;
@@ -87,7 +87,6 @@ function start() {
 			remove(ball);
 			stopTimer(bounceBall);
 			addBall();
-			randomizeDXDY();
 			setTimer(bounceBall, 20);
 		}
 	}
