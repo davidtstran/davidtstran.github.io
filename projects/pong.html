@@ -35,20 +35,11 @@ function start() {
 	var pWidth = 10;
 	var pHeight = 100;
 	
-	paddleL = new Rectangle (pWidth, pHeight);
-	paddleL.setColor(Color.white);
-	paddleL.setPosition(0+pWidth,getHeight()/2-pHeight/2);
-	add(paddleL);
-	
-	paddleR = new Rectangle (pWidth, pHeight);
-	paddleR.setColor(Color.white);
-	paddleR.setPosition(getWidth()-pWidth-pWidth,getHeight()/2-pHeight/2);
-	add(paddleR);
-	
 	var pause = false;
 	
 	randomizeDXDY();
 	addBall();
+	addPaddles();
 	setTimer(bounceBall, 20);
 	mouseClickMethod(pauseGame);
 	
@@ -56,11 +47,24 @@ function start() {
 		dx = Randomizer.nextInt(-10, 10);
 		dy = Randomizer.nextInt(-10, 10);
 	}
+	
 	function addBall() {
 		ball = new Circle (ballRadius);
 		ball.setColor(Color.white);
 		ball.setPosition(ballX, ballY);
 		add(ball);
+	}
+	
+	function addPaddles() {
+		paddleL = new Rectangle (pWidth, pHeight);
+		paddleL.setColor(Color.white);
+		paddleL.setPosition(0+pWidth,getHeight()/2-pHeight/2);
+		add(paddleL);
+	
+		paddleR = new Rectangle (pWidth, pHeight);
+		paddleR.setColor(Color.white);
+		paddleR.setPosition(getWidth()-pWidth-pWidth,getHeight()/2-pHeight/2);
+		add(paddleR);	
 	}
 	
 	function bounceBall() {
