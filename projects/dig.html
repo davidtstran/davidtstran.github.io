@@ -140,14 +140,6 @@ function start() {
 	}
 	
 	function createEnemy() {
-		for (var en = 0; en < numEnemies; en++) {
-			enemy = new Circle (DIGGER_SIZE);
-			var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
-			var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
-			enemy.setPosition (enemyX, enemyY);
-			enemy.setColor (ENEMY_COLOR);
-			add (enemy);
-		}
 		enemy = new Circle (DIGGER_SIZE);
 		var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
 		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
