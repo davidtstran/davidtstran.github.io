@@ -23,9 +23,11 @@
 function start() {
 	removeAll(); // clear canvas
 	
+	var block;
 	var BLOCK_SIZE = 25;
-	var NUM_ROWS = 17; // 20 rows but top 3 are "sky"
+	var NUM_ROWS = 16; // 20 rows but top 4 are "sky"
 	var B_PER_ROW = 16;
+	var row;
 	
 	generateWorld();
 	
@@ -34,11 +36,24 @@ function start() {
 	}
 	
 	function ground() {
-		for (var row = 0; row < NUM_ROWS; row++){
+		for (row = 0; row < NUM_ROWS; row++){
 			for (var col = 0; col < B_PER_ROW; col++){
-				
+				block = new Rectangle (BLOCK_SIZE, BLOCK_SIZE);
+				block.setPosition (0,0);
+				color();
 			}
 		}
+	}
+					
+	function color() {
+		if (row >= 0 && row <= 3)
+			block.setColor (new Color(255, 235, 205));
+		else if (row >= 4 && row <= 7)
+			block.setColor (new Color(255, 222, 173));
+		else if (row >= 8 && row <= 11)
+			block.setColor (new Color(244, 164, 96));
+		else if (row >= 12 && row <= 15)
+			block.setColor (new Color(205, 133, 63));
 	}
 }
 </script>
