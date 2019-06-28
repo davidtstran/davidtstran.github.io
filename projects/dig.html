@@ -55,15 +55,15 @@ function start() {
 					
 	function groundColor() {
 		if (row >= 0 && row <= 3)
-			block.setColor (new Color(135, 206, 250));
+			block.setColor (new Color(135, 206, 250)); // lightskyblue
 		else if (row >= 4 && row <= 7)
-			block.setColor (new Color(255, 235, 205));
+			block.setColor (new Color(255, 235, 205)); // blanchedalmond
 		else if (row >= 8 && row <= 11)
-			block.setColor (new Color(255, 222, 173));
+			block.setColor (new Color(255, 222, 173)); // navajowhite
 		else if (row >= 12 && row <= 15)
-			block.setColor (new Color(244, 164, 96));
+			block.setColor (new Color(244, 164, 96)); // sandybrown
 		else if (row >= 16 && row <= 19)
-			block.setColor (new Color(205, 133, 63));
+			block.setColor (new Color(205, 133, 63)); // peru
 	}
 	
 	function createDigger() {
@@ -121,7 +121,7 @@ function start() {
 	
 	function removeBlock(){
 		if (elem != null) {
-			if (elem.getColor() != "#87cefa") // sky
+			if (elem.getColor() != "#87cefa") // lightskyblue
 				remove(elem);
 		}
 	}
