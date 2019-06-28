@@ -153,7 +153,7 @@ function start() {
 	}
 	
 	function win() {
-		if (blocks_destroyed == TOTAL_BLOCKS) {
+		if ((TOTAL_BLOCKS % blocks_destroyed) == =) {
 			document.getElementById("blocks").innerHTML = "Finish";
 			removeAll();
 			start();
