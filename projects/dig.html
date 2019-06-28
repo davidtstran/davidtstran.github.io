@@ -31,7 +31,6 @@ function start() {
 	var blocks_destroyed = 0;
 	var TOTAL_BLOCKS = (NUM_ROWS-4) * B_PER_ROW;
 	var row;
-	var BUFFER = 1;
 	var digger;
 	var DIGGER_SIZE = BLOCK_SIZE/2;
 	var DIGGER_COLOR = new Color (105, 105, 105);
@@ -42,7 +41,7 @@ function start() {
 	
 	generateWorld();
 	keyDownMethod(movement);
-	setTimer(enemyMove, 20);
+	setTimer(enemyMove, 100);
 	
 	function generateWorld() {
 		createGround();
