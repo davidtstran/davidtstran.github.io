@@ -102,19 +102,19 @@ function start() {
 	
 	function checkBlock(dir){
 		if (dir == "UP") {
-			elem = getElementAt(digger.getY() - BLOCK_SIZE);
+			elem = getElementAt(digger.getY() - DIGGER_SIZE);
 			removeBlock();
 		}
 		else if (dir == "LEFT") {
-			elem = getElementAt(digger.getX() - BLOCK_SIZE);
+			elem = getElementAt(digger.getX() - DIGGER_SIZE);
 			removeBlock();
 		}
 		else if (dir == "DOWN") {
-			elem = getElementAt(digger.getY() + BLOCK_SIZE);
+			elem = getElementAt(digger.getY() + DIGGER_SIZE);
 			removeBlock();
 		}
 		else if (dir == "RIGHT") {
-			elem = getElementAt(digger.getX() + BLOCK_SIZE);
+			elem = getElementAt(digger.getX() + DIGGER_SIZE);
 			removeBlock();
 		}
 	}
