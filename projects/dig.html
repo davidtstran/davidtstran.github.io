@@ -34,6 +34,7 @@ function start() {
 	var DIGGER_COLOR = new Color (105, 105, 105);
 	
 	generateWorld();
+	keyDownMethod(movement);
 	
 	function generateWorld() {
 		createGround();
@@ -69,6 +70,17 @@ function start() {
 		digger.setPosition (getWidth() / 2, 3 * BLOCK_SIZE + BLOCK_SIZE / 2);
 		digger.setColor (DIGGER_COLOR);
 		add (digger);
+	}
+	
+	function movement(e) {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W'))
+			digger.move(0,0);
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A'))
+			digger.move(0,0);
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S'))
+			digger.move(0,0);
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D'))
+			digger.move(0,0);
 	}
 }
 </script>
