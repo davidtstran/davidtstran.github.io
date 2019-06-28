@@ -121,7 +121,8 @@ function start() {
 	
 	function removeBlock(){
 		if (elem != null) {
-			remove(elem);
+			if (elem.getColor() != "#87cefb")
+				remove(elem);
 		}
 	}
 }
