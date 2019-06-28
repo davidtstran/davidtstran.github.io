@@ -130,6 +130,7 @@ function start() {
 			if (elem.getColor() == "#FF0000") { // red enemy
 				remove(digger);
 				document.getElementById("blocks").innerHTML = "Died";
+				removeAll();
 			}
 			else if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
