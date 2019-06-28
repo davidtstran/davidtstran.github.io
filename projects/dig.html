@@ -36,11 +36,11 @@ function start() {
 	generateWorld();
 	
 	function generateWorld() {
-		ground();
-		digger();
+		createGround();
+		createDigger();
 	}
 	
-	function ground() {
+	function createGround() {
 		for (row = 0; row < NUM_ROWS; row++){
 			for (var col = 0; col < B_PER_ROW; col++){
 				block = new Rectangle (BLOCK_SIZE, BLOCK_SIZE);
@@ -64,7 +64,7 @@ function start() {
 			block.setColor (new Color(205, 133, 63));
 	}
 	
-	function digger() {
+	function createDigger() {
 		digger = new Circle (DIGGER_SIZE);
 		digger.setPosition (getWidth() / 2, 4 * BLOCK_SIZE);
 		digger.setColor (DIGGER_COLOR);
