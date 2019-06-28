@@ -13,6 +13,7 @@
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Click Start to Begin Game<br>Movement (Arrow Keys or WASD)<br></h2>
+	<h2 id = "blocks">0</h2
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="400" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
@@ -126,7 +127,7 @@ function start() {
 			if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
 				blocks_destroyed++;
-				print(blocks_destroyed);
+				document.getElementById("blocks").innerHTML = blocks_destroyed.toString(10);
 				win();
 			}
 		}
