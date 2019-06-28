@@ -31,6 +31,7 @@ function start() {
 	var digger;
 	var DIGGER_SIZE = BLOCK_SIZE/2;
 	var DIGGER_COLOR = new Color (105, 105, 105);
+	var elem;
 	
 	generateWorld();
 	keyDownMethod(movement);
@@ -95,6 +96,21 @@ function start() {
 				checkBlock("RIGHT");
 				digger.move(BLOCK_SIZE, 0);
 			}
+		}
+	}
+	
+	function checkBlock(dir){
+		if (dir == "UP") {
+			elem = getElementAt(digger.getY() - BLOCK_SIZE);
+		}
+		else if (dir == "LEFT") {
+			elem = getElementAt(digger.getX() - BLOCK_SIZE);
+		}
+		else if (dir == "DOWN") {
+			elem = getElementAt(digger.getY() + BLOCK_SIZE);
+		}
+		else if (dir == "RIGHT") {
+			elem = getElementAt(digger.getX() + BLOCK_SIZE);
 		}
 	}
 }
