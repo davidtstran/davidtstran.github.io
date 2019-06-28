@@ -36,6 +36,8 @@ function start() {
 	var DIGGER_COLOR = new Color (105, 105, 105);
 	var elem;
 	var enemy;
+	var ENEMY_COLOR = Color.red;
+	var numEnemies = 1;
 	
 	generateWorld();
 	keyDownMethod(movement);
@@ -43,6 +45,7 @@ function start() {
 	function generateWorld() {
 		createGround();
 		createDigger();
+		createEnemy();
 	}
 	
 	function createGround() {
@@ -127,10 +130,20 @@ function start() {
 			if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
 				blocks_destroyed++;
-				document.getElementById("blocks").innerHTML = blocks_destroyed.toString(10);
+				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
+				numEnemies++;
 				win();
 			}
 		}
+	}
+	
+	function createEnemy() {
+		enemy = new Circle (DIGGER_SIZE);
+		var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
+		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
+		enemy.setPosition (enemyX, enemyY);
+		enemy.setColor (ENEMY_COLOR);
+		add (enemy);
 	}
 	
 	function win() {
