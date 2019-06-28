@@ -142,7 +142,7 @@ function start() {
 	function createEnemy() {
 		enemy = new Circle (DIGGER_SIZE);
 		var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
-		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
+		var enemyY = Randomizer.nextInt(100 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
 		enemy.setPosition (enemyX, enemyY);
 		enemy.setColor (ENEMY_COLOR);
 		add (enemy);
