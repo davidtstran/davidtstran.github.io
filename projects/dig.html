@@ -136,6 +136,7 @@ function start() {
 				remove(digger);
 				document.getElementById("blocks").innerHTML = "Died with " + blocks_destroyed.toString(10) + " Blocks Destroyed";            
 				canMove = false;
+				stopTimer(enemyMove);
 			}
 			else if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
@@ -156,6 +157,10 @@ function start() {
 			enemy.setColor (ENEMY_COLOR);
 			add (enemy);
 		}
+	}
+	
+	function enemyMove() {
+		
 	}
 	
 	function win() {
