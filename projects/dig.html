@@ -143,6 +143,7 @@ function start() {
 		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
 		enemy.setPosition (enemyX, enemyY);
 		enemy.setColor (ENEMY_COLOR);
+		enemy.setBorder (Color.black);
 		add (enemy);
 	}
 	
