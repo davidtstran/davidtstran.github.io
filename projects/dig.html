@@ -127,7 +127,11 @@ function start() {
 	
 	function removeBlock() {
 		if (elem != null) {
-			if (elem.getColor() != "#87cefa") { // lightskyblue
+			if (elem.getColor() == "#FF0000") { // red enemy
+				remove(digger);
+				document.getElementById("blocks").innerHTML = "Died";
+			}
+			else if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
 				blocks_destroyed++;
 				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
