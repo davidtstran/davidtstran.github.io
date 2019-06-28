@@ -121,7 +121,8 @@ function start() {
 	
 	function removeBlock(){
 		if (elem != null) {
-			remove(elem);
+			if (elem.getType() == Rectangle && elem.getColor() != new Color(135, 206, 250))
+				remove(elem);
 		}
 	}
 }
