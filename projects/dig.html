@@ -25,7 +25,7 @@ function start() {
 	
 	var block;
 	var BLOCK_SIZE = 25;
-	var NUM_ROWS = 16; // 20 rows but top 4 are "sky"
+	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
 	var row;
 	
@@ -48,12 +48,14 @@ function start() {
 					
 	function color() {
 		if (row >= 0 && row <= 3)
-			block.setColor (new Color(255, 235, 205));
+			block.setColor (Color.blue);
 		else if (row >= 4 && row <= 7)
-			block.setColor (new Color(255, 222, 173));
+			block.setColor (new Color(255, 235, 205));
 		else if (row >= 8 && row <= 11)
-			block.setColor (new Color(244, 164, 96));
+			block.setColor (new Color(255, 222, 173));
 		else if (row >= 12 && row <= 15)
+			block.setColor (new Color(244, 164, 96));
+		else if (row >= 16 && row <= 19)
 			block.setColor (new Color(205, 133, 63));
 	}
 }
