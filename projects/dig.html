@@ -2,12 +2,9 @@
 <head>
 	<link rel="stylesheet" href="/style.css">
 	<title>Digging Game</title>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
 	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
 </head>
-
 <body>
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
@@ -20,7 +17,6 @@
 	</p>
 	
 <script>
-var blocks_destroyed = 0;
 function start() {
 	removeAll(); // clear canvas
 	
@@ -29,7 +25,7 @@ function start() {
 	var BLOCK_SIZE = 25;
 	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
-	//var blocks_destroyed = 0;
+	var blocks_destroyed = 0;
 	var TOTAL_BLOCKS = (NUM_ROWS-4) * B_PER_ROW;
 	var row;
 	var digger;
@@ -83,26 +79,26 @@ function start() {
 		if (canMove == true){
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (digger.getY() - BLOCK_SIZE > 3 * BLOCK_SIZE) {
-					digger.move(0, -BLOCK_SIZE);
 					checkBlock("UP");
+					digger.move(0, -BLOCK_SIZE);
 				}
 			}
 			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
 				if (digger.getX() - BLOCK_SIZE > 0) {
-					digger.move(-BLOCK_SIZE, 0);
 					checkBlock("LEFT");
+					digger.move(-BLOCK_SIZE, 0);
 				}
 			}
 			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 				if (digger.getY() + BLOCK_SIZE < getHeight()) {
-					digger.move(0, BLOCK_SIZE);
 					checkBlock("DOWN");
+					digger.move(0, BLOCK_SIZE);
 				}
 			}
 			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 				if (digger.getX() + BLOCK_SIZE < getWidth()) {
-					digger.move(BLOCK_SIZE, 0);
 					checkBlock("RIGHT");
+					digger.move(BLOCK_SIZE, 0);
 				}
 			}
 		}
@@ -144,6 +140,14 @@ function start() {
 	}
 	
 	function createEnemy() {
+		for (var en = 0; en < numEnemies; en++) {
+			enemy = new Circle (DIGGER_SIZE);
+			var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
+			var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
+			enemy.setPosition (enemyX, enemyY);
+			enemy.setColor (ENEMY_COLOR);
+			add (enemy);
+		}
 		enemy = new Circle (DIGGER_SIZE);
 		var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
 		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
@@ -153,11 +157,9 @@ function start() {
 	}
 	
 	function win() {
-		if (blocks_destroyed/TOTAL_BRICKS % 1 == 0) {
-			if (blocks_destroyed != 0) {
-				document.getElementById("blocks").innerHTML = "Finish";
-				start();
-			}
+		if (blocks_destroyed == TOTAL_BLOCKS) {
+			document.getElementById("blocks").innerHTML = "Finish";
+			generateWorld();
 		}
 	}
 }
