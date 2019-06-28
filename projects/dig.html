@@ -39,7 +39,7 @@ function start() {
 		for (row = 0; row < NUM_ROWS; row++){
 			for (var col = 0; col < B_PER_ROW; col++){
 				block = new Rectangle (BLOCK_SIZE, BLOCK_SIZE);
-				block.setPosition (0,0);
+				block.setPosition (col * BLOCK_SIZE, row * BLOCK_SIZE);
 				color();
 				add(block);
 			}
