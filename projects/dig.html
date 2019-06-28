@@ -102,26 +102,20 @@ function start() {
 	
 	function checkBlock(dir){
 		if (dir == "UP") {
-			if (digger.getY() - DIGGER_SIZE > 4 * BLOCK_SIZE) {
-				elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
-				removeBlock();
-			}
+			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
+			removeBlock();
 		}
 		else if (dir == "LEFT") {
-			if (digger.getY() > 4 * BLOCK_SIZE) {
-				elem = getElementAt(digger.getX() - DIGGER_SIZE, digger.getY());
-				removeBlock();
-			}
+			elem = getElementAt(digger.getX() - DIGGER_SIZE, digger.getY());
+			removeBlock();
 		}
 		else if (dir == "DOWN") {
 			elem = getElementAt(digger.getX(), digger.getY() + DIGGER_SIZE);
 			removeBlock();
 		}
 		else if (dir == "RIGHT") {
-			if (digger.getY() > 4 * BLOCK_SIZE) {
-				elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
-				removeBlock();
-			}
+			elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
+			removeBlock();
 		}
 	}
 	
