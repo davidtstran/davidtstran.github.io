@@ -73,7 +73,7 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			if (digger.getY() - BLOCK_SIZE > 0)
+			if (digger.getY() - BLOCK_SIZE > 2 * BLOCK_SIZE)
 				digger.move(0, -BLOCK_SIZE);
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
