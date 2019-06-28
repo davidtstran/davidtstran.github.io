@@ -73,13 +73,13 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W'))
-			digger.move(0, -1);
+			digger.move(0, -BLOCK_SIZE);
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A'))
-			digger.move(-1, 0);
+			digger.move(-BLOCK_SIZE, 0);
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S'))
-			digger.move(0, 1);
+			digger.move(0, BLOCK_SIZE);
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D'))
-			digger.move(1, 0);
+			digger.move(BLOCK_SIZE, 0);
 	}
 }
 </script>
