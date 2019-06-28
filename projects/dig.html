@@ -102,26 +102,32 @@ function start() {
 	
 	function checkBlock(dir){
 		if (dir == "UP") {
-			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
-			removeBlock();
+			if (digger.getY() - DIGGER_SIZE > 4 * BLOCK_SIZE) {
+				elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
+				removeBlock();
+			}
 		}
 		else if (dir == "LEFT") {
-			elem = getElementAt(digger.getX() - DIGGER_SIZE, digger.getY());
-			removeBlock();
+			if (digger.getY() > 4 * BLOCK_SIZE) {
+				elem = getElementAt(digger.getX() - DIGGER_SIZE, digger.getY());
+				removeBlock();
+			}
 		}
 		else if (dir == "DOWN") {
 			elem = getElementAt(digger.getX(), digger.getY() + DIGGER_SIZE);
 			removeBlock();
 		}
 		else if (dir == "RIGHT") {
-			elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
-			removeBlock();
+			if (digger.getY() > 4 * BLOCK_SIZE) {
+				elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
+				removeBlock();
+			}
 		}
 	}
 	
 	function removeBlock(){
 		if (elem != null) {
-			if (elem.getType() == Rectangle && elem.getColor() != new Color(135, 206, 250))
+			if (elem.getType() == Rectangle)
 				remove(elem);
 		}
 	}
