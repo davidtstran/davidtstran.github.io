@@ -13,7 +13,7 @@
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Click Start to Begin Game<br>Movement (Arrow Keys or WASD)<br></h2>
-	<h2 id = "blocks">0</h2
+	<h2 id = "blocks">0</h2>
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="400" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
@@ -28,7 +28,7 @@ function start() {
 	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
 	var blocks_destroyed = 0;
-	var TOTAL_BLOCKS = NUM_ROWS * B_PER_ROW;
+	var TOTAL_BLOCKS = (NUM_ROWS-4) * B_PER_ROW;
 	var row;
 	var BUFFER = 1;
 	var digger;
