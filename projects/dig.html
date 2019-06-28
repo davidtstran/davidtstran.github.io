@@ -138,6 +138,7 @@ function start() {
 			}
 			else if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
+				canMove = false;
 				blocks_destroyed++;
 				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
 				win();
@@ -174,6 +175,7 @@ function start() {
 		if (blocks_destroyed == TOTAL_BLOCKS) {
 			document.getElementById("blocks").innerHTML = "Finish";
 			generateWorld();
+			canMove = true;
 		}
 	}
 }
