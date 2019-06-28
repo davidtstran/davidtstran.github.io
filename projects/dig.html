@@ -20,6 +20,7 @@
 	</p>
 	
 <script>
+var blocks_destroyed = 0;
 function start() {
 	removeAll(); // clear canvas
 	
@@ -28,7 +29,7 @@ function start() {
 	var BLOCK_SIZE = 25;
 	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
-	var blocks_destroyed = 0;
+	//var blocks_destroyed = 0;
 	var TOTAL_BLOCKS = (NUM_ROWS-4) * B_PER_ROW;
 	var row;
 	var digger;
@@ -155,7 +156,7 @@ function start() {
 		if (blocks_destroyed == TOTAL_BLOCKS) {
 			document.getElementById("blocks").innerHTML = "Finish";
 			removeAll();
-			generateWorld();
+			start();
 		}
 	}
 }
