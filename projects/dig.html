@@ -73,20 +73,28 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			if (digger.getY() - BLOCK_SIZE > 3 * BLOCK_SIZE)
+			if (digger.getY() - BLOCK_SIZE > 3 * BLOCK_SIZE) {
+				checkBlock("UP");
 				digger.move(0, -BLOCK_SIZE);
+			}
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			if (digger.getX() - BLOCK_SIZE > 0)
+			if (digger.getX() - BLOCK_SIZE > 0) {
+				checkBlock("LEFT");
 				digger.move(-BLOCK_SIZE, 0);
+			}
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			if (digger.getY() + BLOCK_SIZE < getHeight())
+			if (digger.getY() + BLOCK_SIZE < getHeight()) {
+				checkBlock("DOWN");
 				digger.move(0, BLOCK_SIZE);
+			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (digger.getX() + BLOCK_SIZE < getWidth())
+			if (digger.getX() + BLOCK_SIZE < getWidth()) {
+				checkBlock("RIGHT");
 				digger.move(BLOCK_SIZE, 0);
+			}
 		}
 	}
 }
