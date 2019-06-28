@@ -151,6 +151,7 @@ function start() {
 	function win() {
 		if (blocks_destroyed == TOTAL_BLOCKS) {
 			document.getElementById("blocks").innerHTML = "Finish";
+			removeAll();
 			generateWorld();
 		}
 	}
