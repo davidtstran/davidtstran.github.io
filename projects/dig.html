@@ -26,6 +26,8 @@ function start() {
 	var BLOCK_SIZE = 25;
 	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
+	var blocks_destroyed = 0;
+	var TOTAL_BLOCKS = NUM_ROWS * B_PER_ROW;
 	var row;
 	var BUFFER = 1;
 	var digger;
@@ -100,7 +102,7 @@ function start() {
 		}
 	}
 	
-	function checkBlock(dir){
+	function checkBlock(dir) {
 		if (dir == "UP") {
 			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
 			removeBlock();
@@ -119,10 +121,19 @@ function start() {
 		}
 	}
 	
-	function removeBlock(){
+	function removeBlock() {
 		if (elem != null) {
-			if (elem.getColor() != "#87cefa") // lightskyblue
+			if (elem.getColor() != "#87cefa") { // lightskyblue
 				remove(elem);
+				blocks_destroyed++;
+				win();
+			}
+		}
+	}
+	
+	function win() {
+		if (blocks_destroyed == TOTAL_BLOCKS) {
+			generateWorld();
 		}
 	}
 }
