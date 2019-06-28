@@ -38,12 +38,11 @@ function start() {
 	var elem;
 	var enemy;
 	var ENEMY_COLOR = Color.red;
-	var DELAY = 1;
-	var numEnemies = 1;
+	var ENEMY_SPEED = BLOCK_SIZE;
 	
 	generateWorld();
 	keyDownMethod(movement);
-	setTimer(enemyMove, DELAY);
+	setTimer(enemyMove, 20);
 	
 	function generateWorld() {
 		createGround();
@@ -142,25 +141,33 @@ function start() {
 				remove(elem);
 				blocks_destroyed++;
 				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
-				numEnemies++;
 				win();
 			}
 		}
 	}
 	
 	function createEnemy() {
-		for (var en = 0; en < numEnemies; en++) {
-			enemy = new Circle (DIGGER_SIZE);
-			var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
-			var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
-			enemy.setPosition (enemyX, enemyY);
-			enemy.setColor (ENEMY_COLOR);
-			add (enemy);
-		}
+		enemy = new Circle (DIGGER_SIZE);
+		var enemyX = Randomizer.nextInt(0 + BLOCK_SIZE / 2, 400 - BLOCK_SIZE / 2);
+		var enemyY = Randomizer.nextInt(200 + BLOCK_SIZE / 2, 500 - BLOCK_SIZE / 2);
+		enemy.setPosition (enemyX, enemyY);
+		enemy.setColor (ENEMY_COLOR);
+		add (enemy);
 	}
 	
 	function enemyMove() {
-		
+		var dmoveX = Randomizer.nextInt(0, 1);
+		var moveX = 0;
+		var dmoveY = Randomizer.nextInt(0, 1);
+		var moveY = 0;
+		if (dmoveX = 0)
+			moveX = -ENEMY_SPEED;
+		else if (dmoveX = 1)
+			moveX = ENEMY_SPEED:
+		if (dmoveY = 0)
+			moveY = -ENEMY_SPEED;
+		else if (dmoveY = 1)
+			moveY = ENEMY_SPEED;
 	}
 	
 	function win() {
