@@ -28,13 +28,16 @@ function start() {
 	var NUM_ROWS = 20; // top 4 are "sky"
 	var B_PER_ROW = 16;
 	var row;
-	
-	var dHeight = BLOCK_SIZE - 1;
+	var BUFFER;
+	var digger;
+	var DIGGER_SIZE = BLOCK_SIZE - BUFFER;
+	var DIGGER_COLOR = Color.red;
 	
 	generateWorld();
 	
 	function generateWorld() {
 		ground();
+		digger();
 	}
 	
 	function ground() {
@@ -42,13 +45,13 @@ function start() {
 			for (var col = 0; col < B_PER_ROW; col++){
 				block = new Rectangle (BLOCK_SIZE, BLOCK_SIZE);
 				block.setPosition (col * BLOCK_SIZE, row * BLOCK_SIZE);
-				color();
-				add(block);
+				groundColor();
+				add (block);
 			}
 		}
 	}
 					
-	function color() {
+	function groundColor() {
 		if (row >= 0 && row <= 3)
 			block.setColor (new Color(135, 206, 250));
 		else if (row >= 4 && row <= 7)
@@ -59,6 +62,13 @@ function start() {
 			block.setColor (new Color(244, 164, 96));
 		else if (row >= 16 && row <= 19)
 			block.setColor (new Color(205, 133, 63));
+	}
+	
+	function digger() {
+		digger = new Circle (DIGGER_SIZE);
+		digger.setPosition (getWidth() / 2, 4 * BLOCK_SIZE);
+		digger.setColor (DIGGER_COLOR);
+		add (digger);
 	}
 }
 </script>
