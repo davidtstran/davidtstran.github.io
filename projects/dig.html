@@ -23,6 +23,23 @@
 function start() {
 	removeAll(); // clear canvas
 	
+	var BLOCK_SIZE = 25;
+	var NUM_ROWS = 17; // 20 rows but top 3 are "sky"
+	var B_PER_ROW = 16;
+	
+	generateWorld();
+	
+	function generateWorld() {
+		ground();
+	}
+	
+	function ground() {
+		for (var row = 0; row < NUM_ROWS; row++){
+			for (var col = 0; col < B_PER_ROW; col++){
+				
+			}
+		}
+	}
 }
 </script>
 
