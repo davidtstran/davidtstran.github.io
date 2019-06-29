@@ -162,28 +162,24 @@ function start() {
 				eMoveX = -ENEMY_SPEED; // LEFT
 			else
 				eMoveX = 0;
-			eMoveX = -ENEMY_SPEED; // LEFT
 		}
 		else if (eX == 1) {
 			if (enemy.getX() + BLOCK_SIZE < getWidth())
 				eMoveX = ENEMY_SPEED; // RIGHT
 			else 
 				eMoveX = 0;
-			eMoveX = ENEMY_SPEED; // RIGHT
 		}
 		if (eY == 0) {
 			if (enemy.getY() - BLOCK_SIZE > 4 * BLOCK_SIZE)
 				eMoveY = -ENEMY_SPEED; // UP
 			else 
 				eMoveY = 0;
-			eMoveY = -ENEMY_SPEED; // UP
 		} 
 		else if (eY == 1) {
 			if (enemy.getY() + BLOCK_SIZE < getHeight()) 
 				eMoveY = ENEMY_SPEED; // DOWN
 			else 
 				eMoveY = 0;
-			eMoveY = ENEMY_SPEED; // DOWN
 		}
 		enemy.move(eMoveX, eMoveY);
 	}
