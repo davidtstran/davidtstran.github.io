@@ -106,7 +106,9 @@ function start() {
 	}
 	
 	function checkBlock(dir) {
-		if (dir == "UP") {
+		elem = getElementAt (digger.getX(), digger.getY());
+		removeBlock();
+		/*if (dir == "UP") {
 			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
 			removeBlock();
 		}
@@ -121,7 +123,7 @@ function start() {
 		else if (dir == "RIGHT") {
 			elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
 			removeBlock();
-		}
+		}*/
 	}
 	
 	function removeBlock() {
