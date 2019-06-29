@@ -21,6 +21,7 @@ function start() {
 	removeAll(); // clear canvas
 	
 	var canMove = true;
+	var win = false;
 	var block;
 	var BLOCK_SIZE = 25;
 	var NUM_ROWS = 20; // top 4 are "sky"
@@ -42,6 +43,7 @@ function start() {
 		createGround();
 		createDigger();
 		createEnemy();
+		win = false;
 	}
 	
 	function createGround() {
@@ -80,25 +82,29 @@ function start() {
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (digger.getY() - BLOCK_SIZE > 3 * BLOCK_SIZE) {
 					checkBlock("UP");
-					digger.move(0, -BLOCK_SIZE);
+					if (win == false)
+						digger.move(0, -BLOCK_SIZE);
 				}
 			}
 			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
 				if (digger.getX() - BLOCK_SIZE > 0) {
 					checkBlock("LEFT");
-					digger.move(-BLOCK_SIZE, 0);
+					if (win == false)
+						digger.move(-BLOCK_SIZE, 0);
 				}
 			}
 			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 				if (digger.getY() + BLOCK_SIZE < getHeight()) {
 					checkBlock("DOWN");
-					digger.move(0, BLOCK_SIZE);
+					if (win == false)
+						digger.move(0, BLOCK_SIZE);
 				}
 			}
 			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 				if (digger.getX() + BLOCK_SIZE < getWidth()) {
 					checkBlock("RIGHT");
-					digger.move(BLOCK_SIZE, 0);
+					if (win == false)
+						digger.move(BLOCK_SIZE, 0);
 				}
 			}
 		}
@@ -134,6 +140,7 @@ function start() {
 				remove(elem);
 				blocks_destroyed++;
 				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
+				win = true;
 				win();
 			}
 		}
@@ -154,7 +161,6 @@ function start() {
 			document.getElementById("blocks").innerHTML = "Finish";
 			removeAll();
 			generateWorld();
-			digger.setPosition (7 * BLOCK_SIZE + BLOCK_SIZE / 2, 3 * BLOCK_SIZE + BLOCK_SIZE / 2);
 		}
 	}
 }
