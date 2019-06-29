@@ -16,4 +16,4 @@ Projects:
         
   - Pong Game
   
-  - Dig Game
+  - Digging Game
