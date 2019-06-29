@@ -20,6 +20,7 @@
 function start() {
 	removeAll(); // clear canvas
 	
+	var BUFFER = 1;
 	var canMove = true;
 	var block;
 	var BLOCK_SIZE = 25;
@@ -106,24 +107,22 @@ function start() {
 	}
 	
 	function checkBlock(dir) {
-		elem = getElementAt (digger.getX(), digger.getY());
-		removeBlock();
-		/*if (dir == "UP") {
-			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE);
+		if (dir == "UP") {
+			elem = getElementAt(digger.getX(), digger.getY() - DIGGER_SIZE - BUFFER);
 			removeBlock();
 		}
 		else if (dir == "LEFT") {
-			elem = getElementAt(digger.getX() - DIGGER_SIZE, digger.getY());
+			elem = getElementAt(digger.getX() - DIGGER_SIZE - BUFFER, digger.getY());
 			removeBlock();
 		}
 		else if (dir == "DOWN") {
-			elem = getElementAt(digger.getX(), digger.getY() + DIGGER_SIZE);
+			elem = getElementAt(digger.getX(), digger.getY() + DIGGER_SIZE + BUFFER);
 			removeBlock();
 		}
 		else if (dir == "RIGHT") {
-			elem = getElementAt(digger.getX() + DIGGER_SIZE, digger.getY());
+			elem = getElementAt(digger.getX() + DIGGER_SIZE + BUFFER, digger.getY());
 			removeBlock();
-		}*/
+		}
 	}
 	
 	function removeBlock() {
