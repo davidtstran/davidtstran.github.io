@@ -141,7 +141,6 @@ function start() {
 				remove(elem);
 				blocks_destroyed++;
 				document.getElementById("blocks").innerHTML = "Blocks Destroyed: " + blocks_destroyed.toString(10);
-				win = true;
 				win();
 			}
 		}
@@ -157,6 +156,7 @@ function start() {
 	}
 	
 	function win() {
+		win = true;
 		var blcks = blocks_destroyed/TOTAL_BLOCKS;
 		if (blcks % 1 == 0 && blcks != 0) {
 			document.getElementById("blocks").innerHTML = "Finish";
