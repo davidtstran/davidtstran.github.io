@@ -152,7 +152,7 @@ function start() {
 	function win() {
 		var blcks = blocks_destroyed/TOTAL_BLOCKS;
 		if (blcks % 1 == 0 && blcks != 0) {
-			document.getElementById("blocks").innerHTML = "Finish";
+			document.getElementById("blocks").innerHTML = "Finished with " + blocks_destroyed.toString(10) + " Blocks Destroyed";
 			removeAll();
 			generateWorld();
 		}
