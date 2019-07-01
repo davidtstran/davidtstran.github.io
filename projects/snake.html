@@ -19,7 +19,6 @@
 <script>
 function start() {
 	removeAll(); // clear canvas
-	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
 	
 	var TIME = 50;
 	var GRID_SIZE = 10; // 50x50 blocks
@@ -28,6 +27,7 @@ function start() {
 	var snakeSize = 1;
 
 	createSnake();
+	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
 	setTimer(movement, TIME);
 	keyDownMethod(changeDirection);
 	
