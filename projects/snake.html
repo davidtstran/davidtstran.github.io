@@ -30,7 +30,7 @@ function start() {
 	add(snakeHead);
 	keyDownMethod(movement);
 	
-	function movement() {
+	function movement(e) {
 		if (canMove == true){
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (snakeHead.getY() - GRID_SIZE > 0) {
