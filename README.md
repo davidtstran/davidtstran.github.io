@@ -17,3 +17,5 @@ Projects:
   - Pong Game
   
   - Digging Game
+  
+  - Snake Game
