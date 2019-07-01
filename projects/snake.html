@@ -39,12 +39,12 @@ function start() {
 	function movement(e) {
 		if (canMove == true){
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-				if (snakeHead.getY() - GRID_SIZE > 0) {
+				if (snakeHead.getY() - GRID_SIZE >= 0) {
 					snakeHead.move(0, -GRID_SIZE);
 				}
 			}
 			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-				if (snakeHead.getX() - GRID_SIZE > 0) {
+				if (snakeHead.getX() - GRID_SIZE >= 0) {
 					snakeHead.move(-GRID_SIZE, 0);
 				}
 			}
