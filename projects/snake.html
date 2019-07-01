@@ -20,6 +20,41 @@
 function start() {
 	removeAll(); // clear canvas
 	
+	var GRID_SIZE = 10;
+	var canMove = true;
+	var snakeHead;
+	
+	snakeHead = new Rectangle (GRID_SIZE, GRID_SIZE);
+	snakeHead.setPosition(Randomizer.nextInt(0, getWidth() - GRID_SIZE), Randomizer.nextInt(0, getHeight() - GRID_SIZE));
+	snakeHead.setColor(Color.white);
+	add(snakeHead);
+	keyDownMethod(movement);
+	
+	function movement() {
+		if (canMove == true){
+			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+				if (snakeHead.getY() - GRID_SIZE > 0) {
+					snakeHead.move(0, -GRID_SIZE);
+				}
+			}
+			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+				if (snakeHead.getX() - GRID_SIZE > 0) {
+					snakeHead.move(-GRID_SIZE, 0);
+				}
+			}
+			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+				if (snakeHead.getY() + GRID_SIZE < getHeight()) {
+					snakeHead.move(0, GRID_SIZE);
+				}
+			}
+			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+				if (snakeHead.getX() + GRID_SIZE < getWidth()) {
+					snakeHead.move(GRID_SIZE, 0);
+				}
+			}
+		}
+	}
+	
 }
 </script>
 	
