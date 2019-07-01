@@ -10,7 +10,7 @@
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Snake - Collect Food to Grow<br>Change Direction with Arrow Keys or WASD<br></h2>
-	<h2 id = "size"></h2>
+	<h2 id = "size">Snake Size: 1</h2>
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
@@ -22,9 +22,9 @@ function start() {
 	
 	var TIME = 50;
 	var GRID_SIZE = 10; // 50x50 blocks
-	var canMove = true;
 	var direction = "RIGHT"; // DEFAULT MOVE RIGHT
 	var snakeHead;
+	var snakeSize = 1;
 
 	createSnake();
 	setTimer(movement, TIME);
@@ -51,15 +51,32 @@ function start() {
 	}
 	
 	function movement() {
-		if (direction == "UP")
+		if (direction == "UP") {
 			snakeHead.move(0, -GRID_SIZE);
-		else if (direction == "LEFT")
+			if (snakeHead.getY() <= 0)
+				dead();
+		}
+		else if (direction == "LEFT") {
 			snakeHead.move(-GRID_SIZE, 0);
-		else if (direction == "DOWN")
+			if (snakeHead.getX() <= 0)
+				dead();
+		}
+		else if (direction == "DOWN") {
 			snakeHead.move(0, GRID_SIZE);
-		else if (direction == "RIGHT")
+			if (snakeHead.getY() < getHeight())
+				dead();
+		}
+		else if (direction == "RIGHT") {
 			snakeHead.move(GRID_SIZE, 0);
-	}	
+			if (snakeHead.getY() < getWidth())
+				dead();
+		}
+	}
+	
+	function dead() {
+		stopTimer(movement);
+		document.getElementById("size").innerHTML = "Died with Snake Size of " + snakeSize.toString(10);
+	}
 }
 </script>
 	
