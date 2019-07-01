@@ -25,10 +25,13 @@ function start() {
 	var direction = "RIGHT"; // DEFAULT MOVE RIGHT
 	var snakeHead;
 	var snakeSize = 1;
+	var food;
+	var foodExists = false;
 
 	createSnake();
 	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
 	setTimer(movement, TIME);
+	setTimer(createFood, 1);
 	keyDownMethod(changeDirection);
 	
 	function createSnake() {
@@ -71,6 +74,17 @@ function start() {
 			snakeHead.move(GRID_SIZE, 0);
 			if (snakeHead.getX() >= getWidth() - GRID_SIZE)
 				dead();
+		}
+	}
+	
+	function createFood() {
+		if (foodExists == false){
+			food = new Rectangle (GRID_SIZE, GRID_SIZE);
+			var fX = Randomizer.nextInt(0, 49); // 50 blocks
+			var fY = Randomizer.nextInt(0, 49); // 50 blocks
+			food.setPosition(fX * GRID_SIZE, fY * GRID_SIZE);
+			food.setColor(Color.red);
+			add(food);	
 		}
 	}
 	
