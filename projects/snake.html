@@ -24,6 +24,8 @@ function start() {
 	var GRID_SIZE = 10; // 50x50 blocks
 	var direction = "RIGHT"; // DEFAULT MOVE RIGHT
 	var snakeHead;
+	var snakeColor = Color.white;
+	var snakeBody = [];
 	var snakeSize = 1;
 	var food;
 	var foodExists = false;
@@ -39,7 +41,7 @@ function start() {
 		var shX = Randomizer.nextInt(0, 49); // 50 blocks
 		var shY = Randomizer.nextInt(0, 49); // 50 blocks
 		snakeHead.setPosition(shX * GRID_SIZE, shY * GRID_SIZE);
-		snakeHead.setColor(Color.white);
+		snakeHead.setColor(snakeColor);
 		add(snakeHead);
 	}
 	
@@ -89,6 +91,10 @@ function start() {
 		}
 		if ( (snakeHead.getX() == food.getX()) && (snakeHead.getY() == food.getY()) ){
 			remove(food);
+			snakeBody[snakeSize - 1] = new Rectangle (GRID_SIZE, GRID_SIZE);
+			snakeBody[snakeSize - 1].setPosition(snakeHead.getX(), snakeHead.getY());
+			snakeBody[snakeSize - 1].setColor(snakeColor);
+			add(snakeBody[snakeSize - 1]);
 			snakeSize++;
 			document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
 			foodExists = false;
