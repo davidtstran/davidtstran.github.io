@@ -20,12 +20,15 @@
 function start() {
 	removeAll(); // clear canvas
 	
+	var TIME = 1;
 	var GRID_SIZE = 10; // 50x50 blocks
 	var canMove = true;
+	var direction = "RIGHT"; // DEFAULT MOVE RIGHT
 	var snakeHead;
 
 	createSnake();
-	keyDownMethod(movement);
+	setTimer(movement, TIME);
+	keyDownMethod(changeDirection);
 	
 	function createSnake() {
 		snakeHead = new Rectangle (GRID_SIZE, GRID_SIZE);
@@ -36,31 +39,27 @@ function start() {
 		add(snakeHead);
 	}
 	
-	function movement(e) {
-		if (canMove == true){
-			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-				if (snakeHead.getY() - GRID_SIZE >= 0) {
-					snakeHead.move(0, -GRID_SIZE);
-				}
-			}
-			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-				if (snakeHead.getX() - GRID_SIZE >= 0) {
-					snakeHead.move(-GRID_SIZE, 0);
-				}
-			}
-			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-				if (snakeHead.getY() + GRID_SIZE < getHeight()) {
-					snakeHead.move(0, GRID_SIZE);
-				}
-			}
-			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-				if (snakeHead.getX() + GRID_SIZE < getWidth()) {
-					snakeHead.move(GRID_SIZE, 0);
-				}
-			}
-		}
+	function changeDirection(e) {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W'))
+			direction = "UP";
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) 
+			direction = "LEFT";
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) 
+			direction = "DOWN";
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) 
+			direction = "RIGHT";
 	}
 	
+	function movement() {
+		if (direction == "UP")
+			snakeHead.move(0, -GRID_SIZE);
+		else if (direction == "LEFT")
+			snakeHead.move(-GRID_SIZE, 0);
+		else if (direction == "DOWN")
+			snakeHead.move(0, GRID_SIZE);
+		else if (direction == "RIGHT")
+			snakeHead.move(GRID_SIZE, 0;
+	}	
 }
 </script>
 	
