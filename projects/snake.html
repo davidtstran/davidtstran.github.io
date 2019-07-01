@@ -64,12 +64,12 @@ function start() {
 		}
 		else if (direction == "DOWN") {
 			snakeHead.move(0, GRID_SIZE);
-			if (snakeHead.getY() >= getHeight())
+			if (snakeHead.getY() >= getHeight() - GRID_SIZE)
 				dead();
 		}
 		else if (direction == "RIGHT") {
 			snakeHead.move(GRID_SIZE, 0);
-			if (snakeHead.getX() >= getWidth())
+			if (snakeHead.getX() >= getWidth() - GRID_SIZE)
 				dead();
 		}
 	}
