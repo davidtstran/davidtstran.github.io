@@ -57,22 +57,22 @@ function start() {
 	function movement() {
 		if (direction == "UP") {
 			snakeHead.move(0, -GRID_SIZE);
-			if (snakeHead.getY() <= 0)
+			if (snakeHead.getY() < 0 - GRID_SIZE)
 				dead();
 		}
 		else if (direction == "LEFT") {
 			snakeHead.move(-GRID_SIZE, 0);
-			if (snakeHead.getX() <= 0)
+			if (snakeHead.getX() < 0 - GRID_SIZE)
 				dead();
 		}
 		else if (direction == "DOWN") {
 			snakeHead.move(0, GRID_SIZE);
-			if (snakeHead.getY() >= getHeight() - GRID_SIZE)
+			if (snakeHead.getY() >= getHeight() + GRID_SIZE)
 				dead();
 		}
 		else if (direction == "RIGHT") {
 			snakeHead.move(GRID_SIZE, 0);
-			if (snakeHead.getX() >= getWidth() - GRID_SIZE)
+			if (snakeHead.getX() >= getWidth() + GRID_SIZE)
 				dead();
 		}
 	}
