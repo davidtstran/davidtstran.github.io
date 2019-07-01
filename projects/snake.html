@@ -58,6 +58,9 @@ function start() {
 	}
 	
 	function movement() {
+		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
+		if (elem.getColor() == "00ffff")
+			dead();
 		if (direction == "UP") {
 			snakeHead.move(0, -GRID_SIZE);
 			if (snakeHead.getY() < 0 - GRID_SIZE)
@@ -75,7 +78,7 @@ function start() {
 		}
 		else if (direction == "RIGHT") {
 			snakeHead.move(GRID_SIZE, 0);
-			if (snakeHead.getX() >= getWidth())
+			if (snakeHead.getX() >= getWidth()) 
 				dead();
 		}
 	}
