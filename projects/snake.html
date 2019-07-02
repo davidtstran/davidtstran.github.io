@@ -58,7 +58,7 @@ function start() {
 	}
 	
 	function movement() {
-		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
+		elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE);
 		if (elem.getColor() == "#00ffff")
 			dead();
 		if (direction == "UP") {
