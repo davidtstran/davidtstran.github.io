@@ -9,7 +9,7 @@
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>Left: WASD | Right: Arrow Keys<br></h2>
+	<h2>Left: WASD | Right: Arrow Keys (Use Down to Attack)<br></h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -22,16 +22,18 @@ function start() {
 	
 	var lf, rf; // left & right fighters
 	var lColor = Color.red, rColor = Color.blue;
-	var lHealth = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // 1 = health bar
-	var rHealth = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // 1 = health bar
-	var healthBuffer = 10;
+	var lHealth = []; // 1 = health bar
+	var rHealth = []; // 1 = health bar
+	var healthBuffer = 10, barBuffer = 5;
 	var moveSpace = 50;
+	var fighterSize = moveSpace / 2;
+	var lShot, rShot; // fighters have 1 shot
+	var shotSpeed = 50;
 	
 	createWorld();
 	keyDownMethod(move);
 	
 	function createWorld() {
-		var fighterSize = moveSpace / 2;
 		lf = new Circle(fighterSize);
 		lf.setPosition(moveSpace + fighterSize, getHeight() - fighterSize);
 		lf.setColor(lColor);
@@ -40,20 +42,20 @@ function start() {
 		rf.setPosition(getWidth() - moveSpace - fighterSize, getHeight() - fighterSize);
 		rf.setColor(rColor);
 		add(rf);
-		var healthBarL = new Rectangle(200, 30), healthBarR = new Rectangle(200, 30);
+		var healthBarL = new Rectangle(205, 40), healthBarR = new Rectangle(205, 40);
 		healthBarL.setColor(Color.black); healthBarR.setColor(Color.black);
 		healthBarL.setPosition(healthBuffer, healthBuffer);
-		healthBarR.setPosition(getWidth() - healthBuffer - 200, healthBuffer);
+		healthBarR.setPosition(getWidth() - healthBuffer - 205, healthBuffer);
 		add(healthBarL); add(healthBarR); 
 		fillHealthBars();
 	}
 	
 	function fillHealthBars(){
-		for (var barN = 0; barN < 10; barN++) {
+		for (var barN = 0; barN < 10; barN++) { // 10 health bars = FULL
 			lHealth[barN] = new Rectangle (15, 30); rHealth[barN] = new Rectangle (15, 30);
 			lHealth[barN].setColor(Color.green); rHealth[barN].setColor(Color.green);
 			lHealth[barN].setPosition(healthBuffer + barBuffer + (barN * 20), healthBuffer + barBuffer);  // 20 = bar(15) + barBuffer
-			rHealth[barN].setPosition(getWidth() - healthBuffer - barBuffer - ((1+barN) * 15) - barBuffer*barN, healthBuffer + barBuffer);
+			rHealth[barN].setPosition(getWidth() - healthBuffer - barBuffer - ((1+barN) * 15) - barBuffer*barN, healthBuffer + barBuffer);       
 			add(lHealth[barN]);
 			add(rHealth[barN]);
 		}
@@ -68,6 +70,13 @@ function start() {
 			if (lf.getX() + moveSpace < getWidth())
 				lf.move(moveSpace, 0); 
 		}
+		if (e.keyCode == Keyboard.letter('S')) { // LEFT SHOOT
+			lShot = new Circle(5);
+			lShot.setPosition(lf.getX() + fighterSize, lf.getY());
+			lShot.setColor(lColor);
+			lShot.setBorderColor(Color.white);
+			add(lShot);
+		}
 		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT
 			if (rf.getX() - moveSpace > 0)
 				rf.move(-moveSpace, 0); 
@@ -76,7 +85,15 @@ function start() {
 			if (rf.getX() + moveSpace < getWidth())
 				rf.move(moveSpace, 0); 
 		}
+		if (e.keyCode == Keyboard.DOWN) { // RIGHT SHOOT
+			rShot = new Circle(5);
+			rShot.setPosition(rf.getX() - fighterSize, rf.getY());
+			rShot.setColor(rColor);
+			rShot.setBorderColor(Color.white);
+			add(rShot);
+		}
 	}
+	
 }
 </script>
 	
