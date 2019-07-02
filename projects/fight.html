@@ -1,0 +1,68 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>Fighters</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+</head>
+<body>
+	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Header
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
+	<h2>Left: WASD | Right: Arrow Keys<br></h2>
+	
+	<p align = "center">
+		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
+		<canvas width="600" height="300" class="codehs-editor-canvas" style="background-color:lightgray"></canvas>
+	</p>
+	
+<script>
+function start() {
+	removeAll(); // clear canvas
+	
+	var lf, rf; // left & right fighters
+	var lColor = Color.red, rColor = Color.blue;
+	var moveSpace = 50;
+	
+	createWorld();
+	keyDownMethod(move);
+	
+	function createWorld() {
+		var fighterSize = moveSpace / 2;
+		lf = new Circle(fighterSize);
+		lf.setPosition(moveSpace + fighterSize, getHeight() - fighterSize);
+		lf.setColor(lColor);
+		add(lf);
+		rf = new Circle(fighterSize);
+		rf.setPosition(getWidth() - moveSpace - fighterSize, getHeight() - fighterSize);
+		rf.setColor(rColor);
+		add(rf);
+	}
+	
+	function move(e) {
+		if (e.keyCode == Keyboard.letter('A')) { // LEFT move LEFT
+			if (lf.getX() - moveSpace > 0)
+				lf.move(-moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
+			if (lf.getX() + moveSpace < getWidth())
+				lf.move(moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT
+			if (rf.getX() - moveSpace > 0)
+				rf.move(-moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
+			if (rf.getX() + moveSpace < getWidth())
+				rf.move(moveSpace, 0); 
+		}
+	}
+}
+</script>
+	
+	<br> <br> <br>
+	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Footer
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
+</body>
+</html>
