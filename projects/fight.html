@@ -110,6 +110,7 @@ function start() {
 				remove(rf);
 				var win = new Text ("Left Player Wins!");
 				win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+				win.setColor(Color.white);
 				add(win);	
 			}
 			remove(lShot);
@@ -127,6 +128,7 @@ function start() {
 				remove(lf);
 				var win = new Text ("Right Player Wins!");
 				win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+				win.setColor(Color.white);
 				add(win);	
 			}
 			remove(rShot);
