@@ -108,7 +108,7 @@ function start() {
 				if (rLife == 0) {
 					remove(rf);
 					var win = new Text ("Left Player Wins!");
-					win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 					win.setColor(Color.white);
 					add(win);	
 				}
@@ -126,7 +126,7 @@ function start() {
 				if (lLife == 0) {
 					remove(lf);
 					var win = new Text ("Right Player Wins!");
-					win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 					win.setColor(Color.white);
 					add(win);	
 				}
