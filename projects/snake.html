@@ -59,28 +59,29 @@ function start() {
 	
 	function movement() {
 		if (direction == "UP") {
+			elem = getElementAt (snakeHead.getX(), snakeHead.getY() - GRID_SIZE);
 			snakeHead.move(0, -GRID_SIZE);
-			if (snakeHead.getY() < 0 - GRID_SIZE)
+			if ((snakeHead.getY() < 0 - GRID_SIZE) || (elem.getColor() == "#00ffff"))
 				dead();
 		}
 		else if (direction == "LEFT") {
+			elem = getElementAt (snakeHead.getX() - GRID_SIZE, snakeHead.getY());
 			snakeHead.move(-GRID_SIZE, 0);
-			if (snakeHead.getX() < 0 - GRID_SIZE)
+			if ((snakeHead.getX() < 0 - GRID_SIZE) || (elem.getColor() == "#00ffff"))
 				dead();
 		}
 		else if (direction == "DOWN") {
+			elem = getElementAt (snakeHead.getX(), snakeHead.getY() + GRID_SIZE);
 			snakeHead.move(0, GRID_SIZE);
-			if (snakeHead.getY() >= getHeight())
+			if ((snakeHead.getY() >= getHeight()) || (elem.getColor() == "#00ffff"))
 				dead();
 		}
 		else if (direction == "RIGHT") {
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY());
 			snakeHead.move(GRID_SIZE, 0);
-			if (snakeHead.getX() >= getWidth()) 
+			if ((snakeHead.getX() >= getWidth()) || (elem.getColor() == "#00ffff"))
 				dead();
 		}
-		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
-		if (elem.getColor() == "#00ffff")
-			dead();
 	}
 	
 	function createFood() {
