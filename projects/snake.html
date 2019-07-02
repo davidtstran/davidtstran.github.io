@@ -63,25 +63,34 @@ function start() {
 			snakeHead.move(0, -GRID_SIZE);
 			if (snakeHead.getY() < 0 - GRID_SIZE)
 				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE/2, snakeHead.getY());
+			if (elem.getColor() == "#00ffff")
+				dead();
 		}
 		else if (direction == "LEFT") {
 			snakeHead.move(-GRID_SIZE, 0);
 			if (snakeHead.getX() < 0 - GRID_SIZE)
+				dead();
+			elem = getElementAt (snakeHead.getX(), snakeHead.getY() + GRID_SIZE/2);
+			if (elem.getColor() == "#00ffff")
 				dead();
 		}
 		else if (direction == "DOWN") {
 			snakeHead.move(0, GRID_SIZE);
 			if (snakeHead.getY() >= getHeight())
 				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE/2, snakeHead.getY() + GRID_SIZE);
+			if (elem.getColor() == "#00ffff")
+				dead();
 		}
 		else if (direction == "RIGHT") {
 			snakeHead.move(GRID_SIZE, 0);
 			if (snakeHead.getX() >= getWidth())
 				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE/2);
+			if (elem.getColor() == "#00ffff")
+				dead();
 		}
-		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
-		if (elem.getColor() == "#00ffff")
-			dead();
 	}
 	
 	function createFood() {
