@@ -40,12 +40,11 @@ function start() {
 		rf.setPosition(getWidth() - moveSpace - fighterSize, getHeight() - fighterSize);
 		rf.setColor(rColor);
 		add(rf);
-		var healthBar = new Rectangle(200, 30);
-		healthBar.setColor(Color.black);
-		healthBar.setPosition(healthBuffer, moveSpace);
-		add(healthBar); // left
-		healthBar.setPosition(getWidth() - healthBuffer - 200, moveSpace);
-		add(healthBar); // right
+		var healthBarL = new Rectangle(200, 30), healthBarR = new Rectangle(200, 30);
+		healthBarL.setColor(Color.black); healthBarR.setColor(Color.black);
+		healthBarL.setPosition(healthBuffer, healthBuffer);
+		healthBarR.setPosition(getWidth() - healthBuffer - 200, healthBuffer);
+		add(healthBarL); add(healthBarR); 
 	}
 	
 	function move(e) {
