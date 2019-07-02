@@ -24,6 +24,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var lHealth = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // 1 = health bar
 	var rHealth = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // 1 = health bar
+	var healthBuffer = 10;
 	var moveSpace = 50;
 	
 	createWorld();
@@ -39,6 +40,12 @@ function start() {
 		rf.setPosition(getWidth() - moveSpace - fighterSize, getHeight() - fighterSize);
 		rf.setColor(rColor);
 		add(rf);
+		var healthBar = new Rectangle(200, 30);
+		healthBar.setColor(Color.black);
+		healthBar.setPosition(healthBuffer, moveSpace);
+		add(healthBar); // left
+		healthBar.setPosition(getWidth() - healthBuffer - 200, moveSpace);
+		add(healthBar); // right
 	}
 	
 	function move(e) {
