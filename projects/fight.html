@@ -45,6 +45,18 @@ function start() {
 		healthBarL.setPosition(healthBuffer, healthBuffer);
 		healthBarR.setPosition(getWidth() - healthBuffer - 200, healthBuffer);
 		add(healthBarL); add(healthBarR); 
+		fillHealthBars();
+	}
+	
+	function fillHealthBars(){
+		for (var barN = 0; barN < 10; barN++) {
+			lHealth[barN] = new Rectangle (15, 30); rHealth[barN] = new Rectangle (15, 30);
+			lHealth[barN].setColor(Color.green); rHealth[barN].setColor(Color.green);
+			lHealth[barN].setPosition(healthBuffer + barBuffer + (barN * 20), healthBuffer + barBuffer);  // 20 = bar(15) + barBuffer
+			rHealth[barN].setPosition(getWidth() - healthBuffer - barBuffer - ((1+barN) * 15), healthBuffer + barBuffer);
+			add(lHealth[barN]);
+			add(rHealth[barN]);
+		}
 	}
 	
 	function move(e) {
