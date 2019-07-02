@@ -36,7 +36,7 @@ function start() {
 	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
 	setTimer(createFood, 1);
 	setTimer(movement, TIME);
-	setTimer(moveFood, TIME);
+	setTimer(moveFood, 1000);
 	keyDownMethod(changeDirection);
 	
 	function createSnake() {
