@@ -9,7 +9,7 @@
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>Snake (Initially Goes Right)<br>Change Direction with Arrow Keys or WASD<br></h2>
+	<h2>Snake (Moves Random Direction at Start)<br>Change Direction with Arrow Keys or WASD<br></h2>
 	<h2 id = "size">Snake Size: 1</h2>
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -22,7 +22,7 @@ function start() {
 	
 	var TIME = 50;
 	var GRID_SIZE = 10; // 50x50 blocks
-	var direction = "RIGHT"; // DEFAULT MOVE RIGHT
+	var direction; // DEFAULT MOVE RANDOM
 	var snakeHead;
 	var snakeColorHead = Color.white;
 	var snakeColorBody = new Color (0, 255, 255);
@@ -45,6 +45,11 @@ function start() {
 		snakeHead.setPosition(shX * GRID_SIZE, shY * GRID_SIZE);
 		snakeHead.setColor(snakeColorHead);
 		add(snakeHead);
+		var dir = Randomizer.nextInt(0, 3); // UP, LEFT, DOWN, RIGHT
+		if (dir == 0) { direction = "UP"; }
+		else if (dir == 1) { direction = "LEFT"; }
+		else if (dir == 2) { direction = "DOWN"; }
+		else if (dir == 3) { direction = "RIGHT"; }
 	}
 	
 	function changeDirection(e) {
