@@ -122,7 +122,7 @@ function start() {
 	}
 	
 	function moveFood() { 
-		var foodMove = Randomizer.nextInt(0, 3);
+		/*var foodMove = Randomizer.nextInt(0, 3);
 		if (foodMove == 0) { // UP
 			if (food.getY() - GRID_SIZE > 0)
 				food.move(0, -GRID_SIZE);
@@ -146,7 +146,10 @@ function start() {
 				food.move(GRID_SIZE, 0);
 			else 
 				food.move(0, 0);
-		}
+		}*/
+		var foodX = Randomizer.nextInt(0, 49); // 50 blocks
+		var foodY = Randomizer.nextInt(0, 49); // 50 blocks
+		food.setPosition(foodX * GRID_SIZE, foodY * GRID_SIZE);
 	}
 	
 	function dead() {
