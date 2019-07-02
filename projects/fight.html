@@ -107,7 +107,7 @@ function start() {
 				remove(rHealth[rLife]);
 				if (rLife == 0) {
 					remove(rf);
-					var win = new Text ("Left Player Wins!");
+					var win = new Text ("Red Player Wins!");
 					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 					win.setColor(Color.white);
 					add(win);	
@@ -125,7 +125,7 @@ function start() {
 				remove(lHealth[lLife]);
 				if (lLife == 0) {
 					remove(lf);
-					var win = new Text ("Right Player Wins!");
+					var win = new Text ("Blue Player Wins!");
 					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 					win.setColor(Color.white);
 					add(win);	
