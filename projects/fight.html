@@ -105,11 +105,12 @@ function start() {
 			if (rLife > 0) {
 				rLife--;
 				remove(rHealth[rLife]);
+			}
+			else {
 				remove(rf);
 				var win = new Text ("Left Player Wins!");
 				win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
-				add(win);
-				
+				add(win);	
 			}
 			remove(lShot);
 			stopTimer(shootfromL);
@@ -121,10 +122,12 @@ function start() {
 			if (lLife > 0) {
 				lLife--;
 				remove(lHealth[lLife]);
+			}
+			else {
 				remove(lf);
 				var win = new Text ("Right Player Wins!");
 				win.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
-				add(win);
+				add(win);	
 			}
 			remove(rShot);
 			stopTimer(shootfromR);
