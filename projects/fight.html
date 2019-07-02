@@ -28,7 +28,7 @@ function start() {
 	var moveSpace = 50;
 	var fighterSize = moveSpace / 2;
 	var lShot, rShot; // fighters have 1 shot
-	var shotSpeed = 100;
+	var shotSpeed = 75;
 	
 	createWorld();
 	keyDownMethod(move);
@@ -71,6 +71,7 @@ function start() {
 				lf.move(moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.letter('S')) { // LEFT SHOOT
+			stopTimer(shootFromL);
 			remove(lShot);
 			lShot = new Circle(5);
 			lShot.setPosition(lf.getX() + fighterSize, lf.getY());
@@ -88,7 +89,8 @@ function start() {
 				rf.move(moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.DOWN) { // RIGHT SHOOT
-			remove(lShot);
+			stopTimer(shootFromR);
+			remove(rShot);
 			rShot = new Circle(5);
 			rShot.setPosition(rf.getX() - fighterSize, rf.getY());
 			rShot.setColor(rColor);
