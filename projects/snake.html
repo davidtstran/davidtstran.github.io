@@ -122,34 +122,31 @@ function start() {
 	}
 	
 	function moveFood() { 
-		var foodX = Randomizer.nextInt(0, 1);
-		var foodY = Randomizer.nextInt(0, 1);
-		var fMoveX, fMoveY;
-		if (foodX == 0) {
-			if (food.getX() - GRID_SIZE > 0)
-				fMoveX = -GRID_SIZE; // LEFT
-			else
-				fMoveX = 0;
-		}
-		else if (foodX == 1) {
-			if (food.getX() + GRID_SIZE < getWidth())
-				fMoveX = GRID_SIZE; // RIGHT
-			else 
-				fMoveX = 0;
-		}
-		if (foodY == 0) {
+		var foodMove = Randomizer.nextInt(0, 3);
+		if (foodMove == 0) { // UP
 			if (food.getY() - GRID_SIZE > 0)
-				fMoveY = -GRID_SIZE; // UP
+				food.move(0, -GRID_SIZE);
 			else 
-				fMoveY = 0;
+				food.move(0, 0);
 		} 
-		else if (foodY == 1) {
-			if (food.getY() + GRID_SIZE < getHeight()) 
-				fMoveY = GRID_SIZE; // DOWN
-			else 
-				fMoveY = 0;
+		else if (foodMove == 1) { // LEFT
+			if (food.getX() - GRID_SIZE > 0)
+				food.move(-GRID_SIZE, 0);
+			else
+				food.move(0, 0);
 		}
-		food.move(fMoveX, fMoveY);
+		else if (foodMove == 2) { // DOWN
+			if (food.getY() + GRID_SIZE < getHeight()) 
+				food.move(0, GRID_SIZE);
+			else 
+				food.move(0, 0);
+		}
+		else if (foodMove == 3) { // RIGHT
+			if (food.getX() + GRID_SIZE < getWidth())
+				food.move(GRID_SIZE, 0);
+			else 
+				food.move(0, 0);
+		}
 	}
 	
 	function dead() {
