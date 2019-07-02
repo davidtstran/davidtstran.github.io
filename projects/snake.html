@@ -58,9 +58,6 @@ function start() {
 	}
 	
 	function movement() {
-		elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE);
-		if (elem.getColor() == "#00ffff")
-			dead();
 		if (direction == "UP") {
 			snakeHead.move(0, -GRID_SIZE);
 			if (snakeHead.getY() < 0 - GRID_SIZE)
@@ -81,6 +78,9 @@ function start() {
 			if (snakeHead.getX() >= getWidth()) 
 				dead();
 		}
+		elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE);
+		if (elem.getColor() == "#00ffff")
+			dead();
 	}
 	
 	function createFood() {
