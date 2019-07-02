@@ -78,7 +78,7 @@ function start() {
 			if (snakeHead.getX() >= getWidth()) 
 				dead();
 		}
-		elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE);
+		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
 		if (elem.getColor() == "#00ffff")
 			dead();
 	}
