@@ -30,6 +30,7 @@ function start() {
 	var snakeSize = 1;
 	var food;
 	var foodExists = false;
+	var elem;
 
 	createSnake();
 	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
@@ -78,6 +79,9 @@ function start() {
 			if (snakeHead.getX() >= getWidth())
 				dead();
 		}
+		elem = getElementAt (snakeHead.getX(), snakeHead.getY());
+		if (elem.getColor() == "#00ffff")
+			dead();
 	}
 	
 	function createFood() {
