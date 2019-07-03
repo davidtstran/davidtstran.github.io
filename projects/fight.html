@@ -71,14 +71,16 @@ function start() {
 				lf.move(moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.letter('S')) { // LEFT SHOOT
-			stopTimer(shootFromL);
-			remove(lShot);
-			lShot = new Circle(5);
-			lShot.setPosition(lf.getX() + fighterSize, lf.getY());
-			lShot.setColor(lColor);
-			lShot.setBorderColor(Color.white);
-			add(lShot);
-			setTimer(shootFromL, shotSpeed);
+			if (lLife > 0) {
+				stopTimer(shootFromL);
+				remove(lShot);
+				lShot = new Circle(5);
+				lShot.setPosition(lf.getX() + fighterSize, lf.getY());
+				lShot.setColor(lColor);
+				lShot.setBorderColor(Color.white);
+				add(lShot);
+				setTimer(shootFromL, shotSpeed);
+			}
 		}
 		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT
 			if (rf.getX() - moveSpace > 0)
@@ -89,14 +91,16 @@ function start() {
 				rf.move(moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.DOWN) { // RIGHT SHOOT
-			stopTimer(shootFromR);
-			remove(rShot);
-			rShot = new Circle(5);
-			rShot.setPosition(rf.getX() - fighterSize, rf.getY());
-			rShot.setColor(rColor);
-			rShot.setBorderColor(Color.white);
-			add(rShot);
-			setTimer(shootFromR, shotSpeed);
+			if (rLife > 0) {
+				stopTimer(shootFromR);
+				remove(rShot);
+				rShot = new Circle(5);
+				rShot.setPosition(rf.getX() - fighterSize, rf.getY());
+				rShot.setColor(rColor);
+				rShot.setBorderColor(Color.white);
+				add(rShot);
+				setTimer(shootFromR, shotSpeed);
+			}
 		}
 	}
 	
