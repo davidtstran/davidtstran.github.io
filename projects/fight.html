@@ -28,7 +28,6 @@ function start() {
 	var moveSpace = 50;
 	var fighterSize = moveSpace / 2;
 	var lShot, rShot; // fighters have 1 shot
-	var hitFL, hitFR;
 	var shotSpeed = 1;
 	
 	createWorld();
@@ -123,13 +122,6 @@ function start() {
 	
 	function shootFromL() { 
 		if (lShot.getX() == rf.getX()) {
-			hitFL = new Circle (10);
-			hitFL.setPosition(lShot.getX(), lShot.getY());
-			hitFL.setColor(Color.yellow);
-			add(hitFL);
-			setTimeout(function() {
-				remove(hitFL);
-			}, 100);
 			if (rLife > 0) {
 				rLife--;
 				remove(rHealth[rLife]);
