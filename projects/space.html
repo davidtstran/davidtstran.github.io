@@ -70,20 +70,28 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			centerShip.move(0, -moveSize);
-			ship.move(0, -moveSize);
+			if (centerShip.getY() - moveSize > 0) {
+				centerShip.move(0, -moveSize);
+				ship.move(0, -moveSize);
+			}
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			centerShip.move(-moveSize, 0);
-			ship.move(-moveSize, 0);
+			if (centerShip.getX() - moveSize > 0) {
+				centerShip.move(-moveSize, 0);
+				ship.move(-moveSize, 0);
+			}
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			centerShip.move(0, moveSize);
-			ship.move(0, moveSize);
+			if (centerShip.getY() + moveSize > getHeight()) {
+				centerShip.move(0, moveSize);
+				ship.move(0, moveSize);
+			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			centerShip.move(moveSize, 0);
-			ship.move(moveSize, 0);
+			if (centerShip.getX() + moveSize > getWidth()) {
+				centerShip.move(moveSize, 0);
+				ship.move(moveSize, 0);
+			}
 		}
 	}
 	function shoot() {
