@@ -22,7 +22,8 @@ function start() {
 	
 	// setFullscreen(); // create resizable full screen canvas
 
-	var ship, sStartX = 400, sStartY = 400;
+	var ship, sStartX = getWidth()/2, sStartY = getHeight()/2;
+	var shot;
 	var moveSize = 10;
 	
 	drawShip();
@@ -71,7 +72,7 @@ function start() {
 		}
 	}
 	function shoot() {
-		var shot = new Circle(5);
+		shot = new Circle(5);
 		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
 		shot.setColor(Color.black);
 		shot.setBorderColor(Color.white);
