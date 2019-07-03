@@ -80,7 +80,7 @@ function start() {
 	function shoot() {
 		shot.move(0, -moveSize);
 		if (shot.getY() < 0) {
-			shot.setPosition(ship.getX(), ship.getY());
+			shot.setPosition(sStartX, sStartY);
 			add(shot);
 		}
 			
