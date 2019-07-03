@@ -73,8 +73,8 @@ function start() {
 	function shoot() {
 		var shot = new Circle(5);
 		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
-		shot.setColor(Color.white);
-		shot.setBorderColor(Color.black);
+		shot.setColor(Color.black);
+		shot.setBorderColor(Color.white);
 		add(shot);
 		move(0, -moveSize);
 	}
