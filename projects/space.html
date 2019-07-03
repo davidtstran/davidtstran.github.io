@@ -58,8 +58,8 @@ function start() {
 		centerShip = new Circle(5);
 		centerShip.setPosition(sStartX + ship.getWidth()/2, sStartY + ship.getHeight()/2);
 		centerShip.setColor(Color.red);
-		add(ship);
 		add(centerShip);
+		add(ship);
 		
 		shot = new Circle(5); 
 		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
@@ -70,15 +70,19 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+			centerShip.move(0, -moveSize);
 			ship.move(0, -moveSize);
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			centerShip.move(-moveSize, 0);
 			ship.move(-moveSize, 0);
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			centerShip.move(0, moveSize);
 			ship.move(0, moveSize);
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			centerShip.move(moveSize, 0);
 			ship.move(moveSize, 0);
 		}
 	}
