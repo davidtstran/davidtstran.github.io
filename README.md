@@ -19,3 +19,7 @@ Projects:
   - Digging Game
   
   - Snake Game
+  
+  - Fighters
+
+  - Space Battle
