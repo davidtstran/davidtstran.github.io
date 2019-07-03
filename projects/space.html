@@ -70,25 +70,25 @@ function start() {
 	
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			if (centerShip.getY() - moveSize - ship.getHeight()/2 > 0) {
+			if (centerShip.getY() - moveSize - ship.getHeight()/2 >= 0) {
 				centerShip.move(0, -moveSize);
 				ship.move(0, -moveSize);
 			}
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			if (centerShip.getX() - moveSize - ship.getWidth()/2 > 0) {
+			if (centerShip.getX() - moveSize - ship.getWidth()/2 >= 0) {
 				centerShip.move(-moveSize, 0);
 				ship.move(-moveSize, 0);
 			}
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			if (centerShip.getY() + moveSize + ship.getHeight()/2 < getHeight()) {
+			if (centerShip.getY() + moveSize + ship.getHeight()/2 <= getHeight()) {
 				centerShip.move(0, moveSize);
 				ship.move(0, moveSize);
 			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (centerShip.getX() + moveSize + ship.getWidth()/2 < getWidth()) {
+			if (centerShip.getX() + moveSize + ship.getWidth()/2 <= getWidth()) {
 				centerShip.move(moveSize, 0);
 				ship.move(moveSize, 0);
 			}
