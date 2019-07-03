@@ -101,38 +101,42 @@ function start() {
 	}
 	
 	function shootFromL() { 
-		if (lShot.getX() == rf.getX()) {
-			if (rLife > 0) {
-				rLife--;
-				remove(rHealth[rLife]);
-				if (rLife == 0) {
-					remove(rf);
-					var win = new Text ("Red Player Wins!");
-					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
-					win.setColor(Color.white);
-					add(win);	
+		if (lLife > 0) {
+			if (lShot.getX() == rf.getX()) {
+				if (rLife > 0) {
+					rLife--;
+					remove(rHealth[rLife]);
+					if (rLife == 0) {
+						remove(rf);
+						var win = new Text ("Red Player Wins!");
+						win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
+						win.setColor(Color.white);
+						add(win);	
+					}
 				}
+				remove(lShot);
+				stopTimer(shootfromL);
 			}
-			remove(lShot);
-			stopTimer(shootfromL);
 		}
 		lShot.move(moveSpace/10, 0);
 	}
 	function shootFromR() { 
-		if (rShot.getX() == lf.getX()) {
-			if (lLife > 0) {
-				lLife--;
-				remove(lHealth[lLife]);
-				if (lLife == 0) {
-					remove(lf);
-					var win = new Text ("Blue Player Wins!");
-					win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
-					win.setColor(Color.white);
-					add(win);	
+		if (rLife > 0) {
+			if (rShot.getX() == lf.getX()) {
+				if (lLife > 0) {
+					lLife--;
+					remove(lHealth[lLife]);
+					if (lLife == 0) {
+						remove(lf);
+						var win = new Text ("Blue Player Wins!");
+						win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
+						win.setColor(Color.white);
+						add(win);	
+					}
 				}
+				remove(rShot);
+				stopTimer(shootfromR);
 			}
-			remove(rShot);
-			stopTimer(shootfromR);
 		}
 		rShot.move(-moveSpace/10, 0);
 	}
