@@ -57,7 +57,7 @@ function start() {
 		add(ship);
 		
 		shot = new Circle(5); 
-		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
+		//shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
 		shot.setColor(Color.black);
 		shot.setBorderColor(Color.white);
 		add(shot);
@@ -78,6 +78,7 @@ function start() {
 		}
 	}
 	function shoot() {
+		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
 		shot.move(0, -moveSize);
 	}
 }
