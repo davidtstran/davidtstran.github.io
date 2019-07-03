@@ -13,7 +13,7 @@
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
-		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black" id = "canvas"></canvas>
+		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
 <script>
@@ -21,6 +21,27 @@ function start() {
 	removeAll(); // clear canvas
 	
 	// setFullscreen(); // create resizable full screen canvas
+
+	var ship, shipW = 50, shipH = 50, sStartX = 400, sStartY = 400;
+	
+	drawShip();
+	
+	function drawShip() {
+		var ship = new Polygon();
+		var scale = 10;
+		ship.addPoint(0* scale, 8* scale); ship.addPoint(1* scale, 8* scale); ship.addPoint(1* scale, 12* scale); ship.addPoint(3* scale, 10* scale);
+		ship.addPoint(3* scale, 6* scale); ship.addPoint(4* scale, 6* scale); ship.addPoint(4* scale, 8* scale); ship.addPoint(6* scale, 7* scale); 
+		ship.addPoint(6* scale, 4* scale); ship.addPoint(7* scale, 4* scale); ship.addPoint(7* scale, 1* scale); ship.addPoint(8* scale, 1* scale);
+		ship.addPoint(8* scale, 4* scale); ship.addPoint(9* scale, 4* scale); ship.addPoint(9* scale, 7* scale); ship.addPoint(11* scale, 8* scale); 
+		ship.addPoint(11* scale, 6* scale); ship.addPoint(12* scale, 6* scale); ship.addPoint(12* scale, 10* scale); ship.addPoint(14* scale, 12* scale);
+		ship.addPoint(14* scale, 8* scale); ship.addPoint(15* scale, 8* scale); ship.addPoint(15* scale, 17* scale); ship.addPoint(14* scale, 17* scale); 
+		ship.addPoint(14* scale, 16* scale); ship.addPoint(11* scale, 13* scale); ship.addPoint(11* scale, 15* scale); ship.addPoint(9* scale, 15* scale);
+		ship.addPoint(9* scale, 14* scale); ship.addPoint(8* scale, 14* scale); ship.addPoint(8* scale, 17* scale); ship.addPoint(7* scale, 17* scale); 
+		ship.addPoint(7* scale, 14* scale); ship.addPoint(6* scale, 14* scale); ship.addPoint(6* scale, 15* scale); ship.addPoint(4* scale, 15* scale);
+		ship.addPoint(4* scale, 13* scale); ship.addPoint(1* scale, 16* scale); ship.addPoint(1* scale, 17* scale); ship.addPoint(0* scale, 17* scale); 
+		ship.setColor(Color.white);
+		add(ship);
+	}
 }
 </script>
 	
