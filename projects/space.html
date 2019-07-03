@@ -28,7 +28,7 @@ function start() {
 	
 	drawShip();
 	keyDownMethod(movement);
-	setTimer(shoot, 1000);
+	setTimer(shoot, 100);
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -57,7 +57,7 @@ function start() {
 		add(ship);
 		
 		shot = new Circle(5); 
-		//shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
+		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
 		shot.setColor(Color.black);
 		shot.setBorderColor(Color.white);
 		add(shot);
@@ -78,8 +78,10 @@ function start() {
 		}
 	}
 	function shoot() {
-		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
 		shot.move(0, -moveSize);
+		if (shot.getX() < 0)
+			shot.setPosition(ship.getX(), ship.getY());
+			
 	}
 }
 </script>
