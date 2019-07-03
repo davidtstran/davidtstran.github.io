@@ -82,13 +82,13 @@ function start() {
 			}
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			if (centerShip.getY() + moveSize > getHeight()) {
+			if (centerShip.getY() + moveSize < getHeight()) {
 				centerShip.move(0, moveSize);
 				ship.move(0, moveSize);
 			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (centerShip.getX() + moveSize > getWidth()) {
+			if (centerShip.getX() + moveSize < getWidth()) {
 				centerShip.move(moveSize, 0);
 				ship.move(moveSize, 0);
 			}
