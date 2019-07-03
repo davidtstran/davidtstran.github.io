@@ -45,7 +45,7 @@ function start() {
 		add(ship);
 	}
 	
-	function movement() {
+	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 			ship.move(0, -moveSize);
 		}
