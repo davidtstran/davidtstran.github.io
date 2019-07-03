@@ -22,7 +22,8 @@ function start() {
 	
 	// setFullscreen(); // create resizable full screen canvas
 
-	var ship, shipW = 50, shipH = 50, sStartX = 400, sStartY = 400;
+	var ship, sStartX = 400, sStartY = 400;
+	var moveSize = 50;
 	
 	drawShip();
 	keyDownMethod(movement);
@@ -46,16 +47,16 @@ function start() {
 	
 	function movement() {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			digger.move(0, -BLOCK_SIZE);
+			ship.move(0, -moveSize);
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			digger.move(-BLOCK_SIZE, 0);
+			ship.move(-moveSize, 0);
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			digger.move(0, BLOCK_SIZE);
+			ship.move(0, moveSize);
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			digger.move(BLOCK_SIZE, 0);
+			ship.move(moveSize, 0);
 		}
 	}
 }
