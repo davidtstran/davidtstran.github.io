@@ -67,7 +67,12 @@ function start() {
 				lf.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.letter('W')) { // LEFT JUMP
-			lf.move(0, -moveSpace); 
+			if (lf.getY() - moveSpace > moveSpace * 2) {
+				lf.move(0, -moveSpace); 
+				setTimeout(function() {
+					lf.move(0, moveSpace);
+				}, 1000);
+			}
 		}
 		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
 			if (lf.getX() + moveSpace < getWidth())
@@ -90,7 +95,9 @@ function start() {
 				rf.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.UP) { // RIGHT JUMP
-			rf.move(0, -moveSpace); 
+			if (rf.getY() - moveSpace > moveSpace * 2) { 
+				rf.move(0, -moveSpace); 
+			}
 		}
 		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
 			if (rf.getX() + moveSpace < getWidth())
