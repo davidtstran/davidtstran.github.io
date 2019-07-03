@@ -9,7 +9,7 @@
 	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>A<br></h2>
+	<h2>WASD/Arrows Movement<br></h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -25,6 +25,7 @@ function start() {
 	var ship, shipW = 50, shipH = 50, sStartX = 400, sStartY = 400;
 	
 	drawShip();
+	keyDownMethod(movement);
 	
 	function drawShip() {
 		var ship = new Polygon();
@@ -41,6 +42,21 @@ function start() {
 		ship.addPoint(4* scale, 13* scale); ship.addPoint(1* scale, 16* scale); ship.addPoint(1* scale, 17* scale); ship.addPoint(0* scale, 17* scale); 
 		ship.setColor(Color.white);
 		add(ship);
+	}
+	
+	function movement() {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+			digger.move(0, -BLOCK_SIZE);
+		}
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			digger.move(-BLOCK_SIZE, 0);
+		}
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			digger.move(0, BLOCK_SIZE);
+		}
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			digger.move(BLOCK_SIZE, 0);
+		}
 	}
 }
 </script>
