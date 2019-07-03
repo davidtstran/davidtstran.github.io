@@ -53,6 +53,7 @@ function start() {
 		ship.addPoint(sStartX + 6* scale, sStartY + 15* scale); ship.addPoint(sStartX + 4* scale, sStartY + 15* scale);
 		ship.addPoint(sStartX + 4* scale, sStartY + 13* scale); ship.addPoint(sStartX + 1* scale, sStartY + 16* scale); 
 		ship.addPoint(sStartX + 1* scale, sStartY + 17* scale); ship.addPoint(sStartX + 0* scale, sStartY + 17* scale); 
+		ship.addPoint(sStartX + 0* scale, sStartY + 8* scale);
 		ship.setColor(Color.white);
 		add(ship);
 		
@@ -80,7 +81,7 @@ function start() {
 	function shoot() {
 		shot.move(0, -moveSize);
 		if (shot.getY() < 0) {
-			shot.setPosition(sStartX, sStartY);
+			shot.setPosition(ship.getX(), ship.getY());
 			add(shot);
 		}
 			
