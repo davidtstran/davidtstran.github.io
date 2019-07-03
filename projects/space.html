@@ -57,12 +57,12 @@ function start() {
 		ship.setColor(Color.white);
 		centerShip = new Circle(5);
 		centerShip.setPosition(sStartX + ship.getWidth()/2, sStartY + ship.getHeight()/2);
-		centerShip.setColor(Color.red);
+		centerShip.setColor(Color.white);
 		add(centerShip);
 		add(ship);
 		
 		shot = new Circle(5); 
-		shot.setPosition(sStartX + ship.getX(), sStartY + ship.getY());
+		shot.setPosition(centerShip.getX(), centerShip.getY());
 		shot.setColor(Color.black);
 		shot.setBorderColor(Color.white);
 		add(shot);
