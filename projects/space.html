@@ -27,6 +27,7 @@ function start() {
 	
 	drawShip();
 	keyDownMethod(movement);
+	setTimer(shoot, 1);
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -58,6 +59,13 @@ function start() {
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 			ship.move(moveSize, 0);
 		}
+	}
+	function shoot() {
+		var shot = new Circle(5);
+		shot.setPosition(ship.getX(), ship.getY());
+		shot.setColor(Color.white);
+		shot.setBorderColor(Color.black);
+		add(shot);
 	}
 }
 </script>
