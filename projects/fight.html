@@ -71,7 +71,7 @@ function start() {
 				lf.move(0, -moveSpace); 
 				setTimeout(function() {
 					lf.move(0, moveSpace);
-				}, 1000);
+				}, 500);
 			}
 		}
 		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
@@ -97,6 +97,9 @@ function start() {
 		if (e.keyCode == Keyboard.UP) { // RIGHT JUMP
 			if (rf.getY() - moveSpace > moveSpace * 2) { 
 				rf.move(0, -moveSpace); 
+				setTimeout(function() {
+					rf.move(0, moveSpace);
+				}, 500);
 			}
 		}
 		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
