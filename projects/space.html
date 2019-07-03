@@ -32,26 +32,26 @@ function start() {
 	function drawShip() {
 		ship = new Polygon(); // 15x16
 		var scale = 2;
-		ship.addPoint(sStartX + 0* scale, 8* scale); ship.addPoint(sStartX + 1* scale, 8* scale); 
-		ship.addPoint(sStartX + 1* scale, 12* scale); ship.addPoint(sStartX + 3* scale, 10* scale);
-		ship.addPoint(sStartX + 3* scale, 6* scale); ship.addPoint(sStartX + 4* scale, 6* scale); 
-		ship.addPoint(sStartX + 4* scale, 8* scale); ship.addPoint(sStartX + 6* scale, 7* scale); 
-		ship.addPoint(sStartX + 6* scale, 4* scale); ship.addPoint(sStartX + 7* scale, 4* scale); 
-		ship.addPoint(sStartX + 7* scale, 1* scale); ship.addPoint(sStartX + 8* scale, 1* scale);
-		ship.addPoint(sStartX + 8* scale, 4* scale); ship.addPoint(sStartX + 9* scale, 4* scale); 
-		ship.addPoint(sStartX + 9* scale, 7* scale); ship.addPoint(sStartX + 11* scale, 8* scale); 
-		ship.addPoint(sStartX + 11* scale, 6* scale); ship.addPoint(sStartX + 12* scale, 6* scale); 
-		ship.addPoint(sStartX + 12* scale, 10* scale); ship.addPoint(sStartX + 14* scale, 12* scale);
-		ship.addPoint(sStartX + 14* scale, 8* scale); ship.addPoint(sStartX + 15* scale, 8* scale); 
-		ship.addPoint(sStartX + 15* scale, 17* scale); ship.addPoint(sStartX + 14* scale, 17* scale); 
-		ship.addPoint(sStartX + 14* scale, 16* scale); ship.addPoint(sStartX + 11* scale, 13* scale); 
-		ship.addPoint(sStartX + 11* scale, 15* scale); ship.addPoint(sStartX + 9* scale, 15* scale);
-		ship.addPoint(sStartX + 9* scale, 14* scale); ship.addPoint(sStartX + 8* scale, 14* scale); 
-		ship.addPoint(sStartX + 8* scale, 17* scale); ship.addPoint(sStartX + 7* scale, 17* scale); 
-		ship.addPoint(sStartX + 7* scale, 14* scale); ship.addPoint(sStartX + 6* scale, 14* scale); 
-		ship.addPoint(sStartX + 6* scale, 15* scale); ship.addPoint(sStartX + 4* scale, 15* scale);
-		ship.addPoint(sStartX + 4* scale, 13* scale); ship.addPoint(sStartX + 1* scale, 16* scale); 
-		ship.addPoint(sStartX + 1* scale, 17* scale); ship.addPoint(sStartX + 0* scale, 17* scale); 
+		ship.addPoint(sStartX + 0* scale, sStartY + 8* scale); ship.addPoint(sStartX + 1* scale, sStartY + 8* scale); 
+		ship.addPoint(sStartX + 1* scale, sStartY + 12* scale); ship.addPoint(sStartX + 3* scale, sStartY + 10* scale);
+		ship.addPoint(sStartX + 3* scale, sStartY + 6* scale); ship.addPoint(sStartX + 4* scale, sStartY + 6* scale); 
+		ship.addPoint(sStartX + 4* scale, sStartY + 8* scale); ship.addPoint(sStartX + 6* scale, sStartY + 7* scale); 
+		ship.addPoint(sStartX + 6* scale, sStartY + 4* scale); ship.addPoint(sStartX + 7* scale, sStartY + 4* scale); 
+		ship.addPoint(sStartX + 7* scale, sStartY + 1* scale); ship.addPoint(sStartX + 8* scale, sStartY + 1* scale);
+		ship.addPoint(sStartX + 8* scale, sStartY + 4* scale); ship.addPoint(sStartX + 9* scale, sStartY + 4* scale); 
+		ship.addPoint(sStartX + 9* scale, sStartY + 7* scale); ship.addPoint(sStartX + 11* scale, sStartY + 8* scale); 
+		ship.addPoint(sStartX + 11* scale, sStartY + 6* scale); ship.addPoint(sStartX + 12* scale, sStartY + 6* scale); 
+		ship.addPoint(sStartX + 12* scale, sStartY + 10* scale); ship.addPoint(sStartX + 14* scale, sStartY + 12* scale);
+		ship.addPoint(sStartX + 14* scale, sStartY + 8* scale); ship.addPoint(sStartX + 15* scale, sStartY + 8* scale); 
+		ship.addPoint(sStartX + 15* scale, sStartY + 17* scale); ship.addPoint(sStartX + 14* scale, sStartY + 17* scale); 
+		ship.addPoint(sStartX + 14* scale, sStartY + 16* scale); ship.addPoint(sStartX + 11* scale, sStartY + 13* scale); 
+		ship.addPoint(sStartX + 11* scale, sStartY + 15* scale); ship.addPoint(sStartX + 9* scale, sStartY + 15* scale);
+		ship.addPoint(sStartX + 9* scale, sStartY + 14* scale); ship.addPoint(sStartX + 8* scale, sStartY + 14* scale); 
+		ship.addPoint(sStartX + 8* scale, sStartY + 17* scale); ship.addPoint(sStartX + 7* scale, sStartY + 17* scale); 
+		ship.addPoint(sStartX + 7* scale, sStartY + 14* scale); ship.addPoint(sStartX + 6* scale, sStartY + 14* scale); 
+		ship.addPoint(sStartX + 6* scale, sStartY + 15* scale); ship.addPoint(sStartX + 4* scale, sStartY + 15* scale);
+		ship.addPoint(sStartX + 4* scale, sStartY + 13* scale); ship.addPoint(sStartX + 1* scale, sStartY + 16* scale); 
+		ship.addPoint(sStartX + 1* scale, sStartY + 17* scale); ship.addPoint(sStartX + 0* scale, sStartY + 17* scale); 
 		ship.setColor(Color.white);
 		add(ship);
 	}
@@ -76,6 +76,7 @@ function start() {
 		shot.setColor(Color.white);
 		shot.setBorderColor(Color.black);
 		add(shot);
+		move(0, -moveSize);
 	}
 }
 </script>
