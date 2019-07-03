@@ -50,12 +50,15 @@ function start() {
 			ship.move(0, -moveSize);
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			ship.rotate(90);
 			ship.move(-moveSize, 0);
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			ship.rotate(180);
 			ship.move(0, moveSize);
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			ship.rotate(270);
 			ship.move(moveSize, 0);
 		}
 	}
