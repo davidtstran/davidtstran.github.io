@@ -32,7 +32,8 @@ function start() {
 	var nme;
 	
 	drawShip();
-	healthAndLives();
+	healthBars();
+	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
 	enemy();
@@ -74,13 +75,15 @@ function start() {
 		add(shot);
 	}
 	
-	function healthAndLives(){
+	function healthBars() {
 		for (var barN = 0; barN < fullBars; barN++) { // 10 health bars = FULL
 			health[barN] = new Rectangle (15, 30);
 			health[barN].setColor(Color.green);
 			health[barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight + barBuffer);  // 20 = bar(15) + barBuffer    
 			add(health[barN]);
 		}
+	}
+	function lifePoints() {
 		for (var livesCount = 0; livesCount < numLives; livesCount++) {
 			var scale = 1.5;
 			var lStartX = getWidth() - (ship.getWidth() * scale) * (livesCount + 1);
