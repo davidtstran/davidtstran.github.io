@@ -35,6 +35,7 @@ function start() {
 	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
+	setTimer(shotCheck, 1);
 	enemy(); // use function to create multiple enemies
 	
 	function drawShip() {
@@ -163,7 +164,13 @@ function start() {
 	}
 	function shoot() {
 		shot.move(0, -moveSize);
-		if (shot.getY() < 0) {
+		//if (shot.getY() < 0) {
+		//	shot.setPosition(centerShip.getX(), centerShip.getY());
+		//	add(shot);
+		//}	
+	}
+	function shotCheck() {
+		if ((shot.getY() < 0) || (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000")) {
 			shot.setPosition(centerShip.getX(), centerShip.getY());
 			add(shot);
 		}	
