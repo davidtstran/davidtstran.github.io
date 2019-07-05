@@ -143,6 +143,12 @@ function start() {
 			fullBars--;
 			remove(health[fullBars]);
 			if (fullBars == 0) {
+				numLives--;
+				remove(life[numLives]);
+				healthBars();
+				fullBars = 10;
+			}
+			if (numLives == 0) {
 				remove(centerShip);
 				remove(ship);
 				remove(shot);
