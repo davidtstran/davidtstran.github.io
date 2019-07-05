@@ -30,7 +30,7 @@ function start() {
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
 	
 	drawShip();
-	fillHealthBars();
+	healthAndLives();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
 	
@@ -71,7 +71,7 @@ function start() {
 		add(shot);
 	}
 	
-	function fillHealthBars(){
+	function healthAndLives(){
 		for (var barN = 0; barN < 10; barN++) { // 10 health bars = FULL
 			health[barN] = new Rectangle (15, 30);
 			health[barN].setColor(Color.green);
