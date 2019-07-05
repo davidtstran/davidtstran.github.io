@@ -26,7 +26,7 @@ function start() {
 	var shot;
 	var moveSize = 10;
 	var health = [], life = 10; // 10 = MAX (LIFE / 10 = #LIVES)
-	var healthBuffer = 10, barBuffer = 5;
+	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
 	
 	drawShip();
 	fillHealthBars();
@@ -74,7 +74,7 @@ function start() {
 		for (var barN = 0; barN < 10; barN++) { // 10 health bars = FULL
 			health[barN] = new Rectangle (15, 30);
 			health[barN].setColor(Color.green);
-			health[barN].setPosition(healthBuffer + barBuffer + (barN * 20), healthBuffer + barBuffer);  // 20 = bar(15) + barBuffer    
+			health[barN].setPosition(healthBuffer + barBuffer + (barN * 20), getHeight() - healthBuffer + barBuffer);  // 20 = bar(15) + barBuffer    
 			add(health[barN]);
 		}
 	}
