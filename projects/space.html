@@ -26,7 +26,7 @@ function start() {
 	var ship, centerShip, sStartX = getWidth()/2, sStartY = getHeight()/2;
 	var shot;
 	var moveSize = 10;
-	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE (2DARRAY, LIFE[HEALTH])
+	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
 	var nme;
@@ -75,19 +75,13 @@ function start() {
 	}
 	
 	function healthAndLives(){
+		for (var barN = 0; barN < fullBars; barN++) { // 10 health bars = FULL
+			health[barN] = new Rectangle (15, 30);
+			health[barN].setColor(Color.green);
+			health[barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight + barBuffer);  // 20 = bar(15) + barBuffer    
+			add(health[barN]);
+		}
 		for (var livesCount = 0; livesCount < numLives; livesCount++) {
-			health[livesCount] = []; // 2D array of health
-			for (var barN = 0; barN < fullBars; barN++) { // 10 health bars = FULL
-				health[livesCount][barN] = new Rectangle (15, 30);
-				var color;
-				if (livesCount == 0) { color = Color.red; }
-				else if (livesCount == 1) { color = Color.yellow; }
-				else if (livesCount == 2) { color = Color.green; }
-				else { color = Color.blue; }
-				health[livesCount][barN].setColor(color);
-				health[livesCount][barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight + barBuffer);  // 20 = bar(15) + barBuffer    
-				add(health[livesCount][barN]);
-			}
 			var scale = 1.5;
 			var lStartX = getWidth() - (ship.getWidth() * scale) * (livesCount + 1);
 			var lStartY = getHeight() - healthHeight;
@@ -144,12 +138,7 @@ function start() {
 		}
 		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() == "#FF0000") { // center hit
 			fullBars--;
-			remove(health[numLives-1][fullBars]);
-			if (fullBars = 0) { 
-				remove(life[numLives]);
-				fullBars = 10;
-				numLives--;
-			}
+			remove(health[fullBars]);
 		}	
 	}
 	function shoot() {
