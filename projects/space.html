@@ -75,7 +75,7 @@ function start() {
 		for (var barN = 0; barN < 10; barN++) { // 10 health bars = FULL
 			health[barN] = new Rectangle (15, 30);
 			health[barN].setColor(Color.green);
-			health[barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight);  // 20 = bar(15) + barBuffer    
+			health[barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight + barBuffer);  // 20 = bar(15) + barBuffer    
 			add(health[barN]);
 		}
 	}
