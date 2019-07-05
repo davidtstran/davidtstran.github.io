@@ -79,7 +79,7 @@ function start() {
 			add(health[barN]);
 		}
 		for (var livesCount = 0; livesCount < numLives; livesCount++) {
-			var lStartX = 300 + 50*livesCount, lStartY = 400;
+			var lStartX = 300 + (barBuffer+ship.getWidth()/2)*livesCount, lStartY = 400;
 			life[livesCount] = new Polygon(); // 15x16
 			var scale = 1;
 			life[livesCount].addPoint(lStartX + 0* scale, lStartY + 8* scale); life[livesCount].addPoint(lStartX + 1* scale, lStartY + 8* scale); 
