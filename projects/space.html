@@ -140,6 +140,8 @@ function start() {
 			fullBars--;
 			remove(health[fullBars]);
 			if (fullBars == 0) {
+				remove(ship);
+				stopTimer(shoot);
 				var end = new Text ("Lost");
 				end.setPosition(getWidth()/2 - end.getWidth()/2, getHeight()/2);
 				end.setColor(Color.white);
