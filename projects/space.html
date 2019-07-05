@@ -144,9 +144,11 @@ function start() {
 			remove(health[fullBars]);
 			if (fullBars == 0) {
 				numLives--;
-				remove(life[numLives]);
-				fullBars = 10;
-				healthBars();
+				if (numLives != 0) {
+					remove(life[numLives]);
+					fullBars = 10;
+					healthBars();
+				}
 			}
 			if (numLives == 0) {
 				remove(centerShip);
