@@ -4,17 +4,15 @@ Wiki: https://github.com/davidtstran/davidtstran.github.io/wiki
 
 Projects: 
 
-  - Projects from CodeHS:
+  - Breakout
   
-        Breakout
-        
-        Drag and Drop
-        
-        Paint Splatter
-        
-        Target
-        
-        Trail
+  - Drag and Drop
+  
+  - Paint Splatter
+  
+  - Target
+  
+  - Trail
         
   - Pong Game
   
