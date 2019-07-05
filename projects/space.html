@@ -135,7 +135,7 @@ function start() {
 				ship.move(moveSize, 0);
 			}
 		}
-		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() != "#FF0000") { // center hit
+		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() == "#FF0000") { // center hit
 			fullBars--;
 			remove(health[fullBars]);
 		}	
