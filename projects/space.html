@@ -29,15 +29,13 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	//var nme;
 	
 	drawShip();
 	healthBars();
 	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
-	for (var i = 0; i < 5; i++) 
-		enemy();
+	enemy(); // use function to create multiple enemies
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -156,7 +154,7 @@ function start() {
 				remove(ship);
 				remove(shot);
 				stopTimer(shoot);
-				var end = new Text ("Lost");
+				var end = new Text ("Game Over");
 				end.setPosition(getWidth()/2 - end.getWidth()/2, getHeight()/2);
 				end.setColor(Color.white);
 				add(end);
