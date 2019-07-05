@@ -144,7 +144,7 @@ function start() {
 		}
 		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() == "#FF0000") { // center hit
 			fullBars--;
-			remove(health[numLives][fullBars]);
+			remove(health[numLives-1][fullBars]);
 			if (fullBars = 0) { 
 				remove(life[numLives]);
 				fullBars = 10;
