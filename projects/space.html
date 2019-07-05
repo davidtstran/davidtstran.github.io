@@ -35,7 +35,6 @@ function start() {
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
 	enemy();
-	checkCollision(collide, 1);
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -136,6 +135,10 @@ function start() {
 				ship.move(moveSize, 0);
 			}
 		}
+		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() != "#FF0000") { // center hit
+			fullBars--;
+			remove(health[fullBars]);
+		}	
 	}
 	function shoot() {
 		shot.move(0, -moveSize);
@@ -150,13 +153,6 @@ function start() {
 		nme.setPosition(100, 100);
 		nme.setColor(Color.red);
 		add(nme);
-	}
-	
-	function collide() {
-		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() != "#FF0000") { // center hit
-			fullBars--;
-			remove(health[fullBars]);
-		}	
 	}
 }
 </script>
