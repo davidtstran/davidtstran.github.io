@@ -80,7 +80,9 @@ function start() {
 		}
 		for (var livesCount = 0; livesCount < numLives; livesCount++) {
 			var scale = 1.5;
-			var lStartX = getWidth()/2 + (ship.getWidth()*scale)*livesCount, lStartY = getHeight() - healthHeight;
+			//var lStartX = getWidth()/2 + (ship.getWidth()*scale)*livesCount; 
+			var lStartX = getWidth() - (ship.getWidth()*scale)*livesCount;
+			var lStartY = getHeight() - healthHeight;
 			life[livesCount] = new Polygon(); // 15x16
 			life[livesCount].addPoint(lStartX + 0* scale, lStartY + 8* scale); life[livesCount].addPoint(lStartX + 1* scale, lStartY + 8* scale); 
 			life[livesCount].addPoint(lStartX + 1* scale, lStartY + 12* scale); life[livesCount].addPoint(lStartX + 3* scale, lStartY + 10* scale);
