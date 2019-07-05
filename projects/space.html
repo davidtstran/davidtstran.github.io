@@ -29,14 +29,15 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	var nme;
+	//var nme;
 	
 	drawShip();
 	healthBars();
 	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
-	enemy();
+	for (var i = 0; i < 5; i++) 
+		enemy();
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -171,7 +172,10 @@ function start() {
 	}
 	
 	function enemy() {
-		nme = new Circle(10);
+		var nmeR = 10;
+		nme = new Circle(nmeR);
+		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
+		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer);
 		nme.setPosition(200, 200);
 		nme.setColor(Color.red);
 		add(nme);
