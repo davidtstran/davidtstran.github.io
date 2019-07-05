@@ -173,10 +173,10 @@ function start() {
 	
 	function enemy() {
 		var nmeR = 10;
-		nme = new Circle(nmeR);
+		var nme = new Circle(nmeR);
 		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
 		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer);
-		nme.setPosition(200, 200);
+		nme.setPosition(nmeX, nmeY);
 		nme.setColor(Color.red);
 		add(nme);
 	}
