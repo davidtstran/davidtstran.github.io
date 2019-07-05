@@ -170,7 +170,11 @@ function start() {
 		//}	
 	}
 	function shotCheck() {
-		if ((shot.getY() < 0) || (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000")) {
+		if (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000") {
+			shot.setPosition(centerShip.getX(), centerShip.getY());
+			add(shot);
+		}
+		if (shot.getY() < 0) {
 			shot.setPosition(centerShip.getX(), centerShip.getY());
 			add(shot);
 		}	
