@@ -29,6 +29,7 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
+	var nme;
 	
 	drawShip();
 	healthBars();
@@ -163,7 +164,11 @@ function start() {
 	}
 	function shoot() {
 		shot.move(0, -moveSize);
-		if ((shot.getY() < 0) || (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000")) {
+		if ((shot.getX() == nme.getX()) && (shot.getY() == nme.getY())) {
+			shot.setPosition(centerShip.getX(), centerShip.getY());
+			add(shot);
+		}
+		if (shot.getY() < 0) {
 			shot.setPosition(centerShip.getX(), centerShip.getY());
 			add(shot);
 		}	
@@ -171,7 +176,7 @@ function start() {
 
 	function enemy() {
 		var nmeR = 10;
-		var nme = new Circle(nmeR);
+		nme = new Circle(nmeR);
 		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
 		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer*2);
 		nme.setPosition(nmeX, nmeY);
