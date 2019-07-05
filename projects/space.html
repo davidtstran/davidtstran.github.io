@@ -139,6 +139,12 @@ function start() {
 		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() == "#FF0000") { // center hit
 			fullBars--;
 			remove(health[fullBars]);
+			if (fullBars == 0) {
+				var end = new Text ("Lost");
+				end.setPosition(getWidth()/2 - end.getWidth()/2, getHeight()/2);
+				end.setColor(Color.white);
+				add(end);
+			}
 		}	
 	}
 	function shoot() {
