@@ -188,7 +188,7 @@ function start() {
 	function enemy() {
 		numEnemies++;
 		var nme = new Polygon();
-		var nmeScale = 1;
+		var nmeScale = 10;
 		var nmeX = Randomizer.nextInt(0, getWidth());
 		var nmeY = Randomizer.nextInt(0, getHeight() - healthHeight - barBuffer*2);
 		nme.setPosition(nmeX, nmeY);
