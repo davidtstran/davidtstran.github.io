@@ -191,7 +191,7 @@ function start() {
 		numEnemies++;
 		var nme = new Polygon();
 		var nmeScale = 3;
-		var nmeX = Randomizer.nextInt(0, getWidth());
+		var nmeX = Randomizer.nextInt(0 + nme.getWidth(), getWidth() - nme.getWidth());
 		var nmeY = Randomizer.nextInt(0, getHeight() - healthHeight - barBuffer*2 - nme.getHeight());
 		nme.addPoint(nmeX + 0*nmeScale, nmeY + 0*nmeScale);
 		nme.addPoint(nmeX + 8*nmeScale, nmeY + 0*nmeScale);
