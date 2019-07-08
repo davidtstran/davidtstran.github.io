@@ -1,7 +1,7 @@
 body {
     background-color: lightgray;
 }
-link_button { 
+button { 
     background-color: white;
     border: none;
     display: inline-block;  
