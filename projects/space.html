@@ -30,13 +30,14 @@ function start() {
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
 	var nme, nmeR = 10;
+	var numEnemies = 0;
 	
 	drawShip();
 	healthBars();
 	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
-	enemy(); // use function to create multiple enemies
+	setTimer(enemy, 1000); // use function to create multiple enemies
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
@@ -164,10 +165,19 @@ function start() {
 	}
 	function shoot() {
 		shot.move(0, -moveSize);
-		if (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000") { // RED enemy
+		var elm = getElementAt(shot.getX(), shot.getY());
+		if (elm.getColor() == "#FF0000") { // RED enemy
 			shot.setPosition(centerShip.getX(), centerShip.getY()); 
-			remove(nme);
-			enemy();
+			remove(elm);
+			numEnemies--;
+			if (numEnemies == 0) {
+				stopTimer(enemy);
+				var win = new Text ("Win");
+				win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
+				win.setColor(Color.white);
+				add(win);
+			}
+			
 		}
 		if (shot.getY() < 0) {
 			shot.setPosition(centerShip.getX(), centerShip.getY());
@@ -175,6 +185,7 @@ function start() {
 	}
 
 	function enemy() {
+		numEnemies++;
 		nme = new Circle(nmeR);
 		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
 		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer*2);
