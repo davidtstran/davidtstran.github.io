@@ -30,7 +30,6 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	var nme, nmeR = 10;
 	var numEnemies = 0;
 	
 	drawShip();
@@ -187,7 +186,8 @@ function start() {
 
 	function enemy() {
 		numEnemies++;
-		nme = new Circle(nmeR);
+		var nmeR = 10;
+		var nme = new Circle(nmeR);
 		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
 		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer*2);
 		nme.setPosition(nmeX, nmeY);
