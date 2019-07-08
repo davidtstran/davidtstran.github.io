@@ -2,8 +2,10 @@ body {
     background-color: lightgray;
 }
 button { 
+    background-color: gray;
     border: none;
-    display: inline-block;   
+    display: inline-block;  
+    cursor: pointer;
 }
 h1 {
     color: black;
