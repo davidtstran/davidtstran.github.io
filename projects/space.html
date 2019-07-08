@@ -172,6 +172,7 @@ function start() {
 			remove(elm);
 			numEnemies--;
 			if (numEnemies == 0) {
+				remove(shot);
 				stopAllTimers();
 				var win = new Text ("Win");
 				win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
