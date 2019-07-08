@@ -30,7 +30,7 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	var numEnemies = 0;
+	var numEnemies = 0, numKills = 0;
 	
 	drawShip();
 	healthBars();
@@ -171,6 +171,7 @@ function start() {
 			shot.setPosition(centerShip.getX(), centerShip.getY()); 
 			remove(elm);
 			numEnemies--;
+			numKills++;
 			if (numEnemies == 0) {
 				remove(shot);
 				stopAllTimers();
