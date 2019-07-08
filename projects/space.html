@@ -156,7 +156,7 @@ function start() {
 				remove(centerShip);
 				remove(ship);
 				remove(shot);
-				stopTimer(shoot);
+				stopAllTimers();
 				var end = new Text ("Game Over");
 				end.setPosition(getWidth()/2 - end.getWidth()/2, getHeight()/2);
 				end.setColor(Color.white);
@@ -172,7 +172,7 @@ function start() {
 			remove(elm);
 			numEnemies--;
 			if (numEnemies == 0) {
-				stopTimer(enemy);
+				stopAllTimers();
 				var win = new Text ("Win");
 				win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 				win.setColor(Color.white);
