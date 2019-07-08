@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>Soccer Simulation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+</head>
+<body>
+	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Header
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
+	<h2>WASD\/Arrows<br> </h2>
+	
+	<p align = "center">
+		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
+		<canvas width="1000" height="600" class="codehs-editor-canvas" style="background-color:#33cc33"></canvas>
+	</p>
+	
+<script>
+function start() {
+	removeAll(); // clear canvas
+	stopAllTimers();
+	// GREEN BACKGROUND : (51, 204, 51) || #33cc33
+	map();
+	
+	function map() {
+		var centerLine = new Line(getWidth()/2, 0, getWidth()/2, getHeight());
+		centerLine.setColor(Color.white);
+		centerLine.setLineWidth(5);
+		var centerCircle = new Circle(50);
+		centerCircle.setPosition(getWidth()/2, getHeight()/2);
+		centerCircle.setColor(new Color(51, 204, 51));
+		centerCircle.setBorderColor(Color.white);
+		centerCircle.setBorderWidth(10);
+		add(centerCircle);
+		add(centerLine);
+		var leftG, leftEdge, rightG, rightEdge;
+		var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
+		leftG = new Rectangle(gWidth, gHeight); rightG = new Rectangle(gWidth, gHeight);
+		leftG.setPosition(0, getHeight()/2 - gHeight/2); rightG.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
+		leftG.setColor(new Color(51, 204, 51)); rightG.setColor(new Color(51, 204, 51));
+		leftG.setBorderColor(Color.white); rightG.setBorderColor(Color.white);
+		leftG.setBorderWidth(10); rightG.setBorderWidth(10);
+		leftEdge = new Rectangle(eWidth, eHeight); rightEdge = new Rectangle(eWidth, eHeight);
+		leftEdge.setPosition(0, getHeight()/2 - eHeight/2); rightEdge.setPosition(getWidth() - eWidth, getHeight()/2 - eHeight/2);
+		leftEdge.setColor(new Color(51, 204, 51)); rightEdge.setColor(new Color(51, 204, 51));
+		leftEdge.setBorderColor(Color.white); rightEdge.setBorderColor(Color.white);
+		leftEdge.setBorderWidth(10); rightEdge.setBorderWidth(10);
+		add(leftEdge); add(rightEdge);
+		add(leftG); add(rightG);
+	}
+}	
+	
+</script>
+	
+	<br> <br> <br>
+	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Footer
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
+</body>
+</html>
