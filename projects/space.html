@@ -164,7 +164,10 @@ function start() {
 	}
 	function shoot() {
 		shot.move(0, -moveSize);
-		if ((shot.getY() < 0) || (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000")) {
+		if (getElementAt(shot.getX(), shot.getY()).getColor() == "#FF0000") { // RED enemy
+			shot.setPosition(centerShip.getX(), centerShip.getY());    
+		}
+		if (shot.getY() < 0) {
 			shot.setPosition(centerShip.getX(), centerShip.getY());
 		}	
 	}
