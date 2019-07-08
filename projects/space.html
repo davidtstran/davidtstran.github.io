@@ -186,11 +186,14 @@ function start() {
 
 	function enemy() {
 		numEnemies++;
-		var nmeR = 10;
-		var nme = new Circle(nmeR);
-		var nmeX = Randomizer.nextInt(0 + nmeR, getWidth() - nmeR);
-		var nmeY = Randomizer.nextInt(0 + nmeR, getHeight() - healthHeight - barBuffer*2);
+		var nme = new Polygon();
+		var nmeScale = 1;
+		var nmeX = Randomizer.nextInt(0, getWidth());
+		var nmeY = Randomizer.nextInt(0, getHeight() - healthHeight - barBuffer*2);
 		nme.setPosition(nmeX, nmeY);
+		nme.addPoint(nmeX + 0*nmeScale, nmeY + 0*nmeScale);
+		nme.addPoint(nmeX + 8*nmeScale, nmeY + 0*nmeScale);
+		nme.addPoint(nmeX + 4*nmeScale, nmeX + 4&nmeScale);
 		nme.setColor(Color.red);
 		add(nme);
 	}
