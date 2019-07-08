@@ -1,10 +1,9 @@
 body {
     background-color: lightgray;
 }
-button { 
+link_button { 
     background-color: white;
     border: none;
-    cursor: pointer;
     display: inline-block;  
     padding: 15px 32px;
 }
