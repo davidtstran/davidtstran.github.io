@@ -10,7 +10,7 @@
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
 	<h2>Space: WASD/Arrows Movement<br>
-	    Enemies Spawn Every 3 Seconds (Clear All to Win) <br> </h2>
+	    Enemies Spawn Every 5 Seconds (Clear All to Win) <br> </h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -38,7 +38,7 @@ function start() {
 	lifePoints();
 	keyDownMethod(movement);
 	setTimer(shoot, 50);
-	setTimer(enemy, 3000); // enemies respawn at constant rate
+	setTimer(enemy, 5000); // enemies respawn at constant rate
 	
 	function drawShip() {
 		ship = new Polygon(); // 15x16
