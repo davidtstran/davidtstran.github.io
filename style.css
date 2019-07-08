@@ -7,10 +7,10 @@ button {
     border-radius: 8px;
     display: inline-block;  
     font-size: 16px;
-    height: 100px;
+    height: 300px;
     margin: 4px 2px;
     text-align: center;
-    width: 200px;
+    width: 500px;
 }
 h1 {
     color: black;
