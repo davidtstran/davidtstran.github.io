@@ -186,7 +186,7 @@ function start() {
 		else if (socBallDir == "RIGHT") {
 			if (socBall.getX() + moveSpace < getWidth()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
-				checkGoal()
+				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getX() + moveSpace < getWidth())
@@ -195,7 +195,7 @@ function start() {
 							socBallSpeedX = -socBallSpeedX;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
-						checkGoal()
+						checkGoal();
 					}, DELAY);
 				}
 			}
@@ -204,7 +204,7 @@ function start() {
 		else if (socBallDir == "DOWN") {
 			if (socBall.getY() + moveSpace < getHeight()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
-				checkGoal()
+				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getY() + moveSpace < getHeight())
@@ -213,7 +213,7 @@ function start() {
 							socBallSpeedY = -socBallSpeedY;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
-						checkGoal()
+						checkGoal();
 					}, DELAY);
 				}
 			}
