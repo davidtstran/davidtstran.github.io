@@ -10,8 +10,7 @@
 	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>Soccer: WASD&SPACE, ARROWS&NUMPAD0<br>
-	    Number of Rolls (Strength) is Randomized<br> </h2>
+	<h2>Soccer: WASD&SPACE, ARROWS&NUMPAD0<br> </h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -152,7 +151,7 @@ function start() {
 	}
 	function ballMove() {
 		var DELAY = 100;
-		socRolls = Randomizer.nextInt(1, 5);
+		//socRolls = Randomizer.nextInt(1, 5);
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - socBallSpeedX > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
