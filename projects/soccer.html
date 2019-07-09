@@ -156,6 +156,10 @@ function start() {
 					setTimeout(function() {
 						if (socBall.getX() - moveSpace > 0)
 							socBall.move(socBallSpeedX, socBallSpeedY);
+						else {
+							socBallSpeedX = -socBallSpeedX;
+							socBall.move(socBallSpeedX, socBallSpeedY);
+						}
 					}, DELAY);
 				}
 			}
@@ -167,6 +171,10 @@ function start() {
 					setTimeout(function() {
 						if (socBall.getY() - moveSpace > 0)
 							socBall.move(socBallSpeedX, socBallSpeedY);
+						else {
+							socBallSpeedY = -socBallSpeedY;
+							socBall.move(socBallSpeedX, socBallSpeedY);
+						}
 					}, DELAY);
 				}
 			}
@@ -178,6 +186,10 @@ function start() {
 					setTimeout(function() {
 						if (socBall.getX() + moveSpace < getWidth())
 							socBall.move(socBallSpeedX, socBallSpeedY);
+						else {
+							socBallSpeedX = -socBallSpeedX;
+							socBall.move(socBallSpeedX, socBallSpeedY);
+						}
 					}, DELAY);
 				}
 			}
@@ -190,6 +202,10 @@ function start() {
 					setTimeout(function() {
 						if (socBall.getY() + moveSpace < getHeight())
 							socBall.move(socBallSpeedX, socBallSpeedY);
+						else {
+							socBallSpeedY = -socBallSpeedY;
+							socBall.move(socBallSpeedX, socBallSpeedY);
+						}
 					}, DELAY);
 				}
 			}
