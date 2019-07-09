@@ -22,6 +22,10 @@ function start() {
 	removeAll(); // clear canvas
 	stopAllTimers();
 	// GREEN BACKGROUND : (51, 204, 51) || #33cc33
+	
+	var lp, rp; // left & right players
+	var lColor = Color.red, rColor = Color.blue;
+	var playerSize = 50;
 	map();
 	
 	function map() {
@@ -49,6 +53,10 @@ function start() {
 		leftEdge.setBorderWidth(10); rightEdge.setBorderWidth(10);
 		add(leftEdge); add(rightEdge);
 		add(leftG); add(rightG);
+		lp = new Circle(playerSize); rp = new Circle(playerSize);
+		lp.setPosition(eWidth + playerSize, getHeight()/2); rp.setPosition(getWidth() - playerSize, getHeight()/2);
+		lp.setColor(lColor); rp.setColor(rColor);
+		add(lp); add(rp);
 	}
 }	
 </script>
