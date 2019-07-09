@@ -26,7 +26,9 @@ function start() {
 	var lp, rp; // left & right players
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 50;
+	
 	map();
+	keyDownMethod(move);
 	
 	function map() {
 		var centerLine = new Line(getWidth()/2, 0, getWidth()/2, getHeight());
@@ -57,6 +59,10 @@ function start() {
 		lp.setPosition(eWidth + playerSize, getHeight()/2); rp.setPosition(getWidth() - playerSize, getHeight()/2);
 		lp.setColor(lColor); rp.setColor(rColor);
 		add(lp); add(rp);
+	}
+	
+	function move(e) {
+		
 	}
 }	
 </script>
