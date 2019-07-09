@@ -28,7 +28,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
-	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = moveSpace, socBallSpeedX, socBallSpeedY;
+	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = 50, socBallSpeedX, socBallSpeedY;
 	
 	map();
 	keyDownMethod(move);
@@ -127,19 +127,21 @@ function start() {
 		var player, playerDir;
 		if (playerTag == "LEFT") { player = lp; playerDir = lDir; }
 		else if (playerTag == "RIGHT") { player = rp; playerDir = rDir; }
-		if (playerDir == "LEFT") {
-			socBallSpeedX = -socBallSpeed; socBallSpeedY = 0; 
+		if ((player.getX() == socBall.getX()) && (player.getY() == socBall.getY())) {
+			if (playerDir == "LEFT") {
+				socBallSpeedX = -socBallSpeed; socBallSpeedY = 0; 
+			}
+			else if (playerDir == "UP") {
+				socBallSpeedX = 0; socBallSpeedY = -socBallSpeed;
+			}
+			else if (playerDir == "RIGHT") {
+				socBallSpeedX = socBallSpeed; socBallSpeedY = 0;
+			}
+			else if (playerDir == "DOWN") {
+				socBallSpeedX = 0; socBallSpeedY = socBallSpeed;
+			}
+			ballMove();
 		}
-		else if (playerDir == "UP") {
-			socBallSpeedX = 0; socBallSpeedY = -socBallSpeed;
-		}
-		else if (playerDir == "RIGHT") {
-			socBallSpeedX = socBallSpeed; socBallSpeedY = 0;
-		}
-		else if (playerDir == "DOWN") {
-			socBallSpeedX = 0; socBallSpeedY = socBallSpeed;
-		}
-		ballMove();
 	}
 	function ballMove() {
 		if (socBall.getX() - socBallSpeed > 0) { // LEFT
