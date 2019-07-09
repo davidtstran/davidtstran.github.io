@@ -25,7 +25,7 @@ function start() {
 	
 	var lp, rp; // left & right players
 	var lColor = Color.red, rColor = Color.blue;
-	var playerSize = 50;
+	var playerSize = 5;
 	var moveSpace = 20;
 	
 	map();
@@ -57,7 +57,7 @@ function start() {
 		add(leftEdge); add(rightEdge);
 		add(leftG); add(rightG);
 		lp = new Circle(playerSize); rp = new Circle(playerSize);
-		lp.setPosition(eWidth + playerSize, getHeight()/2); rp.setPosition(getWidth() - playerSize, getHeight()/2);
+		lp.setPosition(eWidth + playerSize, getHeight()/2); rp.setPosition(getWidth() - eWidth - playerSize, getHeight()/2);
 		lp.setColor(lColor); rp.setColor(rColor);
 		add(lp); add(rp);
 	}
