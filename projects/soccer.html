@@ -84,7 +84,7 @@ function start() {
 				rp.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.UP) { // RIGHT move UP
-			if (rp.getY() - moveSpace > moveSpace * 3)
+			if (rp.getY() - moveSpace > 0)
 				rp.move(0, -moveSpace); 
 		}
 		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
