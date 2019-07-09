@@ -154,7 +154,7 @@ function start() {
 		var DELAY = 100;
 		socRolls = Randomizer.nextInt(1, 5);
 		if (socBallDir == "LEFT") {
-			if (socBall.getX() - moveSpace > 0) {
+			if (socBall.getX() - socBallSpeedX > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
@@ -169,7 +169,7 @@ function start() {
 			}
 		}
 		else if (socBallDir == "UP") {
-			if (socBall.getY() - moveSpace > 0) {
+			if (socBall.getY() - socBallSpeedY > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
@@ -184,7 +184,7 @@ function start() {
 			}
 		}
 		else if (socBallDir == "RIGHT") {
-			if (socBall.getX() + moveSpace < getWidth()) {
+			if (socBall.getX() + socBallSpeedX < getWidth()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
@@ -202,7 +202,7 @@ function start() {
 			  
 		}
 		else if (socBallDir == "DOWN") {
-			if (socBall.getY() + moveSpace < getHeight()) {
+			if (socBall.getY() + socBallSpeedY < getHeight()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
