@@ -155,6 +155,7 @@ function start() {
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - socBallSpeedX > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
+				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getX() - moveSpace > 0)
@@ -163,6 +164,7 @@ function start() {
 							socBallSpeedX = -socBallSpeedX;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
+						checkGoal();
 					}, DELAY);
 				}
 			}
@@ -203,7 +205,6 @@ function start() {
 		else if (socBallDir == "DOWN") {
 			if (socBall.getY() + socBallSpeedY < getHeight()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
-				checkGoal();
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getY() + moveSpace < getHeight())
@@ -212,7 +213,6 @@ function start() {
 							socBallSpeedY = -socBallSpeedY;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
-						checkGoal();
 					}, DELAY);
 				}
 			}
@@ -220,7 +220,7 @@ function start() {
 	}
 	function checkGoal() {
 		var elm = getElementAt(socBall.getX(), socBall.getY());
-		if (elm.getColor() == "#37F944") {
+		if (elm.getColor() == "#37F944") { 
 			remove(socBall);
 			if (socBall.getX() < gWidth) { // RIGHT scores GOAL
 				socBall.setPosition(getWidth()/2, getHeight()/2);
