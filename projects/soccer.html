@@ -145,7 +145,7 @@ function start() {
 	}
 	function ballMove() {
 		if ((socBall.getX() - socBallSpeed > 0) && (socBall.getY() - socBallSpeed > 0)){ // L && U
-			if (socBall.getX() + socBallSpeed < getWidth()) && (socBall.getY() + socBallSpeed < getHeight()){ // R && D
+			if ((socBall.getX() + socBallSpeed < getWidth()) && (socBall.getY() + socBallSpeed < getHeight())){ // R && D
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
