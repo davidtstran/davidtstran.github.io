@@ -10,7 +10,7 @@
 	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>Soccer: WASD, ARROWS<br> </h2>
+	<h2>Soccer: WASD&SPACE, ARROWS&0<br> </h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -24,11 +24,11 @@ function start() {
 	// GREEN BACKGROUND : (51, 204, 51) || #33cc33
 	
 	var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
-	var lp, rp; // left & right players
+	var lp, rp, lDir, rDir; // left & right players
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
-	var socBall, socBallSize = 5, socBallBorder = 3, socBallDX, socBallDY;
+	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = moveSpace, socBallSpeedX, socBallSpeedY;
 	
 	map();
 	keyDownMethod(move);
@@ -68,37 +68,89 @@ function start() {
 	
 	function move(e) {
 		if (e.keyCode == Keyboard.letter('A')) { // LEFT move LEFT
-			if (lp.getX() - moveSpace > 0)
+			if (lp.getX() - moveSpace > 0) {
+				lDir = "LEFT";
 				lp.move(-moveSpace, 0); 
+			}
 		}
 		if (e.keyCode == Keyboard.letter('W')) { // LEFT move UP
-			if (lp.getY() - moveSpace > 0)
+			if (lp.getY() - moveSpace > 0) {
+				lDir = "UP";
 				lp.move(0, -moveSpace); 
+			}
 		}
 		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT (cannot pass goal lines)
-			if (lp.getX() + moveSpace < getWidth() - eWidth)
+			if (lp.getX() + moveSpace < getWidth() - eWidth) {
+				lDir = "RIGHT";
 				lp.move(moveSpace, 0); 
+			}
 		}
 		if (e.keyCode == Keyboard.letter('S')) { // LEFT move DOWN
-			if (lp.getY() + moveSpace < getHeight())
+			if (lp.getY() + moveSpace < getHeight()) {
+				lDir = "DOWN";
 				lp.move(0, moveSpace);
+			}
+		}
+		if (e.keyCode == Keyboard.SPACE) { // LEFT KICK
+			kick("LEFT");
 		}
 		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT (cannot pass goal lines)
-			if (rp.getX() - moveSpace > 0 + eWidth)
+			if (rp.getX() - moveSpace > 0 + eWidth) {
+				rDir = "LEFT";
 				rp.move(-moveSpace, 0); 
+			}
 		}
 		if (e.keyCode == Keyboard.UP) { // RIGHT move UP
-			if (rp.getY() - moveSpace > 0)
+			if (rp.getY() - moveSpace > 0) {
+				rDir = "UP";
 				rp.move(0, -moveSpace); 
+			}
 		}
 		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
-			if (rp.getX() + moveSpace < getWidth())
+			if (rp.getX() + moveSpace < getWidth()) {
+				rDir = "RIGHT";
 				rp.move(moveSpace, 0); 
+			}
 		}
 		if (e.keyCode == Keyboard.DOWN) { // RIGHT move DOWN
-			if (rp.getY() + moveSpace < getHeight())
+			if (rp.getY() + moveSpace < getHeight()) {
+				rDir = "DOWN";
 				rp.move(0, moveSpace);
+			}
 		}	
+		if (e.keyCode == Keyboard.digit('0')) { // RIGHT KICK
+			kick("RIGHT");
+		}
+	}
+	
+	function kick(playerTag) {
+		var player, var playerDir;
+		if (playerTag == "LEFT") { player = lp; playerDir = lDir; }
+		else if (playerTag == "RIGHT") { player = rp; playerDir = rDir; }
+		if (playerDir == "LEFT") {
+			socBallSpeedX = -socBallSpeed; socBallSpeedY = 0; 
+		}
+		else if (playerDir == "UP") {
+			socBallSpeedX = 0; socBallSpeedY = -socBallSpeed;
+		}
+		else if (playerDir == "RIGHT") {
+			socBallSpeedX = socBallSpeed; socBallSpeedY = 0;
+		}
+		else if (playerDir == "DOWN") {
+			socBallSpeedX = 0; socBallSpeedY = socBallSpeed;
+		}
+		ballMove();
+	}
+	function ballMove() {
+		if (socBall.getX() - socBallSpeed > 0) { // LEFT
+			if (socBall.getY() - socBallSpeed > 0) { // UP
+				if (socBall.getX() + socBallSpeed < getWidth()) { // DOWN
+					if (socBall.getY() + socBallSpeed < getHeight()) {
+						socBall.move(socBallSpeedX, socBallSpeedY);	
+					}
+				}
+			}
+		}
 	}
 }	
 </script>
