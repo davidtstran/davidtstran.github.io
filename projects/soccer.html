@@ -28,6 +28,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 5;
 	var moveSpace = 20;
+	var socBall, socBallSize = 2, socBallBorder = 3;
 	
 	map();
 	keyDownMethod(move);
@@ -60,6 +61,9 @@ function start() {
 		lp.setPosition(eWidth + playerSize, getHeight()/2); rp.setPosition(getWidth() - eWidth - playerSize, getHeight()/2);
 		lp.setColor(lColor); rp.setColor(rColor);
 		add(lp); add(rp);
+		socBall = new Circle(socBallSize); socBall.setPosition(getWidth()/2, getHeight()/2);
+		socBall.setColor(Color.black); socBall.setBorderColor(Color.white); socBall.setBorderWidth(socBallBorder);
+		add(socBall);
 	}
 	
 	function move(e) {
