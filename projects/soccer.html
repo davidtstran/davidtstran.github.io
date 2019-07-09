@@ -23,6 +23,7 @@ function start() {
 	stopAllTimers();
 	// GREEN BACKGROUND : (51, 204, 51) || #33cc33
 	
+	var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
 	var lp, rp; // left & right players
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 5;
@@ -43,7 +44,6 @@ function start() {
 		add(centerCircle);
 		add(centerLine);
 		var leftG, leftEdge, rightG, rightEdge;
-		var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
 		leftG = new Rectangle(gWidth, gHeight); rightG = new Rectangle(gWidth, gHeight);
 		leftG.setPosition(0, getHeight()/2 - gHeight/2); rightG.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
 		leftG.setColor(new Color(51, 204, 51)); rightG.setColor(new Color(51, 204, 51));
@@ -71,16 +71,16 @@ function start() {
 			if (lp.getY() - moveSpace > 0)
 				lp.move(0, -moveSpace); 
 		}
-		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
-			if (lp.getX() + moveSpace < getWidth())
+		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT (cannot pass goal lines)
+			if (lp.getX() + moveSpace < getWidth() - eWidth)
 				lp.move(moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.letter('S')) { // LEFT move DOWN
 			if (lp.getY() + moveSpace < getHeight())
 				lp.move(0, moveSpace);
 		}
-		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT
-			if (rp.getX() - moveSpace > 0)
+		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT (cannot pass goal lines)
+			if (rp.getX() - moveSpace > 0 + eWidth)
 				rp.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.UP) { // RIGHT move UP
