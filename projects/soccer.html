@@ -28,7 +28,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
-	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = moveSpace, socBallSpeedX, socBallSpeedY, socRolls = 3;
+	var socBall, socBallSize = 5, socBallBorder = 3, socBallDir, socBallSpeedX, socBallSpeedY, socRolls = 3;
 	
 	map();
 	keyDownMethod(move);
@@ -129,28 +129,68 @@ function start() {
 		else if (playerTag == "RIGHT") { player = rp; playerDir = rDir; }
 		if ((player.getX() == socBall.getX()) && (player.getY() == socBall.getY())) {
 			if (playerDir == "LEFT") {
-				socBallSpeedX = -socBallSpeed; socBallSpeedY = 0; 
+				socBallDir = "LEFT";
+				socBallSpeedX = -moveSpace; socBallSpeedY = 0; 
 			}
 			else if (playerDir == "UP") {
-				socBallSpeedX = 0; socBallSpeedY = -socBallSpeed;
+				socBallDir = "UP";
+				socBallSpeedX = 0; socBallSpeedY = -moveSpace;
 			}
 			else if (playerDir == "RIGHT") {
-				socBallSpeedX = socBallSpeed; socBallSpeedY = 0;
+				socBallDir = "RIGHT";
+				socBallSpeedX = moveSpace; socBallSpeedY = 0;
 			}
 			else if (playerDir == "DOWN") {
-				socBallSpeedX = 0; socBallSpeedY = socBallSpeed;
+				socBallDir = "DOWN";
+				socBallSpeedX = 0; socBallSpeedY = moveSpace;
 			}
 			ballMove();
 		}
 	}
 	function ballMove() {
-		if ((socBall.getX() - socBallSpeed > 0) && (socBall.getY() - socBallSpeed > 0)){ // L && U
-			if ((socBall.getX() + socBallSpeed < getWidth()) && (socBall.getY() + socBallSpeed < getHeight())){ // R && D
+		var DELAY = 100;
+		if (socBallDir == "LEFT") {
+			if (socBall.getX() - moveSpace > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
-						socBall.move(socBallSpeedX, socBallSpeedY);
-					}, 250);
+						if (socBall.getX() - moveSpace > 0)
+							socBall.move(socBallSpeedX, socBallSpeedY);
+					}, DELAY);
+				}
+			}
+		}
+		else if (socBallDir == "UP") {
+			if (socBall.getY() - moveSpace > 0) {
+				socBall.move(socBallSpeedX, socBallSpeedY);
+				for (var i = 0; i < socRolls; i++) {
+					setTimeout(function() {
+						if (socBall.getY() - moveSpace > 0)
+							socBall.move(socBallSpeedX, socBallSpeedY);
+					}, DELAY);
+				}
+			}
+		}
+		else if (socBallDir == "RIGHT") {
+			if (socBall.getX() + moveSpace < getWidth()) {
+				socBall.move(socBallSpeedX, socBallSpeedY);
+				for (var i = 0; i < socRolls; i++) {
+					setTimeout(function() {
+						if (socBall.getX() + moveSpace < getWidth())
+							socBall.move(socBallSpeedX, socBallSpeedY);
+					}, DELAY);
+				}
+			}
+			  
+		}
+		else if (socBallDir == "DOWN") {
+			if (socBall.getY() + moveSpace < getHeight()) {
+				socBall.move(socBallSpeedX, socBallSpeedY);
+				for (var i = 0; i < socRolls; i++) {
+					setTimeout(function() {
+						if (socBall.getY() + moveSpace < getHeight())
+							socBall.move(socBallSpeedX, socBallSpeedY);
+					}, DELAY);
 				}
 			}
 		}
