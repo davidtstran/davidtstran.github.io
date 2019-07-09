@@ -27,6 +27,7 @@ function start() {
 	
 	var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
 	var lp, rp, lDir, rDir; // left & right players
+	var lPoints = 0, rPoints = 0;
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
@@ -34,6 +35,7 @@ function start() {
 	
 	map();
 	keyDownMethod(move);
+	setTimer(checkGoal, 1);
 	
 	function map() {
 		var centerLine = new Line(getWidth()/2, 0, getWidth()/2, getHeight());
@@ -211,6 +213,22 @@ function start() {
 						}
 					}, DELAY);
 				}
+			}
+		}
+	}
+	function checkGoal() {
+		var elm = getElementAt(socBall.getX(), socBall.getY());
+		if (elm.getColor() == "#37F944") {
+			remove(socBall);
+			if (socBall.getX() < gWidth) { // RIGHT scores GOAL
+				socBall.setPosition(getWidth()/2, getHeight()/2);
+				rPoints++;
+				add(socBall);
+			}
+			else if (socBall.getX() > getWidth() - gWidth) { // LEFT scores GOAL
+				socBall.setPosition(getWidth()/2, getHeight()/2);
+				lPoints++;
+				add(socBall);
 			}
 		}
 	}
