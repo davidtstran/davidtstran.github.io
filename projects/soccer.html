@@ -28,7 +28,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
-	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = moveSpace, socBallSpeedX, socBallSpeedY;
+	var socBall, socBallSize = 5, socBallBorder = 3, socBallSpeed = moveSpace, socBallSpeedX, socBallSpeedY, socRolls = 3;
 	
 	map();
 	keyDownMethod(move);
@@ -144,12 +144,13 @@ function start() {
 		}
 	}
 	function ballMove() {
-		if (socBall.getX() - socBallSpeed > 0) { // LEFT
-			if (socBall.getY() - socBallSpeed > 0) { // UP
-				if (socBall.getX() + socBallSpeed < getWidth()) { // DOWN
-					if (socBall.getY() + socBallSpeed < getHeight()) {
-						socBall.move(socBallSpeedX, socBallSpeedY);	
-					}
+		if ((socBall.getX() - socBallSpeed > 0) && (socBall.getY() - socBallSpeed > 0)){ // L && U
+			if (socBall.getX() + socBallSpeed < getWidth()) && (socBall.getY() + socBallSpeed < getHeight()){ // R && D
+				socBall.move(socBallSpeedX, socBallSpeedY);
+				for (var i = 0; i < socRolls; i++) {
+					setTimeout(function() {
+						socBall.move(socBallSpeedX, socBallSpeedY);
+					}, 250);
 				}
 			}
 		}
