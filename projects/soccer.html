@@ -22,7 +22,8 @@
 function start() {
 	removeAll(); // clear canvas
 	stopAllTimers();
-	// GREEN BACKGROUND : (51, 204, 51) || #33cc33
+	// GREEN BACKGROUND : (51, 204, 51) || #33CC33
+	// GREEN GOAL: (55, 249, 68) || #37F944
 	
 	var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
 	var lp, rp, lDir, rDir; // left & right players
@@ -48,7 +49,7 @@ function start() {
 		var leftG, leftEdge, rightG, rightEdge;
 		leftG = new Rectangle(gWidth, gHeight); rightG = new Rectangle(gWidth, gHeight);
 		leftG.setPosition(0, getHeight()/2 - gHeight/2); rightG.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
-		leftG.setColor(new Color(51, 204, 51)); rightG.setColor(new Color(51, 204, 51));
+		leftG.setColor(new Color(55, 249, 68)); rightG.setColor(new Color(55, 249, 68)); // different shade green
 		leftG.setBorderColor(Color.white); rightG.setBorderColor(Color.white);
 		leftG.setBorderWidth(10); rightG.setBorderWidth(10);
 		leftEdge = new Rectangle(eWidth, eHeight); rightEdge = new Rectangle(eWidth, eHeight);
