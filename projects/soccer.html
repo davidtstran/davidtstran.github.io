@@ -28,7 +28,7 @@ function start() {
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
-	var socBall, socBallSize = 5, socBallBorder = 3, socBallDir, socBallSpeedX, socBallSpeedY, socRolls = 2;
+	var socBall, socBallSize = 5, socBallBorder = 3, socBallDir, socBallSpeedX, socBallSpeedY, socRolls = 1;
 	
 	map();
 	keyDownMethod(move);
@@ -149,6 +149,7 @@ function start() {
 	}
 	function ballMove() {
 		var DELAY = 100;
+		socRolls = Randomizer.nextInt(1, 10);
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - moveSpace > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
