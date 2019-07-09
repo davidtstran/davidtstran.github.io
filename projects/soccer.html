@@ -26,6 +26,7 @@ function start() {
 	var lp, rp; // left & right players
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 50;
+	var moveSpace = 20;
 	
 	map();
 	keyDownMethod(move);
@@ -62,7 +63,38 @@ function start() {
 	}
 	
 	function move(e) {
-		
+		if (e.keyCode == Keyboard.letter('A')) { // LEFT move LEFT
+			if (lp.getX() - moveSpace > 0)
+				lp.move(-moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.letter('W')) { // LEFT move UP
+			if (lp.getY() - moveSpace > 0)
+				lp.move(0, -moveSpace); 
+		}
+		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
+			if (lp.getX() + moveSpace < getWidth())
+				lp.move(moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.letter('S')) { // LEFT move DOWN
+			if (lp.getY() + moveSpace < getHeight())
+				lp.move(0, moveSpace);
+		}
+		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT
+			if (rp.getX() - moveSpace > 0)
+				rp.move(-moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.UP) { // RIGHT move UP
+			if (rp.getY() - moveSpace > moveSpace * 3)
+				rp.move(0, -moveSpace); 
+		}
+		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
+			if (rp.getX() + moveSpace < getWidth())
+				rp.move(moveSpace, 0); 
+		}
+		if (e.keyCode == Keyboard.DOWN) { // RIGHT move DOWN
+			if (rp.getY() + moveSpace < getHeight())
+				rp.move(0, moveSpace);
+		}	
 	}
 }	
 </script>
