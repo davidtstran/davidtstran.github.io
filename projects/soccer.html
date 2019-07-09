@@ -152,7 +152,7 @@ function start() {
 	}
 	function ballMove() {
 		var DELAY = 100;
-		socRolls = Randomizer.nextInt(1, 10);
+		socRolls = Randomizer.nextInt(1, 5);
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - moveSpace > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
