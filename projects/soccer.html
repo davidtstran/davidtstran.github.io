@@ -151,12 +151,12 @@ function start() {
 	}
 	function ballMove() {
 		if (socBallDir == "LEFT") {
-			if (socBall.getX() - socBallSpeedX*2 - socBallSize*2 > 0) {
+			if (socBall.getX() - socBallSpeedX - socBallSize > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
 		else if (socBallDir == "UP") {
-			if (socBall.getY() - socBallSpeedY*2 - socBallSize*2 > 0) {
+			if (socBall.getY() - socBallSpeedY - socBallSize > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
