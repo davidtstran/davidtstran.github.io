@@ -34,6 +34,7 @@ function start() {
 	
 	map();
 	keyDownMethod(move);
+	setTimer(checkBall, 1);
 	
 	function map() {
 		var centerLine = new Line(getWidth()/2, 0, getWidth()/2, getHeight());
@@ -188,8 +189,8 @@ function start() {
 			}
 		}
 	}
-	function checkGoal() {
-		// to do
+	function checkBall() {
+		// to do (goal & bodyblock)
 	}
 }	
 </script>
