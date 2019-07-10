@@ -34,7 +34,6 @@ function start() {
 	
 	map();
 	keyDownMethod(move);
-	setTimer(checkBall, 1);
 	
 	function map() {
 		var centerLine = new Line(getWidth()/2, 0, getWidth()/2, getHeight());
@@ -156,26 +155,14 @@ function start() {
 			if (socBall.getX() - socBallSpeedX > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
-			else {
-				socBallSpeedX = -socBallSpeedX;
-				socBall.move(socBallSpeedX, socBallSpeedY);
-			}
 		}
 		else if (socBallDir == "UP") {
 			if (socBall.getY() - socBallSpeedY > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
-			else {
-				socBallSpeedY = -socBallSpeedY;
-				socBall.move(socBallSpeedX, socBallSpeedY);
-			}
 		}
 		else if (socBallDir == "RIGHT") {
 			if (socBall.getX() + socBallSpeedX < getWidth()) {
-				socBall.move(socBallSpeedX, socBallSpeedY);
-			}
-			else {
-				socBallSpeedX = -socBallSpeedX;
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}	  
 		}
@@ -183,14 +170,7 @@ function start() {
 			if (socBall.getY() + socBallSpeedY < getHeight()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
-			else {
-				socBallSpeedY = -socBallSpeedY;
-				socBall.move(socBallSpeedX, socBallSpeedY);
-			}
 		}
-	}
-	function checkBall() {
-		// to do (goal & bodyblock)
 	}
 }	
 </script>
