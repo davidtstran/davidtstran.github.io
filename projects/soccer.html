@@ -222,6 +222,7 @@ function start() {
 		if (dir == "LEFT") { // RIGHT scores LEFT GOAL
 			if (socBall.getX() > 0 && socBall.getX() < gWidth) {
 				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
+					socRolls = 0;
 					remove(socBall);
 					socBall.setPosition(getWidth()/2, getHeight()/2);
 					add(socBall);
@@ -231,6 +232,7 @@ function start() {
 		else if (dir == "RIGHT") { // LEFT scores RIGHT GOAL
 			if (socBall.getX() > getWidth() - gWidth && socBall.getX() < getWidth) {
 				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
+					socRolls = 0;
 					remove(socBall);
 					socBall.setPosition(getWidth()/2, getHeight()/2);
 					add(socBall);	
