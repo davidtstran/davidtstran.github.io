@@ -26,7 +26,7 @@ function start() {
 	
 	var gWidth = 50, gHeight = 100, eWidth = 150, eHeight = 300;
 	var lp, rp, lDir, rDir; // left & right players
-	var lPoints = 0, rPoints = 0;
+	var lPoints = 0, rPoints = 0, lScore, rScore;
 	var lColor = Color.red, rColor = Color.blue;
 	var playerSize = 10;
 	var moveSpace = 20;
@@ -67,6 +67,11 @@ function start() {
 		socBall = new Circle(socBallSize); socBall.setPosition(getWidth()/2, getHeight()/2);
 		socBall.setColor(Color.black); socBall.setBorderColor(Color.white); socBall.setBorderWidth(socBallBorder);
 		add(socBall);
+		lScore = new Text(lPoints); rScore = new Text(rPoints);
+		lScore.setColor(Color.red); rScore.setColor(Color.blue);
+		lScore.setPosition(getWidth()/2 - lScore.getWidth()/2 - moveSpace, lScore.getHeight());
+		rScore.setPosition(getWidth()/2 - rScore.getWidth()/2 + moveSpace, rScore.getHeight());
+		add(lScore); add(rScore);
 	}
 	
 	function move(e) {
@@ -183,6 +188,11 @@ function start() {
 				rGoal.setPosition(getWidth()/2 - rGoal.getWidth()/2, getHeight()/2);
 				rGoal.setColor(Color.blue);
 				add(rGoal);
+				remove(rScore);
+				rScore.setText(rPoints);
+				rScore.setColor(Color.blue);
+				rScore.setPosition(getWidth()/2 - rScore.getWidth()/2 + moveSpace, rScore.getHeight());
+				add(rScore);
 			}
 		}
 		if ((socBall.getX() > getWidth() - gWidth) && (socBall.getX() < getWidth())) { // LEFT scores RIGHT GOAL
@@ -194,7 +204,12 @@ function start() {
 				var lGoal = new Text ("GOAL");
 				lGoal.setPosition(getWidth()/2 - lGoal.getWidth()/2, getHeight()/2);
 				lGoal.setColor(Color.red);
-				add(lGoal);		
+				add(lGoal);
+				remove(lScore);
+				lScore.setText(lPoints);
+				lScore.setColor(Color.red);
+				lScore.setPosition(getWidth()/2 - lScore.getWidth()/2 - moveSpace, lScore.getHeight());
+				add(lScore);
 			}
 		}    
 	}
