@@ -46,11 +46,7 @@ function start() {
 		centerCircle.setBorderWidth(10);
 		add(centerCircle);
 		add(centerLine);
-		var leftG, leftEdge, rightG, rightEdge, leftGx, rightGx;
-		leftGx = new Rectangle(gWidth, gHeight); rightGx = new Rectangle(gWidth, gHeight);
-		leftGx.setPosition(0, getHeight()/2 - gHeight/2); rightGx.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
-		leftGx.setColor(new Color(55, 249, 68)); rightGx.setColor(new Color(55, 249, 68)); // different shade green
-		add(leftGx); add(rightGx);
+		var leftG, leftEdge, rightG, rightEdge;
 		leftG = new Rectangle(gWidth, gHeight); rightG = new Rectangle(gWidth, gHeight);
 		leftG.setPosition(0, getHeight()/2 - gHeight/2); rightG.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
 		leftG.setColor(new Color(55, 249, 68)); rightG.setColor(new Color(55, 249, 68)); // different shade green
@@ -155,11 +151,11 @@ function start() {
 	}
 	function ballMove() {
 		var DELAY = 100;
-		//socRolls = Randomizer.nextInt(1, 5);
+		socRolls = Randomizer.nextInt(1, 5);
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - socBallSpeedX > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
-				checkGoal();
+				checkGoal("LEFT");
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getX() - moveSpace > 0)
@@ -168,7 +164,7 @@ function start() {
 							socBallSpeedX = -socBallSpeedX;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
-						checkGoal();
+						checkGoal("LEFT");
 					}, DELAY);
 				}
 			}
@@ -191,7 +187,7 @@ function start() {
 		else if (socBallDir == "RIGHT") {
 			if (socBall.getX() + socBallSpeedX < getWidth()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
-				checkGoal();
+				checkGoal("RIGHT");
 				for (var i = 0; i < socRolls; i++) {
 					setTimeout(function() {
 						if (socBall.getX() + moveSpace < getWidth())
@@ -200,7 +196,7 @@ function start() {
 							socBallSpeedX = -socBallSpeedX;
 							socBall.move(socBallSpeedX, socBallSpeedY);
 						}
-						checkGoal();
+						checkGoal("RIGHT");
 					}, DELAY);
 				}
 			}
@@ -222,19 +218,23 @@ function start() {
 			}
 		}
 	}
-	function checkGoal() {
-		var elm = getElementAt(socBall.getX(), socBall.getY());
-		if (elm.getColor() == "#37F944") { 
-			remove(socBall);
-			if (socBall.getX() < gWidth) { // RIGHT scores GOAL
-				socBall.setPosition(getWidth()/2, getHeight()/2);
-				rPoints++;
-				add(socBall);
+	function checkGoal(dir) {
+		if (dir == "LEFT") { // RIGHT scores LEFT GOAL
+			if (socBall.getX() > 0 && socBall.getX() < gWidth) {
+				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
+					remove(socBall);
+					socBall.setPosition(getWidth()/2, getHeight()/2);
+					add(socBall);
+				}
 			}
-			else if (socBall.getX() > getWidth() - gWidth) { // LEFT scores GOAL
-				socBall.setPosition(getWidth()/2, getHeight()/2);
-				lPoints++;
-				add(socBall);
+		}
+		else if (dir == "RIGHT") { // LEFT scores RIGHT GOAL
+			if (socBall.getX() > getWidth() - gWidth && socBall.getX() < getWidth) {
+				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
+					remove(socBall);
+					socBall.setPosition(getWidth()/2, getHeight()/2);
+					add(socBall);	
+				}
 			}
 		}
 	}
