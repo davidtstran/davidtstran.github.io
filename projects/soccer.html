@@ -132,11 +132,11 @@ function start() {
 		if ((player.getX() == socBall.getX()) && (player.getY() == socBall.getY())) {
 			if (playerDir == "LEFT") {
 				socBallDir = "LEFT";
-				socBallSpeedX = -moveSpace; socBallSpeedY = 0; 
+				socBallSpeedX = moveSpace; socBallSpeedY = 0; 
 			}
 			else if (playerDir == "UP") {
 				socBallDir = "UP";
-				socBallSpeedX = 0; socBallSpeedY = -moveSpace;
+				socBallSpeedX = 0; socBallSpeedY = moveSpace;
 			}
 			else if (playerDir == "RIGHT") {
 				socBallDir = "RIGHT";
@@ -151,12 +151,12 @@ function start() {
 	}
 	function ballMove() {
 		if (socBallDir == "LEFT") {
-			if (socBall.getX() - socBallSpeedX - socBallSize >= 0) {
+			if (socBall.getX() - socBallSpeedX - socBallSize > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
 		else if (socBallDir == "UP") {
-			if (socBall.getY() - socBallSpeedY - socBallSize >= 0) {
+			if (socBall.getY() - socBallSpeedY - socBallSize > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
