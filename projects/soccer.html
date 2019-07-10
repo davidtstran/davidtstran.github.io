@@ -132,19 +132,19 @@ function start() {
 		if ((player.getX() == socBall.getX()) && (player.getY() == socBall.getY())) {
 			if (playerDir == "LEFT") {
 				socBallDir = "LEFT";
-				socBallSpeedX = -moveSpace*2; socBallSpeedY = 0; 
+				socBallSpeedX = -moveSpace; socBallSpeedY = 0; 
 			}
 			else if (playerDir == "UP") {
 				socBallDir = "UP";
-				socBallSpeedX = 0; socBallSpeedY = -moveSpace*2;
+				socBallSpeedX = 0; socBallSpeedY = -moveSpace;
 			}
 			else if (playerDir == "RIGHT") {
 				socBallDir = "RIGHT";
-				socBallSpeedX = moveSpace*2; socBallSpeedY = 0;
+				socBallSpeedX = moveSpace; socBallSpeedY = 0;
 			}
 			else if (playerDir == "DOWN") {
 				socBallDir = "DOWN";
-				socBallSpeedX = 0; socBallSpeedY = moveSpace*2;
+				socBallSpeedX = 0; socBallSpeedY = moveSpace;
 			}
 			ballMove();
 		}
