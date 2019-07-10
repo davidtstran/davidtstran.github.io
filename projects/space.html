@@ -179,6 +179,8 @@ function start() {
 			numKills++;
 			remove(killText);
 			killText.setText("Number of Kills: " + numKills, '10pt Arial');
+			killText.setColor(Color.white);
+			killText.setPosition(getWidth()/2 - killText.getWidth()/2 + moveSize, getHeight() - killText.getHeight());
 			add(killText);
 			if (numEnemies == 0) {
 				remove(shot);
