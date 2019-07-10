@@ -177,7 +177,9 @@ function start() {
 			remove(elm);
 			numEnemies--;
 			numKills++;
+			remove(killText);
 			killText.setText("Number of Kills: " + numKills, '15pt Arial');
+			add(killText);
 			if (numEnemies == 0) {
 				remove(shot);
 				stopAllTimers();
