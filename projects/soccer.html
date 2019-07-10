@@ -179,12 +179,24 @@ function start() {
 				socBall.setPosition(getWidth()/2, getHeight()/2);
 				add(socBall);
 				rPoints++;
-				var rGoal = new Text ("GOAL", '50 pt Arial');
+				var rGoal = new Text ("GOAL", '300 pt Arial');
 				rGoal.setPosition(getWidth()/2 - rGoal.getWidth()/2, getHeight()/2);
-				rGoal.setColor(Color.black);
+				rGoal.setColor(Color.blue);
 				add(rGoal);
 			}
 		}
+		if ((socBall.getX() > getWidth() - eWidth) && (socBall.getX() < getWidth())) { // LEFT scores RIGHT GOAL
+			if ((socBall.getY() > getHeight()/2 - gHeight/2) && socBall.getY() < getHeight()/2 + gHeight/2)) {
+				remove(socBall);
+				socBall.setPosition(getWidth()/2, getHeight()/2);
+				add(socBall);
+				lPoints++;
+				var lGoal = new Text ("GOAL", '300 pt Arial');
+				lGoal.setPosition(getWidth()/2 - lGoal.getWidth()/2, getHeight()/2);
+				lGoal.setColor(Color.red);
+				add(lGoal);		
+			}
+		}    
 	}
 }	
 </script>
