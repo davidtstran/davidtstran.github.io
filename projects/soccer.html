@@ -155,7 +155,6 @@ function start() {
 		if (socBallDir == "LEFT") {
 			if (socBall.getX() - socBallSpeedX * randScale > 0) {
 				socBall.move(socBallSpeedX * randScale, socBallSpeedY);
-				checkGoal("LEFT");
 			}
 			else {
 				socBallSpeedX = -socBallSpeedX * randScale;
@@ -174,7 +173,6 @@ function start() {
 		else if (socBallDir == "RIGHT") {
 			if (socBall.getX() + socBallSpeedX * randScale < getWidth()) {
 				socBall.move(socBallSpeedX * randScale, socBallSpeedY);
-				checkGoal("RIGHT");
 			}
 			else {
 				socBallSpeedX = -socBallSpeedX * randScale;
@@ -191,25 +189,8 @@ function start() {
 			}
 		}
 	}
-	function checkGoal(dir) {
-		if (dir == "LEFT") { // RIGHT scores LEFT GOAL
-			if (socBall.getX() > 0 && socBall.getX() < gWidth) {
-				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
-					remove(socBall);
-					socBall.setPosition(getWidth()/2, getHeight()/2);
-					add(socBall);
-				}
-			}
-		}
-		else if (dir == "RIGHT") { // LEFT scores RIGHT GOAL
-			if (socBall.getX() > getWidth() - gWidth && socBall.getX() < getWidth) {
-				if (socBall.getY() > getHeight()/2 - gHeight/2 && socBall.getY() < getHeight()/2 + gHeight/2) {
-					remove(socBall);
-					socBall.setPosition(getWidth()/2, getHeight()/2);
-					add(socBall);	
-				}
-			}
-		}
+	function checkGoal() {
+		// to do
 	}
 }	
 </script>
