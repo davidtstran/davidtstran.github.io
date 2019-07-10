@@ -30,7 +30,7 @@ function start() {
 	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
 	var healthWidth = 205, healthHeight = 40;
 	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	var numEnemies = 0, numKills = 0;
+	var numEnemies = 0, numKills = 0, killText;
 	
 	drawShip();
 	healthBars();
@@ -75,6 +75,11 @@ function start() {
 		shot.setColor(Color.black);
 		shot.setBorderColor(Color.white);
 		add(shot);
+		
+		killText = new Text("Number of Kills: " + numKills);
+		killText.setColor(Color.white);
+		killText.setPosition(getWidth()/2 - killText.getWidth()/2, getHeight() - healthHeight + barBuffer);
+		add(killText);
 	}
 	
 	function healthBars() {
