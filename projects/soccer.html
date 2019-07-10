@@ -133,11 +133,11 @@ function start() {
 		if ((player.getX() == socBall.getX()) && (player.getY() == socBall.getY())) {
 			if (playerDir == "LEFT") {
 				socBallDir = "LEFT";
-				socBallSpeedX = -moveSpace * 2; socBallSpeedY = 0; 
+				socBallSpeedX = -moveSpace; socBallSpeedY = 0; 
 			}
 			else if (playerDir == "UP") {
 				socBallDir = "UP";
-				socBallSpeedX = 0; socBallSpeedY = -moveSpace * 2;
+				socBallSpeedX = 0; socBallSpeedY = -moveSpace;
 			}
 			else if (playerDir == "RIGHT") {
 				socBallDir = "RIGHT";
@@ -145,7 +145,7 @@ function start() {
 			}
 			else if (playerDir == "DOWN") {
 				socBallDir = "DOWN";
-				socBallSpeedX = 0; socBallSpeedY = moveSpace * 2;
+				socBallSpeedX = 0; socBallSpeedY = moveSpace;
 			}
 			ballMove();
 		}
@@ -179,7 +179,7 @@ function start() {
 				socBall.setPosition(getWidth()/2, getHeight()/2);
 				add(socBall);
 				rPoints++;
-				var rGoal = new Text ("GOAL", '1000 pt Arial');
+				var rGoal = new Text ("GOAL");
 				rGoal.setPosition(getWidth()/2 - rGoal.getWidth()/2, getHeight()/2);
 				rGoal.setColor(Color.blue);
 				add(rGoal);
@@ -191,7 +191,7 @@ function start() {
 				socBall.setPosition(getWidth()/2, getHeight()/2);
 				add(socBall);
 				lPoints++;
-				var lGoal = new Text ("GOAL", '1000 pt Arial');
+				var lGoal = new Text ("GOAL");
 				lGoal.setPosition(getWidth()/2 - lGoal.getWidth()/2, getHeight()/2);
 				lGoal.setColor(Color.red);
 				add(lGoal);		
