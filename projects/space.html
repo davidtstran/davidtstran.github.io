@@ -76,9 +76,9 @@ function start() {
 		shot.setBorderColor(Color.white);
 		add(shot);
 		
-		killText = new Text("Number of Kills: " + numKills, '10pt Arial');
+		killText = new Text("Number of Kills: " + numKills, '15pt Arial');
 		killText.setColor(Color.white);
-		killText.setPosition(getWidth()/2 - killText.getWidth()/2, getHeight() - killText.getHeight());
+		killText.setPosition(getWidth()/2 - killText.getWidth()/2 + moveSize, getHeight() - killText.getHeight());
 		add(killText);
 	}
 	
@@ -177,7 +177,7 @@ function start() {
 			remove(elm);
 			numEnemies--;
 			numKills++;
-			killText.setText("Number of Kills: " + numKills, '10pt Arial');
+			killText.setText("Number of Kills: " + numKills, '15pt Arial');
 			if (numEnemies == 0) {
 				remove(shot);
 				stopAllTimers();
