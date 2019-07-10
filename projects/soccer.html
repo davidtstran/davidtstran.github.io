@@ -173,7 +173,18 @@ function start() {
 		}
 	}
 	function checkBall() { // goal and corners
-		
+		if ((socBall.getX() > 0) && (socBall.getX() < gWidth)) { // RIGHT scores LEFT GOAL
+			if ((socBall.getY() > getHeight()/2 - gHeight/2) && (socBall.getY() < getHeight()/2 + gHeight/2)) {
+				remove(socBall);
+				socBall.setPosition(getWidth()/2, getHeight()/2);
+				add(socBall);
+				rPoints++;
+				var rGoal = new Text ("GOAL", '50 pt Arial');
+				rGoal.setPosition(getWidth()/2 - rGoal.getWidth()/2, getHeight()/2);
+				rGoal.setColor(rGoal.white);
+				add(rGoal);
+			}
+		}
 	}
 }	
 </script>
