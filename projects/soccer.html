@@ -46,7 +46,11 @@ function start() {
 		centerCircle.setBorderWidth(10);
 		add(centerCircle);
 		add(centerLine);
-		var leftG, leftEdge, rightG, rightEdge;
+		var leftG, leftEdge, rightG, rightEdge, leftGx, rightGx;
+		leftGx = new Rectangle(gWidth, gHeight); rightGx = new Rectangle(gWidth, gHeight);
+		leftGx.setPosition(0, getHeight()/2 - gHeight/2); rightGx.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
+		leftGx.setColor(new Color(55, 249, 68)); rightGx.setColor(new Color(55, 249, 68)); // different shade green
+		add(leftGx); add(rightGx);
 		leftG = new Rectangle(gWidth, gHeight); rightG = new Rectangle(gWidth, gHeight);
 		leftG.setPosition(0, getHeight()/2 - gHeight/2); rightG.setPosition(getWidth() - gWidth, getHeight()/2 - gHeight/2);
 		leftG.setColor(new Color(55, 249, 68)); rightG.setColor(new Color(55, 249, 68)); // different shade green
