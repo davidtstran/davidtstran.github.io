@@ -87,8 +87,9 @@ function start() {
 				lp.move(0, -moveSpace); 
 			}
 		}
-		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT (cannot pass goal lines)
-			if (lp.getX() + moveSpace < getWidth() - eWidth) {
+		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT 
+			//if (lp.getX() + moveSpace < getWidth() - eWidth) { // cannot pass goal lines
+			if (lp.getX() + moveSpace < getWidth()) {
 				lDir = "RIGHT";
 				lp.move(moveSpace, 0); 
 			}
@@ -102,8 +103,9 @@ function start() {
 		if (e.keyCode == Keyboard.SPACE) { // LEFT KICK
 			kick("LEFT");
 		}
-		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT (cannot pass goal lines)
-			if (rp.getX() - moveSpace > 0 + eWidth) {
+		if (e.keyCode == Keyboard.LEFT) { // RIGHT move LEFT 
+			//if (rp.getX() - moveSpace > 0 + eWidth) { // cannot pass goal lines
+			if (rp.getX() - moveSpace > 0) {
 				rDir = "LEFT";
 				rp.move(-moveSpace, 0); 
 			}
