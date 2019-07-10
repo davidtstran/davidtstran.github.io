@@ -158,7 +158,7 @@ function start() {
 				checkGoal("LEFT");
 			}
 			else {
-				socBallSpeedX = -socBallSpeedX;
+				socBallSpeedX = -socBallSpeedX * randScale;
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
@@ -167,26 +167,26 @@ function start() {
 				socBall.move(socBallSpeedX, socBallSpeedY * randScale);
 			}
 			else {
-				socBallSpeedY = -socBallSpeedY;
+				socBallSpeedY = -socBallSpeedY * randScale;
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
 		else if (socBallDir == "RIGHT") {
-			if (socBall.getX() + socBallSpeedX < getWidth()) {
-				socBall.move(socBallSpeedX, socBallSpeedY);
+			if (socBall.getX() + socBallSpeedX * randScale < getWidth()) {
+				socBall.move(socBallSpeedX * randScale, socBallSpeedY);
 				checkGoal("RIGHT");
 			}
 			else {
-				socBallSpeedX = -socBallSpeedX;
+				socBallSpeedX = -socBallSpeedX * randScale;
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}	  
 		}
 		else if (socBallDir == "DOWN") {
-			if (socBall.getY() + socBallSpeedY < getHeight()) {
-				socBall.move(socBallSpeedX, socBallSpeedY);
+			if (socBall.getY() + socBallSpeedY * randScale < getHeight()) {
+				socBall.move(socBallSpeedX, socBallSpeedY * randScale);
 			}
 			else {
-				socBallSpeedY = -socBallSpeedY;
+				socBallSpeedY = -socBallSpeedY * randScale;
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
