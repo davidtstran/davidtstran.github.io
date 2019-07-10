@@ -152,22 +152,22 @@ function start() {
 	function ballMove() {
 		var DELAY = 100;
 		if (socBallDir == "LEFT") {
-			if (socBall.getX() - socBallSpeedX > 0) {
+			if (socBall.getX() - socBallSpeedX - socBallSize > 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
 		else if (socBallDir == "UP") {
-			if (socBall.getY() - socBallSpeedY > 0) {
+			if (socBall.getY() - socBallSpeedY - socBallSize> 0) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
 		else if (socBallDir == "RIGHT") {
-			if (socBall.getX() + socBallSpeedX < getWidth()) {
+			if (socBall.getX() + socBallSpeedX + socBallSize < getWidth()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}	  
 		}
 		else if (socBallDir == "DOWN") {
-			if (socBall.getY() + socBallSpeedY < getHeight()) {
+			if (socBall.getY() + socBallSpeedY + socBallSize < getHeight()) {
 				socBall.move(socBallSpeedX, socBallSpeedY);
 			}
 		}
