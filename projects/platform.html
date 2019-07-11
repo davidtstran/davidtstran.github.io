@@ -57,7 +57,10 @@ function start() {
 			// JUMP
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			personCenter.move(-blockSize, 0);
+			if (personCenter.getX() - blockSize > 0)
+				personCenter.move(-blockSize, 0);
+			else
+				changeMap(currentMap, currentMap - 1);
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 			// probably unneeded (falls because gravity)
@@ -65,13 +68,29 @@ function start() {
 			// probably unneeded (falls because gravity)
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			personCenter.move(blockSize, 0);
+			if (personCenter.getX() + blockSize < getHeight())
+				personCenter.move(blockSize, 0);
+			else
+				changeMap(currentMap, currentMap + 1);
 		}
 	}
 	function changeMap(curr, new) {
-		//remove(personCenter);
-		//personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
-		//add(personCenter);
+		if (new < totalMaps && new > 0) {
+			if (new > curr) {
+				remove(personCenter);
+				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
+				add(personCenter);
+				currentMap++;
+				map(currentMap);
+			}
+			else if (new < curr) {
+				remove(personCenter);
+				personCenter.setPosition(getWidth() - blockSize/2, getHeight() - blockSize - blockSize/2);
+				add(personCenter);
+				currentMap--;
+				map(currentMap);
+			}
+		}
 	}
 	function map(number) {
 		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
