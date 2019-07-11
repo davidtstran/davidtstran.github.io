@@ -27,9 +27,7 @@ function start() {
 	var numBlocks = getWidth() / blockSize;
 	var person, personCenter;
 	
-	for (var i = 0; i < numBlocks; i++) {
-		platformBlock(i * blockSize, getHeight() - blockSize);	
-	}
+	map(currentMap);
 	personObject();
 	keyDownMethod(movement);
 	
@@ -70,8 +68,17 @@ function start() {
 			personCenter.move(blockSize, 0);
 		}
 	}
+	function changeMap(curr, new) {
+		//remove(personCenter);
+		//personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
+		//add(personCenter);
+	}
 	function map(number) {
-			
+		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
+			for (var i = 0; i < numBlocks; i++) {
+				platformBlock(i * blockSize, getHeight() - blockSize);	
+			}	
+		}
 	}
 	
 }	
