@@ -75,7 +75,7 @@ function start() {
 		}
 	}
 	function changeMap(curr, newM) {
-		if (newM < totalMaps && newM > 0) {
+		if (newM <= totalMaps && newM > 0) {
 			if (newM > curr) {
 				remove(personCenter);
 				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
