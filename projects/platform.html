@@ -74,16 +74,16 @@ function start() {
 				changeMap(currentMap, currentMap + 1);
 		}
 	}
-	function changeMap(curr, new) {
-		if (new < totalMaps && new > 0) {
-			if (new > curr) {
+	function changeMap(curr, newM) {
+		if (newM < totalMaps && newM > 0) {
+			if (newM > curr) {
 				remove(personCenter);
 				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
 				add(personCenter);
 				currentMap++;
 				map(currentMap);
 			}
-			else if (new < curr) {
+			else if (newM < curr) {
 				remove(personCenter);
 				personCenter.setPosition(getWidth() - blockSize/2, getHeight() - blockSize - blockSize/2);
 				add(personCenter);
