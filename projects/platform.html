@@ -26,12 +26,14 @@ function start() {
 	var blockSize = 20;
 	
 	platformBlock(0, getHeight() - blockSize);
+	platformBlock(0 + blockSize, getHeight() - blockSize);
 	
-	function platformBlock() {
+	function platformBlock(xLoc, yLoc) {
 		var block = new Rectangle (blockSize, blockSize);
 		block.setColor(Color.brown);
 		block.setBorderColor(Color.black);
-		block.set
+		block.setPosition(xLoc, yLoc);
+		add(block);
 	}
 	
 }	
