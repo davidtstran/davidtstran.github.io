@@ -75,7 +75,7 @@ function start() {
 		}
 	}
 	function changeMap(curr, newM) {
-		if (newM <= totalMaps && newM > 0) {
+		if (newM < totalMaps && newM >= 0) {
 			if (newM > curr) {
 				remove(personCenter);
 				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
@@ -96,7 +96,7 @@ function start() {
 		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
 			remove(mapN);
 			mapN = new Text(currentMap);
-			mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight()/2);
+			mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 			mapN.setColor(Color.black);
 			add(mapN);
 			for (var i = 0; i < numBlocks; i++) {
