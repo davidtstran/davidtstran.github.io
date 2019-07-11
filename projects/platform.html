@@ -22,7 +22,7 @@ function start() {
 	removeAll(); // clear canvas
 	stopAllTimers();
 	
-	var maps = [], currentMap = 0, totalMaps = 5;
+	var maps = [], currentMap = 0, totalMaps = 5, mapN;
 	var blockSize = 25, blockColor = new Color(204, 102, 0), blockBorder = new Color (102, 51, 0);
 	var numBlocks = getWidth() / blockSize;
 	var person, personCenter;
@@ -94,8 +94,9 @@ function start() {
 	}
 	function map(number) {
 		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
-			var mapN = new Text(currentMap);
-			mapN.setPosition(getWidth() - mapN.getWidth()/2, 0 + mapN.getHeight()/2);
+			remove(mapN);
+			mapN = new Text(currentMap);
+			mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight()/2);
 			mapN.setColor(Color.black);
 			add(mapN);
 			for (var i = 0; i < numBlocks; i++) {
