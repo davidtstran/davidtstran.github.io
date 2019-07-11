@@ -10,7 +10,7 @@
 	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>Platformer<br> </h2>
+	<h2>WASD\/Arrows<br> </h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -22,13 +22,16 @@ function start() {
 	removeAll(); // clear canvas
 	stopAllTimers();
 	
-	var maps = [];
+	var maps = [], currentMap = 0;
 	var blockSize = 25, blockColor = new Color(204, 102, 0), blockBorder = new Color (102, 51, 0);
 	var numBlocks = getWidth() / blockSize;
+	var person, personCenter;
 	
 	for (var i = 0; i < numBlocks; i++) {
 		platformBlock(i * blockSize, getHeight() - blockSize);	
 	}
+	personObject();
+	keyDownMethod(movement);
 	
 	function platformBlock(xLoc, yLoc) {
 		var block = new Rectangle (blockSize, blockSize);
@@ -36,6 +39,36 @@ function start() {
 		block.setBorderColor(blockBorder);
 		block.setPosition(xLoc, yLoc);
 		add(block);
+	}
+	
+	function personObject() {
+		var startX = 0, startY = getHeight() - blockSize*2;
+		var scale = 1;
+		//person = new Polygon();
+		//person.setColor(Color.black);
+		//add(person);
+		personCenter = new Circle(10);
+		personCenter.setColor(Color.black);
+		personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
+		add(personCenter);
+	}
+	function movement(e) {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+			// JUMP
+			personCenter.move(0, 0); 
+			// JUMP
+		}
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			personCenter.move(-blockSize, 0);
+		}
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			// probably unneeded (falls because gravity)
+			personCenter.move(0, 0);
+			// probably unneeded (falls because gravity)
+		}
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			personCenter.move(blockSize, 0);
+		}
 	}
 	
 }	
