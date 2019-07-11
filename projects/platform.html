@@ -94,7 +94,7 @@ function start() {
 	}
 	function map(number) {
 		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
-			var mapN = new Text("currentMap");
+			var mapN = new Text(currentMap);
 			mapN.setPosition(getWidth() - mapN.getWidth()/2, 0 + mapN.getHeight()/2);
 			mapN.setColor(Color.black);
 			add(mapN);
