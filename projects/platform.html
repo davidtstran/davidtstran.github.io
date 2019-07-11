@@ -93,12 +93,12 @@ function start() {
 		}
 	}
 	function map(number) {
+		remove(mapN);
+		mapN = new Text(currentMap + 1);
+		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
+		mapN.setColor(Color.black);
+		add(mapN);
 		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3 || currentMap == 4) {
-			remove(mapN);
-			mapN = new Text(currentMap + 1);
-			mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
-			mapN.setColor(Color.black);
-			add(mapN);
 			for (var i = 0; i < numBlocks; i++) {
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
