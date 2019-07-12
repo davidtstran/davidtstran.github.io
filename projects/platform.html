@@ -77,14 +77,14 @@ function start() {
 	function changeMap(curr, newM) {
 		if (newM < totalMaps && newM >= 0) {
 			if (newM > curr) {
-				remove(personCenter);
+				removeAll();
 				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
 				add(personCenter);
 				currentMap++;
 				map(currentMap);
 			}
 			else if (newM < curr) {
-				remove(personCenter);
+				removeAll();
 				personCenter.setPosition(getWidth() - blockSize/2, getHeight() - blockSize - blockSize/2);
 				add(personCenter);
 				currentMap--;
@@ -93,7 +93,6 @@ function start() {
 		}
 	}
 	function map(number) {
-		remove(mapN);
 		mapN = new Text(currentMap + 1);
 		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 		mapN.setColor(Color.black);
@@ -102,6 +101,13 @@ function start() {
 			for (var i = 0; i < numBlocks; i++) {
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
+		}
+		else if (currentMap == 4) {
+			for (var i = 0; i < numBlocks; i++) {
+				if (i != numBlocks - 2) {
+					platformBlock(i * blockSize, getHeight() - blockSize*2);	
+				}
+			}
 		}
 	}
 	
