@@ -75,16 +75,11 @@ function start() {
 			else
 				changeMap(currentMap, currentMap + 1);
 		}
-		//var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
-		//if (below == null) {
-		//		personCenter.move(0, blockSize);
-		//		below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
-		//}
 	}
 	function checkBelow() {
 		var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
 		if (below == null) {
-				personCenter.move(0, blockSize);
+			personCenter.move(0, blockSize);
 		}
 	}
 	function changeMap(curr, newM) {
