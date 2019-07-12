@@ -124,11 +124,12 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i != numBlocks - 2)
-					platformBlock(i * blockSize, getHeight() - blockSize*3);	
-				else {
+				if (i == numBlocks - 2) {
 					platformBlock(i * blockSize, getHeight() - blockSize);
 					platformBlock((i+1) * blockSize, getHeight() - blockSize);
+				}	
+				else {
+					platformBlock(i * blockSize, getHeight() - blockSize*3);
 				}
 			}
 		}
