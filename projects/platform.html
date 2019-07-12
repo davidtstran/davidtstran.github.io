@@ -103,13 +103,21 @@ function start() {
 		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 		mapN.setColor(Color.black);
 		add(mapN);
-		if (number == 0 || number == 1 || number == 2 || number == 3) {
+		if (number == 0 || number == 1 || number == 2) {
 			newY = getHeight() - blockSize - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
+		}
+		else if (number == 3) {
+			newY = getHeight() - blockSize * 5 - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
+			for (var i = 0; i < numBlocks; i++) {
+				platformBlock(i * blockSize, getHeight() - blockSize * 5);
+			}
 		}
 		else if (number == 4) {
 			newY = getHeight() - blockSize*3 - blockSize/2;
