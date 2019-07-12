@@ -111,7 +111,7 @@ function start() {
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
 		}
-		if (number == 4) {
+		else if (number == 4) {
 			newY = getHeight() - blockSize*3 - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
