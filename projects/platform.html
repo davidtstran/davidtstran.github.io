@@ -25,11 +25,12 @@ function start() {
 	var maps = [], currentMap = 0, totalMaps = 5, mapN;
 	var blockSize = 25, blockColor = new Color(204, 102, 0), blockBorder = new Color (102, 51, 0);
 	var numBlocks = getWidth() / blockSize;
-	var person, personCenter;
+	var person, personCenter, newX, newY;
 	
-	map(currentMap);
 	personObject();
+	map(currentMap);
 	keyDownMethod(movement);
+	setTimer(checkBelow, 1);
 	
 	function platformBlock(xLoc, yLoc) {
 		var block = new Rectangle (blockSize, blockSize);
@@ -49,11 +50,12 @@ function start() {
 		personCenter.setColor(Color.black);
 		personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
 		add(personCenter);
+		newX = blockSize/2; // starting X
 	}
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 			// JUMP
-			personCenter.move(0, 0); 
+			personCenter.move(0, -blockSize); 
 			// JUMP
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
@@ -73,44 +75,61 @@ function start() {
 			else
 				changeMap(currentMap, currentMap + 1);
 		}
+		//var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
+		//if (below == null) {
+		//		personCenter.move(0, blockSize);
+		//		below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
+		//}
+	}
+	function checkBelow() {
+		var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
+		if (below == null) {
+				personCenter.move(0, blockSize);
+		}
 	}
 	function changeMap(curr, newM) {
 		if (newM < totalMaps && newM >= 0) {
-			if (newM > curr) {
+			if (newM > curr) { // go into right, start at left
 				removeAll();
-				personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
-				add(personCenter);
+				newX = blockSize/2; 
 				currentMap++;
 				map(currentMap);
 			}
-			else if (newM < curr) {
+			else if (newM < curr) { // go into left, start at right
 				removeAll();
-				personCenter.setPosition(getWidth() - blockSize/2, getHeight() - blockSize - blockSize/2);
-				add(personCenter);
+				newX = getWidth() - blockSize/2;
 				currentMap--;
 				map(currentMap);
 			}
 		}
 	}
 	function map(number) {
-		mapN = new Text(currentMap + 1);
+		mapN = new Text(number + 1);
 		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 		mapN.setColor(Color.black);
 		add(mapN);
-		if (currentMap == 0 || currentMap == 1 || currentMap == 2 || currentMap == 3) {
+		if (number == 0 || number == 1 || number == 2 || number == 3) {
+			newY = getHeight() - blockSize - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
 		}
-		else if (currentMap == 4) {
+		if (number == 4) {
+			newY = getHeight() - blockSize*3 - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i != numBlocks - 2) {
-					platformBlock(i * blockSize, getHeight() - blockSize);	
+				if (i != numBlocks - 2)
+					platformBlock(i * blockSize, getHeight() - blockSize*3);	
+				else {
+					platformBlock(i * blockSize, getHeight() - blockSize);
+					platformBlock((i+1) * blockSize, getHeight() - blockSize);
 				}
 			}
 		}
 	}
-	
 }	
 	
 </script>
