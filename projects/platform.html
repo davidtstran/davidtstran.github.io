@@ -60,8 +60,10 @@ function start() {
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
 			var leftElem = getElementAt(personCenter.getX() - blockSize, personCenter.getY());
-			if ((personCenter.getX() - blockSize > 0) && (leftElem == null))
-				personCenter.move(-blockSize, 0);
+			if (personCenter.getX() - blockSize > 0) {
+				if (leftElem != null)
+					personCenter.move(-blockSize, 0);
+			}
 			else
 				changeMap(currentMap, currentMap - 1);
 		}
@@ -72,8 +74,10 @@ function start() {
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 			var rightElem = getElementAt(personCenter.getX() + blockSize, personCenter.getY());
-			if ((personCenter.getX() + blockSize < getHeight()) && (rightElem == null))
-				personCenter.move(blockSize, 0);
+			if (personCenter.getX() + blockSize < getHeight()) {
+				if (rightElem != null)
+					personCenter.move(blockSize, 0);
+			}
 			else
 				changeMap(currentMap, currentMap + 1);
 		}
