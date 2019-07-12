@@ -55,7 +55,7 @@ function start() {
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 			// JUMP
-			personCenter.move(0, -blockSize); 
+			personCenter.move(0, -blockSize * 2); 
 			// JUMP
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
