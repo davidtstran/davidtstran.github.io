@@ -125,6 +125,9 @@ function start() {
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
 				if (i == numBlocks - 2) {
+					platformBlock((i-3) * blockSize, getHeight() - blockSize*2);
+					platformBlock((i-2) * blockSize, getHeight() - blockSize);
+					platformBlock((i-1) * blockSize, getHeight() - blockSize);
 					platformBlock(i * blockSize, getHeight() - blockSize);
 					platformBlock((i+1) * blockSize, getHeight() - blockSize);
 				}	
