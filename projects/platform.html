@@ -59,7 +59,8 @@ function start() {
 			// JUMP
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			if (personCenter.getX() - blockSize > 0)
+			var leftElem = getElementAt(personCenter.getX() - blockSize, personCenter.getY());
+			if ((personCenter.getX() - blockSize > 0) && (leftElem != null))
 				personCenter.move(-blockSize, 0);
 			else
 				changeMap(currentMap, currentMap - 1);
@@ -70,7 +71,8 @@ function start() {
 			// probably unneeded (falls because gravity)
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (personCenter.getX() + blockSize < getHeight())
+			var rightElem = getElementAt(personCenter.getX() + blockSize, personCenter.getY());
+			if ((personCenter.getX() + blockSize < getHeight()) && (rightElem != null))
 				personCenter.move(blockSize, 0);
 			else
 				changeMap(currentMap, currentMap + 1);
