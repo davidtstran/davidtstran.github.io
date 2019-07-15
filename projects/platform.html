@@ -97,6 +97,8 @@ function start() {
 		}
 		if (personCenter.getY() >= getHeight()){
 			numLives--;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
 		}
 	}
 	function changeMap(curr, newM) {
