@@ -170,6 +170,11 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
+				if (i == 9){
+					for (var j = 0; j < 10; j++){
+						platformBlock(i * blockSize, getHeight() - blockSize*(j+2));	
+					}
+				}
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
 		}
