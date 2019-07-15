@@ -109,7 +109,23 @@ function start() {
 		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 		mapN.setColor(Color.black);
 		add(mapN);
-		if (number == 0 || number == 1 || number == 2) {
+		if (number == 0) {
+			newY = getHeight() - blockSize - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
+			for (var i = 0; i < numBlocks; i++) {
+				if (i == 5 || i == 6 || i == 7) {
+					platformBlock(i * blockSize, getHeight() - blockSize * 3);
+				}
+				else if (i == 8 || i == 9 || i == 10) {
+					platformBlock(i * blockSize, getHeight() - blockSize * 5);
+				}
+				else {
+					platformBlock(i * blockSize, getHeight() - blockSize);	
+				}
+			}
+		}
+		else if (number == 1 || number == 2) {
 			newY = getHeight() - blockSize - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
@@ -131,14 +147,14 @@ function start() {
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
 				if (i == numBlocks - 2) {
-					platformBlock((i-3) * blockSize, getHeight() - blockSize*2);
+					platformBlock((i-3) * blockSize, getHeight() - blockSize * 2);
 					platformBlock((i-2) * blockSize, getHeight() - blockSize);
 					platformBlock((i-1) * blockSize, getHeight() - blockSize);
 					platformBlock(i * blockSize, getHeight() - blockSize);
 					platformBlock((i+1) * blockSize, getHeight() - blockSize);
 				}	
 				else {
-					platformBlock(i * blockSize, getHeight() - blockSize*3);
+					platformBlock(i * blockSize, getHeight() - blockSize * 3);
 				}
 			}
 		}
