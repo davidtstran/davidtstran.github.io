@@ -130,7 +130,7 @@ function start() {
 			if (newX == blockSize/2)
 				newY = getHeight() - blockSize - blockSize/2;
 			else if (newX == getWidth() - blockSize/2)
-				newY = getHeight() - blockSize - blockSize/2;
+				newY = getHeight() - blockSize * 15 - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
@@ -174,7 +174,7 @@ function start() {
 		}
 		else if (number == 4) {
 			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
-				newY = getHeight() - blockSize*3 - blockSize/2;
+				newY = getHeight() - blockSize * 3 - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
