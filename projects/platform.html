@@ -10,7 +10,7 @@
 	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> <br>
-	<h2>WASD\/Arrows<br> </h2>
+	<h2>UP/JUMP/LEFT<br> </h2>
 	
 	<p align = "center">
 		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
@@ -25,7 +25,7 @@ function start() {
 	var maps = [], currentMap = 0, totalMaps = 5, mapN;
 	var blockSize = 25, blockColor = new Color(204, 102, 0), blockBorder = new Color (102, 51, 0);
 	var numBlocks = getWidth() / blockSize;
-	var person, personCenter, newX, newY;
+	var person, personCenter, newX, newY, numLives;
 	
 	personObject();
 	map(currentMap);
@@ -86,6 +86,9 @@ function start() {
 		var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
 		if (below == null) {
 			personCenter.move(0, blockSize);
+		}
+		if (personCenter.getY() >= getHeight()){
+			numLives--;
 		}
 	}
 	function changeMap(curr, newM) {
