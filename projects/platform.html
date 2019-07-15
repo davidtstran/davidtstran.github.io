@@ -133,10 +133,10 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i == 2 || i == 8 || i == 13 || i == 14 || i == 15) {
+				if (i == 2 || i == 13 || i == 14 || i == 15) {
 					platformBlock(i * blockSize, getHeight() - blockSize * 3);
 				}
-				else if (i == 3 || i == 7 || i == 11 || i == 12) {
+				else if (i == 3 || i == 11 || i == 12) {
 					platformBlock(i * blockSize, getHeight() - blockSize * 5);
 				}
 				else if (i == 4 || i == 5 || i == 6 || i == 9 || i == 10) {
