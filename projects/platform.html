@@ -128,7 +128,15 @@ function start() {
 				}
 			}
 		}
-		else if (number == 1 || number == 2) {
+		else if (number == 1) {
+			newY = getHeight() - blockSize - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
+			for (var i = 0; i < numBlocks; i++) {
+				platformBlock(i * blockSize, getHeight() - blockSize);	
+			}
+		}
+		else if (number == 2) {
 			newY = getHeight() - blockSize - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
