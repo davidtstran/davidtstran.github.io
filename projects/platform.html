@@ -30,7 +30,7 @@ function start() {
 	personObject();
 	map(currentMap);
 	keyDownMethod(movement);
-	setTimer(checkBelow, 1);
+	setTimer(checkBelow, 100);
 	
 	function platformBlock(xLoc, yLoc) {
 		var block = new Rectangle (blockSize, blockSize);
