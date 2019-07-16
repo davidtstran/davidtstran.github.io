@@ -211,7 +211,10 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i == numBlocks - 2) {
+				if (i == 3 || i == 4 || i == 5) {
+					platformBlock(i * blockSize, getHeight() - blockSize * 5);	
+				}
+				else if (i == numBlocks - 2) {
 					platformBlock((i-3) * blockSize, getHeight() - blockSize * 2);
 					platformBlock((i-2) * blockSize, getHeight() - blockSize);
 					platformBlock((i-1) * blockSize, getHeight() - blockSize);
