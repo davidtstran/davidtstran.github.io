@@ -25,7 +25,7 @@ function start() {
 	var maps = [], currentMap = 0, totalMaps = 5, mapN;
 	var blockSize = 25, blockColor = new Color(204, 102, 0), blockBorder = new Color (102, 51, 0);
 	var numBlocks = getWidth() / blockSize;
-	var person, personCenter, newX, newY, numFalls, canJump = true;
+	var person, personCenter, newX, newY, numFalls = 0, fallsN, canJump = true;
 	
 	personObject();
 	map(currentMap);
@@ -41,6 +41,10 @@ function start() {
 	}
 	
 	function personObject() {
+		fallsN = new Text(numFalls);
+		fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
+		fallsN.setColor(Color.black);
+		add(fallsN);
 		var startX = 0, startY = getHeight() - blockSize*2;
 		var scale = 1;
 		//person = new Polygon();
@@ -96,7 +100,12 @@ function start() {
 			canJump = true;	
 		}
 		if (personCenter.getY() >= getHeight()){
+			remove(fallsN);
 			numFalls++;
+			fallsN = new Text(numFalls);
+			fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
+			fallsN.setColor(Color.black);
+			add(fallsN);
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 		}
@@ -119,7 +128,8 @@ function start() {
 	}
 	function map(number) {
 		mapN = new Text(number + 1);
-		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
+		//mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
+		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getWidth());
 		mapN.setColor(Color.black);
 		add(mapN);
 		if (number == 0) {
