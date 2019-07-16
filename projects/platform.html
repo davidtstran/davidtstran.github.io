@@ -63,7 +63,7 @@ function start() {
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 			// JUMP
-			if (canJump) {
+			if ((canJump) && (personCenter.getY() - blockSize > 0)) {
 				var aboveElem = getElementAt(personCenter.getX(), personCenter.getY() - blockSize);
 				if (aboveElem == null)
 					personCenter.move(0, -blockSize * 2); 
@@ -195,6 +195,25 @@ function start() {
 		}
 		else if (number == 3) {
 			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
+				newY = getHeight() - blockSize * 19 - blockSize/2;
+			personCenter.setPosition(newX, newY);
+			add(personCenter);
+			for (var i = 0; i < numBlocks; i++) {
+				if (i == 3 || i == 4 || i == 5 || i == 6)
+					platformBlock(i * blockSize, getHeight() - blockSize * 4);	
+				else if (i == numBlocks - 2) {
+					platformBlock((i-3) * blockSize, getHeight() - blockSize * 2);
+					platformBlock((i-2) * blockSize, getHeight() - blockSize);
+					platformBlock((i-1) * blockSize, getHeight() - blockSize);
+					platformBlock(i * blockSize, getHeight() - blockSize);
+					platformBlock((i+1) * blockSize, getHeight() - blockSize);
+				}	
+				else
+					platformBlock(i * blockSize, getHeight() - blockSize * 19);
+			}
+		}
+		else if (number == 4) {
+			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
 				newY = getHeight() - blockSize - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
@@ -215,25 +234,6 @@ function start() {
 				}
 				platformBlock(i * blockSize, getHeight() - blockSize);	
 			}	
-		}
-		else if (number == 4) {
-			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
-				newY = getHeight() - blockSize * 19 - blockSize/2;
-			personCenter.setPosition(newX, newY);
-			add(personCenter);
-			for (var i = 0; i < numBlocks; i++) {
-				if (i == 3 || i == 4 || i == 5 || i == 6)
-					platformBlock(i * blockSize, getHeight() - blockSize * 4);	
-				else if (i == numBlocks - 2) {
-					platformBlock((i-3) * blockSize, getHeight() - blockSize * 2);
-					platformBlock((i-2) * blockSize, getHeight() - blockSize);
-					platformBlock((i-1) * blockSize, getHeight() - blockSize);
-					platformBlock(i * blockSize, getHeight() - blockSize);
-					platformBlock((i+1) * blockSize, getHeight() - blockSize);
-				}	
-				else
-					platformBlock(i * blockSize, getHeight() - blockSize * 19);
-			}
 		}
 	}
 }	
