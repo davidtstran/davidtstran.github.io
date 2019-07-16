@@ -189,7 +189,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i == 8) {
+				if (i == 8 || i == 10) {
 					platformBlock(i * blockSize, getHeight() - blockSize * 3);
 					platformBlock(i * blockSize, getHeight() - blockSize * 5);
 					platformBlock(i * blockSize, getHeight() - blockSize * 7);
