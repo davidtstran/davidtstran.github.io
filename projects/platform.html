@@ -41,10 +41,7 @@ function start() {
 	}
 	
 	function personObject() {
-		fallsN = new Text(numFalls);
-		fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
-		fallsN.setColor(Color.black);
-		add(fallsN);
+		fallTrack();
 		var startX = 0, startY = getHeight() - blockSize*2;
 		var scale = 1;
 		//person = new Polygon();
@@ -55,6 +52,12 @@ function start() {
 		personCenter.setPosition(blockSize/2, getHeight() - blockSize - blockSize/2);
 		add(personCenter);
 		newX = blockSize/2; // starting X
+	}
+	function fallTrack() {
+		fallsN = new Text(numFalls);
+		fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
+		fallsN.setColor(Color.black);
+		add(fallsN);
 	}
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
@@ -102,10 +105,7 @@ function start() {
 		if (personCenter.getY() >= getHeight()){
 			remove(fallsN);
 			numFalls++;
-			fallsN = new Text(numFalls);
-			fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
-			fallsN.setColor(Color.black);
-			add(fallsN);
+			fallTrack();
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 		}
@@ -131,10 +131,7 @@ function start() {
 		mapN.setPosition(getWidth() - mapN.getWidth(), 0 + mapN.getHeight());
 		mapN.setColor(Color.black);
 		add(mapN);
-		fallsN = new Text(numFalls);
-		fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
-		fallsN.setColor(Color.black);
-		add(fallsN);
+		fallTrack();
 		if (number == 0) {
 			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
 				newY = getHeight() - blockSize - blockSize/2;
