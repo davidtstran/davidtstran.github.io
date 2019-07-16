@@ -218,14 +218,12 @@ function start() {
 		}
 		else if (number == 4) {
 			if (newX == blockSize/2 || newX == getWidth() - blockSize/2)
-				newY = getHeight() - blockSize * 3 - blockSize/2;
+				newY = getHeight() - blockSize * 19 - blockSize/2;
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				if (i == 3 || i == 4 || i == 5 || i == 6) {
-					platformBlock(i * blockSize, getHeight() - blockSize * 4);
-					platformBlock(i * blockSize, getHeight() - blockSize * 5);	
-				}
+				if (i == 3 || i == 4 || i == 5 || i == 6)
+					platformBlock(i * blockSize, getHeight() - blockSize * 4);	
 				else if (i == numBlocks - 2) {
 					platformBlock((i-3) * blockSize, getHeight() - blockSize * 2);
 					platformBlock((i-2) * blockSize, getHeight() - blockSize);
@@ -234,7 +232,7 @@ function start() {
 					platformBlock((i+1) * blockSize, getHeight() - blockSize);
 				}	
 				else
-					platformBlock(i * blockSize, getHeight() - blockSize * 3);
+					platformBlock(i * blockSize, getHeight() - blockSize * 19);
 			}
 		}
 	}
