@@ -140,8 +140,13 @@ function start() {
 			for (var i = 0; i < numBlocks; i++) {
 				if (i == 5 || i == 6 || i == 7)
 					platformBlock(i * blockSize, getHeight() - blockSize * 3);
-				else if (i == 8 || i == 9 || i == 10) 
+				else if (i == 8 || i == 9) 
 					platformBlock(i * blockSize, getHeight() - blockSize * 5);
+				else if (i == 10) {
+					for (var j = 0; j < 6; j++) {
+						platformBlock(i * blockSize, getHeight() - blockSize * j);	
+					}
+				}
 				else
 					platformBlock(i * blockSize, getHeight() - blockSize);	
 			}
@@ -213,6 +218,7 @@ function start() {
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
 				if (i == 3 || i == 4 || i == 5 || i == 6) {
+					platformBlock(i * blockSize, getHeight() - blockSize * 4);
 					platformBlock(i * blockSize, getHeight() - blockSize * 5);	
 				}
 				else if (i == numBlocks - 2) {
