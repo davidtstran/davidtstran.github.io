@@ -147,6 +147,10 @@ function start() {
 						platformBlock(i * blockSize, getHeight() - blockSize * j);	
 					}
 				}
+				else if (i == 11) {
+					platformBlock(i * blockSize, getHeight() - blockSize * 3);
+					platformBlock(i * blockSize, getHeight() - blockSize);
+				}
 				else
 					platformBlock(i * blockSize, getHeight() - blockSize);	
 			}
