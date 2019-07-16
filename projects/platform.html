@@ -56,7 +56,7 @@ function start() {
 	function fallTrack() {
 		remove(fallsN);
 		fallsN = new Text("Deaths: " + numFalls);
-		fallsN.setPosition(0, 0 + fallsN.getHeight());
+		fallsN.setPosition(mapN.getWidth(), 0 + fallsN.getHeight());
 		fallsN.setColor(Color.black);
 		add(fallsN);
 	}
