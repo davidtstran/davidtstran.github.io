@@ -54,6 +54,7 @@ function start() {
 		newX = blockSize/2; // starting X
 	}
 	function fallTrack() {
+		remove(fallsN);
 		fallsN = new Text(numFalls);
 		fallsN.setPosition(0 + fallsN.getWidth(), 0 + fallsN.getHeight());
 		fallsN.setColor(Color.black);
