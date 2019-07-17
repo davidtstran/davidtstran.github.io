@@ -172,7 +172,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize);
+				if (i != 7) platformBlock(i * blockSize, getHeight() - blockSize);
 			}
 		}
 		else if (number == 2) {
@@ -181,7 +181,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize);
+				if (i != 11) platformBlock(i * blockSize, getHeight() - blockSize);
 			}
 		}
 		else if (number == 3) {
@@ -190,7 +190,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize);
+				if (i != 3) platformBlock(i * blockSize, getHeight() - blockSize);
 			}
 		}
 		else if (number == 4) {
@@ -225,7 +225,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize);
+				if (i != 18) platformBlock(i * blockSize, getHeight() - blockSize);
 			}
 		}
 		else if (number == 6) {
@@ -234,7 +234,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize);
+				if (i != 5) platformBlock(i * blockSize, getHeight() - blockSize);
 			}
 		}
 		else if (number == 7) {
@@ -243,7 +243,7 @@ function start() {
 			personCenter.setPosition(newX, newY);
 			add(personCenter);
 			for (var i = 0; i < numBlocks; i++) {
-				platformBlock(i * blockSize, getHeight() - blockSize * 5);
+				if (i != 3) platformBlock(i * blockSize, getHeight() - blockSize * 5);
 			}
 		}
 		else if (number == 8) {
