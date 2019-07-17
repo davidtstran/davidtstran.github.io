@@ -103,7 +103,15 @@ function start() {
 	}
 	function checkBelow() {
 		var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
-		if (below == null) {
+		if (below == winCoin) {
+			// win case
+			remove(winCoin);
+			var win = new Text ("Win");
+			win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
+			win.setColor(Color.black);
+			add(win);
+		}
+		else if (below == null) {
 			personCenter.move(0, blockSize);
 			canJump = false;
 		}
