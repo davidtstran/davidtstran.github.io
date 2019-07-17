@@ -31,7 +31,7 @@ function start() {
 	personObject();
 	map(currentMap);
 	keyDownMethod(movement);
-	setTimer(checkBelow, 250); // change to fix falling
+	setTimer(checkBelow, 225); // change to fix falling
 	
 	function platformBlock(xLoc, yLoc) {
 		var block = new Rectangle (blockSize, blockSize);
@@ -88,11 +88,7 @@ function start() {
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 			// probably unneeded (falls because gravity)
-			if (personCenter.getY() + blockSize < getHeight()) {
-				var belowElem = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
-				if (belowElem == null)
-					personCenter.move(0, blockSize); 
-			}
+			personCenter.move(0, 0); 
 			// probably unneeded (falls because gravity)
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
@@ -107,17 +103,17 @@ function start() {
 	}
 	function checkBelow() {
 		var below = getElementAt(personCenter.getX(), personCenter.getY() + blockSize);
-		if (below == winCoin) {
+		if (below == null) {
+			personCenter.move(0, blockSize);
+			canJump = false;
+		}
+		else if (below == winCoin) {
 			// win case
 			remove(winCoin);
 			var win = new Text ("Win");
 			win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
 			win.setColor(Color.black);
 			add(win);
-		}
-		else if (below == null) {
-			personCenter.move(0, blockSize);
-			canJump = false;
 		}
 		else {
 			canJump = true;	
