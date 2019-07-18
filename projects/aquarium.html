@@ -23,10 +23,12 @@ window.onload = function() {
 	var fishMoveSpace = 50, fishMoveDelay = 750;
 	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 2;
+	var foodSize = 2;
 	
 	function start() {
 		tank(); // border / layout [initial]
 		setTimer(fishMove, fishMoveDelay);
+		mouseClickMethod(dropFood);
 	}
 	
 	class Fish {
@@ -82,6 +84,13 @@ window.onload = function() {
 					fishes[i].fishObject.move(fishMoveSpace, 0);
 			}
 		}
+	}
+	
+	function dropFood(e) {
+		var food = new Rectangle (foodSize/2, foodSize);
+		food.setPosition (e.getX(), e.getY());
+		food.setColor(Color.yellow);
+		add(food);
 	}
 	
 	if (typeof start === 'function') {
