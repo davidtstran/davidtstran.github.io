@@ -36,6 +36,10 @@ function start() {
 	setTimer(fall, 50); // change to fix falling
 	
 	function createWorld() {
+		var platform = new Rectangle(getWidth(), moveSpace);
+		platform.setPosition(0, getHeight());
+		platform.setColor(Color.black);
+		add(platform);
 		lf = new Circle(fighterSize);
 		lf.setPosition(moveSpace + fighterSize, getHeight() - fighterSize);
 		lf.setColor(lColor);
