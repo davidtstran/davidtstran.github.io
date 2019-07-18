@@ -87,12 +87,14 @@ window.onload = function() {
 	}
 	
 	function dropFood(e) {
-		if (e.getY() < dropSpace) {
-			var food = new Rectangle (foodSize, foodSize/2);
-			food.setPosition (e.getX(), e.getY());
-			food.setColor(Color.yellow);
-			add(food);
-			setTimer(foodFall, foodFallDelay, food);
+		if ((e.getX() > wallWidth) && (e.getX() < getWidth() - wallWidth)) {
+			if (e.getY() < dropSpace) {
+				var food = new Rectangle (foodSize, foodSize/2);
+				food.setPosition (e.getX(), e.getY());
+				food.setColor(Color.yellow);
+				add(food);
+				setTimer(foodFall, foodFallDelay, food);
+			}
 		}
 	}
 	function foodFall(foodObj) {
