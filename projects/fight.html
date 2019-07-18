@@ -21,6 +21,7 @@ function start() {
 	removeAll(); // clear canvas
 	
 	var lf, rf; // left & right fighters
+	var lJump = true, rJump = true; // can jump
 	var lColor = Color.red, rColor = Color.blue;
 	var lHealth = [], lLife = 10; // 10 = MAX (LIFE / 10 = #LIVES)
 	var rHealth = [], rLife = 10; // 10 = MAX (LIFE / 10 = #LIVES)
@@ -32,6 +33,7 @@ function start() {
 	
 	createWorld();
 	keyDownMethod(move);
+	setTimer(fall, 50); // change to fix falling
 	
 	function createWorld() {
 		lf = new Circle(fighterSize);
@@ -67,11 +69,8 @@ function start() {
 				lf.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.letter('W')) { // LEFT JUMP
-			if (lf.getY() - moveSpace > moveSpace * 3) {
+			if ((lJump) && (lf.getY() - moveSpace > moveSpace * 3)) {
 				lf.move(0, -moveSpace); 
-				setTimeout(function() {
-					lf.move(0, moveSpace);
-				}, 250);
 			}
 		}
 		if (e.keyCode == Keyboard.letter('D')) { // LEFT move RIGHT
@@ -95,11 +94,8 @@ function start() {
 				rf.move(-moveSpace, 0); 
 		}
 		if (e.keyCode == Keyboard.UP) { // RIGHT JUMP
-			if (rf.getY() - moveSpace > moveSpace * 3) { 
+			if ((rJump) && (rf.getY() - moveSpace > moveSpace * 3)) { 
 				rf.move(0, -moveSpace); 
-				setTimeout(function() {
-					rf.move(0, moveSpace);
-				}, 250);
 			}
 		}
 		if (e.keyCode == Keyboard.RIGHT) { // RIGHT move RIGHT
@@ -155,6 +151,24 @@ function start() {
 			stopTimer(shootfromR);
 		}
 		rShot.move(-moveSpace/10, 0);
+	}
+	
+	function fall() {
+		var belowL = getElementAt(lf.getX(), lf.getY() + moveSpace);
+		var belowR = getElementAt(rf.getX(), rf.getY() + moveSpace);
+		if (belowL == null) {
+			lf.move(0, moveSpace);
+			rJump = false;
+		}
+		else 
+			lJump = true;
+		if (belowR == null) {
+			rf.move(0, moveSpace);
+			rJump = false;
+		}
+		else
+			rJump = true;
+			
 	}
 }
 </script>
