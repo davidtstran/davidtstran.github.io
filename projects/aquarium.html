@@ -19,7 +19,7 @@
 window.onload = function() {
 	removeAll(); // clear canvas
 	
-	var dropSpace = 50, wallWidth = 5;
+	var aboveTank, dropSpace = 50, wallWidth = 5;
 	var fishMoveSpace = 50, fishMoveDelay = 750;
 	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 2;
@@ -46,7 +46,7 @@ window.onload = function() {
 	}
 	
 	function tank() {
-		var aboveTank = new Rectangle (getWidth(), dropSpace);
+		aboveTank = new Rectangle (getWidth(), dropSpace);
 		aboveTank.setPosition(0, 0); aboveTank.setColor(Color.black);
 		add(aboveTank);
 		var lWall, rWall, bWall;
@@ -104,7 +104,7 @@ window.onload = function() {
 	}
 	function foodFall(foodObj) {
 		var foodElem = getElementAt(foodObj.getX(), foodObj.getY());
-		if (foodElem != null) {
+		if ((foodElem != null) && (foodElem != aboveTank)) {
 			remove(foodObj);
 			for (var i = 0; i < fishes.length; i++) {
 				if (fishes[i].fishObject == foodElem) {
