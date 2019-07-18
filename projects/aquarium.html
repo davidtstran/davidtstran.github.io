@@ -12,22 +12,33 @@
 	<h2>Click to Drop Food<br></h2>
 	
 	<p align = "center">
-		<canvas width="400" height="400" class="codehs-editor-canvas" style="background-color:dodgerblue"></canvas>
+		<canvas width="400" height="400" class="codehs-editor-canvas" style="background-color:#39C2F1"></canvas>
 	</p>
 	
 <script>
-
 window.onload = function() {
 	removeAll(); // clear canvas
 	
 	var dropSpace = 50, wallWidth = 5;
-	var fishMoveDelay = 300;
+	var fishMoveSpace = 50, fishMoveDelay = 750;
 	var fishRadius = 10;
-	var fishStorage = [], fishCount = 0; startingFish = 2;
+	var fishes = [], fishCount = 0, startingFish = 2;
 	
 	function start() {
 		tank(); // border / layout [initial]
-		//setTimer(fishMove, fishMoveDelay);
+		setTimer(fishMove, fishMoveDelay);
+	}
+	
+	class Fish {
+		constructor(xLoc, yLoc, gender, direc, rad) {
+			this.fishObject = new Circle(fishRadius);
+			this.fishObject.setPosition(xLoc, yLoc);
+			this.fishObject.setColor(Randomizer.nextColor());
+			add(this.fishObject);
+			this.fishGender = gender;
+			this.moveDir = direc; 
+			this.radius = rad;
+		}
 	}
 	
 	function tank() {
@@ -44,18 +55,32 @@ window.onload = function() {
 			var randX = Randomizer.nextInt(wallWidth + fishRadius, getWidth() - wallWidth - fishRadius);
 			var randY = Randomizer.nextInt(dropSpace + fishRadius, getHeight() - wallWidth - fishRadius);
 			var randG = Randomizer.nextBoolean(), gend;
+			var randD = Randomizer.nextBoolean(), direc;
 			if (randG) gend = "MALE"; else gend = "FEMALE";
-			fishStorage[fishCount] = new Fish(randX, randY, gend); 
+			if (randD) direc = "LEFT"; else direc = "RIGHT";
+			fishes[fishCount] = new Fish(randX, randY, gend, direc, fishRadius); 
+			fishCount++;
 		}
 	}
 	
-	class Fish {
-		constructor(xLoc, yLoc, gender) {
-			this.fishObject = new Circle(fishRadius);
-			this.fishObject.setPosition(xLoc, yLoc);;
-			this.fishObject.setColor(Randomizer.nextColor());
-			add(this.fishObject);
-			this.fishGender = gender;
+	function fishMove() {
+		for (var i = 0; i < fishes.length; i++) {
+			if (fishes[i].moveDir == "LEFT") {
+				if (fishes[i].fishObject.getX() - fishMoveSpace < wallWidth + fishes[i].radius) {
+					fishes[i].fishObject.setPosition(wallWidth + fishes[i].radius, fishes[i].fishObject.getY());
+					fishes[i].moveDir = "RIGHT";
+				}
+				else
+					fishes[i].fishObject.move(-fishMoveSpace, 0);
+			}
+			else if (fishes[i].moveDir == "RIGHT") {
+				if (fishes[i].fishObject.getX() + fishMoveSpace > getWidth() - wallWidth - fishes[i].radius) {
+					fishes[i].fishObject.setPosition(getWidth() - wallWidth - fishes[i].radius, fishes[i].fishObject.getY());
+					fishes[i].moveDir = "LEFT";
+				}
+				else
+					fishes[i].fishObject.move(fishMoveSpace, 0);
+			}
 		}
 	}
 	
