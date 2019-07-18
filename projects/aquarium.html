@@ -44,6 +44,9 @@ window.onload = function() {
 	}
 	
 	function tank() {
+		var aboveTank = new Rectangle (getWidth(), dropSpace);
+		aboveTank.setPosition(0, 0); aboveTank.setColor(Color.gray);
+		add(aboveTank);
 		var lWall, rWall, bWall;
 		lWall = new Rectangle (wallWidth, getHeight() - dropSpace); rWall = new Rectangle (wallWidth, getHeight() - dropSpace);
 		lWall.setPosition(0, dropSpace); rWall.setPosition(getWidth() - wallWidth, dropSpace);
