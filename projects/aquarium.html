@@ -87,13 +87,15 @@ window.onload = function() {
 	}
 	
 	function dropFood(e) {
-		var food = new Rectangle (foodSize, foodSize/2);
-		food.setPosition (e.getX(), e.getY());
-		food.setColor(Color.yellow);
-		add(food);
-		setTimeout(function() {
-			food.move(0, foodMoveSpace);
-		}, foodFallDelay);
+		if (e.getY() < dropSpace) {
+			var food = new Rectangle (foodSize, foodSize/2);
+			food.setPosition (e.getX(), e.getY());
+			food.setColor(Color.yellow);
+			add(food);
+			setTimeout(function() {
+				food.move(0, foodMoveSpace);
+			}, foodFallDelay);
+		}
 	}
 	
 	if (typeof start === 'function') {
