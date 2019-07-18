@@ -96,7 +96,10 @@ window.onload = function() {
 		}
 	}
 	function foodFall(foodObj) {
-		foodObj.move(0, foodMoveSpace);
+		if (foodObj.get() > getHeight() - wallWidth)
+			remove(foodObj);
+		else 
+			foodObj.move(0, foodMoveSpace);
 	}
 	
 	if (typeof start === 'function') {
