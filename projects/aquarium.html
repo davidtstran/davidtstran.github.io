@@ -35,10 +35,26 @@ window.onload = function() {
 	
 	class Fish {
 		constructor(xLoc, yLoc, gender, direc, rad) {
+			var randColor = Randomizer.nextColor();
+			var scale = 3;
+			this.fishBody = new Polygon();
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 0 * scale, yLoc - fishRadius + 3 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius + 0 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius + 3 * scale); 
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 6 * scale, yLoc - fishRadius + 4 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 8 * scale, yLoc - fishRadius + 2 * scale); 
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 8 * scale, yLoc - fishRadius + 9 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 6 * scale, yLoc - fishRadius + 6 * scale); 
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius + 7 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 2 * scale, yLoc - fishRadius + 9 * scale); 
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 1 * scale, yLoc - fishRadius + 7 * scale);
+			this.fishBody.addPoint(xLoc + fishRadius/2 + 0 * scale, yLoc - fishRadius + 7 * scale); 
+			this.fishBody.setColor(randColor);
 			this.fishObject = new Circle(fishRadius);
 			this.fishObject.setPosition(xLoc, yLoc);
-			this.fishObject.setColor(Randomizer.nextColor());
+			this.fishObject.setColor(randColor);
 			add(this.fishObject);
+			add(this.fishBody);
 			this.fishGender = gender;
 			this.moveDir = direc; 
 			this.radius = rad;
@@ -77,16 +93,20 @@ window.onload = function() {
 					fishes[i].fishObject.setPosition(wallWidth + fishes[i].radius, fishes[i].fishObject.getY());
 					fishes[i].moveDir = "RIGHT";
 				}
-				else
+				else {
 					fishes[i].fishObject.move(-fishMoveSpace, 0);
+					fishes[i].fishBody.move(-fishMoveSpace, 0);
+				}
 			}
 			else if (fishes[i].moveDir == "RIGHT") {
 				if (fishes[i].fishObject.getX() + fishMoveSpace > getWidth() - wallWidth - fishes[i].radius) {
 					fishes[i].fishObject.setPosition(getWidth() - wallWidth - fishes[i].radius, fishes[i].fishObject.getY());
 					fishes[i].moveDir = "LEFT";
 				}
-				else
+				else {
 					fishes[i].fishObject.move(fishMoveSpace, 0);
+					fishes[i].fishBody.move(fishMoveSpace, 0);
+				}
 			}
 		}
 	}
