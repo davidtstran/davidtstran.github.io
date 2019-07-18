@@ -92,9 +92,11 @@ window.onload = function() {
 			food.setPosition (e.getX(), e.getY());
 			food.setColor(Color.yellow);
 			add(food);
-			setTimeout(function() {
-				food.move(0, foodMoveSpace);
-			}, foodFallDelay);
+			while (food.getY() < getHeight() - wallWidth) {
+				setTimeout(function() {
+					food.move(0, foodMoveSpace);
+				}, foodFallDelay);
+			}
 		}
 	}
 	
