@@ -12,17 +12,19 @@
 	<h2>Click to Drop Food<br></h2>
 	
 	<p align = "center">
-		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
 		<canvas width="400" height="400" class="codehs-editor-canvas" style="background-color:dodgerblue"></canvas>
 	</p>
 	
 <script>
-function start() {
+
+window.onload = function() {
 	removeAll(); // clear canvas
 	
 	var dropSpace = 50, wallWidth = 5;
 	
-	tank(); // border / layout
+	function start() {
+		tank(); // border / layout
+	}
 	
 	function tank() {
 		var lWall, rWall, bWall;
@@ -35,6 +37,10 @@ function start() {
 		bWall.setColor(Color.white);
 		add(bWall);
 	}
+	
+	if (typeof start === 'function') {
+        start();
+    }
 }
 </script>
 	
