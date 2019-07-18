@@ -21,7 +21,7 @@ window.onload = function() {
 	
 	var dropSpace = 50, wallWidth = 5;
 	var fishMoveSpace = 50, fishMoveDelay = 750;
-	var fishRadius = 10;
+	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 2;
 	
 	function start() {
@@ -85,8 +85,8 @@ window.onload = function() {
 	}
 	
 	if (typeof start === 'function') {
-        start();
-    }
+        	start();
+    	}
 }
 </script>
 	
