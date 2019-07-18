@@ -105,14 +105,8 @@ window.onload = function() {
 	function foodFall(foodObj) {
 		var foodElem = getElementAt(foodObj.getX(), foodObj.getY());
 		if (foodElem != null) {
-			for (var i = 0; i < fishes.length; i++) {
-				if (fishes[i].fishObject == foodElem) {
-					remove(foodObj);
-					fishes[i].radius = fishes[i].radius + foodGrowth;
-					fishes[i].fishObject.setRadius(fishes[i].radius + foodGrowth);
-					break;	
-				}
-			}
+			remove(foodObj);
+			foodElem.setRadius(foodElem.getRadius() + foodGrowth);
 		}
 		if (foodObj.getY() > getHeight() - wallWidth)
 			remove(foodObj);
