@@ -21,9 +21,13 @@ window.onload = function() {
 	removeAll(); // clear canvas
 	
 	var dropSpace = 50, wallWidth = 5;
+	var fishMoveDelay = 300;
+	var fishRadius = 10;
+	var fishStorage = [], fishCount = 0; startingFish = 2;
 	
 	function start() {
-		tank(); // border / layout
+		tank(); // border / layout [initial]
+		//setTimer(fishMove, fishMoveDelay);
 	}
 	
 	function tank() {
@@ -36,6 +40,23 @@ window.onload = function() {
 		bWall.setPosition(0, getHeight() - wallWidth);
 		bWall.setColor(Color.white);
 		add(bWall);
+		for (var i = 0; i < startingFish; i++) {
+			var randX = Randomizer.nextInt(wallWidth + fishRadius, getWidth() - wallWidth - fishRadius);
+			var randY = Randomizer.nextInt(dropSpace + fishRadius, getHeight() - wallWidth - fishRadius);
+			var randG = Randomizer.nextBoolean(), gend;
+			if (randG) gend = "MALE"; else gend = "FEMALE";
+			fishStorage[fishCount] = new Fish(randX, randY, gend); 
+		}
+	}
+	
+	class Fish {
+		constructor(xLoc, yLoc, gender) {
+			this.fishObject = new Circle(fishRadius);
+			this.fishObject.setPosition(xLoc, yLoc);;
+			this.fishObject.setColor(Randomizer.nextColor());
+			add(this.fishObject);
+			this.fishGender = gender;
+		}
 	}
 	
 	if (typeof start === 'function') {
