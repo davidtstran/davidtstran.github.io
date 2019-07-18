@@ -23,7 +23,9 @@ window.onload = function() {
 	var fishMoveSpace = 50, fishMoveDelay = 750;
 	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 2;
-	var foodSize = 10, foodMoveSpace = 20, foodFallDelay = 1000;
+	var foodSize = 10, foodGrowth = 5;
+	var foodMoveSpace = 20, foodFallDelay = 1000;
+	
 	
 	function start() {
 		tank(); // border / layout [initial]
@@ -101,6 +103,17 @@ window.onload = function() {
 		}
 	}
 	function foodFall(foodObj) {
+		var foodElem = getElementAt(foodObj.getX(), foodObj.getY());
+		if (foodElem != null) {
+			remove(foodObj);
+			for (var i = 0; i < fishes.length; i++) {
+				if (fishes[i].fishObject == foodElem) {
+					fishes[i].radius = fishes[i].radius + foodGrowth;
+					fishes[i].fishObject.setRadius(fishes[i].radius + foodGrowth);
+					break;	
+				}
+			}
+		}
 		if (foodObj.getY() > getHeight() - wallWidth)
 			remove(foodObj);
 		else 
