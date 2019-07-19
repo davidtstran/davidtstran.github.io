@@ -34,8 +34,7 @@ window.onload = function() {
 	}
 	
 	class Fish {
-		constructor(xLoc, yLoc, gender, direc, rad) {
-			var randColor = Randomizer.nextColor();
+		constructor(xLoc, yLoc, gender, direc, rad, colr) {
 			var scale = 3;
 			this.fishBody = new Polygon();
 			if (direc == "LEFT") {
@@ -62,12 +61,13 @@ window.onload = function() {
 				this.fishBody.addPoint(xLoc - fishRadius*3 + 2 * scale, yLoc - fishRadius*1.5 + 6 * scale);
 				this.fishBody.addPoint(xLoc - fishRadius*3 + 0 * scale, yLoc - fishRadius*1.5 + 9 * scale);
 			}
-			this.fishBody.setColor(randColor);
+			this.fishBody.setColor(colr);
 			this.fishObject = new Circle(fishRadius);
 			this.fishObject.setPosition(xLoc, yLoc);
-			this.fishObject.setColor(randColor);
+			this.fishObject.setColor(colr);
 			add(this.fishObject);
 			add(this.fishBody);
+			this.fishColor = colr;
 			this.fishGender = gender;
 			this.moveDir = direc; 
 			this.radius = rad;
@@ -92,9 +92,10 @@ window.onload = function() {
 			var randY = Randomizer.nextInt(dropSpace + fishRadius, getHeight() - wallWidth - fishRadius);
 			var randG = Randomizer.nextBoolean(), gend;
 			var randD = Randomizer.nextBoolean(), direc;
+			var randC = Randomizer.nextColor();
 			if (randG) gend = "MALE"; else gend = "FEMALE";
 			if (randD) direc = "LEFT"; else direc = "RIGHT";
-			fishes[fishCount] = new Fish(randX, randY, gend, direc, fishRadius); 
+			fishes[fishCount] = new Fish(randX, randY, gend, direc, fishRadius, randC); 
 			fishCount++;
 		}
 	}
@@ -103,9 +104,11 @@ window.onload = function() {
 		for (var i = 0; i < fishes.length; i++) {
 			if (fishes[i].moveDir == "LEFT") {
 				if (fishes[i].fishObject.getX() - fishMoveSpace < wallWidth + fishes[i].radius) {
-					var prevG = fishes[i].fishGender, prevR = fishes[i].radius;
-					fishes[i].moveDir = "RIGHT";
-					fishes[i].fishObject.setPosition(wallWidth + fishes[i].radius, fishes[i].fishObject.getY());
+					var newX = wallWidth + fishes[i].radius, newY = fishes[i].fishObject.getY();
+					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					remove(fishes[i].fishBody);
+					remove(fishes[i].fishObject);
+					fishes[i] = new Fish(newX, newY, prevG, "RIGHT", prevR, prevC);
 				}
 				else {
 					fishes[i].fishObject.move(-fishMoveSpace, 0);
@@ -114,8 +117,11 @@ window.onload = function() {
 			}
 			else if (fishes[i].moveDir == "RIGHT") {
 				if (fishes[i].fishObject.getX() + fishMoveSpace > getWidth() - wallWidth - fishes[i].radius) {
-					fishes[i].moveDir = "LEFT";
-					fishes[i].fishObject.setPosition(getWidth() - wallWidth - fishes[i].radius, fishes[i].fishObject.getY());
+					var newX = getWidth() - wallWidth - fishes[i].radius, newY = fishes[i].fishObject.getY();
+					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					remove(fishes[i].fishBody);
+					remove(fishes[i].fishObject);
+					fishes[i] = new Fish(newX, newY, prevG, "LEFT", prevR, prevC);
 				}
 				else {
 					fishes[i].fishObject.move(fishMoveSpace, 0);
@@ -142,8 +148,8 @@ window.onload = function() {
 			for (var i = 0; i < fishes.length; i++) {
 				if (fishes[i].fishObject == foodElem) {
 					remove(foodObj);
-					fishes[i].radius = fishes[i].radius + foodGrowth;
-					fishes[i].fishObject.setRadius(fishes[i].radius + foodGrowth);
+					//fishes[i].radius = fishes[i].radius + foodGrowth;
+					//fishes[i].fishObject.setRadius(fishes[i].radius + foodGrowth);
 					break;	
 				}
 			}
