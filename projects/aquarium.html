@@ -23,7 +23,7 @@ window.onload = function() {
 	var fishMoveSpace = 1, fishMoveDelay = 15;
 	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 10;
-	var foodSize = 10, foodGrowth = 500;
+	var foodSize = 10, foodGrowth = 10;
 	var foodMoveSpace = 1, foodFallDelay = 50;
 	
 	
@@ -144,12 +144,11 @@ window.onload = function() {
 	}
 	function foodFall(foodObj) {
 		var foodElem = getElementAt(foodObj.getX(), foodObj.getY());
-		if (foodElem != null) {
+		if (foodElem.getColor() != "#39C2F1") {
 			for (var i = 0; i < fishes.length; i++) {
 				if (fishes[i].fishObject == foodElem) {
 					remove(foodObj);
-					//fishes[i].radius = fishes[i].radius + foodGrowth;
-					//fishes[i].fishObject.setRadius(fishes[i].radius + foodGrowth);
+					// fish growing here
 					break;	
 				}
 			}
