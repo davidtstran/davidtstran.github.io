@@ -23,7 +23,7 @@ window.onload = function() {
 	var fishMoveSpace = 1, fishMoveDelay = 15;
 	var fishRadius = 10; // default / starting
 	var fishes = [], fishCount = 0, startingFish = 50;
-	var foodSize = 10, foodGrowth = 10;
+	var foodSize = 10, foodGrowth = 50;
 	var foodMoveSpace = 1, foodFallDelay = 50;
 	
 	
@@ -149,6 +149,8 @@ window.onload = function() {
 				if (fishes[i].fishObject == foodElem) {
 					remove(foodObj);
 					// add fish growing here
+					fishes[i].radius += foodGrowth;
+					fishes[i].fishObject.setRadius(fishes[i].radius);
 					break;	
 				}
 			}
