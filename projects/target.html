@@ -1,89 +1,187 @@
-
 <html>
 <head>
 	<link rel="stylesheet" href="/style.css">
-	<title>CodeHS Target</title>
-
+	<title>Aquarium</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
 	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
 </head>
-
 <body>
-
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
-		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> 
-	<h2>Move Mouse to Move Crosshair<br>Click to Add Hit Marker</h2>
-	<h2 id = "shots"></h2>
-	<h2 id = "pos"></h2>
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
+	<h2>Click to Drop Food<br></h2>
 	
 	<p align = "center">
-		<canvas id = "cv" width="400" height="500" class="codehs-editor-canvas"></canvas>
+		<canvas width="400" height="400" class="codehs-editor-canvas" style="background-color:#39C2F1"></canvas>
 	</p>
-
+	
 <script>
 window.onload = function() {
-
-    // This program draws a target that follows the mouse
-	var RADIUS = 10;
+	removeAll(); // clear canvas
 	
-	var shot = 0;
+	var aboveTank, dropSpace = 50, wallWidth = 5;
+	var fishMoveSpace = 1, fishMoveDelay = 15;
+	var fishRadius = 10; // default / starting
+	var fishes = [], fishCount = 0, startingFish = 10;
+	var foodHold;
+	var foodSize = 10, foodGrowth = 10;
+	var foodMoveSpace = 1, foodFallDelay = 50;
 	
-	var horizLine;
-	var verticLine;
-
-	function start(){
-		document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
-		document.getElementById("pos").innerHTML = "Position:";
-		horizLine = new Line (0, getHeight()/2, getWidth(), getHeight()/2);
-		horizLine.setColor(Color.black);
-		add(horizLine);
-    
-		verticLine = new Line (getWidth()/2, 0, getWidth()/2, getHeight());
-		verticLine.setColor(Color.black);
-		add(verticLine);
-    
-		mouseMoveMethod(moveLines);
-		mouseClickMethod(addHitMarkers);
-	}
-
-	function moveLines(e){
-		horizLine.setPosition(0, e.getY());
-		horizLine.setEndpoint(getWidth(), e.getY());
-    
-		verticLine.setPosition(e.getX(), 0);
-		verticLine.setEndpoint(e.getX(), getHeight());
+	
+	function start() {
+		tank(); // border / layout [initial]
+		setTimer(fishMove, fishMoveDelay);
 		
-		document.getElementById("pos").innerHTML = "Position: (" + e.getX().toString(10) + ", " + e.getY().toString(10) + ")";
+		foodHold = new Rectangle(foodSize, foodSize/2);
+		foodHold.setPosition(0, 0);
+		foodHold.setColor(Color.black);
+		add(foodHold);
+		mouseMoveMethod(holdFood);
+		mouseClickMethod(dropFood);
 	}
 	
-	function getColor(x, y){
-		if (x == document.getElementById("cv").width/2 && y == document.getElementById("cv").height/2) {
-			return Color.black;
-		} else if (x >= 100 && x <= 300 && y >= 150 && y <= 350) {
-			return Color.red;
-		} else {
-			return Color.orange;
+	class Fish {
+		constructor(xLoc, yLoc, gender, direc, rad, colr) {
+			var scale = 3;
+			this.fishBody = new Polygon();
+			if (direc == "LEFT") {
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 0 * scale, yLoc - fishRadius*1.5 + 3 * scale);
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius*1.5 + 0 * scale);
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius*1.5 + 3 * scale); 
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 6 * scale, yLoc - fishRadius*1.5 + 4 * scale);
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 8 * scale, yLoc - fishRadius*1.5 + 2 * scale); 
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 8 * scale, yLoc - fishRadius*1.5 + 9 * scale);
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 6 * scale, yLoc - fishRadius*1.5 + 6 * scale); 
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius*1.5 + 7 * scale);
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 3 * scale, yLoc - fishRadius*1.5 + 10 * scale); 
+				this.fishBody.addPoint(xLoc + fishRadius/2 + 0 * scale, yLoc - fishRadius*1.5 + 7 * scale);
+			}
+			else if (direc == "RIGHT") {
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 0 * scale, yLoc - fishRadius*1.5 + 2 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 2 * scale, yLoc - fishRadius*1.5 + 4 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 5 * scale, yLoc - fishRadius*1.5 + 3 * scale); 
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 5 * scale, yLoc - fishRadius*1.5 + 0 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 8 * scale, yLoc - fishRadius*1.5 + 3 * scale); 
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 8 * scale, yLoc - fishRadius*1.5 + 7 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 5 * scale, yLoc - fishRadius*1.5 + 10 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 5 * scale, yLoc - fishRadius*1.5 + 7 * scale); 
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 2 * scale, yLoc - fishRadius*1.5 + 6 * scale);
+				this.fishBody.addPoint(xLoc - fishRadius*3 + 0 * scale, yLoc - fishRadius*1.5 + 9 * scale);
+			}
+			this.fishBody.setColor(colr);
+			this.fishObject = new Circle(fishRadius);
+			this.fishObject.setPosition(xLoc, yLoc);
+			this.fishObject.setColor(colr);
+			add(this.fishObject);
+			add(this.fishBody);
+			this.fishColor = colr;
+			this.fishGender = gender;
+			this.moveDir = direc; 
+			this.radius = rad;
 		}
 	}
-
-	function addHitMarkers(e){
-		var ball = new Circle (RADIUS);
-		ball.setPosition (e.getX(), e.getY());
-		ball.setColor(getColor(e.getX(), e.getY()));
-		add (ball);
-		shot++;
-		if (e.getX() == document.getElementById("cv").width/2 && e.getY() == document.getElementById("cv").height/2)
-			document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10) + " (CENTER HIT)";
-		else
-			document.getElementById("shots").innerHTML = "Hits: " + shot.toString(10);
+	
+	function tank() {
+		aboveTank = new Rectangle (getWidth(), dropSpace);
+		aboveTank.setPosition(0, 0); aboveTank.setColor(Color.black);
+		add(aboveTank);
+		var lWall, rWall, bWall;
+		lWall = new Rectangle (wallWidth, getHeight() - dropSpace); rWall = new Rectangle (wallWidth, getHeight() - dropSpace);
+		lWall.setPosition(0, dropSpace); rWall.setPosition(getWidth() - wallWidth, dropSpace);
+		lWall.setColor(Color.white); rWall.setColor(Color.white);
+		add(lWall); add(rWall);
+		bWall = new Rectangle (getWidth(), wallWidth);
+		bWall.setPosition(0, getHeight() - wallWidth);
+		bWall.setColor(Color.white);
+		add(bWall);
+		for (var i = 0; i < startingFish; i++) {
+			var randX = Randomizer.nextInt(wallWidth + fishRadius, getWidth() - wallWidth - fishRadius);
+			var randY = Randomizer.nextInt(dropSpace + fishRadius, getHeight() - wallWidth - fishRadius);
+			var randG = Randomizer.nextBoolean(), gend;
+			var randD = Randomizer.nextBoolean(), direc;
+			var randC = Randomizer.nextColor();
+			if (randG) gend = "MALE"; else gend = "FEMALE";
+			if (randD) direc = "LEFT"; else direc = "RIGHT";
+			fishes[fishCount] = new Fish(randX, randY, gend, direc, fishRadius, randC); 
+			fishCount++;
+		}
 	}
-
+	
+	function fishMove() {
+		for (var i = 0; i < fishes.length; i++) {
+			if (fishes[i].moveDir == "LEFT") {
+				if (fishes[i].fishObject.getX() - fishMoveSpace < wallWidth + fishes[i].radius) {
+					var newX = wallWidth + fishes[i].radius, newY = fishes[i].fishObject.getY();
+					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					remove(fishes[i].fishBody);
+					remove(fishes[i].fishObject);
+					fishes[i] = new Fish(newX, newY, prevG, "RIGHT", prevR, prevC);
+				}
+				else {
+					fishes[i].fishObject.move(-fishMoveSpace, 0);
+					fishes[i].fishBody.move(-fishMoveSpace, 0);
+				}
+			}
+			else if (fishes[i].moveDir == "RIGHT") {
+				if (fishes[i].fishObject.getX() + fishMoveSpace > getWidth() - wallWidth - fishes[i].radius) {
+					var newX = getWidth() - wallWidth - fishes[i].radius, newY = fishes[i].fishObject.getY();
+					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					remove(fishes[i].fishBody);
+					remove(fishes[i].fishObject);
+					fishes[i] = new Fish(newX, newY, prevG, "LEFT", prevR, prevC);
+				}
+				else {
+					fishes[i].fishObject.move(fishMoveSpace, 0);
+					fishes[i].fishBody.move(fishMoveSpace, 0);
+				}
+			}
+		}
+	}
+	
+	function holdFood(e) {
+		if ((e.getX() > wallWidth) && (e.getX() < getWidth() - wallWidth) && (e.getY() < dropSpace)) {
+			if (e.getY() < dropSpace) {
+				foodHold.setColor(Color.yellow);
+				foodHold.setPosition(e.getX(), e.getY());
+			}
+		}
+		else {
+				foodHold.setColor(Color.black);
+				foodHold.setPosition(0, 0);
+		}
+	}
+	function dropFood(e) {
+		if ((e.getX() > wallWidth) && (e.getX() < getWidth() - wallWidth)) {
+			if (e.getY() < dropSpace) {
+				var food = new Rectangle (foodSize, foodSize/2);
+				food.setPosition (e.getX(), e.getY());
+				food.setColor(Color.yellow);
+				add(food);
+				setTimer(foodFall, foodFallDelay, food);
+			}
+		}
+	}
+	function foodFall(foodObj) {
+		var foodElem = getElementAt(foodObj.getX(), foodObj.getY());
+		if (foodElem.getColor() != "#39C2F1") {
+			for (var i = 0; i < fishes.length; i++) {
+				if (fishes[i].fishObject == foodElem) {
+					remove(foodObj);
+					// fish growing here
+					break;	
+				}
+			}
+		}
+		if (foodObj.getY() > getHeight() - wallWidth)
+			remove(foodObj);
+		else 
+			foodObj.move(0, foodMoveSpace);
+	}
+	
 	if (typeof start === 'function') {
         	start();
     	}
-};
+}
 </script>
 	
 	<br> <br> <br>
