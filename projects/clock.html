@@ -38,7 +38,7 @@ window.onload = function() {
 		date.setColor(allColor);
 		add(date);
 		displayClock(); // outline and tick markers
-		clockHands(nowTime.getHours(), nowTime.getMinutes());
+		clockHands(nowTime.getHours(), nowTime.getMinutes(), nowTime.getSeconds());
 	}
 	function month(mh){
 		var months = ["January", "February", "March", "April", "May", "June",
@@ -93,12 +93,19 @@ window.onload = function() {
 		}
 		FIX TICK MARKERS */ 
 	}
-	function clockHands(hrs, mins) {
-		var hourHand = new Line(clock.getX(), clock.getY(), hrs, hrs);
-		var minuteHand = new Line(clock.getX(), clock.getY(), mins, mins);
-		hourHand.setColor(allColor); minuteHand.setColor(allColor);
-		hourHand.setLineWidth(5); minuteHand.setLineWidth(5);
-		add(hourHand); add(minuteHand);
+	function clockHands(hrs, mins, secs) {
+		var topClock = getHeight()/2 + BUFFER - clock.getRadius(), botClock = getHeight()/2 + BUFFER + clock.getRadius();
+		var leftClock = getWidth()/2 - clock.getRadius(), rightClock = getWidth()/2 + clock.getRadius();
+		var hrDir = hrs - 12; 
+		var minDir = (mins / 5); if (minDir == 12) { minDir = 0; }
+		var secDir = (secs / 5); if (secDir == 12) { secDir = 0; }
+		var hourHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
+		var minuteHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
+		var secondHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
+		hourHand.setColor(allColor); minuteHand.setColor(Color.gray); secondHand.setColor(Color.red);
+		hourHand.setLineWidth(5); minuteHand.setLineWidth(5); secondHand.setLineWidth(3);
+		hourHand.rotate(hrDir * 30); minuteHand.rotate(minDir * 30); secondHand.rotate(secDir * 30);
+		add(hourHand); add(minuteHand); add(secondHand);
 	}
 	
 	if (typeof start === 'function') {
