@@ -2,7 +2,7 @@
 
 Wiki: https://github.com/davidtstran/davidtstran.github.io/wiki
 
-Projects: 
+Projects (Ordered by Release): 
 
   - Breakout
   
