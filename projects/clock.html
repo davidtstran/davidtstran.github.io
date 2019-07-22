@@ -17,7 +17,7 @@
 <script>
 window.onload = function() {
 	removeAll();
-	var nowTime;
+	var nowTime, clock;
 	var allColor = Color.white;
 	var timeOfDay; // DAY/NIGHT (change background to reflect) ?
 	var BUFFER = 10;
@@ -54,17 +54,17 @@ window.onload = function() {
 		else { return timeIn; }
 	}
 	function displayClock() {
-		var clock = new Circle (150);
+		clock = new Circle (150);
 		clock.setBorderColor(allColor);
 		clock.setBorderWidth(10);
 		clock.setPosition(getWidth()/2, getHeight()/2 + BUFFER);
 		add(clock);
 	}
-	function clockHands() {
-		var hourHand = new Line();
-		var minuteHand = newLine();
+	function clockHands(hrs, mins) {
+		var hourHand = new Line(clock.getX(), clock.getY(), 0, 0);
+		var minuteHand = new Line(clock.getX(), clock.getY(), 0, 0);
 		hourHand.setColor(allColor); minuteHand.setColor(allColor);
-		hourHand.setLineWidth(10); minuteHand.setLineWidth(10);
+		hourHand.setLineWidth(5); minuteHand.setLineWidth(5);
 		add(hourHand); add(minuteHand);
 	}
 	
