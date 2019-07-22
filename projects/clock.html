@@ -59,10 +59,43 @@ window.onload = function() {
 		clock.setBorderWidth(10);
 		clock.setPosition(getWidth()/2, getHeight()/2 + BUFFER);
 		add(clock);
+		var topClock = getHeight()/2 + BUFFER - clock.getRadius(), botClock = getHeight()/2 + BUFFER + clock.getRadius();
+		var leftClock = getWidth()/2 - clock.getRadius(), rightClock = getWidth()/2 + clock.getRadius();
+		
+		/* FIX TICK MARKERS 
+		for (var i = 0; i < 12; i++) {
+			var tickX, tickY, xDir, yDir, tickLength = 20;
+			// X VALUE
+			if (i == 9) { tickX = leftClock; }
+			else if (i == 10 || i == 8) { tickX = leftClock + clock.getRadius() * 1/3; }
+			else if (i == 11 || i == 7) { tickX = leftClock + clock.getRadius() * 2/3; }
+			else if (i == 0 || i == 6) { tickX = getWidth()/2; }
+			else if (i == 1 || i == 5) { tickX = rightClock - clock.getRadius() * 2/3; }
+			else if (i == 2 || i == 4) { tickX = rightClock - clock.getRadius() * 1/3; }
+			else if (i == 3) { tickX = rightClock; }
+			if (i == 7 || i == 8 || i == 3 || i == 10 || i == 11) { xDir = tickX - tickLength; }	
+			else if (i == 1 || i == 2 || i == 9 || i == 4 || i == 5) { xDir = tickX + tickLength; }
+			else if (i == 0 || i == 6) { xDir = tickX; }
+			// Y VALUE
+			if (i == 0) { tickY = topClock; }
+			else if (i == 11 || i == 1) { tickY = topClock + clock.getRadius() * 1/3; } 
+			else if (i == 10 || i == 2) { tickY = topClock + clock.getRadius() * 2/3; }
+			else if (i == 9 || i == 3) { tickY = getHeight()/2 + BUFFER }
+			else if (i == 8 || i == 4) { tickY = botClock - clock.getRadius() * 2/3; }
+			else if (i == 7 || i == 5) { tickY = botClock - clock.getRadius() * 1/3; }
+			else if (i == 6) { tickY = botClock; }
+			if (i == 10 || i == 11 || i == 6 || i == 1 || i == 2) { yDir = tickY - tickLength; }
+			else if (i == 8 || i == 7 || i == 0 || i == 5 || i == 4) { yDir = tickY + tickLength; }
+			else if (i == 9 || i == 3) { yDir = tickY; } 
+			var tick = new Line (tickX, tickY, xDir, yDir);
+			tick.setColor(allColor); tick.setLineWidth(5);	
+			add(tick);
+		}
+		FIX TICK MARKERS */ 
 	}
 	function clockHands(hrs, mins) {
-		var hourHand = new Line(clock.getX(), clock.getY(), 0, 0);
-		var minuteHand = new Line(clock.getX(), clock.getY(), 0, 0);
+		var hourHand = new Line(clock.getX(), clock.getY(), hrs, hrs);
+		var minuteHand = new Line(clock.getX(), clock.getY(), mins, mins);
 		hourHand.setColor(allColor); minuteHand.setColor(allColor);
 		hourHand.setLineWidth(5); minuteHand.setLineWidth(5);
 		add(hourHand); add(minuteHand);
