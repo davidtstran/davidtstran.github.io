@@ -8,10 +8,10 @@ button {
     cursor: pointer;
     display: inline-block;  
     font-size: 15px;
-    height: 50px;
+    height: 75px;
     margin: 2px 2px;
     text-align: center;
-    width: 150px;
+    width: 175px;
 }
 h1 {
     color: black;
