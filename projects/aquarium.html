@@ -105,7 +105,7 @@ window.onload = function() {
 			if (fishes[i].moveDir == "LEFT") {
 				if (fishes[i].fishObject.getX() - fishMoveSpace < wallWidth + fishes[i].radius) {
 					var newX = wallWidth + fishes[i].radius, newY = fishes[i].fishObject.getY();
-					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					var prevG = fishes[i].fishGender, prevR = fishes[i].fishObject.getRadius(), prevC = fishes[i].fishColor;
 					remove(fishes[i].fishBody);
 					remove(fishes[i].fishObject);
 					fishes[i] = new Fish(newX, newY, prevG, "RIGHT", prevR, prevC);
@@ -118,7 +118,7 @@ window.onload = function() {
 			else if (fishes[i].moveDir == "RIGHT") {
 				if (fishes[i].fishObject.getX() + fishMoveSpace > getWidth() - wallWidth - fishes[i].radius) {
 					var newX = getWidth() - wallWidth - fishes[i].radius, newY = fishes[i].fishObject.getY();
-					var prevG = fishes[i].fishGender, prevR = fishes[i].radius, prevC = fishes[i].fishColor;
+					var prevG = fishes[i].fishGender, prevR = fishes[i].fishObject.getRadius(), prevC = fishes[i].fishColor;
 					remove(fishes[i].fishBody);
 					remove(fishes[i].fishObject);
 					fishes[i] = new Fish(newX, newY, prevG, "LEFT", prevR, prevC);
