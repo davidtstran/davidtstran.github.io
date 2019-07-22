@@ -149,8 +149,8 @@ window.onload = function() {
 				if (fishes[i].fishObject == foodElem) {
 					remove(foodObj);
 					// fish grow
-					fishes[i].fishObject.setRadius(fishes[i].fishObject.getRadius() + foodGrowth);
-					fishes[i].radius = fishes[i].fishObject.getRadius();
+					fishes[i].radius = fishes[i].fishObject.getRadius() + foodGrowth;
+					fishes[i].fishObject.setRadius(fishes[i].radius);
 					i = fishes.length;
 					// fish grow
 					break;	
