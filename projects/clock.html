@@ -18,7 +18,9 @@
 window.onload = function() {
 	removeAll();
 	var nowTime;
+	var allColor = Color.white;
 	var timeOfDay; // DAY/NIGHT (change background to reflect) ?
+	var BUFFER = 10;
 	
 	function start() {
 		displayTime();
@@ -29,11 +31,14 @@ window.onload = function() {
 		removeAll();
 		nowTime = new Date();
 		var AMPM; if (nowTime.getHours() < 12) AMPM = " AM"; else AMPM = " PM";
-		var date = new Text (nowTime.getDate() + " " + month(nowTime.getMonth()) + " " + nowTime.getFullYear() + " " +
-							 hour(nowTime.getHours()) + ":" + nowTime.getMinutes() + ":" + nowTime.getSeconds() + AMPM);
-		date.setPosition(getWidth()/2 - date.getWidth()/2, getHeight()/2);
-		date.setColor(Color.white);
+		var date = new Text (nowTime.getDate() + " " + month(nowTime.getMonth()) + " " + nowTime.getFullYear() 
+							 + "  " + hour(nowTime.getHours()) + ":" + time00(nowTime.getMinutes()) 
+							 + ":" + time00(nowTime.getSeconds()) + AMPM);
+		date.setPosition(getWidth()/2 - date.getWidth()/2, date.getHeight() + BUFFER);
+		date.setColor(allColor);
 		add(date);
+		displayClock(); // outline and tick markers
+		clockHands(nowTime.getHours(), nowTime.getMinutes());
 	}
 	function month(mh){
 		var months = ["January", "February", "March", "April", "May", "June",
@@ -42,7 +47,27 @@ window.onload = function() {
 	}
 	function hour(hs) {
 		if (hs > 12) { timeOfDay = "NIGHT"; return hs-12; }
+		else { timeOfDay = "DAY"; return hs; }
 	}
+	function time00(timeIn) {
+		if (timeIn < 10) { return "0" + timeIn; }
+		else { return timeIn; }
+	}
+	function displayClock() {
+		var clock = new Circle (150);
+		clock.setBorderColor(allColor);
+		clock.setBorderWidth(10);
+		clock.setPosition(getWidth()/2, getHeight()/2 + BUFFER);
+		add(clock);
+	}
+	function clockHands() {
+		var hourHand = new Line();
+		var minuteHand = newLine();
+		hourHand.setColor(allColor); minuteHand.setColor(allColor);
+		hourHand.setLineWidth(10); minuteHand.setLineWidth(10);
+		add(hourHand); add(minuteHand);
+	}
+	
 	if (typeof start === 'function') {
         	start();
     	}
