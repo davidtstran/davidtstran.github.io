@@ -31,3 +31,5 @@ Projects (Ordered by Release):
   - Aquarium
   
   - Clock
+  
+  - Weather
