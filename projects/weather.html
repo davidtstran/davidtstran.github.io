@@ -26,12 +26,13 @@ window.onload = function() {
 	var elementsArray = [];
 	
 	function start() {
-		dayNight = Randomizer.nextBoolean();
 		displayWeather();
-		//setTimer(displayWeather, 1000);
+		setTimer(displayWeather, 60000); // 60000 = minute
 	}
 	
 	function displayWeather() {
+		dayNight = Randomizer.nextBoolean();
+		
 		background(dayNight);
 		
 	}
