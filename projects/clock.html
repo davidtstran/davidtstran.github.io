@@ -17,7 +17,7 @@
 <script>
 window.onload = function() {
 	removeAll();
-	var nowTime, clock;
+	var nowTime, clock, clockHandsArray = [];
 	var allColor = Color.white;
 	var timeOfDay; // DAY/NIGHT (change background to reflect) ?
 	var BUFFER = 10;
@@ -62,50 +62,24 @@ window.onload = function() {
 		var topClock = getHeight()/2 + BUFFER - clock.getRadius(), botClock = getHeight()/2 + BUFFER + clock.getRadius();
 		var leftClock = getWidth()/2 - clock.getRadius(), rightClock = getWidth()/2 + clock.getRadius();
 		
-		/* FIX TICK MARKERS 
-		for (var i = 0; i < 12; i++) {
-			var tickX, tickY, xDir, yDir, tickLength = 20;
-			// X VALUE
-			if (i == 9) { tickX = leftClock; }
-			else if (i == 10 || i == 8) { tickX = leftClock + clock.getRadius() * 1/3; }
-			else if (i == 11 || i == 7) { tickX = leftClock + clock.getRadius() * 2/3; }
-			else if (i == 0 || i == 6) { tickX = getWidth()/2; }
-			else if (i == 1 || i == 5) { tickX = rightClock - clock.getRadius() * 2/3; }
-			else if (i == 2 || i == 4) { tickX = rightClock - clock.getRadius() * 1/3; }
-			else if (i == 3) { tickX = rightClock; }
-			if (i == 7 || i == 8 || i == 3 || i == 10 || i == 11) { xDir = tickX - tickLength; }	
-			else if (i == 1 || i == 2 || i == 9 || i == 4 || i == 5) { xDir = tickX + tickLength; }
-			else if (i == 0 || i == 6) { xDir = tickX; }
-			// Y VALUE
-			if (i == 0) { tickY = topClock; }
-			else if (i == 11 || i == 1) { tickY = topClock + clock.getRadius() * 1/3; } 
-			else if (i == 10 || i == 2) { tickY = topClock + clock.getRadius() * 2/3; }
-			else if (i == 9 || i == 3) { tickY = getHeight()/2 + BUFFER }
-			else if (i == 8 || i == 4) { tickY = botClock - clock.getRadius() * 2/3; }
-			else if (i == 7 || i == 5) { tickY = botClock - clock.getRadius() * 1/3; }
-			else if (i == 6) { tickY = botClock; }
-			if (i == 10 || i == 11 || i == 6 || i == 1 || i == 2) { yDir = tickY - tickLength; }
-			else if (i == 8 || i == 7 || i == 0 || i == 5 || i == 4) { yDir = tickY + tickLength; }
-			else if (i == 9 || i == 3) { yDir = tickY; } 
-			var tick = new Line (tickX, tickY, xDir, yDir);
-			tick.setColor(allColor); tick.setLineWidth(5);	
-			add(tick);
+		for (var i = 0; i < 60; i++) {
+			var endX = 0;
+			var endY = 0;
+			if (i >= 0 && i < 15) { endX = clock.getX() + clock.getRadius()*i/15; endY = topClock + clock.getRadius()*i/15; }
+			else if (i >= 15 && i < 30) { endX = rightClock - clock.getRadius()*(i-15)/15; endY = clock.getY() + clock.getRadius()*(i-15)/15; }
+			else if (i >= 30 && i < 45) { endX = clock.getX() - clock.getRadius()*(i-30)/15; endY = botClock - clock.getRadius()*(i-30)/15; }
+			else if (i >= 45 && i < 60) { endX = leftClock + clock.getRadius()*(i-45)/15; endY = clock.getY() - clock.getRadius()*(i-45)/15; }
+			clockHandsArray[i] = new Line(clock.getX(), clock.getY(), endX, endY);
 		}
-		FIX TICK MARKERS */ 
+		// ADD TICK MARKERS (1 to 12)
 	}
 	function clockHands(hrs, mins, secs) {
-		var topClock = getHeight()/2 + BUFFER - clock.getRadius(), botClock = getHeight()/2 + BUFFER + clock.getRadius();
-		var leftClock = getWidth()/2 - clock.getRadius(), rightClock = getWidth()/2 + clock.getRadius();
-		var hrDir = hrs - 12; 
-		var minDir = (mins / 5); if (minDir == 12) { minDir = 0; }
-		var secDir = (secs / 5); if (secDir == 12) { secDir = 0; }
-		var hourHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
-		var minuteHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
-		var secondHand = new Line(clock.getX(), botClock, clock.getX(), topClock);
-		hourHand.setColor(allColor); minuteHand.setColor(new Color(169,169,169)); secondHand.setColor(new Color(112,112,112));
-		hourHand.setLineWidth(5); minuteHand.setLineWidth(5); secondHand.setLineWidth(3);
-		hourHand.rotate(hrDir * 30); minuteHand.rotate(minDir * 30); secondHand.rotate(secDir * 30);
-		add(hourHand); add(minuteHand); add(secondHand);
+		var hourHand = clockHandsArray[hrs*5];
+		var minHand = clockHandsArray[mins];
+		var secHand = clockHandsArray[secs];
+		hourHand.setColor(allColor); minHand.setColor(new Color(169,169,169)); secHand.setColor(new Color(112,112,112));
+		hourHand.setLineWidth(5); minHand.setLineWidth(5); secHand.setLineWidth(5);
+		add(hourHand); add(minHand); add(secHand);
 	}
 	
 	if (typeof start === 'function') {
