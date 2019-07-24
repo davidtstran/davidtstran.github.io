@@ -30,17 +30,17 @@ window.onload = function() {
 	
 	function start() {
 		displayWeather();
-		setTimer(displayWeather, 60000); // 60000 = minute
+		//setTimer(displayWeather, 60000); // 60000 = minute
 	}
 	
 	function displayWeather() {
 		dayNight = Randomizer.nextBoolean();
-		precipit = Randomizer.nextInt(0,5); 
+		precipit = Randomizer.nextInt(0,5);
 		if (precipit == 0 || precipit == 1) { clearCloud = false; }
 		else { clearCloud = Randomizer.nextBoolean(); }
 		
 		background(dayNight);
-		setTimer(precipitate, 1000, precipit);
+		setTimer(precipitate, 150, precipit);
 		cloudCreate(clearCloud);
 	}
 	function background(dN) { // true if day, false if night
@@ -89,7 +89,7 @@ window.onload = function() {
 		if (dp.getY() > getHeight())
 			remove(dp);
 		else {
-			var dropSpeed = Randomizer.nextFloat(1, 10);
+			var dropSpeed = Randomizer.nextFloat(10, 100);
 			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
 		}
 	}
