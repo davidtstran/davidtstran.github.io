@@ -23,8 +23,9 @@ window.onload = function() {
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
 	var clearCloud; // clear true, cloudy false
-	var cloudColor = new Color(105,105,105);
-	var precipitation; // NONE, RAIN, SNOW, ICE
+	var cloudSection;
+	var cloudColor = new Color(220,220,220);
+	var precipit; // RAIN 0, SNOW 1, ELSE NONE
 	var elementsArray = [];
 	
 	function start() {
@@ -34,9 +35,12 @@ window.onload = function() {
 	
 	function displayWeather() {
 		dayNight = Randomizer.nextBoolean();
-		clearCloud = Randomizer.nextBoolean();
+		precipit = Randomizer.nextInt(0,5); 
+		if (precipit == 0 || precipit == 1) { clearCloud = false; }
+		else { clearCloud = Randomizer.nextBoolean(); }
 		
 		background(dayNight);
+		setTimer(precipitate, 1000, precipit);
 		cloudCreate(clearCloud);
 	}
 	function background(dN) { // true if day, false if night
@@ -59,7 +63,7 @@ window.onload = function() {
 		var cloudCount = Randomizer.nextInt(10, 20), cloudRadius = (getWidth()/2)/cloudCount;
 		var cloudY = sunMoon.getY() + sunMoon.getRadius();
 		if (!cC) {
-			var cloudSection = new Rectangle(getWidth(), cloudRadius);
+			cloudSection = new Rectangle(getWidth(), cloudRadius);
 			cloudSection.setPosition(0, cloudY);
 			cloudSection.setColor(cloudColor); add(cloudSection);
 			for (var i = 0; i < cloudCount; i ++) {
@@ -70,6 +74,26 @@ window.onload = function() {
 			}
 		}
 	}
+	function precipitate(p) { // RAIN 0, SNOW 1, ELSE NONE
+		var precipColor, precipRadius = 5; 
+		if (p == 0) { precipColor = Color.blue; }
+		else if (p == 1) { precipColor = Color.white; }
+		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
+			var drop = new Circle(precipRadius);
+			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
+			drop.setColor(precipColor); add(drop);
+			setTimer(dropFall, 1, drop);
+		}
+	}
+	function dropFall(dp) {
+		if (dp.getY() > getHeight())
+			remove(dp);
+		else {
+			var dropSpeed = Randomizer.nextFloat(1, 10);
+			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
+		}
+	}
+	
 	if (typeof start === 'function') {
         	start();
     	}
