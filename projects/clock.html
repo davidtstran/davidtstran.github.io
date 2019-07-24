@@ -74,7 +74,7 @@ window.onload = function() {
 		// ADD TICK MARKERS (1 to 12)
 	}
 	function clockHands(hrs, mins, secs) {
-		if (hrs > 12) { hrs = hrs - 12 };
+		if (hrs >= 12) { hrs = hrs - 12 };
 		var hourHand = clockHandsArray[hrs*5];
 		var minHand = clockHandsArray[mins];
 		var secHand = clockHandsArray[secs];
