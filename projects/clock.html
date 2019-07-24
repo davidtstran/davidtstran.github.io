@@ -65,10 +65,8 @@ window.onload = function() {
 		for (var i = 0; i < 60; i++) {
 			var endX = 0;
 			var endY = 0;
-			if (i >= 0 && i < 15) { endX = clock.getX() + clock.getRadius()*i/15; endY = topClock + clock.getRadius()*i/15; }
-			else if (i >= 15 && i < 30) { endX = rightClock - clock.getRadius()*(i-15)/15; endY = clock.getY() + clock.getRadius()*(i-15)/15; }
-			else if (i >= 30 && i < 45) { endX = clock.getX() - clock.getRadius()*(i-30)/15; endY = botClock - clock.getRadius()*(i-30)/15; }
-			else if (i >= 45 && i < 60) { endX = leftClock + clock.getRadius()*(i-45)/15; endY = clock.getY() - clock.getRadius()*(i-45)/15; }
+			endX = clock.getX() + clock.getRadius()*Math.cos((i*3.14/30) - 3.14/2); // unit circle starts at 15 mark, - pi/2
+			endY = clock.getY() + clock.getRadius()*Math.sin((i*3.14/30) - 3.14/2); // unit circle starts at 15 mark, - pi/2
 			clockHandsArray[i] = new Line(clock.getX(), clock.getY(), endX, endY);
 		}
 		// ADD TICK MARKERS (1 to 12)
