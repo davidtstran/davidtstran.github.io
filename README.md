@@ -1,6 +1,6 @@
 # davidtstran.github.io
 
-Uses HTML, CSS, JavaScript, jQuery
+Uses HTML, CSS, JavaScript/jQuery
 
 Wiki: https://github.com/davidtstran/davidtstran.github.io/wiki 
 
