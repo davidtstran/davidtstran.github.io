@@ -19,9 +19,11 @@ window.onload = function() {
 	removeAll();
 	var BUFFER = 10;
 	var dayNight; // day true, night false
+	var sunMoon;
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
 	var clearCloud; // clear true, cloudy false
+	var cloudColor = new Color(105,105,105);
 	var precipitation; // NONE, RAIN, SNOW, ICE
 	var elementsArray = [];
 	
@@ -32,13 +34,14 @@ window.onload = function() {
 	
 	function displayWeather() {
 		dayNight = Randomizer.nextBoolean();
+		clearCloud = Randomizer.nextBoolean();
 		
 		background(dayNight);
-		
+		cloudCreate(clearCloud);
 	}
-	function background(dN) {
+	function background(dN) { // true if day, false if night
 		var background = new Rectangle(getWidth(), getHeight());
-		var sunMoon = new Circle(30);
+		sunMoon = new Circle(30);
 		sunMoon.setPosition(getWidth() - sunMoon.getRadius() - BUFFER, sunMoon.getRadius() + BUFFER);  // top right
 		if (dN) { background.setColor(dayColor); sunMoon.setColor(sunColor); add(background); add(sunMoon); }
 		else { 
@@ -49,6 +52,21 @@ window.onload = function() {
 				star.setColor(moonColor);
 				star.setPosition(Randomizer.nextInt(0, getWidth()), Randomizer.nextInt(0, getHeight()/2)); 
 				add(star);
+			}
+		}
+	}
+	function cloudCreate(cC) { // true if clear, false if cloudy
+		var cloudCount = Randomizer.nextInt(10, 20), cloudRadius = (getWidth()/2)/cloudCount;
+		var cloudY = sunMoon.getY() + sunMoon.getRadius();
+		if (!cC) {
+			var cloudSection = new Rectangle(getWidth(), cloudRadius);
+			cloudSection.setPosition(0, cloudY);
+			cloudSection.setColor(cloudColor); add(cloudSection);
+			for (var i = 0; i < cloudCount; i ++) {
+				var cloud = new Circle(cloudRadius);
+				cloud.setColor(cloudColor);
+				cloud.setPosition(cloudRadius + cloudRadius*2*i, cloudY);
+				add(cloud);
 			}
 		}
 	}
