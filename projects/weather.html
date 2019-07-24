@@ -9,7 +9,7 @@
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
-	<h2>Weather Refreshes Every Minute</h2>
+	<h2>Weather Refreshes Every 10 Minutes</h2>
 	<p align = "center">
 		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
@@ -18,7 +18,7 @@
 window.onload = function() {
 	removeAll();
 	var BUFFER = 10;
-	var dayNight; // day true, night false
+	var dayNight; // day true, night false 
 	var sunMoon;
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
@@ -30,7 +30,7 @@ window.onload = function() {
 	
 	function start() {
 		displayWeather();
-		//setTimer(displayWeather, 60000); // 60000 = minute
+		setTimer(displayWeather, 600000); // 60000 = minute
 	}
 	
 	function displayWeather() {
