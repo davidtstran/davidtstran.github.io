@@ -11,7 +11,7 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
 	<h2>Weather Refreshes Every 10 Minutes<br>
 	    Data from OpenWeatherMap<br></h2>
-	<h2 id = "displayW"></h2>
+	<h2 id = "displayW">Default City is Kansas City</h2>
 	<p align = "center">
 		City: <input type = "text" id = "newCity">
 		<input type = "button" value = "Set/Change" onclick = "start()"> <br> <br>
@@ -22,14 +22,14 @@
 function start() { 
 	removeAll();
 	var BUFFER = 10;
-	var cityName, cityTemp;
+	var city, cityTZ, cityName, cityTemp;
 	var dayNight; // day true, night false 
 	var sunMoon;
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
 	var cloudSection;
 	var cloudColor = new Color(220,220,220);
-	var precipit; // (Clear/Clouds/Rain/Thunderstorm/Snow)
+	var precipit; // (Clear/Clouds/Haze/Rain/Thunderstorm/Snow)
 	var weatherJSON;
 	
 	displayWeather();
@@ -38,19 +38,23 @@ function start() {
 	function displayWeather() {
 		if (document.getElementById("newCity").value == "") { city = "Kansas City"; }
 		else { city = document.getElementById("newCity").value; }
-		//var city = "Kansas City";
 		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=13c9e93b7a505729f5d267751fde0e41";
         $.getJSON(weatherLink,function(json){
 			weatherJSON = json;
-			// document.write(JSON.stringify(json)); // full JSON string
+			//document.write(JSON.stringify(json)); // full JSON string
 			cityName = weatherJSON.name; // city name
+			cityTZ = parseInt(weatherJSON.timezone);// city timezone [in seconds]
 			cityTemp = weatherJSON.main.temp; // temperature default Kelvin
 			cityTemp = 9/5 * (parseFloat(cityTemp) - 273.15) + 32 // convert temp to Fahrenheit
-			precipit = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm/Snow)
+			precipit = weatherJSON.weather[0].main; // weather (Clear/Clouds/Haze/Rain/Thunderstorm/Snow)
 			document.getElementById("displayW").innerHTML = cityName + " " + cityTemp.toFixed(2) + "°F " + precipit;
 			
-			var currDate = new Date();
-			if (currDate.getHours() >= 7 && currDate.getHours() < 20) { dayNight = true; }
+			var cityDate = new Date();
+			var utcHours = cityDate.getUTCHours();
+			var cityHours = utcHours + cityTZ/3600;
+			if (cityHours >= 24) { cityHours = cityHours - 24; }
+			var dayStarts = 7, dayEnds = 20;
+			if (cityHours >= dayStarts && cityHours < dayEnds) { dayNight = true; } // UTC time
 			else { dayNight = false; }
 			
 			background(dayNight);
