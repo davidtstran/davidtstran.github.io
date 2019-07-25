@@ -91,7 +91,7 @@ function start() {
 	}
 	function precipitate(p) { // RAIN 0, SNOW 1, ELSE NONE
 		var precipColor, precipRadius = 5; 
-		if (p == "Rain") { precipColor = Color.blue; }
+		if (p == "Rain" || p == "Thunderstorm") { precipColor = Color.blue; }
 		else if (p == "Snow") { precipColor = Color.white; }
 		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
 			var drop = new Circle(precipRadius);
