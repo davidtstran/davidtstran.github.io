@@ -64,8 +64,13 @@ function start() {
 				}
 			}
 			cloudCreate(precipit);
+			
+			var cityTimeHours = cityHours, cityAMPM;
+			if (cityTimeHours > 12) { cityTimeHours -= 12; cityAMPM = "PM"; }
+			else { cityAMPM = "AM"; }
 		
-			document.getElementById("displayW").innerHTML = cityName + " " + cityHours + " "+ cityTemp.toFixed(2) + "°F " + precipit;
+			document.getElementById("displayW").innerHTML = cityName + " " + cityTimeHours + " " + cityAMPM + " " +
+							cityTemp.toFixed(2) + "°F " + precipit;
         });
 	}
 	function background(dN) { // true if day, false if night
