@@ -20,6 +20,7 @@
 window.onload = function() {
 	removeAll();
 	var BUFFER = 10;
+	var cityName, cityTemp;
 	var dayNight; // day true, night false 
 	var sunMoon;
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
@@ -28,36 +29,31 @@ window.onload = function() {
 	var cloudColor = new Color(220,220,220);
 	var precipit; // (Clear/Clouds/Rain/Thunderstorm/Snow)
 	var weatherJSON;
-	var elementsArray = [];
 	
 	function start() {
 		displayWeather();
 		setTimer(displayWeather, 600000); // 60000 = minute
 	}
 	
-    function gettingJSON(){
+	function displayWeather() {
 		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?id=4393217&appid=13c9e93b7a505729f5d267751fde0e41";
         $.getJSON(weatherLink,function(json){
 			weatherJSON = json;
 			// document.write(JSON.stringify(json)); // full JSON string
-			elementsArray[0] = weatherJSON.name; // city name
-			elementsArray[1] = weatherJSON.main.temp; // temperature default Kelvin
-			elementsArray[1] = 9/5 * (parseFloat(elementsArray[1]) - 273.15) + 32 // convert temp to Fahrenheit
-			elementsArray[2] = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm/Snow)
-			document.getElementById("displayW").innerHTML = elementsArray[0] + " " + elementsArray[1].toFixed(2) + "°F " + elementsArray[2];
+			cityName = weatherJSON.name; // city name
+			cityTemp = weatherJSON.main.temp; // temperature default Kelvin
+			cityTemp = 9/5 * (parseFloat(cityTemp) - 273.15) + 32 // convert temp to Fahrenheit
+			precipit = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm/Snow)
+			document.getElementById("displayW").innerHTML = cityName + " " + cityTemp.toFixed(2) + "°F " + precipit;
+			
+			var currDate = new Date();
+			if (currDate.getHours() >= 7 && currDate.getHours() < 20) { dayNight = true; }
+			else { dayNight = false; }
+			
+			background(dayNight);
+			setTimer(precipitate, 150, precipit);
+			cloudCreate(precipit);
         });
-    }
-	
-	function displayWeather() {
-		gettingJSON();
-		var currDate = new Date();
-		if (currDate.getHours() >= 7 && currDate.getHours() < 20) { dayNight = true; }
-		else { dayNight = false; }
-		precipit = elementsArray[2];
-		
-		background(dayNight);
-		setTimer(precipitate, 150, precipit);
-		cloudCreate(precipit);
 	}
 	function background(dN) { // true if day, false if night
 		var background = new Rectangle(getWidth(), getHeight());
@@ -122,4 +118,3 @@ window.onload = function() {
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
 </body>
 </html>
-
