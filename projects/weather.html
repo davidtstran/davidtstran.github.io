@@ -61,7 +61,7 @@ function start() {
 			background(dayNight);
 			if (precipit != "Clear") {
 				if (precipit != "Clouds") {
-					setTimer(precipitate, 200, precipit);
+					setTimer(precipitate, 500, precipit);
 				}
 			}
 			cloudCreate(precipit);
@@ -113,7 +113,7 @@ function start() {
 		if (dp.getY() > getHeight())
 			remove(dp);
 		else {
-			var dropSpeed = Randomizer.nextFloat(10, 100);
+			var dropSpeed = Randomizer.nextFloat(1, 100);
 			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
 		}
 	}
