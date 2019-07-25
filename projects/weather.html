@@ -55,7 +55,7 @@ function start() {
 			var cityHours = utcHours + cityTZ/3600;
 			if (cityHours >= 24) { cityHours = cityHours - 24; }
 			var dayStarts = 7, dayEnds = 20;
-			if (cityHours >= dayStarts && cityHours <= dayEnds) { dayNight = true; } // UTC+offset time
+			if (cityHours >= dayStarts && cityHours < dayEnds) { dayNight = true; } // UTC+offset time
 			else { dayNight = false; }
 			
 			background(dayNight);
