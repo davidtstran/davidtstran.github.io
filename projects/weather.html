@@ -39,7 +39,7 @@ function start() {
 		if (document.getElementById("newCity").value == "") { city = "Kansas City"; }
 		else { city = document.getElementById("newCity").value; }
 		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=13c9e93b7a505729f5d267751fde0e41";
-        	$.getJSON(weatherLink,function(json){
+        $.getJSON(weatherLink,function(json){
 			weatherJSON = json;
 			//document.write(JSON.stringify(json)); // full JSON string
 			cityName = weatherJSON.name; // city name
@@ -58,9 +58,9 @@ function start() {
 			else { dayNight = false; }
 			
 			background(dayNight);
-			setTimer(precipitate, 300, precipit);
+			setTimer(precipitate, 200, precipit);
 			cloudCreate(precipit);
-        	});
+        });
 	}
 	function background(dN) { // true if day, false if night
 		var background = new Rectangle(getWidth(), getHeight());
@@ -98,7 +98,7 @@ function start() {
 		if (p == "Rain" || p == "Thunderstorm") { precipColor = Color.blue; }
 		else if (p == "Snow") { precipColor = Color.white; }
 		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
-			var drop = new Circle(precipRadius);
+			var drop = new Rectangle(precipRadius, precipRadius*3);
 			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
 			drop.setColor(precipColor); add(drop);
 			setTimer(dropFall, 1, drop);
