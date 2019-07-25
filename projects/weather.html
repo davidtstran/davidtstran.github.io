@@ -11,13 +11,15 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
 	<h2>Weather Refreshes Every 10 Minutes<br>
 	    Data from OpenWeatherMap<br></h2>
-	<h2 id = "displayW">-</h2>
+	<h2 id = "displayW"></h2>
 	<p align = "center">
+		City: <input type = "text" id = "newCity">
+		<input type = "button" value = "Set/Change" onclick = "start()"> <br> <br>
 		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
 <script>
-window.onload = function() {
+function start() { 
 	removeAll();
 	var BUFFER = 10;
 	var cityName, cityTemp;
@@ -30,13 +32,13 @@ window.onload = function() {
 	var precipit; // (Clear/Clouds/Rain/Thunderstorm/Snow)
 	var weatherJSON;
 	
-	function start() {
-		displayWeather();
-		setTimer(displayWeather, 600000); // 60000 = minute
-	}
+	displayWeather();
+	setTimer(displayWeather, 600000); // 60000 = minute
 	
 	function displayWeather() {
-		var city = "Kansas City";
+		if (document.getElementById("newCity").value == "") { city = "Kansas City"; }
+		else { city = document.getElementById("newCity").value; }
+		//var city = "Kansas City";
 		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=13c9e93b7a505729f5d267751fde0e41";
         $.getJSON(weatherLink,function(json){
 			weatherJSON = json;
@@ -106,10 +108,6 @@ window.onload = function() {
 			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
 		}
 	}
-	
-	if (typeof start === 'function') {
-        	start();
-    	}
 }
 </script>
 	
