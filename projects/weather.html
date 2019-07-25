@@ -2,14 +2,16 @@
 <head>
 	<link rel="stylesheet" href="/style.css">
 	<title>Weather</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
 </head>
 <body>
 	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
 		David Tran Header
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
-	<h2>Weather Refreshes Every 10 Minutes</h2>
+	<h2>Weather Refreshes Every 10 Minutes<br>
+	    Data from OpenWeatherMap<br></h2>
+	<h2 id = "displayW">-</h2>
 	<p align = "center">
 		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
@@ -22,10 +24,10 @@ window.onload = function() {
 	var sunMoon;
 	var dayColor = new Color(135,206,235), nightColor = new Color(25,25,112); // skyblue | midnightblue
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
-	var clearCloud; // clear true, cloudy false
 	var cloudSection;
 	var cloudColor = new Color(220,220,220);
 	var precipit; // RAIN 0, SNOW 1, ELSE NONE
+	var weatherJSON;
 	var elementsArray = [];
 	
 	function start() {
@@ -33,15 +35,29 @@ window.onload = function() {
 		setTimer(displayWeather, 600000); // 60000 = minute
 	}
 	
+    function gettingJSON(){
+		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?id=4393217&appid=13c9e93b7a505729f5d267751fde0e41";
+        $.getJSON(weatherLink,function(json){
+			weatherJSON = json;
+			// document.write(JSON.stringify(json)); // full JSON string
+			elementsArray[0] = weatherJSON.name; // city name
+			elementsArray[1] = weatherJSON.main.temp; // temperature default Kelvin
+			elementsArray[1] = 9/5 * (parseFloat(elementsArray[1]) - 273.15) + 32 // convert temp to Fahrenheit
+			elementsArray[2] = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm )
+			document.getElementById("displayW").innerHTML = elementsArray[0] + " " + elementsArray[1].toFixed(2) + "°F " + elementsArray[2];
+        });
+    }
+	
 	function displayWeather() {
-		dayNight = Randomizer.nextBoolean();
-		precipit = Randomizer.nextInt(0,5);
-		if (precipit == 0 || precipit == 1) { clearCloud = false; }
-		else { clearCloud = Randomizer.nextBoolean(); }
+		gettingJSON();
+		var currDate = new Date();
+		if (currDate.getHours() >= 7 && currDate.getHours() < 20) { dayNight = true; }
+		else { dayNight = false; }
+		precipit = elementsArray[2];
 		
 		background(dayNight);
 		setTimer(precipitate, 150, precipit);
-		cloudCreate(clearCloud);
+		cloudCreate(precipit);
 	}
 	function background(dN) { // true if day, false if night
 		var background = new Rectangle(getWidth(), getHeight());
@@ -59,10 +75,10 @@ window.onload = function() {
 			}
 		}
 	}
-	function cloudCreate(cC) { // true if clear, false if cloudy
+	function cloudCreate(p) { // true if clear, false if cloudy
 		var cloudCount = Randomizer.nextInt(10, 20), cloudRadius = (getWidth()/2)/cloudCount;
 		var cloudY = sunMoon.getY() + sunMoon.getRadius();
-		if (!cC) {
+		if (p != "Clear") {
 			cloudSection = new Rectangle(getWidth(), cloudRadius);
 			cloudSection.setPosition(0, cloudY);
 			cloudSection.setColor(cloudColor); add(cloudSection);
@@ -76,8 +92,8 @@ window.onload = function() {
 	}
 	function precipitate(p) { // RAIN 0, SNOW 1, ELSE NONE
 		var precipColor, precipRadius = 5; 
-		if (p == 0) { precipColor = Color.blue; }
-		else if (p == 1) { precipColor = Color.white; }
+		if (p == "RAIN") { precipColor = Color.blue; }
+		else if (p == "SNOW") { precipColor = Color.white; }
 		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
 			var drop = new Circle(precipRadius);
 			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
