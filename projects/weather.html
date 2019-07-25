@@ -61,7 +61,7 @@ function start() {
 			background(dayNight);
 			if (precipit != "Clear") {
 				if (precipit != "Clouds") {
-					setTimer(precipitate, 500, precipit);
+					setTimer(precipitate, 100, precipit);
 				}
 			}
 			cloudCreate(precipit);
@@ -104,7 +104,8 @@ function start() {
 		else if (p == "Snow") { precipColor = Color.white; }
 		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
 			var drop = new Rectangle(precipRadius, precipRadius*3);
-			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
+			var dropY = Randomizer.nextInt(cloudSection.getY() + cloudSection.getHeight(), getHeight()/2);
+			drop.setPosition(precipRadius + precipRadius*2*i, dropY);
 			drop.setColor(precipColor); add(drop);
 			setTimer(dropFall, 1, drop);
 		}
@@ -113,7 +114,7 @@ function start() {
 		if (dp.getY() > getHeight())
 			remove(dp);
 		else {
-			var dropSpeed = Randomizer.nextFloat(1, 100);
+			var dropSpeed = Randomizer.nextFloat(10, 100);
 			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
 		}
 	}
@@ -125,4 +126,4 @@ function start() {
 		David Tran Footer
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
 </body>
-</html> 
+</html>
