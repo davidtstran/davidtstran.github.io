@@ -48,7 +48,6 @@ function start() {
 			cityTemp = weatherJSON.main.temp; // temperature default Kelvin
 			cityTemp = 9/5 * (parseFloat(cityTemp) - 273.15) + 32 // convert temp to Fahrenheit
 			precipit = weatherJSON.weather[0].main; // weather (Clear/Clouds/Haze/Mist/Rain/Thunderstorm/Snow)
-			document.getElementById("displayW").innerHTML = cityName + " " + cityTemp.toFixed(2) + "°F " + precipit;
 			
 			var cityDate = new Date();
 			var utcHours = cityDate.getUTCHours();
@@ -65,6 +64,8 @@ function start() {
 				}
 			}
 			cloudCreate(precipit);
+		
+			document.getElementById("displayW").innerHTML = cityName + " " + cityHours + " "+ cityTemp.toFixed(2) + "°F " + precipit;
         });
 	}
 	function background(dN) { // true if day, false if night
