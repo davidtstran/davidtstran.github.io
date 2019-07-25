@@ -68,6 +68,7 @@ function start() {
 			var cityTimeHours = cityHours, cityAMPM;
 			if (cityTimeHours >= 12) { cityTimeHours -= 12; cityAMPM = "PM"; }
 			else { cityAMPM = "AM"; }
+			if (cityTimeHours == 0) { cityTimeHours = 12; }
 		
 			document.getElementById("displayW").innerHTML = cityName + " " + parseInt(cityTimeHours) + " " + cityAMPM + " " +
 							cityTemp.toFixed(2) + "°F " + precipit;
