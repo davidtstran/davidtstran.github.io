@@ -26,7 +26,7 @@ window.onload = function() {
 	var sunColor = new Color(255,255,51), moonColor = new Color(255,255,240); // lightyellow4 | ivory 
 	var cloudSection;
 	var cloudColor = new Color(220,220,220);
-	var precipit; // RAIN 0, SNOW 1, ELSE NONE
+	var precipit; // (Clear/Clouds/Rain/Thunderstorm/Snow)
 	var weatherJSON;
 	var elementsArray = [];
 	
@@ -43,7 +43,7 @@ window.onload = function() {
 			elementsArray[0] = weatherJSON.name; // city name
 			elementsArray[1] = weatherJSON.main.temp; // temperature default Kelvin
 			elementsArray[1] = 9/5 * (parseFloat(elementsArray[1]) - 273.15) + 32 // convert temp to Fahrenheit
-			elementsArray[2] = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm )
+			elementsArray[2] = weatherJSON.weather[0].main; // weather (Clear/Clouds/Rain/Thunderstorm/Snow)
 			document.getElementById("displayW").innerHTML = elementsArray[0] + " " + elementsArray[1].toFixed(2) + "°F " + elementsArray[2];
         });
     }
@@ -92,8 +92,8 @@ window.onload = function() {
 	}
 	function precipitate(p) { // RAIN 0, SNOW 1, ELSE NONE
 		var precipColor, precipRadius = 5; 
-		if (p == "RAIN") { precipColor = Color.blue; }
-		else if (p == "SNOW") { precipColor = Color.white; }
+		if (p == "Rain") { precipColor = Color.blue; }
+		else if (p == "Snow") { precipColor = Color.white; }
 		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
 			var drop = new Circle(precipRadius);
 			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
@@ -122,3 +122,4 @@ window.onload = function() {
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
 </body>
 </html>
+
