@@ -97,11 +97,13 @@ function start() {
 		var precipColor, precipRadius = 5; 
 		if (p == "Rain" || p == "Thunderstorm") { precipColor = Color.blue; }
 		else if (p == "Snow") { precipColor = Color.white; }
-		for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
-			var drop = new Rectangle(precipRadius, precipRadius*3);
-			drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
-			drop.setColor(precipColor); add(drop);
-			setTimer(dropFall, 1, drop);
+		if (p != "Clear" && p != "Clouds") {
+			for (var i = 0; i < getWidth()/(precipRadius*2); i++) {
+				var drop = new Rectangle(precipRadius, precipRadius*3);
+				drop.setPosition(precipRadius + precipRadius*2*i, cloudSection.getY() + cloudSection.getHeight());
+				drop.setColor(precipColor); add(drop);
+				setTimer(dropFall, 1, drop);
+			}
 		}
 	}
 	function dropFall(dp) {
