@@ -39,7 +39,8 @@ function start() {
 	function displayWeather() {
 		if (document.getElementById("newCity").value == "") { city = "Kansas City"; }
 		else { city = document.getElementById("newCity").value; }
-		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=13c9e93b7a505729f5d267751fde0e41";
+		var apiKey = "13c9e93b7a505729f5d267751fde0e41";
+		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
         $.getJSON(weatherLink,function(json){
 			weatherJSON = json;
 			//document.write(JSON.stringify(json)); // full JSON string
