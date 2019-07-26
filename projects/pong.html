@@ -70,18 +70,14 @@ function start() {
 	function randomizeDir() {
 		var lr = Randomizer.nextInt(0, 1); // Left or Right
 		var ud = Randomizer.nextInt(0, 1); // Up or Down
-		if (lr == 0) { // Left
+		if (lr == 0) // Left
 			ballDx = -SPEED;
-		}
-		else if (lr == 1) { // Right
+		else if (lr == 1) // Right
 			ballDx = SPEED;				
-		}
-		if (ud == 0) { // Up
+		if (ud == 0) // Up
 			ballDy = -SPEED;
-		}
-		else if (ud == 1) { // Down
+		else if (ud == 1) // Down
 			ballDy = SPEED;
-		}
 	}
 	
 	function addBall() {
@@ -111,13 +107,11 @@ function start() {
 	
 	function checkWalls() {
 		// Bounce Off Top Wall
-		if (ball.getY() - ball.getRadius() < 0){
+		if (ball.getY() - ball.getRadius() < 0)
 			ballDy = -ballDy;
-		}
 		// Bounce Off Bottom Wall
-		else if (ball.getY() + ball.getRadius() > getHeight()){
+		else if (ball.getY() + ball.getRadius() > getHeight())
 			ballDy = -ballDy;
-		}
 		// Reset Past Left Wall
 		else if (ball.getX() - ball.getRadius() < 0){
 			rightScore++;
@@ -142,9 +136,8 @@ function start() {
 	
 	function checkObjects() {
 		var elem = getCollidingObjects();
-		if (elem != null) {
+		if (elem != null)
 			ballDx = -ballDx;
-		}
 	}
 		
 	function movement(e){
