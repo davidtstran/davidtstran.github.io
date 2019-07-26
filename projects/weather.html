@@ -58,19 +58,17 @@ function start() {
 			else { dayNight = false; }
 			
 			background(dayNight);
-			if (precipit != "Clear") {
-				if (precipit != "Clouds") {
-					setTimer(precipitate, 100, precipit);
-				}
-			}
 			cloudCreate(precipit);
+			if (precipit == "Rain" || precipit == "Snow" || precipit == "Thunderstorm") {
+					setTimer(precipitate, 100, precipit);
+			}
 			
 			var cityTimeHours = cityHours, cityAMPM;
 			if (cityTimeHours >= 12) { cityTimeHours -= 12; cityAMPM = "PM"; }
 			else { cityAMPM = "AM"; }
 			if (parseInt(cityTimeHours) == 0) { cityTimeHours = 12; }
 		
-			document.getElementById("displayW").innerHTML = cityName + " " + parseInt(cityTimeHours) + " " + cityAMPM + " " +
+			document.getElementById("displayW").innerHTML = cityName + " (" + parseInt(cityTimeHours) + " " + cityAMPM + ") " +
 							cityTemp.toFixed(2) + "°F " + precipit;
         });
 	}
@@ -118,7 +116,7 @@ function start() {
 		}
 	}
 	function dropFall(dp) {
-		if (dp.getY() > getHeight())
+		if (dp.getY() > getHeight() - dp.getHeight())
 			remove(dp);
 		else {
 			var dropSpeed = Randomizer.nextFloat(10, 100);
