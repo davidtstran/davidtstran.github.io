@@ -111,7 +111,8 @@ function start() {
 			var drop = new Rectangle(precipRadius, precipRadius*3);
 			var dropY = Randomizer.nextInt(cloudSection.getY() + cloudSection.getHeight(), getHeight()/2);
 			drop.setPosition(precipRadius + precipRadius*2*i, dropY);
-			drop.setColor(precipColor); add(drop);
+			drop.setColor(precipColor); drop.setBorderColor(Color.white);
+			add(drop);
 			setTimer(dropFall, 1, drop);
 		}
 		if (p == "Thunderstorm") { setTimer(lightningStrike, 10000); }
