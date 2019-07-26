@@ -1,4 +1,3 @@
-
 <html>
 <head>
 	<link rel="stylesheet" href="/style.css">
@@ -30,14 +29,11 @@ window.onload = function() {
 	var BRICK_HEIGHT = 10;
 	var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
 	var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
-
 	/* Constants for ball and paddle */
 	var PADDLE_WIDTH = 80;
 	var PADDLE_HEIGHT = 15;
 	var PADDLE_OFFSET = 10;
-
 	var BALL_RADIUS = 15;
-
 	//added
 	var brick;
 	var ball;
@@ -49,7 +45,8 @@ window.onload = function() {
 	var ballStopped = false;
 	var tries = 3;
 	var totalBricks = 80;
-
+	var pbColor = Randomizer.nextColor();
+	
 	function start(){
 		document.getElementById("lives").innerHTML = "Lives Left: " + tries.toString(10);
 		bricks();
@@ -58,7 +55,6 @@ window.onload = function() {
 		paddle();
 		mouseMoveMethod (paddleMove);
 	}
-
 	function rowOfBricks(){
 		for (var i = 0; i < NUM_BRICKS_PER_ROW; i++){
 			brick = new Rectangle (BRICK_WIDTH, BRICK_HEIGHT);
@@ -67,38 +63,32 @@ window.onload = function() {
 			add(brick);
 		}
 	}
-
 	function bricks(){
 		for (f = 1; f <= NUM_ROWS; f++){
 			rowOfBricks();
 			yPos = BRICK_TOP_OFFSET + f * (BRICK_HEIGHT + BRICK_SPACING);
 		}
 	}
-
 	function color(){
-		if (f == 1 || f == 2){
+		if (f == 1 || f == 2)
 			brick.setColor (Color.red);
-		}
-		else if (f == 3 || f == 4){
+		else if (f == 3 || f == 4)
 			brick.setColor (Color.orange);
-		}
-		else if (f == 5 || f == 6){
+		else if (f == 5 || f == 6)
+			brick.setColor (Color.yellow);
+		else if (f == 7 || f == 8)
 			brick.setColor (Color.green);
-		}
-		else if (f == 7 || f == 8){
+		else if (f == 9 || f == 10)
 			brick.setColor (Color.blue);
-		}
-		else {
+		else 
 			brick.setColor (Color.black);
-		}
 	}
-
 	function ball(){
 		ball = new Circle (BALL_RADIUS);
 		ball.setPosition (getWidth()/2, getHeight()/2);
+		ball.setColor(pbColor);
 		add(ball);
 	}
-
 	function bounceBall(){
 		if (ballStopped == false){
 			checkWalls();
@@ -107,7 +97,6 @@ window.onload = function() {
 			youLose();
 		}
 	}
-
 	function checkObjects(){
 		var element = getCollidingObjects();
 		if (element != null){
@@ -119,26 +108,20 @@ window.onload = function() {
 			dy = -dy;
 		}
 	}
-
 	function getCollidingObjects(){
-		var topLeft = getElementAt (ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
-		var topRight = getElementAt (ball.getX() + ball.getRadius(), ball.getY() - ball.getRadius());
-		var botLeft = getElementAt (ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
-		var botRight = getElementAt (ball.getX() + ball.getRadius(), ball.getY() + ball.getRadius());
-		if (topLeft){
-			return topLeft;
-		}
-		else if (topRight){
-			return topRight;
-		}
-		else if (botLeft){
-			return botLeft;
-		}
-		else if (botRight){
-			return botRight;
-		}
+		var top = getElementAt (ball.getX(), ball.getY() - ball.getRadius());
+		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius());
+		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
+		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
+		if (top)
+			return top;
+		else if (bot)
+			return bot;
+		else if (right)
+			return right;
+		else if (left)
+			return left;
 	}
-
 	function checkWalls(){
 		// Bounce off right wall
 		if(ball.getX() + ball.getRadius() > getWidth()){
@@ -164,17 +147,16 @@ window.onload = function() {
 			dy = -dy;
 		}
 	}
-
 	function beginBall(e){
 		ballStopped = false;
 	}
-
 	function paddle(){
 		paddle = new Rectangle (PADDLE_WIDTH, PADDLE_HEIGHT);
 		paddle.setPosition (getWidth()/2 - PADDLE_WIDTH / 2, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
+		paddle.setColor(pbColor);
+		paddle.setBorderColor(Color.black);
 		add(paddle);
 	}
-
 	function paddleMove(e){
 		var paddleX = e.getX() - paddle.getWidth()/2;
     
@@ -187,7 +169,6 @@ window.onload = function() {
 		}
 		paddle.setPosition (paddleX, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
 	}
-
 	function youLose(){
 		if (tries == 0){
 			stopTimer(bounceBall);
@@ -197,7 +178,6 @@ window.onload = function() {
 			add(txt);
 		}
 	}
-
 	function youWin(){
 		if (totalBricks <= 0){
 			stopTimer(bounceBall);
@@ -206,8 +186,6 @@ window.onload = function() {
 			add(txt);
 		}
 	}
-
-
     	if (typeof start === 'function') {
         	start();
     	}
