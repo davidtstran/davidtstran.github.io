@@ -114,6 +114,7 @@ function start() {
 			drop.setColor(precipColor); add(drop);
 			setTimer(dropFall, 1, drop);
 		}
+		if (p == "Thunderstorm") { setTimer(lightningStrike, 10000); }
 	}
 	function dropFall(dp) {
 		if (dp.getY() > getHeight() - dp.getHeight())
@@ -121,6 +122,26 @@ function start() {
 		else {
 			var dropSpeed = Randomizer.nextFloat(10, 100);
 			dp.setPosition(dp.getX(), dp.getY() + dropSpeed);
+		}
+	}
+	function lightningStrike() {
+		var chanceLightning = Randomizer.nextInt(1, 10); 
+		if (chanceLightning == 10) { // 1in10 chance of lightning
+			var lightningLength = 50;
+			var x1 = Randomizer.nextInt(0, getWidth()), x2 = Randomizer.nextInt(0, getWidth());
+			var x3 = Randomizer.nextInt(0, getWidth()), x4 = Randomizer.nextInt(0, getWidth()); 
+			var y1 = cloudSection.getY() + cloudSection.getHeight(), y2 = y1 + lightningLength; 
+			var y3 = y2 + lightningLength, y4 = y3 + lightningLength;
+			var lghtngColor = Color.yellow;
+			var lightningLength = 10;
+			var line1 = new Line (x1, y1, x2, y2);
+			var line2 = new Line (x2, y2, x3, y3);
+			var line3 = new Line (x3, y3, x4, y4);
+			line1.setColor(lghtngColor); line2.setColor(lghtngColor); line3.setColor(lghtngColor);
+			add(line1); add(line2); add(line3);
+			setTimeout(function(){
+				remove(line1); remove(line2); remove(line3);
+			}, 100);
 		}
 	}
 }
