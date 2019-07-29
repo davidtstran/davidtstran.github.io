@@ -5,6 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
 </head>
+
 <body>
 	<p align = "center">
 		<canvas width="800" height="800" class="codehs-editor-canvas" style="background-color:black"></canvas>
@@ -24,6 +25,7 @@ window.onload = function() {
 	function start() {
 		fillBoard();
 		addCharacter();
+		addEnemy(blockSize * 10, blockSize * 10, Color.red);
 		keyDownMethod(movement);
 	}
 	
@@ -48,8 +50,7 @@ window.onload = function() {
 		mazerCenter = new Circle(1);
 		mazerCenter.setPosition(startX + mazer.getWidth()/2, startY + mazer.getHeight()/2);
 		mazerCenter.setColor(mazerColor); mazer.setColor(mazerColor);
-		add(mazerCenter); add(mazer);
-		
+		add(mazerCenter); add(mazer);	
 	}
 	function movement(e) {
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
@@ -76,6 +77,14 @@ window.onload = function() {
 				mazerCenter.move(blockSize, 0);
 			}
 		}
+	}
+	function addEnemy(xPos, yPos, color) {
+		var headRadius = 10, bodyWidth = headRadius * 2, bodyHeight = 10;
+		var numFeet = 4, footRadius = bodyWidth / (numFeet * 2);
+		var head = new Circle(headRadius);
+		head.setColor(color); head.setPosition(xPos, yPos); add(head);
+		var body = new Rectangle(bodyWidth, bodyHeight);
+		body.setColor(color); body.setPosition(xPos - bodyWidth/2, yPos); add(body);
 	}
 	
 	if (typeof start == 'function')
