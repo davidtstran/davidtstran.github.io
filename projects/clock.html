@@ -19,6 +19,10 @@ window.onload = function() {
 	removeAll();
 	var nowTime, clock, clockHandsArray = [];
 	var allColor = Color.white;
+	var clockTimeColor = Color.white;
+	var hourHandColor = Color.white;
+	var minHandColor = new Color(169,169,169);
+	var secHandColor = new Color(112,112,112);
 	var timeOfDay; // DAY/NIGHT (change background to reflect) ?
 	var BUFFER = 10;
 	
@@ -76,7 +80,7 @@ window.onload = function() {
 		var hourHand = clockHandsArray[hrs*5];
 		var minHand = clockHandsArray[mins];
 		var secHand = clockHandsArray[secs];
-		hourHand.setColor(allColor); minHand.setColor(new Color(169,169,169)); secHand.setColor(new Color(112,112,112));
+		hourHand.setColor(hourHandColor); minHand.setColor(minHandColor); secHand.setColor(secHandColor);
 		hourHand.setLineWidth(5); minHand.setLineWidth(5); secHand.setLineWidth(5);
 		add(hourHand); add(minHand); add(secHand);
 	}
