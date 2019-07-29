@@ -93,22 +93,22 @@ window.onload = function() {
 	function enemyMovement(partsArray) { // 0:head, 1:body
 		var randDirection = Randomizer.nextInt(1, 4);
 		if (randDirection == 1) { // UP
-			if (true) {
+			if (partsArray[0].getY() - blockSize > 0) {
 				partsArray[0].move(0, -blockSize); partsArray[1].move(0, -blockSize);
 			}
 		}
 		else if (randDirection == 2) { // LEFT
-			if (true) {
+			if (partsArray[0].getX() - blockSize > 0) {
 				partsArray[0].move(-blockSize, 0); partsArray[1].move(-blockSize, 0);
 			}
 		}
 		else if (randDirection == 3) { // RIGHT
-			if (true) {
+			if (partsArray[0].getX() + blockSize < getWidth()) {
 				partsArray[0].move(blockSize, 0); partsArray[1].move(blockSize, 0);
 			}
 		}
 		else if (randDirection == 4) { // DOWN
-			if (true) {
+			if (partsArray[1].getY() + blockSize < getHeight()) {
 				partsArray[0].move(0, blockSize); partsArray[1].move(0, blockSize);
 			}
 		}
