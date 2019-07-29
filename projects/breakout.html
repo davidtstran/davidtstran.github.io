@@ -74,7 +74,7 @@ window.onload = function() {
 	function bricksLeft(){
 		remove(bc);
 		bc = new Text ("Bricks Remaining: " + totalBricks);
-		bc.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - getHeight()/2);
+		bc.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - bc.getHeight());
 		add(bc);	
 	}
 	function color(){
@@ -109,12 +109,9 @@ window.onload = function() {
 		var element = getCollidingObjects();
 		if (element != null){
 			if (element != paddle){
-				if (element != bc){
-					remove(element);
-					totalBricks--;
-					bricksLeft();
-					youWin();
-				}
+				remove(element);
+				totalBricks--;
+				youWin();
 			}
 			dy = -dy;
 		}
