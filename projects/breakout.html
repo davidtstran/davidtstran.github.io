@@ -74,7 +74,7 @@ window.onload = function() {
 	function bricksLeft(){
 		remove(bc);
 		bc = new Text ("Bricks Remaining: " + totalBricks);
-		bc.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - bc.getHeight());
+		bc.setPosition(getWidth()/2 - bc.getWidth()/2, getHeight() - bc.getHeight());
 		add(bc);	
 	}
 	function color(){
