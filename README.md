@@ -35,3 +35,5 @@ Projects (Ordered by Release):
   - Clock
   
   - Weather
+  
+  - Maze Game
