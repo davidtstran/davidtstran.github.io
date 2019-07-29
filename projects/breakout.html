@@ -14,6 +14,7 @@
 		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
 	<h2>Move Mouse to Move Paddle<br>Click Screen to Start/Continue</h2>
 	<h2 id = "lives"></h2>
+	<h2 id = "bricksCount"></h2>
 	<p align = "center">
 		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
 	</p>
@@ -44,7 +45,7 @@ window.onload = function() {
 	var f;  // = # of row
 	var ballStopped = false;
 	var tries = 3;
-	var totalBricks = 80, bc;
+	var totalBricks = 80;
 	var pbColor = Randomizer.nextColor();
 	
 	function start(){
@@ -72,10 +73,7 @@ window.onload = function() {
 		}
 	}
 	function bricksLeft(){
-		remove(bc);
-		bc = new Text ("Bricks Remaining: " + totalBricks);
-		bc.setPosition(getWidth()/2 - bc.getWidth()/2, getHeight() - bc.getHeight());
-		add(bc);	
+		document.getElementById("bricksCount").innerHTML = "Bricks Left: " + totalBricks.toString(10);	
 	}
 	function color(){
 		if (f == 1 || f == 2)
@@ -111,6 +109,7 @@ window.onload = function() {
 			if (element != paddle){
 				remove(element);
 				totalBricks--;
+				bricksLeft();
 				youWin();
 			}
 			dy = -dy;
@@ -121,6 +120,7 @@ window.onload = function() {
 		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius());
 		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
 		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
+		var center = getElementAt (ball.getX(), ball.getY());
 		if (top)
 			return top;
 		else if (bot)
@@ -129,6 +129,8 @@ window.onload = function() {
 			return right;
 		else if (left)
 			return left;
+		else if (center)
+			return center;
 	}
 	function checkWalls(){
 		// Bounce off right wall
