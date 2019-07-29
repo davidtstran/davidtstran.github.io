@@ -26,6 +26,9 @@ window.onload = function() {
 		fillBoard();
 		addCharacter();
 		addEnemy(blockSize * 10, blockSize * 10, Color.red);
+		addEnemy(blockSize * 11, blockSize * 10, Color.green);
+		addEnemy(blockSize * 12, blockSize * 10, Color.orange);
+		addEnemy(blockSize * 13, blockSize * 10, Color.purple);
 		keyDownMethod(movement);
 	}
 	
@@ -79,12 +82,36 @@ window.onload = function() {
 		}
 	}
 	function addEnemy(xPos, yPos, color) {
-		var headRadius = 10, bodyWidth = headRadius * 2, bodyHeight = 10;
-		var numFeet = 4, footRadius = bodyWidth / (numFeet * 2);
+		var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
 		var head = new Circle(headRadius);
-		head.setColor(color); head.setPosition(xPos, yPos); add(head);
+		head.setColor(color); head.setPosition(xPos + blockSize/2, yPos + blockSize/2); add(head);
 		var body = new Rectangle(bodyWidth, bodyHeight);
-		body.setColor(color); body.setPosition(xPos - bodyWidth/2, yPos); add(body);
+		body.setColor(color); body.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2); add(body);
+		var enemyParts = []; enemyParts[0] = head; enemyParts[1] = body;
+		setTimer(enemyMovement, 100, enemyParts);
+	}
+	function enemyMovement(partsArray) { // 0:head, 1:body
+		var randDirection = Randomizer.nextInt(1, 4);
+		if (randDirection == 1) { // UP
+			if (true) {
+				partsArray[0].move(0, -blockSize); partsArray[1].move(0, -blockSize);
+			}
+		}
+		else if (randDirection == 2) { // LEFT
+			if (true) {
+				partsArray[0].move(-blockSize, 0); partsArray[1].move(-blockSize, 0);
+			}
+		}
+		else if (randDirection == 3) { // RIGHT
+			if (true) {
+				partsArray[0].move(blockSize, 0); partsArray[1].move(blockSize, 0);
+			}
+		}
+		else if (randDirection == 4) { // DOWN
+			if (true) {
+				partsArray[0].move(0, blockSize); partsArray[1].move(0, blockSize);
+			}
+		}
 	}
 	
 	if (typeof start == 'function')
