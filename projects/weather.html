@@ -41,7 +41,7 @@ function start() {
 		else { city = document.getElementById("newCity").value; }
 		var apiKey = "13c9e93b7a505729f5d267751fde0e41";
 		var weatherLink = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-        $.getJSON(weatherLink,function(json){
+        	$.getJSON(weatherLink,function(json){
 			weatherJSON = json;
 			//document.write(JSON.stringify(json)); // full JSON string
 			cityName = weatherJSON.name; // city name
@@ -71,7 +71,7 @@ function start() {
 		
 			document.getElementById("displayW").innerHTML = cityName + " (" + parseInt(cityTimeHours) + " " + cityAMPM + ") " +
 							cityTemp.toFixed(2) + "°F " + precipit;
-        });
+        	});
 	}
 	function background(dN) { // true if day, false if night
 		var background = new Rectangle(getWidth(), getHeight());
