@@ -54,12 +54,14 @@ window.onload = function() {
 		setTimer(bounceBall, 20);
 		paddle();
 		mouseMoveMethod (paddleMove);
+		bricksLeft();
 	}
 	function rowOfBricks(){
 		for (var i = 0; i < NUM_BRICKS_PER_ROW; i++){
 			brick = new Rectangle (BRICK_WIDTH, BRICK_HEIGHT);
 			brick.setPosition (BRICK_SPACING + i * (BRICK_WIDTH + BRICK_SPACING), yPos);
-			color();
+			//color();
+			brick.setColor(pbColor);
 			add(brick);
 		}
 	}
@@ -68,6 +70,11 @@ window.onload = function() {
 			rowOfBricks();
 			yPos = BRICK_TOP_OFFSET + f * (BRICK_HEIGHT + BRICK_SPACING);
 		}
+	}
+	function bricksLeft(){
+		var txt = new Text ("Bricks Remaining: " + totalBricks);
+		txt.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - getHeight()/2);
+		add(txt);	
 	}
 	function color(){
 		if (f == 1 || f == 2)
@@ -103,6 +110,7 @@ window.onload = function() {
 			if (element != paddle){
 				remove(element);
 				totalBricks--;
+				bricksLeft();
 				youWin();
 			}
 			dy = -dy;
@@ -179,7 +187,7 @@ window.onload = function() {
 		}
 	}
 	function youWin(){
-		if (totalBricks <= 0){
+		if (totalBricks == 0){
 			stopTimer(bounceBall);
 			var txt = new Text ("You Win!");
 			txt.setPosition (getWidth()/2 - txt.getWidth()/2, getHeight()/2);
