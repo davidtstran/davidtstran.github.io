@@ -18,7 +18,6 @@
 window.onload = function() {
 	removeAll();
 	var nowTime, clock, clockHandsArray = [];
-	var allColor = Color.white;
 	var clockTimeColor = Color.white;
 	var hourHandColor = Color.white;
 	var minHandColor = new Color(169,169,169);
@@ -39,7 +38,7 @@ window.onload = function() {
 							 + "  " + hour(nowTime.getHours()) + ":" + time00(nowTime.getMinutes()) 
 							 + ":" + time00(nowTime.getSeconds()) + AMPM);
 		date.setPosition(getWidth()/2 - date.getWidth()/2, date.getHeight() + BUFFER);
-		date.setColor(allColor);
+		date.setColor(clockTimeColor);
 		add(date);
 		displayClock(); // outline and tick markers
 		clockHands(nowTime.getHours(), nowTime.getMinutes(), nowTime.getSeconds());
@@ -59,7 +58,7 @@ window.onload = function() {
 	}
 	function displayClock() {
 		clock = new Circle (150);
-		clock.setBorderColor(allColor);
+		clock.setBorderColor(clockTimeColor);
 		clock.setBorderWidth(10);
 		clock.setPosition(getWidth()/2, getHeight()/2 + BUFFER);
 		add(clock);
