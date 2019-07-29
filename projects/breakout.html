@@ -159,25 +159,12 @@ window.onload = function() {
 				add(txt);
 			}
 		}
-		chancePowers();
 		dy = -dy; 
 	}
-	function chancePowers() { // 1 in 1000 chance power ups
-		var randZer = Randomizer.nextInt(1, 1000);
-		if (randZer == 1)
-			paddle.setWidth(paddle.getWidth() * 2);
-		else if (randZer == 2) {
-			tries += 1;
-			document.getElementById("lives").innerHTML = "Lives Left: " + tries.toString(10);
-		}
-		else if (randZer == 3)
-			ball.setRadius(ball.getRadius() / 2);
-	}
 	
-	
-    if (typeof start === 'function') {
-        start();
-    }
+	if (typeof start === 'function') {
+        	start();
+    	}
 };
 
 </script>
