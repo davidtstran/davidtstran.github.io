@@ -44,7 +44,7 @@ window.onload = function() {
 	var f;  // = # of row
 	var ballStopped = false;
 	var tries = 3;
-	var totalBricks = 80;
+	var totalBricks = 80, bc;
 	var pbColor = Randomizer.nextColor();
 	
 	function start(){
@@ -72,9 +72,10 @@ window.onload = function() {
 		}
 	}
 	function bricksLeft(){
-		var txt = new Text ("Bricks Remaining: " + totalBricks);
-		txt.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - getHeight()/2);
-		add(txt);	
+		remove(bc);
+		bc = new Text ("Bricks Remaining: " + totalBricks);
+		bc.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight() - getHeight()/2);
+		add(bc);	
 	}
 	function color(){
 		if (f == 1 || f == 2)
@@ -108,10 +109,12 @@ window.onload = function() {
 		var element = getCollidingObjects();
 		if (element != null){
 			if (element != paddle){
-				remove(element);
-				totalBricks--;
-				bricksLeft();
-				youWin();
+				if (element != bc){
+					remove(element);
+					totalBricks--;
+					bricksLeft();
+					youWin();
+				}
 			}
 			dy = -dy;
 		}
@@ -187,7 +190,7 @@ window.onload = function() {
 		}
 	}
 	function youWin(){
-		if (totalBricks == 0){
+		if (totalBricks <= 0){
 			stopTimer(bounceBall);
 			var txt = new Text ("You Win!");
 			txt.setPosition (getWidth()/2 - txt.getWidth()/2, getHeight()/2);
