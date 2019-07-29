@@ -16,10 +16,15 @@ window.onload = function() {
 	stopAllTimers();
 	
 	var blockSize = 20;
+	var borderColor = Color.blue;
 	var numBlocks = getHeight() / blockSize;
+	var mazer, mazerCenter;
+	var mazerColor = Color.yellow;
 	
 	function start() {
 		fillBoard();
+		addCharacter();
+		keyDownMethod(movement);
 	}
 	
 	function fillBoard() {
@@ -27,9 +32,48 @@ window.onload = function() {
 			for (var col = 0; col < numBlocks; col++) {
 				var block = new Rectangle (blockSize, blockSize);
 				block.setColor(Color.black);
-				block.setBorderColor(Color.blue);
+				block.setBorderColor(borderColor);
 				block.setPosition(col * blockSize, row * blockSize);
 				add(block);
+			}
+		}
+	}
+	function addCharacter() {
+		var startX = 0, startY = 0 
+		var scale = 4;
+		mazer = new Polygon();
+		mazer.addPoint(startX + 0*scale, startY + 5*scale);
+		mazer.addPoint(startX + 2.5*scale, startY + 0*scale);
+		mazer.addPoint(startX + 5*scale, startY + 5*scale);
+		mazerCenter = new Circle(1);
+		mazerCenter.setPosition(startX + mazer.getWidth()/2, startY + mazer.getHeight()/2);
+		mazerCenter.setColor(mazerColor); mazer.setColor(mazerColor);
+		add(mazerCenter); add(mazer);
+		
+	}
+	function movement(e) {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+			if (mazerCenter.getY() - blockSize > 0) {
+				mazer.move(0, -blockSize);
+				mazerCenter.move(0, -blockSize);
+			}
+		}
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			if (mazerCenter.getX() - blockSize > 0) {
+				mazer.move(-blockSize, 0);
+				mazerCenter.move(-blockSize, 0);
+			}
+		}
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			if (mazerCenter.getY() + blockSize < getHeight()) {
+				mazer.move(0, blockSize);
+				mazerCenter.move(0, blockSize);
+			}
+		}
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			if (mazerCenter.getX() + blockSize < getWidth()) {
+				mazer.move(blockSize, 0);
+				mazerCenter.move(blockSize, 0);
 			}
 		}
 	}
