@@ -135,9 +135,12 @@ function start() {
 	}
 	
 	function checkObjects() {
-		var elem = getCollidingObjects();
-		if (elem != null)
-			ballDx = -ballDx;
+		var elem;
+		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
+		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
+		if (left != null) { elem = left; }
+		else if (right != null) { elem = right; }
+		if (elem != null) { ballDx = -ballDx; }
 	}
 		
 	function movement(e){
@@ -158,15 +161,6 @@ function start() {
 			if (paddleR.getY() < (getHeight() - pHeight))
 				paddleR.move(0, pDy);
 		}
-	}
-	
-	function getCollidingObjects() {
-		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
-		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
-		if (left)
-			return left;
-		else if (right)
-			return right;
 	}
 	
 	function pauseGame(e) {
