@@ -18,7 +18,8 @@ window.onload = function() {
 	
 	var blockSize = 20;
 	var borderColor = Color.blue;
-	var numBlocks = getHeight() / blockSize;
+	var numBlocks = getHeight() / blockSize; // per row or col
+	var totalBlocks = Math.pow(numBlocks, 2);
 	var foodRadius = 3;
 	var mazer, mazerCenter;
 	var canMove = true;
@@ -83,11 +84,15 @@ window.onload = function() {
 					remove(mazerCenter);
 					remove(mazer);
 					canMove = false;
+					gameEnd("LOSE");
 					break;
 				}
 			}
-			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00"))
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00")) {
 				remove(collideElem);
+				totalBlocks--;
+				if (totalBlocks == 0) { gameEnd("WIN"); }
+			}
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (mazerCenter.getY() - blockSize > 0) {
 					mazer.move(0, -blockSize);
@@ -127,25 +132,35 @@ window.onload = function() {
 	function enemyMovement(partsArray) { // 0:head, 1:body
 		var randDirection = Randomizer.nextInt(1, 4);
 		if (randDirection == 1) { // UP
-			if (partsArray[0].getY() - blockSize > 0) {
+			if (partsArray[0].getY() - blockSize > 0)
 				partsArray[0].move(0, -blockSize); partsArray[1].move(0, -blockSize);
-			}
 		}
 		else if (randDirection == 2) { // LEFT
-			if (partsArray[0].getX() - blockSize > 0) {
+			if (partsArray[0].getX() - blockSize > 0)
 				partsArray[0].move(-blockSize, 0); partsArray[1].move(-blockSize, 0);
-			}
 		}
 		else if (randDirection == 3) { // RIGHT
-			if (partsArray[0].getX() + blockSize < getWidth()) {
+			if (partsArray[0].getX() + blockSize < getWidth())
 				partsArray[0].move(blockSize, 0); partsArray[1].move(blockSize, 0);
-			}
 		}
 		else if (randDirection == 4) { // DOWN
-			if (partsArray[1].getY() + blockSize < getHeight()) {
+			if (partsArray[1].getY() + blockSize < getHeight()) 
 				partsArray[0].move(0, blockSize); partsArray[1].move(0, blockSize);
-			}
 		}
+	}
+	
+	function gameEnd(geText) {
+		var gameEndText;
+		if (geText == "LOSE") { gameEndText = "Game Over"; }
+		else if (geText == "WIN") { gameEndText = "Win!"; }
+		var gameEnd = new Text (gameEndText, '50pt Arial');
+		gameEnd.setPosition(getWidth()/2 - gameEnd.getWidth()/2, getHeight()/2);
+		gameEnd.setColor(Color.white);
+		gameEnd.setBorderColor(Color.black);
+		var endBox = new Rectangle (gameEnd.getWidth(), gameEnd.getHeight());
+		endBox.setPosition(getWidth()/2 - endBox.getWidth()/2, getHeight()/2 - endBox.getHeight());
+		add(endBox);
+		add(gameEnd);
 	}
 	
 	if (typeof start == 'function')
