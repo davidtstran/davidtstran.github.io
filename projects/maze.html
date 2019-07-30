@@ -19,12 +19,14 @@ window.onload = function() {
 	var blockSize = 20;
 	var borderColor = Color.blue;
 	var numBlocks = getHeight() / blockSize;
+	var foodRadius = 3;
 	var mazer, mazerCenter;
 	var mazerColor = Color.yellow;
 	
 	function start() {
-		fillBoard();
+		mazeLayout();
 		addCharacter();
+		fillBoard();
 		addEnemy(blockSize * 10, blockSize * 10, Color.red);
 		addEnemy(blockSize * 11, blockSize * 10, Color.green);
 		addEnemy(blockSize * 12, blockSize * 10, Color.orange);
@@ -32,10 +34,16 @@ window.onload = function() {
 		keyDownMethod(movement);
 	}
 	
-	function fillBoard() {
+	function mazeLayout() {
 		for (var row = 0; row < numBlocks; row++) {
 			for (var col = 0; col < numBlocks; col++) {
 				addBorderBlock(col * blockSize, row * blockSize);
+			}
+		}
+	}
+	function fillBoard() {
+		for (var row = 0; row < numBlocks; row++) {
+			for (var col = 0; col < numBlocks; col++) {
 				addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2);
 			}
 		}
@@ -47,7 +55,7 @@ window.onload = function() {
 		add(block);
 	}
 	function addFood(xPos, yPos) {
-		var food = new Circle(3);
+		var food = new Circle(foodRadius);
 		food.setColor(mazerColor);
 		food.setPosition(xPos, yPos);
 		add(food);
@@ -59,12 +67,15 @@ window.onload = function() {
 		mazer.addPoint(startX + 0*scale, startY + 5*scale);
 		mazer.addPoint(startX + 2.5*scale, startY + 0*scale);
 		mazer.addPoint(startX + 5*scale, startY + 5*scale);
-		mazerCenter = new Circle(1);
+		mazerCenter = new Circle(foodRadius);
 		mazerCenter.setPosition(startX + mazer.getWidth()/2, startY + mazer.getHeight()/2);
-		mazerCenter.setColor(mazerColor); mazer.setColor(mazerColor);
+		mazer.setColor(mazerColor);
 		add(mazerCenter); add(mazer);	
 	}
 	function movement(e) {
+		var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
+		if (collideElem.getType() != "Polygon")
+			remove(collideElem);
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 			if (mazerCenter.getY() - blockSize > 0) {
 				mazer.move(0, -blockSize);
@@ -90,6 +101,7 @@ window.onload = function() {
 			}
 		}
 	}
+	
 	function addEnemy(xPos, yPos, color) {
 		var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
 		var head = new Circle(headRadius);
