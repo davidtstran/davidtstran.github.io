@@ -19,7 +19,7 @@ window.onload = function() {
 	var blockSize = 20;
 	var borderColor = Color.blue;
 	var numBlocks = getHeight() / blockSize; // per row or col
-	var totalBlocks = Math.pow(numBlocks, 2);
+	var totalBlocks = numBlocks * numBlocks;
 	var foodRadius = 3;
 	var powerFoodRadius = foodRadius * 2;
 	var powerColor = Color.cyan;
@@ -85,6 +85,7 @@ window.onload = function() {
 		add(mazerCenter); add(mazer);	
 	}
 	function movement(e) {
+		if (totalBlocks == 0) { gameEnd("WIN"); }
 		if (canMove) {
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (mazerCenter.getY() - blockSize > 0) {
@@ -113,10 +114,6 @@ window.onload = function() {
 			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
 			for (var i = 0; i < enemyColor.length; i++) {
 				if (collideElem.getColor() == enemyColor[i]) {
-					stopAllTimers();
-					remove(mazerCenter);
-					remove(mazer);
-					canMove = false;
 					gameEnd("LOSE");
 					break;
 				}
@@ -131,7 +128,6 @@ window.onload = function() {
 				}
 				remove(collideElem); 
 				totalBlocks--;
-				if (totalBlocks == 0) { gameEnd("WIN"); }
 			}
 			else if (collideElem.getColor() == "#00FFFF") { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
@@ -177,6 +173,10 @@ window.onload = function() {
 	}
 	
 	function gameEnd(geText) {
+		stopAllTimers();
+		remove(mazerCenter);
+		remove(mazer);
+		canMove = false;
 		var gameEndText;
 		if (geText == "LOSE") { gameEndText = "Game Over"; }
 		else if (geText == "WIN") { gameEndText = "Win!"; }
