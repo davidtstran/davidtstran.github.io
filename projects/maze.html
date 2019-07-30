@@ -11,8 +11,6 @@
 		<canvas width="800" height="800" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
-	<h2 id = "a"></h2>
-	
 <script>
 window.onload = function() {
 	removeAll();
@@ -32,12 +30,7 @@ window.onload = function() {
 	var enemyColor = [ Color.red, Color.green, Color.orange, Color.purple ];
 	var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
 	
-	function printX() { 
-		document.getElementById("a").innerHTML = "Food Left: " + totalBlocks.toString(10);
-	}
 	function start() {
-		printX(); ////////////////////////////
-	
 		mazeLayout();
 		addCharacter();
 		fillBoard();
@@ -135,7 +128,6 @@ window.onload = function() {
 				}
 				remove(collideElem); 
 				totalBlocks--;
-				printX(); ////////////////////////////
 			}
 			else if (collideElem.getColor() == "#00FFFF") { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
