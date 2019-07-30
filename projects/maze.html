@@ -23,6 +23,7 @@ window.onload = function() {
 	var foodRadius = 3;
 	var powerFoodRadius = foodRadius * 2;
 	var powerColor = Color.cyan;
+	var powerTimer = 0; // 3 seconds for each power food
 	var mazer, mazerCenter;
 	var canMove = true;
 	var mazerColor = Color.yellow;
@@ -121,10 +122,18 @@ window.onload = function() {
 			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00")) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
 					//mazer.setColor(powerColor); // changes user to power color (can eat enemy)
+					powerTimer += 3000;
 					for (var i = 0; i < enemyArray.length; i++) {
 						enemyArray[i].head.setColor(powerColor);
 						enemyArray[i].body.setColor(powerColor);
 					}
+					setTimeout(function() {
+						for (var i = 0; i < enemyArray.length; i++) {
+							enemyArray[i].head.setColor(enemyColor[i]);
+							enemyArray[i].body.setColor(enemyColor[i]);
+							powerTimer = 0;
+						}
+					}, powerTimer); // 3 seconds
 				}
 				remove(collideElem); 
 				totalBlocks--;
