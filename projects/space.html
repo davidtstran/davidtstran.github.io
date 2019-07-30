@@ -1,220 +1,172 @@
 <html>
 <head>
 	<link rel="stylesheet" href="/style.css">
-	<title>Space Battle</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<title>Maze Game</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
 </head>
+
 <body>
-	<header id = "header">(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
-		David Tran Header
-		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> 
-	<h2>Space: WASD/Arrows Movement<br>
-	    Enemies Spawn Every 5 Seconds (Clear All to Win) <br> </h2>
-	
 	<p align = "center">
-		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
-		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
+		<canvas width="800" height="800" class="codehs-editor-canvas" style="background-color:black"></canvas>
 	</p>
 	
 <script>
-function start() {
-	removeAll(); // clear canvas
+window.onload = function() {
+	removeAll();
 	stopAllTimers();
 	
-	// setFullscreen(); // create resizable full screen canvas
-
-	var ship, centerShip, sStartX = getWidth()/2, sStartY = getHeight()/2;
-	var shot;
-	var moveSize = 10;
-	var health = [], fullBars = 10, life = [], numLives = 3; // 10 = MAX HEALTH per LIFE
-	var healthWidth = 205, healthHeight = 40;
-	var healthBuffer = 10, barBuffer = 5; // hB = from edge, bB = between bars
-	var numEnemies = 0, numKills = 0, killText;
+	var blockSize = 20;
+	var borderColor = Color.blue;
+	var numBlocks = getHeight() / blockSize;
+	var foodRadius = 3;
+	var mazer, mazerCenter;
+	var canMove = true;
+	var mazerColor = Color.yellow;
+	var enemyColor = [ Color.red, Color.green, Color.orange, Color.purple ];
 	
-	drawShip();
-	healthBars();
-	lifePoints();
-	keyDownMethod(movement);
-	setTimer(shoot, 50);
-	enemy();
-	setTimer(enemy, 5000); // enemies respawn at constant rate
-	
-	function drawShip() {
-		ship = new Polygon(); // 15x16
-		var scale = 2;
-		ship.addPoint(sStartX + 0* scale, sStartY + 8* scale); ship.addPoint(sStartX + 1* scale, sStartY + 8* scale); 
-		ship.addPoint(sStartX + 1* scale, sStartY + 12* scale); ship.addPoint(sStartX + 3* scale, sStartY + 10* scale);
-		ship.addPoint(sStartX + 3* scale, sStartY + 6* scale); ship.addPoint(sStartX + 4* scale, sStartY + 6* scale); 
-		ship.addPoint(sStartX + 4* scale, sStartY + 8* scale); ship.addPoint(sStartX + 6* scale, sStartY + 7* scale); 
-		ship.addPoint(sStartX + 6* scale, sStartY + 4* scale); ship.addPoint(sStartX + 7* scale, sStartY + 4* scale); 
-		ship.addPoint(sStartX + 7* scale, sStartY + 1* scale); ship.addPoint(sStartX + 8* scale, sStartY + 1* scale);
-		ship.addPoint(sStartX + 8* scale, sStartY + 4* scale); ship.addPoint(sStartX + 9* scale, sStartY + 4* scale); 
-		ship.addPoint(sStartX + 9* scale, sStartY + 7* scale); ship.addPoint(sStartX + 11* scale, sStartY + 8* scale); 
-		ship.addPoint(sStartX + 11* scale, sStartY + 6* scale); ship.addPoint(sStartX + 12* scale, sStartY + 6* scale); 
-		ship.addPoint(sStartX + 12* scale, sStartY + 10* scale); ship.addPoint(sStartX + 14* scale, sStartY + 12* scale);
-		ship.addPoint(sStartX + 14* scale, sStartY + 8* scale); ship.addPoint(sStartX + 15* scale, sStartY + 8* scale); 
-		ship.addPoint(sStartX + 15* scale, sStartY + 17* scale); ship.addPoint(sStartX + 14* scale, sStartY + 17* scale); 
-		ship.addPoint(sStartX + 14* scale, sStartY + 16* scale); ship.addPoint(sStartX + 11* scale, sStartY + 13* scale); 
-		ship.addPoint(sStartX + 11* scale, sStartY + 15* scale); ship.addPoint(sStartX + 9* scale, sStartY + 15* scale);
-		ship.addPoint(sStartX + 9* scale, sStartY + 14* scale); ship.addPoint(sStartX + 8* scale, sStartY + 14* scale); 
-		ship.addPoint(sStartX + 8* scale, sStartY + 17* scale); ship.addPoint(sStartX + 7* scale, sStartY + 17* scale); 
-		ship.addPoint(sStartX + 7* scale, sStartY + 14* scale); ship.addPoint(sStartX + 6* scale, sStartY + 14* scale); 
-		ship.addPoint(sStartX + 6* scale, sStartY + 15* scale); ship.addPoint(sStartX + 4* scale, sStartY + 15* scale);
-		ship.addPoint(sStartX + 4* scale, sStartY + 13* scale); ship.addPoint(sStartX + 1* scale, sStartY + 16* scale); 
-		ship.addPoint(sStartX + 1* scale, sStartY + 17* scale); ship.addPoint(sStartX + 0* scale, sStartY + 17* scale); 
-		ship.setColor(Color.white);
-		centerShip = new Circle(5);
-		centerShip.setPosition(sStartX + ship.getWidth()/2, sStartY + ship.getHeight()/2);
-		centerShip.setColor(Color.white);
-		add(centerShip);
-		add(ship);
-		
-		shot = new Circle(3); 
-		shot.setPosition(centerShip.getX(), centerShip.getY());
-		shot.setColor(Color.black);
-		shot.setBorderColor(Color.white);
-		add(shot);
-		
-		killText = new Text("Number of Kills: " + numKills, '10pt Arial');
-		killText.setColor(Color.white);
-		killText.setPosition(getWidth()/2 - killText.getWidth()/2 + moveSize, getHeight() - killText.getHeight());
-		add(killText);
+	function start() {
+		mazeLayout();
+		addCharacter();
+		fillBoard();
+		addEnemy(blockSize * 10, blockSize * 10, enemyColor[0]);
+		addEnemy(blockSize * 11, blockSize * 10, enemyColor[1]);
+		addEnemy(blockSize * 12, blockSize * 10, enemyColor[2]);
+		addEnemy(blockSize * 13, blockSize * 10, enemyColor[3]);
+		keyDownMethod(movement);
 	}
 	
-	function healthBars() {
-		for (var barN = 0; barN < fullBars; barN++) { // 10 health bars = FULL
-			health[barN] = new Rectangle (15, 30);
-			health[barN].setColor(Color.green);
-			health[barN].setPosition(barBuffer + (barN * 20), getHeight() - healthHeight + barBuffer);  // 20 = bar(15) + barBuffer    
-			add(health[barN]);
+	function mazeLayout() {
+		for (var row = 0; row < numBlocks; row++) {
+			for (var col = 0; col < numBlocks; col++) {
+				addBorderBlock(col * blockSize, row * blockSize);
+			}
 		}
 	}
-	function lifePoints() {
-		for (var livesCount = 0; livesCount < numLives; livesCount++) {
-			var scale = 1.5;
-			var lStartX = getWidth() - (ship.getWidth() * scale) * (livesCount + 1);
-			var lStartY = getHeight() - healthHeight;
-			life[livesCount] = new Polygon(); // 15x16
-			life[livesCount].addPoint(lStartX + 0* scale, lStartY + 8* scale); life[livesCount].addPoint(lStartX + 1* scale, lStartY + 8* scale); 
-			life[livesCount].addPoint(lStartX + 1* scale, lStartY + 12* scale); life[livesCount].addPoint(lStartX + 3* scale, lStartY + 10* scale);
-			life[livesCount].addPoint(lStartX + 3* scale, lStartY + 6* scale); life[livesCount].addPoint(lStartX + 4* scale, lStartY + 6* scale); 
-			life[livesCount].addPoint(lStartX + 4* scale, lStartY + 8* scale); life[livesCount].addPoint(lStartX + 6* scale, lStartY + 7* scale); 
-			life[livesCount].addPoint(lStartX + 6* scale, lStartY + 4* scale); life[livesCount].addPoint(lStartX + 7* scale, lStartY + 4* scale); 
-			life[livesCount].addPoint(lStartX + 7* scale, lStartY + 1* scale); life[livesCount].addPoint(lStartX + 8* scale, lStartY + 1* scale);
-			life[livesCount].addPoint(lStartX + 8* scale, lStartY + 4* scale); life[livesCount].addPoint(lStartX + 9* scale, lStartY + 4* scale); 
-			life[livesCount].addPoint(lStartX + 9* scale, lStartY + 7* scale); life[livesCount].addPoint(lStartX + 11* scale, lStartY + 8* scale); 
-			life[livesCount].addPoint(lStartX + 11* scale, lStartY + 6* scale); life[livesCount].addPoint(lStartX + 12* scale, lStartY + 6* scale); 
-			life[livesCount].addPoint(lStartX + 12* scale, lStartY + 10* scale); life[livesCount].addPoint(lStartX + 14* scale, lStartY + 12* scale);
-			life[livesCount].addPoint(lStartX + 14* scale, lStartY + 8* scale); life[livesCount].addPoint(lStartX + 15* scale, lStartY + 8* scale); 
-			life[livesCount].addPoint(lStartX + 15* scale, lStartY + 17* scale); life[livesCount].addPoint(lStartX + 14* scale, lStartY + 17* scale); 
-			life[livesCount].addPoint(lStartX + 14* scale, lStartY + 16* scale); life[livesCount].addPoint(lStartX + 11* scale, lStartY + 13* scale); 
-			life[livesCount].addPoint(lStartX + 11* scale, lStartY + 15* scale); life[livesCount].addPoint(lStartX + 9* scale, lStartY + 15* scale);
-			life[livesCount].addPoint(lStartX + 9* scale, lStartY + 14* scale); life[livesCount].addPoint(lStartX + 8* scale, lStartY + 14* scale); 
-			life[livesCount].addPoint(lStartX + 8* scale, lStartY + 17* scale); life[livesCount].addPoint(lStartX + 7* scale, lStartY + 17* scale); 
-			life[livesCount].addPoint(lStartX + 7* scale, lStartY + 14* scale); life[livesCount].addPoint(lStartX + 6* scale, lStartY + 14* scale); 
-			life[livesCount].addPoint(lStartX + 6* scale, lStartY + 15* scale); life[livesCount].addPoint(lStartX + 4* scale, lStartY + 15* scale);
-			life[livesCount].addPoint(lStartX + 4* scale, lStartY + 13* scale); life[livesCount].addPoint(lStartX + 1* scale, lStartY + 16* scale); 
-			life[livesCount].addPoint(lStartX + 1* scale, lStartY + 17* scale); life[livesCount].addPoint(lStartX + 0* scale, lStartY + 17* scale); 
-			life[livesCount].setColor(Color.white);
-			add(life[livesCount]);
+	function fillBoard() {
+		for (var row = 0; row < numBlocks; row++) {
+			for (var col = 0; col < numBlocks; col++) {
+				addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2);
+			}
 		}
 	}
-	
+	function addBorderBlock(xPos, yPos) {
+		var block = new Rectangle (blockSize, blockSize);
+		block.setBorderColor(borderColor);
+		block.setPosition(xPos, yPos);
+		add(block);
+	}
+	function addFood(xPos, yPos) {
+		var food = new Circle(foodRadius);
+		food.setColor(mazerColor);
+		food.setPosition(xPos, yPos);
+		add(food);
+	}
+	function addCharacter() {
+		var startX = 0, startY = 0 
+		var scale = 4;
+		mazer = new Polygon();
+		mazer.addPoint(startX + 0*scale, startY + 5*scale);
+		mazer.addPoint(startX + 2.5*scale, startY + 0*scale);
+		mazer.addPoint(startX + 5*scale, startY + 5*scale);
+		mazerCenter = new Circle(foodRadius);
+		mazerCenter.setPosition(startX + mazer.getWidth()/2, startY + mazer.getHeight()/2);
+		mazer.setColor(mazerColor);
+		add(mazerCenter); add(mazer);	
+	}
 	function movement(e) {
-		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			if (centerShip.getY() - moveSize - ship.getHeight()/2 >= 0) {
-				centerShip.move(0, -moveSize);
-				ship.move(0, -moveSize);
-			}
-		}
-		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			if (centerShip.getX() - moveSize - ship.getWidth()/2 >= 0) {
-				centerShip.move(-moveSize, 0);
-				ship.move(-moveSize, 0);
-			}
-		}
-		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			if (centerShip.getY() + moveSize + ship.getHeight()/2 + healthHeight + barBuffer <= getHeight()) {
-				centerShip.move(0, moveSize);
-				ship.move(0, moveSize);
-			}
-		}
-		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (centerShip.getX() + moveSize + ship.getWidth()/2 <= getWidth()) {
-				centerShip.move(moveSize, 0);
-				ship.move(moveSize, 0);
-			}
-		}
-		if (getElementAt(centerShip.getX(), centerShip.getY()).getColor() == "#FF0000") { // center hit
-			fullBars--;
-			remove(health[fullBars]);
-			if (fullBars == 0) {
-				numLives--;
-				remove(life[numLives]);
-				if (numLives != 0) {
-					fullBars = 10;
-					healthBars();
+		if (canMove) {
+			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
+			for (var i = 0; i < enemyColor.length; i++) {
+				if (collideElem.getColor() == enemyColor[i]) {
+					stopAllTimers();
+					remove(mazerCenter);
+					remove(mazer);
+					canMove = false;
+					gameEnd("LOSE");
+					break;
 				}
 			}
-			if (numLives == 0) {
-				remove(centerShip);
-				remove(ship);
-				remove(shot);
-				stopAllTimers();
-				var end = new Text ("Game Over");
-				end.setPosition(getWidth()/2 - end.getWidth()/2, getHeight()/2);
-				end.setColor(Color.white);
-				add(end);
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00"))
+				remove(collideElem);
+			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+				if (mazerCenter.getY() - blockSize > 0) {
+					mazer.move(0, -blockSize);
+					mazerCenter.move(0, -blockSize);
+				}
 			}
-		}	
-	}
-	function shoot() {
-		shot.move(0, -moveSize);
-		var elm = getElementAt(shot.getX(), shot.getY());
-		if (elm.getColor() == "#FF0000") { // RED enemy
-			shot.setPosition(centerShip.getX(), centerShip.getY()); 
-			remove(elm);
-			numEnemies--;
-			numKills++;
-			remove(killText);
-			killText = new Text("Number of Kills: " + numKills, '10pt Arial');
-			killText.setColor(Color.white);
-			killText.setPosition(getWidth()/2 - killText.getWidth()/2 + moveSize, getHeight() - killText.getHeight());
-			add(killText);
-			if (numEnemies == 0) {
-				remove(shot);
-				stopAllTimers();
-				var win = new Text ("Win");
-				win.setPosition(getWidth()/2 - win.getWidth()/2, getHeight()/2);
-				win.setColor(Color.white);
-				add(win);
+			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+				if (mazerCenter.getX() - blockSize > 0) {
+					mazer.move(-blockSize, 0);
+					mazerCenter.move(-blockSize, 0);
+				}
 			}
-			
+			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+				if (mazerCenter.getY() + blockSize < getHeight()) {
+					mazer.move(0, blockSize);
+					mazerCenter.move(0, blockSize);
+				}
+			}
+			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+				if (mazerCenter.getX() + blockSize < getWidth()) {
+					mazer.move(blockSize, 0);
+					mazerCenter.move(blockSize, 0);
+				}
+			}
 		}
-		if (shot.getY() < 0) {
-			shot.setPosition(centerShip.getX(), centerShip.getY());
-		}	
 	}
-
-	function enemy() {
-		numEnemies++;
-		var nme = new Polygon();
-		var nmeScale = 3;
-		var nmeX = Randomizer.nextInt(0 + nme.getWidth(), getWidth() - nme.getWidth());
-		var nmeY = Randomizer.nextInt(0, getHeight() - healthHeight - barBuffer*2 - nme.getHeight() - ship.getHeight());
-		nme.addPoint(nmeX + 0*nmeScale, nmeY + 0*nmeScale);
-		nme.addPoint(nmeX + 8*nmeScale, nmeY + 0*nmeScale);
-		nme.addPoint(nmeX + 4*nmeScale, nmeY + 8*nmeScale);
-		nme.setColor(Color.red);
-		add(nme);
+	
+	function addEnemy(xPos, yPos, color) {
+		var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
+		var head = new Circle(headRadius);
+		head.setColor(color); head.setPosition(xPos + blockSize/2, yPos + blockSize/2); add(head);
+		var body = new Rectangle(bodyWidth, bodyHeight);
+		body.setColor(color); body.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2); add(body);
+		var enemyParts = []; enemyParts[0] = head; enemyParts[1] = body;
+		setTimer(enemyMovement, 500, enemyParts);
 	}
+	function enemyMovement(partsArray) { // 0:head, 1:body
+		var randDirection = Randomizer.nextInt(1, 4);
+		if (randDirection == 1) { // UP
+			if (partsArray[0].getY() - blockSize > 0) {
+				partsArray[0].move(0, -blockSize); partsArray[1].move(0, -blockSize);
+			}
+		}
+		else if (randDirection == 2) { // LEFT
+			if (partsArray[0].getX() - blockSize > 0) {
+				partsArray[0].move(-blockSize, 0); partsArray[1].move(-blockSize, 0);
+			}
+		}
+		else if (randDirection == 3) { // RIGHT
+			if (partsArray[0].getX() + blockSize < getWidth()) {
+				partsArray[0].move(blockSize, 0); partsArray[1].move(blockSize, 0);
+			}
+		}
+		else if (randDirection == 4) { // DOWN
+			if (partsArray[1].getY() + blockSize < getHeight()) {
+				partsArray[0].move(0, blockSize); partsArray[1].move(0, blockSize);
+			}
+		}
+	}
+	
+	function gameEnd(geText) {
+		var gameEndText;
+		if (geText == "LOSE") { gameEndText = "Game Over"; }
+		else if (geText == "WIN") { gameEndText = "Win!"; }
+		var gameEnd = new Text (gameEndText, '50pt Arial');
+		gameEnd.setPosition(getWidth()/2 - gameEnd.getWidth()/2, getHeight()/2);
+		gameEnd.setColor(Color.white);
+		gameEnd.setBorderColor(Color.black);
+		var endBox = new Rectangle (gameEnd.getWidth(), gameEnd.getHeight());
+		endBox.setPosition(getWidth()/2 - endBox.getWidth()/2, getHeight()/2 - endBox.getHeight());
+		add(endBox);
+		add(gameEnd);
+	}
+	
+	if (typeof start == 'function')
+		start();
 }
 </script>
 	
-	<br> <br> <br>
-	<footer>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
-		David Tran Footer
-		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </footer> 
 </body>
 </html>
