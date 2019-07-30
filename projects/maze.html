@@ -21,16 +21,18 @@ window.onload = function() {
 	var numBlocks = getHeight() / blockSize;
 	var foodRadius = 3;
 	var mazer, mazerCenter;
+	var canMove = true;
 	var mazerColor = Color.yellow;
+	var enemyColor = [ Color.red, Color.green, Color.orange, Color.purple ];
 	
 	function start() {
 		mazeLayout();
 		addCharacter();
 		fillBoard();
-		addEnemy(blockSize * 10, blockSize * 10, Color.red);
-		addEnemy(blockSize * 11, blockSize * 10, Color.green);
-		addEnemy(blockSize * 12, blockSize * 10, Color.orange);
-		addEnemy(blockSize * 13, blockSize * 10, Color.purple);
+		addEnemy(blockSize * 10, blockSize * 10, enemyColor[0]);
+		addEnemy(blockSize * 11, blockSize * 10, enemyColor[1]);
+		addEnemy(blockSize * 12, blockSize * 10, enemyColor[2]);
+		addEnemy(blockSize * 13, blockSize * 10, enemyColor[3]);
 		keyDownMethod(movement);
 	}
 	
@@ -73,31 +75,41 @@ window.onload = function() {
 		add(mazerCenter); add(mazer);	
 	}
 	function movement(e) {
-		var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
-		if (collideElem.getType() != "Polygon")
-			remove(collideElem);
-		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
-			if (mazerCenter.getY() - blockSize > 0) {
-				mazer.move(0, -blockSize);
-				mazerCenter.move(0, -blockSize);
+		if (canMove) {
+			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
+			for (var i = 0; i < enemyColor.length; i++) {
+				if (collideElem.getColor() == enemyColor[i]) {
+					stopAllTimers();
+					remove(mazerCenter);
+					remove(mazer);
+					canMove = false;
+				}
 			}
-		}
-		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
-			if (mazerCenter.getX() - blockSize > 0) {
-				mazer.move(-blockSize, 0);
-				mazerCenter.move(-blockSize, 0);
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00"))
+				remove(collideElem);
+			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+				if (mazerCenter.getY() - blockSize > 0) {
+					mazer.move(0, -blockSize);
+					mazerCenter.move(0, -blockSize);
+				}
 			}
-		}
-		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			if (mazerCenter.getY() + blockSize < getHeight()) {
-				mazer.move(0, blockSize);
-				mazerCenter.move(0, blockSize);
+			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+				if (mazerCenter.getX() - blockSize > 0) {
+					mazer.move(-blockSize, 0);
+					mazerCenter.move(-blockSize, 0);
+				}
 			}
-		}
-		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
-			if (mazerCenter.getX() + blockSize < getWidth()) {
-				mazer.move(blockSize, 0);
-				mazerCenter.move(blockSize, 0);
+			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+				if (mazerCenter.getY() + blockSize < getHeight()) {
+					mazer.move(0, blockSize);
+					mazerCenter.move(0, blockSize);
+				}
+			}
+			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+				if (mazerCenter.getX() + blockSize < getWidth()) {
+					mazer.move(blockSize, 0);
+					mazerCenter.move(blockSize, 0);
+				}
 			}
 		}
 	}
@@ -109,7 +121,7 @@ window.onload = function() {
 		var body = new Rectangle(bodyWidth, bodyHeight);
 		body.setColor(color); body.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2); add(body);
 		var enemyParts = []; enemyParts[0] = head; enemyParts[1] = body;
-		setTimer(enemyMovement, 100, enemyParts);
+		setTimer(enemyMovement, 500, enemyParts);
 	}
 	function enemyMovement(partsArray) { // 0:head, 1:body
 		var randDirection = Randomizer.nextInt(1, 4);
