@@ -21,6 +21,8 @@ window.onload = function() {
 	var numBlocks = getHeight() / blockSize; // per row or col
 	var totalBlocks = Math.pow(numBlocks, 2);
 	var foodRadius = 3;
+	var powerFoodRadius = foodRadius * 2;
+	var powerColor = Color.cyan;
 	var mazer, mazerCenter;
 	var canMove = true;
 	var mazerColor = Color.yellow;
@@ -47,7 +49,12 @@ window.onload = function() {
 	function fillBoard() {
 		for (var row = 0; row < numBlocks; row++) {
 			for (var col = 0; col < numBlocks; col++) {
-				addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2);
+				if (row == 0 && col == 0) // empty 0,0 square
+					continue;
+				else if (row == col)
+					addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2, powerFoodRadius);
+				else 
+					addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2, foodRadius);
 			}
 		}
 	}
@@ -57,8 +64,8 @@ window.onload = function() {
 		block.setPosition(xPos, yPos);
 		add(block);
 	}
-	function addFood(xPos, yPos) {
-		var food = new Circle(foodRadius);
+	function addFood(xPos, yPos, radus) {
+		var food = new Circle(radus);
 		food.setColor(mazerColor);
 		food.setPosition(xPos, yPos);
 		add(food);
@@ -77,22 +84,6 @@ window.onload = function() {
 	}
 	function movement(e) {
 		if (canMove) {
-			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
-			for (var i = 0; i < enemyColor.length; i++) {
-				if (collideElem.getColor() == enemyColor[i]) {
-					stopAllTimers();
-					remove(mazerCenter);
-					remove(mazer);
-					canMove = false;
-					gameEnd("LOSE");
-					break;
-				}
-			}
-			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00")) {
-				remove(collideElem);
-				totalBlocks--;
-				if (totalBlocks == 0) { gameEnd("WIN"); }
-			}
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (mazerCenter.getY() - blockSize > 0) {
 					mazer.move(0, -blockSize);
@@ -116,6 +107,25 @@ window.onload = function() {
 					mazer.move(blockSize, 0);
 					mazerCenter.move(blockSize, 0);
 				}
+			}
+			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
+			for (var i = 0; i < enemyColor.length; i++) {
+				if (collideElem.getColor() == enemyColor[i]) {
+					stopAllTimers();
+					remove(mazerCenter);
+					remove(mazer);
+					canMove = false;
+					gameEnd("LOSE");
+					break;
+				}
+			}
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00")) { // food
+				if (collideElem.getRadius() == powerFoodRadius) { // power food
+					mazer.setColor(powerColor); // changes user to power color (can eat enemy)
+				}
+				remove(collideElem); 
+				totalBlocks--;
+				if (totalBlocks == 0) { gameEnd("WIN"); }
 			}
 		}
 	}
