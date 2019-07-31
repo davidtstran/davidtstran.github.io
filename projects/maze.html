@@ -35,10 +35,9 @@ window.onload = function() {
 		mazeLayout();
 		addCharacter();
 		fillBoard();
-		enemyArray[0] = new Enemy(blockSize * 10, blockSize * 10, enemyColor[0]);
-		enemyArray[1] = new Enemy(blockSize * 11, blockSize * 10, enemyColor[1]);
-		enemyArray[2] = new Enemy(blockSize * 12, blockSize * 10, enemyColor[2]);
-		enemyArray[3] = new Enemy(blockSize * 13, blockSize * 10, enemyColor[3]);
+		for (var i = 0; i < enemyColor.length; i++) {
+			enemyArray[i] = new Enemy(blockSize * 10, blockSize * 10, enemyColor[i]);
+		}
 		keyDownMethod(movement);
 	}
 	
