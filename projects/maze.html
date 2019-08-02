@@ -90,6 +90,10 @@ window.onload = function() {
 						mazerCenter.move(-blockSize, 0);
 					}
 				}
+				else {
+					mazer.move(blockSize * 39, 0);
+					mazerCenter.move(blockSize * 39, 0 );
+				}
 			}
 			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 				if (mazerCenter.getY() + blockSize < getHeight()) {
@@ -107,6 +111,10 @@ window.onload = function() {
 						mazer.move(blockSize, 0);
 						mazerCenter.move(blockSize, 0);
 					}
+				}
+				else {
+					mazer.move(-blockSize * 39, 0);
+					mazerCenter.move(-blockSize * 39, 0 );
 				}
 			}
 			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
