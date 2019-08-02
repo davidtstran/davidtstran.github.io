@@ -21,6 +21,7 @@ window.onload = function() {
 	var numBlocks = getHeight() / blockSize; // per row or col
 	var totalFood = 0; // first square is blank
 	var foodRadius = 3;
+	var foodColor = Color.yellow;
 	var powerFoodRadius = foodRadius * 2;
 	var powerColor = Color.cyan;
 	var powerTimer = 0; // 3 seconds for each power food
@@ -76,7 +77,7 @@ window.onload = function() {
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (mazerCenter.getY() - blockSize > 0) {
 					var elem = getElementAt(mazerCenter.getX(), mazerCenter.getY() - blockSize);
-					if (elem == null || elem.getColor() != "#0000FF") {
+					if (elem == null || elem.getColor() != blockColor) {
 						mazer.move(0, -blockSize);
 						mazerCenter.move(0, -blockSize);
 					}
@@ -85,7 +86,7 @@ window.onload = function() {
 			else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
 				if (mazerCenter.getX() - blockSize > 0) {
 					var elem = getElementAt(mazerCenter.getX() - blockSize, mazerCenter.getY());
-					if (elem == null || elem.getColor() != "#0000FF") {
+					if (elem == null || elem.getColor() != blockColor) {
 						mazer.move(-blockSize, 0);
 						mazerCenter.move(-blockSize, 0);
 					}
@@ -98,7 +99,7 @@ window.onload = function() {
 			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 				if (mazerCenter.getY() + blockSize < getHeight()) {
 					var elem = getElementAt(mazerCenter.getX(), mazerCenter.getY() + blockSize);
-					if (elem == null || elem.getColor() != "#0000FF") {
+					if (elem == null || elem.getColor() != blockColor) {
 						mazer.move(0, blockSize);
 						mazerCenter.move(0, blockSize);
 					}
@@ -107,7 +108,7 @@ window.onload = function() {
 			else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 				if (mazerCenter.getX() + blockSize < getWidth()) {
 					var elem = getElementAt(mazerCenter.getX() + blockSize, mazerCenter.getY());
-					if (elem == null || elem.getColor() != "#0000FF") {
+					if (elem == null || elem.getColor() != blockColor) {
 						mazer.move(blockSize, 0);
 						mazerCenter.move(blockSize, 0);
 					}
@@ -124,7 +125,7 @@ window.onload = function() {
 					break;
 				}
 			}
-			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == "#FFFF00")) { // food
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
 					//mazer.setColor(powerColor); // changes user to power color (can eat enemy)
 					powerTimer += 3000;
@@ -143,7 +144,7 @@ window.onload = function() {
 				remove(collideElem); 
 				totalFood--;
 			}
-			else if (collideElem.getColor() == "#00FFFF") { // eatable enemy 
+			else if (collideElem.getColor() == powerColor) { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
 					if (collideElem == enemyArray[i].head || collideElem == enemyArray[i].body){
 						remove(enemyArray[i].head); remove(enemyArray[i].body);
@@ -174,7 +175,7 @@ window.onload = function() {
 		if (randDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
-				if (elem == null || elem.getColor() != "#0000FF") {
+				if (elem == null || elem.getColor() != blockColor) {
 					nmeBody.move(0, -blockSize);
 					nmeCenter.move(0, -blockSize);
 				}
@@ -183,7 +184,7 @@ window.onload = function() {
 		else if (randDirection == 2) { // LEFT
 			if (nmeCenter.getX() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX() - blockSize, nmeCenter.getY());
-				if (elem == null || elem.getColor() != "#0000FF") {
+				if (elem == null || elem.getColor() != blockColor) {
 					nmeBody.move(-blockSize, 0);
 					nmeCenter.move(-blockSize, 0); 
 				}
@@ -192,7 +193,7 @@ window.onload = function() {
 		else if (randDirection == 3) { // RIGHT
 			if (nmeCenter.getX() + blockSize < getWidth()) {
 				var elem = getElementAt(nmeCenter.getX() + blockSIze, nmeCenter.getY());
-				if (elem == null || elem.getColor() != "#0000FF") {
+				if (elem == null || elem.getColor() != blockColor) {
 					nmeBody.move(blockSize, 0);
 					nmeCenter.move(blockSize, 0); 
 				}
@@ -201,7 +202,7 @@ window.onload = function() {
 		else if (randDirection == 4) { // DOWN
 			if (nmeCenter.getY() + blockSize < getHeight()) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() + blockSize);
-				if (elem == null || elem.getColor() != "#0000FF") {
+				if (elem == null || elem.getColor() != blockColor) {
 					nmeBody.move(0, blockSize);
 					nmeCenter.move(0, blockSize); 
 				}
