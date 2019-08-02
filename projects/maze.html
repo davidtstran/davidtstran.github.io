@@ -154,40 +154,57 @@ window.onload = function() {
 	}
 	class Enemy {
 		constructor(xPos, yPos, color) {
-			this.head = new Circle(headRadius);
-			this.head.setColor(color); 
-			this.head.setPosition(xPos + blockSize/2, yPos + blockSize/2); 
-			add(this.head);
-			this.body = new Rectangle(bodyWidth, bodyHeight);
-			this.body.setColor(color); 
-			this.body.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2); 
-			add(this.body);
-			var enemyParts = []; enemyParts[0] = this.head; enemyParts[1] = this.body;
-			setTimer(enemyMovement, 500, enemyParts);
+			var scale = 5;
+			this.enemyBody = new Polygon();
+			this.enemyBody.addPoint(xPos + 0*scale, yPos + 4*scale);
+			this.enemyBody.addPoint(xPos + 2*scale, yPos + 0*scale);
+			this.enemyBody.addPoint(xPos + 4*scale, yPos + 4*scale);
+			this.enemyCenter = new Circle(foodRadius);
+			this.enemyCenter.setPosition(xPos + this.enemyBody.getWidth()/2, yPos + this.enemyBody.getHeight()/2);
+			this.enemyBody.setColor(color);
+			add(this.enemyCenter); add(this.enemyBody);
+			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody;
+			//setTimer(enemyMovement, 500, enemyParts); //////////
 		}
 	}
-	function enemyMovement(partsArray) { // 0:head, 1:body
-		var nmeHead = partsArray[0];
+	function enemyMovement(partsArray) { // 0:center, 1:body
+		var nmeCenter = partsArray[0];
 		var nmeBody = partsArray[1];
 		var randDirection = Randomizer.nextInt(1, 4);
 		if (randDirection == 1) { // UP
-			if ((nmeHead.getY() - blockSize > 0) && (nmeBody.getY() > 0)) {
-				nmeHead.move(0, -blockSize); nmeBody.move(0, -blockSize);
+			if (nmeCenter.getY() - blockSize > 0) {
+				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
+				if (elem == null || elem.getColor() != "#0000FF") {
+					nmeBody.move(0, -blockSize);
+					nmeCenter.move(0, -blockSize);
+				}
 			}
 		}
 		else if (randDirection == 2) { // LEFT
-			if ((nmeHead.getX() - blockSize > 0) && (nmeBody.getX() > 0)) {
-				nmeHead.move(-blockSize, 0); nmeBody.move(-blockSize, 0);
+			if (nmeCenter.getX() - blockSize > 0) {
+				var elem = getElementAt(nmeCenter.getX() - blockSize, nmeCenter.getY());
+				if (elem == null || elem.getColor() != "#0000FF") {
+					nmeBody.move(-blockSize, 0);
+					nmeCenter.move(-blockSize, 0); 
+				}
 			}
 		}
 		else if (randDirection == 3) { // RIGHT
-			if ((nmeHead.getX() + blockSize < getWidth()) && (nmeBody.getX() + nmeBody.getWidth() < getWidth())) {
-				nmeHead.move(blockSize, 0); nmeBody.move(blockSize, 0);
+			if (nmeCenter.getX() + blockSize < getWidth()) {
+				var elem = getElementAt(nmeCenter.getX() + blockSIze, nmeCenter.getY());
+				if (elem == null || elem.getColor() != "#0000FF") {
+					nmeBody.move(blockSize, 0);
+					nmeCenter.move(blockSize, 0); 
+				}
 			}
 		}
 		else if (randDirection == 4) { // DOWN
-			if ((nmeHead.getY() + blockSize < getHeight()) && (nmeBody.getY() + nmeBody.getHeight() < getHeight())) {
-				nmeHead.move(0, blockSize); nmeBody.move(0, blockSize);
+			if (nmeCenter.getY() + blockSize < getHeight()) {
+				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() + blockSize);
+				if (elem == null || elem.getColor() != "#0000FF") {
+					nmeBody.move(0, blockSize);
+					nmeCenter.move(0, blockSize); 
+				}
 			}
 		}
 	}
