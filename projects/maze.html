@@ -19,7 +19,7 @@ window.onload = function() {
 	var blockSize = 20;
 	var blockColor = Color.blue;
 	var numBlocks = getHeight() / blockSize; // per row or col
-	var totalBlocks = 0; // first square is blank
+	var totalFood = 0; // first square is blank
 	var foodRadius = 3;
 	var powerFoodRadius = foodRadius * 2;
 	var powerColor = Color.cyan;
@@ -38,9 +38,9 @@ window.onload = function() {
 		//fillBoard();
 		for (var i = 0; i < enemyColor.length; i++) {
 			if (enemyColor.length == 4)
-				enemyArray[i] = new Enemy(blockSize * (17 + i), blockSize * 17, enemyColor[i]);
+				enemyArray[i] = new Enemy(blockSize * (18 + i), blockSize * 17, enemyColor[i]);
 			else
-				enemyArray[i] = new Enemy(blockSize * 17, blockSize * 17, enemyColor[i]);
+				enemyArray[i] = new Enemy(blockSize * 18, blockSize * 17, enemyColor[i]);
 		}
 		keyDownMethod(movement);
 	}
@@ -71,7 +71,7 @@ window.onload = function() {
 		add(mazerCenter); add(mazer);	
 	}
 	function movement(e) {
-		if (totalBlocks == 0) { gameEnd("WIN"); }
+		if (totalFood == 0) { gameEnd("WIN"); }
 		if (canMove) {
 			if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
 				if (mazerCenter.getY() - blockSize > 0) {
@@ -121,7 +121,7 @@ window.onload = function() {
 					}, powerTimer); // 3 seconds
 				}
 				remove(collideElem); 
-				totalBlocks--;
+				totalFood--;
 			}
 			else if (collideElem.getColor() == "#00FFFF") { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
@@ -195,11 +195,11 @@ window.onload = function() {
 				for (var col = 0; col < numBlocks; col++) {
 					if (col == 0 || col == 19 || col == 20 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -208,11 +208,11 @@ window.onload = function() {
 					if (col == 0 || (col >= 2 && col <= 8) || (col >= 11 && col <= 17) || col == 19 || col == 20 
 						|| (col >= 22 && col <= 28) || (col >= 31 && col <= 37) || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -221,7 +221,7 @@ window.onload = function() {
 					if (col == 0 || col == 2 || col == 8 || col == 11 || col == 17 || col == 19 || col == 20
 						|| col == 22 || col == 28 || col == 31 || col == 37 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else if ((col >= 3 && col <= 7) || (col >= 12 && col <= 16) 
 						|| (col >= 23 && col <= 27) || (col >= 32 && col <= 36)) { 
@@ -229,7 +229,7 @@ window.onload = function() {
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -238,7 +238,7 @@ window.onload = function() {
 					if (col == 0 || col == 2 || col == 8 || col == 11 || col == 17
 						|| col == 22 || col == 28 || col == 31 || col == 37 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else if ((col >= 3 && col <= 7) || (col >= 12 && col <= 16) 
 						|| (col >= 23 && col <= 27) || (col >= 32 && col <= 36)) { 
@@ -246,7 +246,7 @@ window.onload = function() {
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -255,7 +255,7 @@ window.onload = function() {
 					if (col == 0 || col == 2 || col == 8 || col == 11 || col == 17 || col == 19 || col == 20
 						|| col == 22 || col == 28 || col == 31 || col == 37 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else if ((col >= 3 && col <= 7) || (col >= 12 && col <= 16) 
 						|| (col >= 23 && col <= 27) || (col >= 32 && col <= 36)) { 
@@ -263,7 +263,7 @@ window.onload = function() {
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -272,147 +272,161 @@ window.onload = function() {
 					if (col == 0 || (col >= 2 && col <= 8) || (col >= 11 && col <= 17) || col == 19 || col == 20 
 						|| (col >= 22 && col <= 28) || (col >= 31 && col <= 37) || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 7 || row == numBlocks - 8) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || col == 19 || col == 20 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 8 || row == numBlocks - 9) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || (col >= 2 && col <= 7) || (col >= 10 && col <= 15) || col == 19 || col == 20 
+						|| (col >= 24 && col <= 29) || (col >= 32 && col <= 37) || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 9 || row == numBlocks - 10) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || col == 2 || col == 7 || (col >= 17 && col <= 22)
+						|| col == 32 || col == 37 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
+					}
+					else if ((col >= 3 && col <= 6) || (col >= 33 && col <= 36)) { 
+						continue; 
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 10 || row == numBlocks - 11) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || col == 2 || col == 7 || col == 9 || (col >= 12 && col <= 15) || (col >= 24 && col <= 27)
+						|| col == 30 || (col >= 17 && col <= 22) || col == 32 || col == 37 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
+					}
+					else if ((col >= 3 && col <= 6) || (col >= 33 && col <= 36)) { 
+						continue; 
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 11 || row == numBlocks - 12) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || (col >= 2 && col <= 7) || col == 9 || col == 12 || col == 27 || col == 30
+						|| (col >= 32 && col <= 37) || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 12 || row == numBlocks - 13) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || col == 9 || col == 12 || col == 27 || col == 30 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 13 || row == numBlocks - 14) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || (col >= 3 && col <= 9) || col == 12 || (col >= 14 && col <= 18)
+						|| (col >= 21 && col <= 25) || col == 27 || (col >= 30 && col <= 36) || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 14 || row == numBlocks - 15) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if (col == 0 || col == 12 || col == 14 || col == 25 || col == 27 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 15 || row == numBlocks - 16) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if ((col >= 0 && col <= 10) || col == 12 || col == 14 || col == 17 || col == 18
+						|| col == 21 || col == 22 || col == 25 || col == 27 || (col >= 29 && col <= numBlocks-1)) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 16 || row == numBlocks - 17) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 10 || col == 29) {
+					if (col == 10 || col == 12 || col == 14 || col == 17 || col == 22 
+						|| col == 25 || col == 27 ||col == 29) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 17 || row == numBlocks - 18) {
 				for (var col = 10; col < numBlocks; col++) {
-					if (col == 10 || col == 29) {
+					if (col == 10 || col == 14 || col == 17 || col == 22 || col == 25 || col == 29) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
 			else if (row == 18 || row == numBlocks - 19) {
 				for (var col = 0; col < numBlocks; col++) {
-					if (col == 0 || col == numBlocks-1) {
+					if ((col >= 0 && col <= 10) || col == 14 || (col >= 17 && col <= 22) || col == 25
+						|| (col >= 29 && col <= numBlocks-1)) {
 						addBorderBlock(col * blockSize, row * blockSize);
-						totalBlocks++;
+						totalFood++;
 					}
 				}
 			}
@@ -425,10 +439,10 @@ window.onload = function() {
 					continue;
 				else if (row == col) {
 					addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2, powerFoodRadius);
-					totalBlocks++;
+					totalFood++;
 				} else { 
 					addFood(col * blockSize + blockSize/2, row * blockSize + blockSize/2, foodRadius);
-					totalBlocks++;
+					totalFood++;
 				}
 			}
 		}
