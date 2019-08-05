@@ -8,7 +8,7 @@
 
 <body>
 	<p align = "center">
-		<canvas width="400" height="600" class="codehs-editor-canvas" style="background-color:lightgray"></canvas>
+		<canvas width="400" height="600" class="codehs-editor-canvas" style="background-color:lightgray"></canvas> 
 	</p>
 	
 <script>
@@ -56,15 +56,19 @@ window.onload = function() {
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
 			rPaddle.setRotation(45);	
 		}
-		else if (e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.letter('S')) {
-		
+		else if (e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
+			setTimer(ballMove, 1);
 		}
-		
+	}
+	function ballMove() {
+		if (ball.getY() - ball.getRadius() > 0) 
+			ball.move(0, -10);
 	}
 	
 	function createBackground() {
 		var ballArea = new Rectangle(ballStartSpaceWidth, getHeight());
 		ballArea.setColor(new Color(222, 184, 135));
+		ballArea.setBorderColor(Color.black);
 		ballArea.setPosition(getWidth() - ballStartSpaceWidth, 0);
 		add(ballArea);
 	}
