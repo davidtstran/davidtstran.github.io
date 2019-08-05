@@ -8,7 +8,7 @@
 
 <body>
 	<p align = "center">
-		<canvas width="400" height="600" class="codehs-editor-canvas" style="background-color:black"></canvas>
+		<canvas width="400" height="600" class="codehs-editor-canvas" style="background-color:lightgray"></canvas>
 	</p>
 	
 <script>
@@ -16,8 +16,57 @@ window.onload = function() {
 	removeAll();
 	stopAllTimers();
 	
-	function start() {
+	var ballStartSpaceWidth = 25; 
+	var lPaddle, rPaddle;
+	var paddleWidth = 75, paddleHeight = 10, paddleXSpacing = 115, paddleYSpacing = getHeight() - 50;
+	var paddleColor = Color.purple;
+	var ball;
+	var ballRadius = 10, ballColor = Color.white;
+	var ballStrength = 0;
 	
+	function start() {
+		createBackground();
+		addBall();
+		addPaddles();
+		keyUpMethod(paddleReset);
+		keyDownMethod(paddleMove);
+	}
+	
+	function addPaddles() {
+		lPaddle = new Rectangle(paddleWidth, paddleHeight); rPaddle = new Rectangle(paddleWidth, paddleHeight);
+		lPaddle.setPosition(0 + paddleXSpacing - ballStartSpaceWidth, paddleYSpacing); 
+		rPaddle.setPosition(getWidth() - paddleXSpacing - paddleWidth - ballStartSpaceWidth, paddleYSpacing);
+		lPaddle.setColor(paddleColor); rPaddle.setColor(paddleColor);
+		add(lPaddle); add(rPaddle);
+	}
+	function addBall() {
+		ball = new Circle(ballRadius);
+		ball.setPosition(getWidth() - ballStartSpaceWidth/2, paddleYSpacing);
+		ball.setColor(ballColor);
+		add(ball);
+	}
+	function paddleReset() {
+		lPaddle.setRotation(45);
+		rPaddle.setRotation(-45);
+	}
+	function paddleMove(e) {
+		if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+			lPaddle.setRotation(-45);	
+		}
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+			rPaddle.setRotation(45);	
+		}
+		else if (e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.letter('S')) {
+		
+		}
+		
+	}
+	
+	function createBackground() {
+		var ballArea = new Rectangle(ballStartSpaceWidth, getHeight());
+		ballArea.setColor(new Color(222, 184, 135));
+		ballArea.setPosition(getWidth() - ballStartSpaceWidth, 0);
+		add(ballArea);
 	}
 	
 	if (typeof start == 'function')
