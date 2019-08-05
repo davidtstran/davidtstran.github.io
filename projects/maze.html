@@ -170,7 +170,7 @@ window.onload = function() {
 			this.enemyHead.setColor(color); this.enemyBody.setColor(color); this.enemyCenter.setColor(color);
 			add(this.enemyHead); add(this.enemyBody); add(this.enemyCenter); 
 			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody; enemyParts[2] = this.enemyHead;
-			setTimer(enemyMovement, 500, enemyParts);
+			setTimer(enemyMovement, 100, enemyParts);
 		}
 	}
 	function enemyMovement(partsArray) { // 0:center, 1:body, 2:head
@@ -185,10 +185,18 @@ window.onload = function() {
 		if (UDorLR) {
 			if (nmeCenter.getX() >= mazerCenter.getX()) { moveDirection = 2; }
 			else { moveDirection = 3; }
+			if (nmeCenter.getColor() == powerColor) { 
+				if (moveDirection == 2) { moveDirection = 3; }
+				else if (moveDirection = 3) { moveDirection = 2; }
+			}
 		}
 		else {
 			if (nmeCenter.getY() >= mazerCenter.getY()) { moveDirection = 1; }
 			else { moveDirection = 4; }
+			if (nmeCenter.getColor() == powerColor) { 
+				if (moveDirection == 1) { moveDirection = 4; }
+				else if (moveDirection = 4) { moveDirection = 1; }
+			}
 		}
 		if (moveDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
@@ -476,7 +484,7 @@ window.onload = function() {
 			}
 			else if (row == 17 || row == numBlocks - 18) {
 				for (var col = 10; col < numBlocks; col++) {
-					if (col == 10 || col == 14 || col == 17 || col == 22 || col == 25 || col == 29) {
+					if (col == 10 || col == 14 || col == 25 || col == 29) {
 						addBorderBlock(col * blockSize, row * blockSize);
 					}
 					else if (col == 11 || col == 12 || col == 13 || col == 15 || col == 16
