@@ -92,8 +92,8 @@ window.onload = function() {
 					}
 				}
 				else {
-					mazer.move(blockSize * 39, 0);
-					mazerCenter.move(blockSize * 39, 0 );
+					mazer.move(blockSize * (numBlocks-1), 0);
+					mazerCenter.move(blockSize * (numBlocks-1), 0 );
 				}
 			}
 			else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
@@ -114,8 +114,8 @@ window.onload = function() {
 					}
 				}
 				else {
-					mazer.move(-blockSize * 39, 0);
-					mazerCenter.move(-blockSize * 39, 0 );
+					mazer.move(-blockSize * (numBlocks-1), 0);
+					mazerCenter.move(-blockSize * (numBlocks-1), 0 );
 				}
 			}
 			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
@@ -125,7 +125,7 @@ window.onload = function() {
 					break;
 				}
 			}
-			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
+			if ((collideElem.getType() != "Circle") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
 					//mazer.setColor(powerColor); // changes user to power color (can eat enemy)
 					powerTimer += 3000;
@@ -165,7 +165,7 @@ window.onload = function() {
 			this.enemyBody.setColor(color);
 			add(this.enemyCenter); add(this.enemyBody);
 			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody;
-			//setTimer(enemyMovement, 500, enemyParts); //////////
+			setTimer(enemyMovement, 500, enemyParts); //////////
 		}
 	}
 	function enemyMovement(partsArray) { // 0:center, 1:body
@@ -192,7 +192,7 @@ window.onload = function() {
 		}
 		else if (randDirection == 3) { // RIGHT
 			if (nmeCenter.getX() + blockSize < getWidth()) {
-				var elem = getElementAt(nmeCenter.getX() + blockSIze, nmeCenter.getY());
+				var elem = getElementAt(nmeCenter.getX() + blockSize, nmeCenter.getY());
 				if (elem == null || elem.getColor() != blockColor) {
 					nmeBody.move(blockSize, 0);
 					nmeCenter.move(blockSize, 0); 
