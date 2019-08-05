@@ -186,7 +186,7 @@ window.onload = function() {
 		if (UDorLR) {
 			if (nmeCenter.getX() >= mazerCenter.getX()) { moveDirection = 2; }
 			else { moveDirection = 3; }
-			if (nmeCenter.getColor() == powerColor) { 
+			if (nmeCenter.getColor() == powerColor) { // opposite direction if eatable
 				if (moveDirection == 2) { moveDirection = 3; }
 				else if (moveDirection = 3) { moveDirection = 2; }
 			}
@@ -194,7 +194,7 @@ window.onload = function() {
 		else {
 			if (nmeCenter.getY() >= mazerCenter.getY()) { moveDirection = 1; }
 			else { moveDirection = 4; }
-			if (nmeCenter.getColor() == powerColor) { 
+			if (nmeCenter.getColor() == powerColor) { // opposite direction if eatable
 				if (moveDirection == 1) { moveDirection = 4; }
 				else if (moveDirection = 4) { moveDirection = 1; }
 			}
