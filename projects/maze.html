@@ -126,11 +126,13 @@ window.onload = function() {
 					for (var i = 0; i < enemyArray.length; i++) {
 						enemyArray[i].enemyHead.setColor(powerColor);
 						enemyArray[i].enemyBody.setColor(powerColor);
+						enemyArray[i].enemyCenter.setColor(powerColor);
 					}
 					setTimeout(function() {
 						for (var i = 0; i < enemyArray.length; i++) {
 							enemyArray[i].enemyHead.setColor(enemyColor[i]);
 							enemyArray[i].enemyBody.setColor(enemyColor[i]);
+							enemyArray[i].enemyCenter.setColor(enemyColor[i]);
 							powerTimer = 0;
 						}
 					}, powerTimer); // 3 seconds
@@ -140,8 +142,8 @@ window.onload = function() {
 			}
 			else if (collideElem.getColor() == powerColor) { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
-					if (collideElem == enemyArray[i].head || collideElem == enemyArray[i].body){
-						remove(enemyArray[i].head); remove(enemyArray[i].body);
+					if (collideElem == enemyArray[i].enemyHead || collideElem == enemyArray[i].enemyBody){
+						remove(enemyArray[i].enemyHead); remove(enemyArray[i].enemyBody); remove(enemyArray[i].enemyCenter);
 					}
 				}
 			}
