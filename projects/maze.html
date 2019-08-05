@@ -29,6 +29,7 @@ window.onload = function() {
 	var mazerStartX = blockSize * 19, mazerStartY = blockSize * 22;
 	var canMove = true;
 	var mazerColor = Color.yellow;
+	var collideElem;
 	var enemyArray = [];
 	var enemyColor = [ Color.red, Color.green, Color.orange, Color.purple ]; // add enemy by adding color
 	var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
@@ -118,13 +119,7 @@ window.onload = function() {
 					mazerCenter.move(-blockSize * (numBlocks-1), 0 );
 				}
 			}
-			var collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
-			for (var i = 0; i < enemyColor.length; i++) {
-				if (collideElem.getColor() == enemyColor[i]) {
-					gameEnd("LOSE");
-					break;
-				}
-			}
+			collideWithEnemy();
 			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
 					powerTimer += 3000;
@@ -153,6 +148,15 @@ window.onload = function() {
 			
 		}
 	}
+	function collideWithEnemy() {
+		collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
+		for (var i = 0; i < enemyColor.length; i++) {
+			if (collideElem.getColor() == enemyColor[i]) {
+				gameEnd("LOSE");
+				break;
+			}
+		}
+	}
 	class Enemy {
 		constructor(xPos, yPos, color) {
 			this.enemyHead = new Circle(headRadius);
@@ -160,11 +164,11 @@ window.onload = function() {
 			this.enemyBody = new Rectangle(bodyWidth, bodyHeight);
 			this.enemyBody.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2);
 			this.enemyCenter = new Circle(foodRadius);
-			this.enemyCenter.setPosition(xPos + this.enemyBody.getWidth()/2, yPos + this.enemyBody.getHeight()/2);
-			this.enemyHead.setColor(color); this.enemyBody.setColor(color); 
-			add(this.enemyCenter); add(this.enemyHead); add(this.enemyBody);
+			this.enemyCenter.setPosition(xPos + headRadius*1.5, yPos + headRadius*1.5);
+			this.enemyHead.setColor(color); this.enemyBody.setColor(color); this.enemyCenter.setColor(color);
+			add(this.enemyHead); add(this.enemyBody); add(this.enemyCenter); 
 			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody; enemyParts[2] = this.enemyHead;
-			setTimer(enemyMovement, 500, enemyParts); //////////
+			setTimer(enemyMovement, 500, enemyParts);
 		}
 	}
 	function enemyMovement(partsArray) { // 0:center, 1:body, 2:head
@@ -172,6 +176,7 @@ window.onload = function() {
 		var nmeBody = partsArray[1];
 		var nmeHead = partsArray[2];
 		var randDirection = Randomizer.nextInt(1, 4);
+		collideWithEnemy();
 		if (randDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
@@ -212,6 +217,7 @@ window.onload = function() {
 				}
 			}
 		}
+		collideWithEnemy();
 	}
 	
 	function gameEnd(geText) {
