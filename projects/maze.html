@@ -24,7 +24,7 @@ window.onload = function() {
 	var foodColor = Color.yellow;
 	var powerFoodRadius = foodRadius * 2;
 	var powerColor = Color.cyan;
-	var powerTimer = 0; // 3 seconds for each power food
+	var powerTimer = 0; // time for each power food
 	var mazer, mazerCenter;
 	var mazerStartX = blockSize * 19, mazerStartY = blockSize * 22;
 	var canMove = true;
@@ -122,7 +122,7 @@ window.onload = function() {
 			collideWithEnemy();
 			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
-					powerTimer += 3000;
+					powerTimer += 10000;
 					for (var i = 0; i < enemyArray.length; i++) {
 						enemyArray[i].enemyHead.setColor(powerColor);
 						enemyArray[i].enemyBody.setColor(powerColor);
@@ -142,7 +142,7 @@ window.onload = function() {
 			}
 			else if (collideElem.getColor() == powerColor) { // eatable enemy 
 				for (var i = 0; i < enemyArray.length; i++) {
-					if (collideElem == enemyArray[i].enemyHead || collideElem == enemyArray[i].enemyBody){
+					if (collideElem == enemyArray[i].enemyHead || collideElem == enemyArray[i].enemyBody || collideElem == enemyArray[i].enemyCenter){
 						remove(enemyArray[i].enemyHead); remove(enemyArray[i].enemyBody); remove(enemyArray[i].enemyCenter);
 					}
 				}
