@@ -177,6 +177,7 @@ window.onload = function() {
 		var nmeCenter = partsArray[0];
 		var nmeBody = partsArray[1];
 		var nmeHead = partsArray[2];
+		collideWithEnemy();
 		var moveDirection;
 		var randDirection = Randomizer.nextInt(1, 4);
 		//moveDirection = randDirection;
@@ -189,7 +190,6 @@ window.onload = function() {
 			if (nmeCenter.getY() >= mazerCenter.getY()) { moveDirection = 1; }
 			else { moveDirection = 4; }
 		}
-		collideWithEnemy();
 		if (moveDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
