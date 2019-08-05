@@ -34,8 +34,8 @@ window.onload = function() {
 	var headRadius = 7, bodyWidth = headRadius * 2, bodyHeight = 8;
 	
 	function start() {
-		mazeLayout();
 		addCharacter(mazerStartX, mazerStartY); 
+		mazeLayout();
 		//fillBoard();
 		for (var i = 0; i < enemyColor.length; i++) {
 			if (enemyColor.length == 4)
@@ -125,9 +125,8 @@ window.onload = function() {
 					break;
 				}
 			}
-			if ((collideElem.getType() != "Circle") && (collideElem.getColor() == foodColor)) { // food
+			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
-					//mazer.setColor(powerColor); // changes user to power color (can eat enemy)
 					powerTimer += 3000;
 					for (var i = 0; i < enemyArray.length; i++) {
 						enemyArray[i].head.setColor(powerColor);
@@ -151,6 +150,7 @@ window.onload = function() {
 					}
 				}
 			}
+			
 		}
 	}
 	class Enemy {
@@ -322,6 +322,10 @@ window.onload = function() {
 				for (var col = 0; col < numBlocks; col++) {
 					if (col == 0 || col == 19 || col == 20 || col == numBlocks-1) {
 						addBorderBlock(col * blockSize, row * blockSize);
+					}
+					else if (col == 1 || col == numBlocks-2) {
+						addFood(col * blockSize, row * blockSize, powerFoodRadius);
+						totalFood++;
 					}
 					else {
 						addFood(col * blockSize, row * blockSize, foodRadius);
