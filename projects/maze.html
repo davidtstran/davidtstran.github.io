@@ -49,7 +49,7 @@ window.onload = function() {
 	
 	function addBorderBlock(xPos, yPos) {
 		var block = new Rectangle (blockSize, blockSize);
-		//block.setBorderColor(blockColor);
+		//block.setBorderColor(Color.white);
 		block.setColor(blockColor);
 		block.setPosition(xPos, yPos);
 		add(block);
@@ -177,9 +177,20 @@ window.onload = function() {
 		var nmeCenter = partsArray[0];
 		var nmeBody = partsArray[1];
 		var nmeHead = partsArray[2];
+		var moveDirection;
 		var randDirection = Randomizer.nextInt(1, 4);
+		//moveDirection = randDirection;
+		var UDorLR = Randomizer.nextBoolean(); // up down or left right
+		if (UDorLR) {
+			if (nmeCenter.getX() >= mazerCenter.getX()) { moveDirection = 2; }
+			else { moveDirection = 3; }
+		}
+		else {
+			if (nmeCenter.getY() >= mazerCenter.getY()) { moveDirection = 1; }
+			else { moveDirection = 4; }
+		}
 		collideWithEnemy();
-		if (randDirection == 1) { // UP
+		if (moveDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
 				if (elem == null || elem.getColor() != blockColor) {
@@ -189,7 +200,7 @@ window.onload = function() {
 				}
 			}
 		}
-		else if (randDirection == 2) { // LEFT
+		else if (moveDirection == 2) { // LEFT
 			if (nmeCenter.getX() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX() - blockSize, nmeCenter.getY());
 				if (elem == null || elem.getColor() != blockColor) {
@@ -199,7 +210,7 @@ window.onload = function() {
 				}
 			}
 		}
-		else if (randDirection == 3) { // RIGHT
+		else if (moveDirection == 3) { // RIGHT
 			if (nmeCenter.getX() + blockSize < getWidth()) {
 				var elem = getElementAt(nmeCenter.getX() + blockSize, nmeCenter.getY());
 				if (elem == null || elem.getColor() != blockColor) {
@@ -209,7 +220,7 @@ window.onload = function() {
 				}
 			}
 		}
-		else if (randDirection == 4) { // DOWN
+		else if (moveDirection == 4) { // DOWN
 			if (nmeCenter.getY() + blockSize < getHeight()) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() + blockSize);
 				if (elem == null || elem.getColor() != blockColor) {
