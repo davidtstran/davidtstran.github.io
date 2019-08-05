@@ -16,12 +16,12 @@ window.onload = function() {
 	removeAll();
 	stopAllTimers();
 	
-	var ballStartSpaceWidth = 25; 
+	var ballSpaceWidth = 25; 
 	var lPaddle, rPaddle;
 	var paddleWidth = 75, paddleHeight = 10, paddleXSpacing = 115, paddleYSpacing = getHeight() - 50;
 	var paddleColor = Color.purple;
 	var ball;
-	var ballRadius = 10, ballColor = Color.white;
+	var ballRadius = 10, ballColor = Color.white, ballDX, ballDY, ballSpd = 10;
 	var ballStrength = 0;
 	
 	function start() {
@@ -34,14 +34,14 @@ window.onload = function() {
 	
 	function addPaddles() {
 		lPaddle = new Rectangle(paddleWidth, paddleHeight); rPaddle = new Rectangle(paddleWidth, paddleHeight);
-		lPaddle.setPosition(0 + paddleXSpacing - ballStartSpaceWidth, paddleYSpacing); 
-		rPaddle.setPosition(getWidth() - paddleXSpacing - paddleWidth - ballStartSpaceWidth, paddleYSpacing);
+		lPaddle.setPosition(0 + paddleXSpacing - ballSpaceWidth, paddleYSpacing); 
+		rPaddle.setPosition(getWidth() - paddleXSpacing - paddleWidth - ballSpaceWidth, paddleYSpacing);
 		lPaddle.setColor(paddleColor); rPaddle.setColor(paddleColor);
 		add(lPaddle); add(rPaddle);
 	}
 	function addBall() {
 		ball = new Circle(ballRadius);
-		ball.setPosition(getWidth() - ballStartSpaceWidth/2, paddleYSpacing);
+		ball.setPosition(getWidth() - ballSpaceWidth/2, paddleYSpacing);
 		ball.setColor(ballColor);
 		add(ball);
 	}
@@ -61,16 +61,18 @@ window.onload = function() {
 		}
 	}
 	function ballMove() {
-		if (ball.getY() - ball.getRadius() > 0) 
-			ball.move(0, -10);
+	
 	}
 	
 	function createBackground() {
-		var ballArea = new Rectangle(ballStartSpaceWidth, getHeight());
+		var ballArea = new Rectangle(ballSpaceWidth, getHeight());
 		ballArea.setColor(new Color(222, 184, 135));
-		ballArea.setBorderColor(Color.black);
-		ballArea.setPosition(getWidth() - ballStartSpaceWidth, 0);
+		ballArea.setPosition(getWidth() - ballSpaceWidth, 0);
 		add(ballArea);
+		var topBallArea = new Rectangle(getWidth(), ballSpaceWidth);
+		topBallArea.setColor(new Color(222, 184, 135));
+		topBallArea.setPosition(0, 0);
+		add(topBallArea);
 	}
 	
 	if (typeof start == 'function')
