@@ -170,7 +170,7 @@ window.onload = function() {
 			this.enemyHead.setColor(color); this.enemyBody.setColor(color); this.enemyCenter.setColor(color);
 			add(this.enemyHead); add(this.enemyBody); add(this.enemyCenter); 
 			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody; enemyParts[2] = this.enemyHead;
-			setTimer(enemyMovement, 100, enemyParts);
+			setTimer(enemyMovement, 200, enemyParts);
 		}
 	}
 	function enemyMovement(partsArray) { // 0:center, 1:body, 2:head
