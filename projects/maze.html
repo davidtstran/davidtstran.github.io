@@ -129,13 +129,13 @@ window.onload = function() {
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
 					powerTimer += 3000;
 					for (var i = 0; i < enemyArray.length; i++) {
-						enemyArray[i].head.setColor(powerColor);
-						enemyArray[i].body.setColor(powerColor);
+						enemyArray[i].enemyHead.setColor(powerColor);
+						enemyArray[i].enemyBody.setColor(powerColor);
 					}
 					setTimeout(function() {
 						for (var i = 0; i < enemyArray.length; i++) {
-							enemyArray[i].head.setColor(enemyColor[i]);
-							enemyArray[i].body.setColor(enemyColor[i]);
+							enemyArray[i].enemyHead.setColor(enemyColor[i]);
+							enemyArray[i].enemyBody.setColor(enemyColor[i]);
 							powerTimer = 0;
 						}
 					}, powerTimer); // 3 seconds
@@ -155,27 +155,28 @@ window.onload = function() {
 	}
 	class Enemy {
 		constructor(xPos, yPos, color) {
-			var scale = 5;
-			this.enemyBody = new Polygon();
-			this.enemyBody.addPoint(xPos + 0*scale, yPos + 4*scale);
-			this.enemyBody.addPoint(xPos + 2*scale, yPos + 0*scale);
-			this.enemyBody.addPoint(xPos + 4*scale, yPos + 4*scale);
+			this.enemyHead = new Circle(headRadius);
+			this.enemyHead.setPosition(xPos + blockSize/2, yPos + blockSize/2);
+			this.enemyBody = new Rectangle(bodyWidth, bodyHeight);
+			this.enemyBody.setPosition(xPos + (blockSize - headRadius*2)/2, yPos + blockSize/2);
 			this.enemyCenter = new Circle(foodRadius);
 			this.enemyCenter.setPosition(xPos + this.enemyBody.getWidth()/2, yPos + this.enemyBody.getHeight()/2);
-			this.enemyBody.setColor(color);
-			add(this.enemyCenter); add(this.enemyBody);
-			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody;
+			this.enemyHead.setColor(color); this.enemyBody.setColor(color); 
+			add(this.enemyCenter); add(this.enemyHead); add(this.enemyBody);
+			var enemyParts = []; enemyParts[0] = this.enemyCenter; enemyParts[1] = this.enemyBody; enemyParts[2] = this.enemyHead;
 			setTimer(enemyMovement, 500, enemyParts); //////////
 		}
 	}
-	function enemyMovement(partsArray) { // 0:center, 1:body
+	function enemyMovement(partsArray) { // 0:center, 1:body, 2:head
 		var nmeCenter = partsArray[0];
 		var nmeBody = partsArray[1];
+		var nmeHead = partsArray[2];
 		var randDirection = Randomizer.nextInt(1, 4);
 		if (randDirection == 1) { // UP
 			if (nmeCenter.getY() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() - blockSize);
 				if (elem == null || elem.getColor() != blockColor) {
+					nmeHead.move(0, -blockSize);
 					nmeBody.move(0, -blockSize);
 					nmeCenter.move(0, -blockSize);
 				}
@@ -185,6 +186,7 @@ window.onload = function() {
 			if (nmeCenter.getX() - blockSize > 0) {
 				var elem = getElementAt(nmeCenter.getX() - blockSize, nmeCenter.getY());
 				if (elem == null || elem.getColor() != blockColor) {
+					nmeHead.move(-blockSize, 0);
 					nmeBody.move(-blockSize, 0);
 					nmeCenter.move(-blockSize, 0); 
 				}
@@ -194,6 +196,7 @@ window.onload = function() {
 			if (nmeCenter.getX() + blockSize < getWidth()) {
 				var elem = getElementAt(nmeCenter.getX() + blockSize, nmeCenter.getY());
 				if (elem == null || elem.getColor() != blockColor) {
+					nmeHead.move(blockSize, 0);
 					nmeBody.move(blockSize, 0);
 					nmeCenter.move(blockSize, 0); 
 				}
@@ -203,6 +206,7 @@ window.onload = function() {
 			if (nmeCenter.getY() + blockSize < getHeight()) {
 				var elem = getElementAt(nmeCenter.getX(), nmeCenter.getY() + blockSize);
 				if (elem == null || elem.getColor() != blockColor) {
+					nmeHead.move(0, blockSize);
 					nmeBody.move(0, blockSize);
 					nmeCenter.move(0, blockSize); 
 				}
