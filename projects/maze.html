@@ -122,7 +122,7 @@ window.onload = function() {
 			collideWithEnemy();
 			if ((collideElem.getType() != "Polygon") && (collideElem.getColor() == foodColor)) { // food
 				if (collideElem.getRadius() == powerFoodRadius) { // power food
-					powerTimer += 10000;
+					powerTimer += 5000;
 					for (var i = 0; i < enemyArray.length; i++) {
 						enemyArray[i].enemyHead.setColor(powerColor);
 						enemyArray[i].enemyBody.setColor(powerColor);
@@ -146,9 +146,9 @@ window.onload = function() {
 						remove(enemyArray[i].enemyHead); remove(enemyArray[i].enemyBody); remove(enemyArray[i].enemyCenter);
 					}
 				}
-			}
-			
+			}	
 		}
+		if (totalFood == 0) { gameEnd("WIN"); }
 	}
 	function collideWithEnemy() {
 		collideElem = getElementAt(mazerCenter.getX(), mazerCenter.getY());
