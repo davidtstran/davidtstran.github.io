@@ -22,8 +22,8 @@ window.onload = function() {
 	var paddleColor = Color.purple;
 	var ball;
 	var ballRadius = 10, ballColor = Color.white, ballDX = 0, ballDY = 0, ballSpd = 5;
-	var ballHasMoved = false, ballStrength = 0;
-	var bumperColor = Color.red;
+	var ballHasMoved = false;
+	var bumperColor = paddleColor, bumpEdgeWidth = 10;
 	
 	function start() {
 		createBackground();
@@ -69,11 +69,14 @@ window.onload = function() {
 		if (ball.getY() - ball.getRadius() > 0) {
 			ball.move(0, -ballSpd);
 		}
+		else if (ball.getX() - ball.getRadius() > 0) {
+			ball.move(-ballSpd, 0);
+		}
 		else { stopTimer(initialBall); }
 	}
 	function ballMove() {
 		collide();
-		ball.move(ballDX, ballDY);
+		ball.move(ballDX * 2, ballDY * 3); // width = 400, height = 600, scale 2/3
 	}
 	function collide() {
 		var topLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
@@ -81,35 +84,41 @@ window.onload = function() {
 		var botLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
 		var botRight = getElementAt(ball.getX() + ball.getRadius(), ball.getY() + ball.getRadius());
 		if (topLeft != null && topLeft.getColor() == bumperColor) {
-			ballDX = ballSpd;
-			ballDY = ballSpd; 
+			ballDX = ballSpd; ballDY = ballSpd; 
 		}
 		else if (topRight != null && topRight.getColor() == bumperColor) {
-			ballDX = -ballSpd;
-			ballDY = ballSpd * 2;
+			ballDX = -ballSpd; ballDY = ballSpd;
 		}
 		else if (botLeft != null && botLeft.getColor() == bumperColor) {
-			ballDX = ballSpd;
-			ballDY = -ballSpd;
+			ballDX = ballSpd; ballDY = -ballSpd;
 		}
 		else if (botRight != null && botRight.getColor() == bumperColor) {
-			ballDX = -ballSpd;
-			ballDY = -ballSpd;
+			ballDX = -ballSpd; ballDY = -ballSpd;
 		}
 	}
 	
 	function createBackground() {
+		var leftBumpEdge = new Rectangle(bumpEdgeWidth, getHeight());
+		leftBumpEdge.setColor(bumperColor);
+		leftBumpEdge.setPosition(0, 0); 
+		add(leftBumpEdge);
+		var rightBumpEdge = new Rectangle(bumpEdgeWidth, getHeight());
+		rightBumpEdge.setColor(bumperColor);
+		rightBumpEdge.setPosition(getWidth() - ballSpaceWidth - bumpEdgeWidth, 0); 
+		add(rightBumpEdge);
 		var ballArea = new Rectangle(ballSpaceWidth, getHeight());
 		ballArea.setColor(new Color(222, 184, 135));
+		ballArea.setBorderColor(Color.black);
 		ballArea.setPosition(getWidth() - ballSpaceWidth, 0);
 		add(ballArea);
 		var topBallArea = new Rectangle(getWidth(), ballSpaceWidth);
 		topBallArea.setColor(new Color(222, 184, 135));
+		topBallArea.setBorderColor(Color.black);
 		topBallArea.setPosition(0, 0);
 		add(topBallArea);
-		var ballAreaCorner = new Circle(ballSpaceWidth/2);
+		var ballAreaCorner = new Circle(ballSpaceWidth);
 		ballAreaCorner.setColor(bumperColor);
-		ballAreaCorner.setPosition(getWidth(), 0);
+		ballAreaCorner.setPosition(0, 0);
 		add(ballAreaCorner);
 	}
 	
