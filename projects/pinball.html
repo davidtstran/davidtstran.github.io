@@ -42,7 +42,7 @@ window.onload = function() {
 	}
 	function addBall() {
 		ball = new Circle(ballRadius);
-		ball.setPosition(getWidth() - ballSpaceWidth/2, paddleYSpacing);
+		ball.setPosition(getWidth() - ballSpaceWidth/2, getHeight() - ballRadius);
 		ball.setColor(ballColor);
 		add(ball);
 	}
@@ -60,7 +60,7 @@ window.onload = function() {
 		else if (e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
 			if (ballHasMoved == false) {
 				setTimer(initialBall, 1);
-				setTimer(ballMove, 1);
+				setTimer(ballMove, 1); 
 			}
 		}
 	}
@@ -79,7 +79,6 @@ window.onload = function() {
 		ball.move(ballDX * 2, ballDY * 3); // width = 400, height = 600, scale 2/3
 	}
 	function collide() {
-		ballSpd = Randomizer.nextInt(5, 10);
 		var topLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
 		var topRight = getElementAt(ball.getX() + ball.getRadius(), ball.getY() - ball.getRadius());
 		var botLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
@@ -107,6 +106,11 @@ window.onload = function() {
 		rightBumpEdge.setColor(bumperColor);
 		rightBumpEdge.setPosition(getWidth() - ballSpaceWidth - bumpEdgeWidth, 0); 
 		add(rightBumpEdge);
+		var botBumpEdge = new Rectangle(getWidth(), bumpEdgeWidth);
+		botBumpEdge.setColor(bumperColor);
+		botBumpEdge.setBorderColor(Color.black);
+		botBumpEdge.setPosition(0 + bumpEdgeWidth, getHeight() - bumpEdgeWidth); 
+		add(botBumpEdge);
 		var ballArea = new Rectangle(ballSpaceWidth, getHeight());
 		ballArea.setColor(new Color(222, 184, 135));
 		ballArea.setBorderColor(Color.black);
