@@ -79,6 +79,7 @@ window.onload = function() {
 		ball.move(ballDX * 2, ballDY * 3); // width = 400, height = 600, scale 2/3
 	}
 	function collide() {
+		ballSpd = Randomizer.nextInt(5, 10);
 		var topLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
 		var topRight = getElementAt(ball.getX() + ball.getRadius(), ball.getY() - ball.getRadius());
 		var botLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
