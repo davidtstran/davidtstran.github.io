@@ -21,8 +21,9 @@ window.onload = function() {
 	var paddleWidth = 75, paddleHeight = 10, paddleXSpacing = 115, paddleYSpacing = getHeight() - 50;
 	var paddleColor = Color.purple;
 	var ball;
-	var ballRadius = 10, ballColor = Color.white, ballDX, ballDY, ballSpd = 10;
-	var ballStrength = 0;
+	var ballRadius = 10, ballColor = Color.white, ballDX = 0, ballDY = 0, ballSpd = 5;
+	var ballHasMoved = false, ballStrength = 0;
+	var bumperColor = Color.red;
 	
 	function start() {
 		createBackground();
@@ -57,20 +58,44 @@ window.onload = function() {
 			rPaddle.setRotation(45);	
 		}
 		else if (e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) {
-			setTimer(ballMove, 1);
+			if (ballHasMoved == false) {
+				setTimer(initialBall, 1);
+				setTimer(ballMove, 1);
+			}
 		}
 	}
-	function ballMove() {
-		collide();
+	function initialBall() {
+		ballHasMoved = true;
 		if (ball.getY() - ball.getRadius() > 0) {
 			ball.move(0, -ballSpd);
 		}
-		else if (ball.getX() - ball.getRadius() > 0) { 
-			ball.move(-ballSpd, 0); 
-		}
+		else { stopTimer(initialBall); }
+	}
+	function ballMove() {
+		collide();
+		ball.move(ballDX, ballDY);
 	}
 	function collide() {
-	
+		var topLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() - ball.getRadius());
+		var topRight = getElementAt(ball.getX() + ball.getRadius(), ball.getY() - ball.getRadius());
+		var botLeft = getElementAt(ball.getX() - ball.getRadius(), ball.getY() + ball.getRadius());
+		var botRight = getElementAt(ball.getX() + ball.getRadius(), ball.getY() + ball.getRadius());
+		if (topLeft != null && topLeft.getColor() == bumperColor) {
+			ballDX = ballSpd;
+			ballDY = ballSpd; 
+		}
+		else if (topRight != null && topRight.getColor() == bumperColor) {
+			ballDX = -ballSpd;
+			ballDY = ballSpd * 2;
+		}
+		else if (botLeft != null && botLeft.getColor() == bumperColor) {
+			ballDX = ballSpd;
+			ballDY = -ballSpd;
+		}
+		else if (botRight != null && botRight.getColor() == bumperColor) {
+			ballDX = -ballSpd;
+			ballDY = -ballSpd;
+		}
 	}
 	
 	function createBackground() {
@@ -82,6 +107,10 @@ window.onload = function() {
 		topBallArea.setColor(new Color(222, 184, 135));
 		topBallArea.setPosition(0, 0);
 		add(topBallArea);
+		var ballAreaCorner = new Circle(ballSpaceWidth/2);
+		ballAreaCorner.setColor(bumperColor);
+		ballAreaCorner.setPosition(getWidth(), 0);
+		add(ballAreaCorner);
 	}
 	
 	if (typeof start == 'function')
