@@ -37,5 +37,4 @@ Projects (Ordered by Release):
   - Weather
   
   - Maze Game
-  
-  - Pinball
+
