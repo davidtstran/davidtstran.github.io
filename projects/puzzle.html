@@ -17,19 +17,19 @@ window.onload = function() {
 	stopAllTimers();
 	
 	var blockSize = 15;
+	var colors = [ Color.cyan, Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.purple ];
 	var blocksAcross = getWidth() / blockSize; // left 12 are for playing, rest is for score/next_puzzle
 	var blocksDown = getHeight() / blockSize;
 	var borderColor = new Color(112, 128, 144);
 	var blocksPerPiece = 4;
-	var colors = [ Color.cyan, Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.purple ];
 	
 	function start() {
 		layout();
 		keyDownMethod(moveBlock);
 		
-		for (var j = 0; j < 5; j+=2) {
+		for (var j = 0; j < 9; j+=2) {
 			var pieceMove = Randomizer.nextInt(0, 6);
-			var pieceDrop = returnPiece(pieceMove); // copy from original 
+			var pieceDrop = returnPiece(pieceMove);
 			for (var i = 0; i < blocksPerPiece; i++) {
 					pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
 					add(pieceDrop[i]);
@@ -68,7 +68,7 @@ window.onload = function() {
 		}
 	}
 	
-	function returnPiece(val) {
+	function returnPiece(val) { // create piece (0:----, 1:|--, 2:--|, 3:[--], 4:_--, 5:--_, 6:_|_)
 		var returnObj = [];
 		if (val == 0) { // ---- 
 			for (var i = 0; i < blocksPerPiece; i++) {
@@ -102,7 +102,7 @@ window.onload = function() {
 				else if (i == 3) { returnObj[i].setPosition(2*blockSize, 0*blockSize); }
 			} 
 		} // [--]
-		else if (val == 4) { // _-
+		else if (val == 4) { // _--
 			for (var i = 0; i < blocksPerPiece; i++) {
 				returnObj[i] = new Rectangle(blockSize, blockSize);
 				returnObj[i].setColor(colors[val]);
@@ -110,8 +110,8 @@ window.onload = function() {
 				else if (i == 2) { returnObj[i].setPosition(1*blockSize, 0*blockSize); }
 				else if (i == 3) { returnObj[i].setPosition(2*blockSize, 0*blockSize); }
 			} 
-		} // _-
-		else if (val == 5) { // -_
+		} // _--
+		else if (val == 5) { // --_
 			for (var i = 0; i < blocksPerPiece; i++) {
 				returnObj[i] = new Rectangle(blockSize, blockSize);
 				returnObj[i].setColor(colors[val]);
@@ -119,7 +119,7 @@ window.onload = function() {
 				else if (i == 2) { returnObj[i].setPosition(1*blockSize, 1*blockSize); }
 				else if (i == 3) { returnObj[i].setPosition(2*blockSize, 1*blockSize); }
 			} 
-		} // -_
+		} // --_
 		else if (val == 6) { // _|_
 			for (var i = 0; i < blocksPerPiece; i++) {
 				returnObj[i] = new Rectangle(blockSize, blockSize);
