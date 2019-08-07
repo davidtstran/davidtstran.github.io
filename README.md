@@ -38,5 +38,5 @@ Projects (Ordered by Release):
   
   - Maze Game
   
-  - Tile Puzzle
+  - Blocks Puzzle
 
