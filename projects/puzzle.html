@@ -27,21 +27,15 @@ window.onload = function() {
 		layout();
 		keyDownMethod(moveBlock);
 		
-		var pieceMove = Randomizer.nextInt(0, 6);
-		var pieceDrop = returnPiece(pieceMove); // copy from original 
-		for (var i = 0; i < blocksPerPiece; i++) {
-				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
-				add(pieceDrop[i]);
-		}
-		
-		/*  /// DISPLAYS PIECES
-		for (var i = 0; i < pieces.length; i++) {  
-			for (var j = 0; j < blocksPerPiece; j++) {
-				pieces[i][j].setPosition(pieces[i][j].getX() * blockSize + blockSize, pieces[i][j].getY() * blockSize);
-				add(pieces[i][j]);
-				pieces[i][j].move(0, blockSize*(2*i))
+		for (var j = 0; j < 5; j+=2) {
+			var pieceMove = Randomizer.nextInt(0, 6);
+			var pieceDrop = returnPiece(pieceMove); // copy from original 
+			for (var i = 0; i < blocksPerPiece; i++) {
+					pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
+					add(pieceDrop[i]);
+					pieceDrop[i].move(0, blockSize * j);
 			}
-		}*/  /// DISPLAYS PIECES
+		}
 	}
 	
 	function moveBlock(e) {
