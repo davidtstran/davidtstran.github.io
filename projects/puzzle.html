@@ -27,20 +27,48 @@ window.onload = function() {
 	function start() {
 		layout();
 		piecesInArray();
-		
 		keyDownMethod(moveBlock);
 		
-		//for (var i = 0; i < pieces.length; i++) {
-			//var placeX = blockSize, placeY = blockSize * (2*i);
-			var testV = 6;
+		pieceMove = Randomizer.nextInt(0, 6);
+		
+		/*  /// DISPLAYS PIECES
+		for (var i = 0; i < pieces.length; i++) {  
 			for (var j = 0; j < blocksPerPiece; j++) {
-				pieces[testV][j].setPosition(pieces[testV][j].getX() * blockSize, (pieces[testV][j].getY()+1) * blockSize);
-				add(pieces[testV][j]);
+				pieces[i][j].setPosition(pieces[i][j].getX() * blockSize + blockSize, pieces[i][j].getY() * blockSize);
+				add(pieces[i][j]);
+				pieces[i][j].move(0, blockSize*(2*i))
 			}
-		//}
+		}*/  /// DISPLAYS PIECES
 	}
 	
 	function moveBlock(e) {
+	
+	}
+	
+	function layout() {
+		var scoreArea = new Rectangle(blockSize * 8, getHeight());
+		scoreArea.setColor(borderColor);
+		scoreArea.setPosition(getWidth() - blockSize*8, 0);
+		add(scoreArea);
+		for (var i = 0; i < blocksAcross - 8; i++) {
+			var border = new Rectangle(blockSize, blockSize);
+			border.setColor(borderColor);
+			border.setBorderColor(Color.black);
+			border.setPosition(blockSize * i, getHeight() - blockSize);
+			add(border);
+		}
+		for (var i = 0; i < blocksDown; i++) {
+			var leftBorder = new Rectangle(blockSize, blockSize);
+			leftBorder.setColor(borderColor);
+			leftBorder.setBorderColor(Color.black);
+			leftBorder.setPosition(0, blockSize * i);
+			add(leftBorder);
+			var rightBorder = new Rectangle(blockSize, blockSize);
+			rightBorder.setColor(borderColor);
+			rightBorder.setBorderColor(Color.black);
+			rightBorder.setPosition(getWidth() - blockSize * 9, blockSize * i);
+			add(rightBorder);
+		}
 	}
 	
 	function piecesInArray() { // every piece is in 2row&4col area [0,3]&[0,1]
@@ -95,32 +123,6 @@ window.onload = function() {
 			if (i != 3) { pieces[6][i].setPosition(i, 1); }
 			else { pieces[6][i].setPosition(1, 0); }
 		} // _|_
-	}
-	
-	function layout() {
-		var scoreArea = new Rectangle(blockSize * 8, getHeight());
-		scoreArea.setColor(borderColor);
-		scoreArea.setPosition(getWidth() - blockSize*8, 0);
-		add(scoreArea);
-		for (var i = 0; i < blocksAcross - 8; i++) {
-			var border = new Rectangle(blockSize, blockSize);
-			border.setColor(borderColor);
-			border.setBorderColor(Color.black);
-			border.setPosition(blockSize * i, getHeight() - blockSize);
-			add(border);
-		}
-		for (var i = 0; i < blocksDown; i++) {
-			var leftBorder = new Rectangle(blockSize, blockSize);
-			leftBorder.setColor(borderColor);
-			leftBorder.setBorderColor(Color.black);
-			leftBorder.setPosition(0, blockSize * i);
-			add(leftBorder);
-			var rightBorder = new Rectangle(blockSize, blockSize);
-			rightBorder.setColor(borderColor);
-			rightBorder.setBorderColor(Color.black);
-			rightBorder.setPosition(getWidth() - blockSize * 9, blockSize * i);
-			add(rightBorder);
-		}
 	}
 	
 	if (typeof start == 'function')
