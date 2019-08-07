@@ -37,4 +37,6 @@ Projects (Ordered by Release):
   - Weather
   
   - Maze Game
+  
+  - Tile Puzzle
 
