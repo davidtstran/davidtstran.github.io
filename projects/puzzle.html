@@ -57,12 +57,24 @@ window.onload = function() {
 			}
 		}
 		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.letter('S')) { // down
-			if (pieceDrop[2].getY() + blockSize*2 <= getHeight() - blockSize) { // bottom wall
-				for (var i = 0; i < blocksPerPiece; i++) {
-					pieceDrop[i].move(0, blockSize); 
+			for (var i = 0; i < blocksPerPiece; i++) {
+				var origPiece = returnPiece(pieceMove);
+				if (origPiece[i].getY() == 1*blockSize) {
+					var botElem = getElementAt(pieceDrop[i].getX(), pieceDrop[i].getY() + blockSize + blockSize/2);
+					if (botElem != null) {
+						stopped = true;
+						break;
+					}
 				}
 			}
-			else { stopped = true; }
+			if (stopped == false) { 
+				if (pieceDrop[2].getY() + blockSize*2 <= getHeight() - blockSize) { // bottom wall
+					for (var i = 0; i < blocksPerPiece; i++) {
+						pieceDrop[i].move(0, blockSize); 
+					}
+				}
+				else { stopped = true; }
+			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) { // right
 			if (pieceDrop[3].getX() + blockSize*2 <= getWidth() - blockSize * 9) { // right wall
