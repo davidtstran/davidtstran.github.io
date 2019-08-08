@@ -29,7 +29,7 @@ window.onload = function() {
 		
 		for (var j = 0; j < 9; j+=2) {
 			var pieceMove = Randomizer.nextInt(0, 6);
-			var pieceDrop = returnPiece(pieceMove);
+			var pieceDrop = returnPiece(pieceMove); // create piece based on random index 
 			for (var i = 0; i < blocksPerPiece; i++) {
 					pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
 					add(pieceDrop[i]);
@@ -39,7 +39,14 @@ window.onload = function() {
 	}
 	
 	function moveBlock(e) {
-	
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) {
+		}
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) {
+		}
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.SPACE || e.keyCode == Keyboard.letter('S')) {
+		}
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) {
+		}
 	}
 	
 	function layout() {
