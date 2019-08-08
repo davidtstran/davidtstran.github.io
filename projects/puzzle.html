@@ -22,30 +22,26 @@ window.onload = function() {
 	var blocksDown = getHeight() / blockSize;
 	var borderColor = new Color(112, 128, 144);
 	var blocksPerPiece = 4;
+	var pieceMove;
 	var pieceDrop;
+	var stopped = true;
 	
 	function start() {
 		layout();
 		keyDownMethod(moveBlock);
 		
-		/*for (var j = 0; j < 9; j+=2) {
-			var pieceMove = Randomizer.nextInt(0, 6);
-			pieceDrop = returnPiece(pieceMove); // create piece based on random index 
-			for (var i = 0; i < blocksPerPiece; i++) {
-					pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
-					add(pieceDrop[i]);
-					pieceDrop[i].move(0, blockSize * j);
-			}
-		}*/
-		setTimer(newBlock, 3000); 
+		setTimer(newBlock, 3000); // check every X seconds to put a new block
 	}
 	
 	function newBlock() {
-		var pieceMove = Randomizer.nextInt(0, 6);
-		pieceDrop = returnPiece(pieceMove); 
-		for (var i = 0; i < blocksPerPiece; i++) {
-			pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
-			add(pieceDrop[i]);
+		if (stopped) {
+			pieceMove = Randomizer.nextInt(0, 6);
+			pieceDrop = returnPiece(pieceMove); 
+			for (var i = 0; i < blocksPerPiece; i++) {
+				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
+				add(pieceDrop[i]);
+			}
+			stopped = false;
 		}
 	}
 	
@@ -66,6 +62,7 @@ window.onload = function() {
 					pieceDrop[i].move(0, blockSize); 
 				}
 			}
+			else { stopped = true; }
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) { // right
 			if (pieceDrop[3].getX() + blockSize*2 <= getWidth() - blockSize * 9) { // right wall
