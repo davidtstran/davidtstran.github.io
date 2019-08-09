@@ -44,15 +44,15 @@ window.onload = function() {
 			stopped = false;
 		}
 		for (var i = 0; i < blocksPerPiece; i++) {
-				var origPiece = returnPiece(pieceMove);
-				if (origPiece[i].getY() == 1*blockSize) {
-					var botElem = getElementAt(pieceDrop[i].getX(), pieceDrop[i].getY() + blockSize + blockSize/2);
-					if (botElem != null) {
-						stopped = true;
-						break;
-					}
+			var origPiece = returnPiece(pieceMove);
+			if (origPiece[i].getY() == 1*blockSize) {
+				var botElem = getElementAt(pieceDrop[i].getX() + blockSize/2, pieceDrop[i].getY() + blockSize + blockSize/2);
+				if (botElem != null && botElem.getColor() != borderColor) {
+					stopped = true;
+					break;
 				}
 			}
+		}
 	}
 	
 	function moveBlock(e) { // 0 at leftmost, 3 at rightmost, 2 at botmost location
@@ -60,9 +60,12 @@ window.onload = function() {
 			//continue;
 		}
 		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) { // left
-			if (pieceDrop[0].getX() - blockSize >= blockSize) { // left wall
-				for (var i = 0; i < blocksPerPiece; i++) {
-					pieceDrop[i].move(-blockSize, 0); 
+			var leftElem = getElementAt(pieceDrop[0].getX() - blockSize/2, pieceDrop[0].getY() + blockSize/2);
+			if (leftElem == null) {
+				if (pieceDrop[0].getX() - blockSize >= blockSize) { // left wall
+					for (var i = 0; i < blocksPerPiece; i++) {
+						pieceDrop[i].move(-blockSize, 0); 
+					}
 				}
 			}
 		}
@@ -77,9 +80,12 @@ window.onload = function() {
 			}
 		}
 		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) { // right
-			if (pieceDrop[3].getX() + blockSize*2 <= getWidth() - blockSize * 9) { // right wall
-				for (var i = 0; i < blocksPerPiece; i++) {
-					pieceDrop[i].move(blockSize, 0); 
+			var rightElem = getElementAt(pieceDrop[3].getX() + blockSize + blockSize/2, pieceDrop[3].getY() + blockSize/2);
+			if (rightElem == null) {
+				if (pieceDrop[3].getX() + blockSize*2 <= getWidth() - blockSize * 9) { // right wall
+					for (var i = 0; i < blocksPerPiece; i++) {
+						pieceDrop[i].move(blockSize, 0); 
+					}
 				}
 			}
 		}
