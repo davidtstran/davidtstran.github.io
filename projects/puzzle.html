@@ -47,7 +47,7 @@ window.onload = function() {
 			var origPiece = returnPiece(pieceMove);
 			if (origPiece[i].getY() == 1*blockSize) {
 				var botElem = getElementAt(pieceDrop[i].getX() + blockSize/2, pieceDrop[i].getY() + blockSize + blockSize/2);
-				if (botElem != null && botElem.getColor() != borderColor) {
+				if (botElem != null) {
 					stopped = true;
 					break;
 				}
