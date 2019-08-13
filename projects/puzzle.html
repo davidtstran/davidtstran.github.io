@@ -59,8 +59,9 @@ window.onload = function() {
 	function checkLose() {
 		for (var i = 1; i < 11; i++) {
 			var elem = getElementAt(i*blockSize + blockSize/2, blockSize/2);
-			var elemBelow = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize*2);
-			if ((elem != null) && (elemBelow != null)) {
+			var elemBelow = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize);
+			var elemBelow2 = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize*2);
+			if ((elem != null) && (elemBelow != null) && (elemBelow2 != null)) {
 				stopAllTimers();
 				var loss = new Text ("Game Over");
 				loss.setPosition(blockSize * 6 - loss.getWidth()/2, getHeight()/2);
