@@ -39,7 +39,7 @@ window.onload = function() {
 			pieceMove = Randomizer.nextInt(0, 6);
 			pieceDrop = returnPiece(pieceMove); 
 			for (var i = 0; i < blocksPerPiece; i++) {
-				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() + blockSize);
+				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY());
 				add(pieceDrop[i]);
 			}
 			stopped = false;
@@ -59,7 +59,7 @@ window.onload = function() {
 	function checkLose() {
 		for (var i = 1; i < 11; i++) {
 			var elem = getElementAt(i*blockSize + blockSize/2, blockSize/2);
-			if (elem != null) {
+			if ((elem != null) && (elem.getColor() != colors[pieceMove])) {
 				stopAllTimers();
 				for (var i = 0; i < blocksPerPiece; i++) {
 					remove(pieceDrop[i]); 
