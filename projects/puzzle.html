@@ -66,9 +66,9 @@ window.onload = function() {
 	}
 	function moveBlock(e) { // 0 at leftmost, 3 at rightmost, 2 at botmost location
 		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W')) { // rotate
-			//continue;
+			///// 
 			for (var i = 0; i < blocksPerPiece; i++) {
-				pieceDrop[i].move(0, blockSize); 
+				pieceDrop[i].move(0, -blockSize); 
 			}
 			///// 
 		}
