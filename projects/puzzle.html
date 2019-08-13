@@ -59,11 +59,9 @@ window.onload = function() {
 	function checkLose() {
 		for (var i = 1; i < 11; i++) {
 			var elem = getElementAt(i*blockSize + blockSize/2, blockSize/2);
-			if ((elem != null) && (elem.getColor() != colors[pieceMove])) {
+			var elemBelow = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize);
+			if ((elem != null) && (elemBelow != null)) {
 				stopAllTimers();
-				for (var i = 0; i < blocksPerPiece; i++) {
-					remove(pieceDrop[i]); 
-				}
 				var loss = new Text ("Game Over");
 				loss.setPosition(blockSize * 5, getHeight()/2);
 				loss.setColor(Color.white);
