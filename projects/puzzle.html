@@ -39,7 +39,7 @@ window.onload = function() {
 			pieceMove = Randomizer.nextInt(0, 6);
 			pieceDrop = returnPiece(pieceMove); 
 			for (var i = 0; i < blocksPerPiece; i++) {
-				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY());
+				pieceDrop[i].setPosition(pieceDrop[i].getX() + blockSize*4, pieceDrop[i].getY() - blockSize);
 				add(pieceDrop[i]);
 			}
 			stopped = false;
@@ -59,11 +59,11 @@ window.onload = function() {
 	function checkLose() {
 		for (var i = 1; i < 11; i++) {
 			var elem = getElementAt(i*blockSize + blockSize/2, blockSize/2);
-			var elemBelow = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize);
+			var elemBelow = getElementAt(i*blockSize + blockSize/2, blockSize/2 + blockSize*2);
 			if ((elem != null) && (elemBelow != null)) {
 				stopAllTimers();
 				var loss = new Text ("Game Over");
-				loss.setPosition(blockSize * 5, getHeight()/2);
+				loss.setPosition(blockSize * 5 - loss.getWidth()/2, getHeight()/2);
 				loss.setColor(Color.white);
 				add(loss);
 			}
