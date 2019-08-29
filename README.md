@@ -18,7 +18,7 @@ Projects (Ordered by Release):
         
   - Pong Game
   
-  - Digging Game
+  - Digging Game (DigDug)
   
   - Snake Game
   
@@ -28,7 +28,7 @@ Projects (Ordered by Release):
 
   - Soccer
   
-  - Platformer
+  - Platformer (Mario)
   
   - Aquarium
   
@@ -36,7 +36,9 @@ Projects (Ordered by Release):
   
   - Weather
   
-  - Maze Game
+  - Maze Game (PacMan)
   
-  - Blocks Puzzle
+  - Blocks Puzzle (Tetris)
+  
+  - Tron
 
