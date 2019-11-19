@@ -31,9 +31,6 @@ p {
     font-family: Times;
     font-size: 100%;
 }
-td {
-    text-align: right;   
-}
 canvas {
     border: 1px solid black;
     display: inline-block;
