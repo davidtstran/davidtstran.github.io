@@ -2,7 +2,8 @@ body {
     background-color: lightgray;
 }
 button { 
-    background-color: white;
+    background-color: gray;
+    color: white;
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
