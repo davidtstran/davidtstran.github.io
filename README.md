@@ -6,39 +6,39 @@ Wiki: https://github.com/davidtstran/davidtstran.github.io/wiki
 
 Projects (Ordered by Release): 
 
-  - Breakout
+  1. Breakout
   
-  - Drag and Drop
+  2. Drag and Drop
   
-  - Paint Splatter
+  3. Paint Splatter
   
-  - Target
+  4. Target
   
-  - Trail
+  5. Trail
         
-  - Pong Game
+  6. Pong Game
   
-  - Digging Game (DigDug)
+  7. Digging Game (DigDug)
   
-  - Snake Game
+  8. Snake Game
   
-  - Fighters
+  9. Fighters
 
-  - Space Battle
+  10. Space Battle
 
-  - Soccer
+  11. Soccer
   
-  - Platformer (Mario)
+  12. Platformer (Mario)
   
-  - Aquarium
+  13. Aquarium
   
-  - Clock
+  14. Clock
   
-  - Weather
+  15. Weather
   
-  - Maze Game (PacMan)
+  16. Maze Game (PacMan)
   
-  - Blocks Puzzle (Tetris)
+  17. Blocks Puzzle (Tetris)
   
-  - Tron
+  18. Tron
 
