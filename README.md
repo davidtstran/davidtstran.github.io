@@ -4,7 +4,7 @@ Uses HTML, CSS, JavaScript
 
 Wiki: https://github.com/davidtstran/davidtstran.github.io/wiki 
 
-Projects (Ordered by Release from Oldest to Newest): 
+Projects (Ordered by Release, Oldest to Newest): 
 
   1. Breakout
   
