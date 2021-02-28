@@ -1,0 +1,152 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>Tron</title>
+</head>
+<body>
+	<canvas id="gc" width="800" height="800">
+	</canvas> <br>
+<script>
+
+let size;
+let redPos;
+let bluePos;
+let redVel;
+let blueVel;
+let booster = 5;
+
+
+window.onload=function() {
+	canv=document.getElementById("gc");
+	ctx=canv.getContext("2d");
+    
+   	size = 10;
+	redPos = [size, canv.height/2 - size/2];
+	bluePos = [canv.width - size*2, canv.height/2 - size/2];
+	redVel = [booster, 0];
+	blueVel = [-booster, 0];
+	
+	ctx.fillStyle = "black";
+  	ctx.fillRect(0, 0, canv.width, canv.height);
+    
+	document.addEventListener("keydown", redKeyPush);
+    	document.addEventListener("keydown", blueKeyPush);
+    
+    	let loop = setInterval(function game() {  
+		// Player 1
+		redPos[0] += redVel[0];
+	      	redPos[1] += redVel[1]; 
+
+	      	// Player 2
+	      	bluePos[0] += blueVel[0];
+	      	bluePos[1] += blueVel[1];
+
+	      	ctx.textAlign = "center"; 
+		ctx.font = "20pt Fira Sans";
+
+		let redOutOfBounds = redPos[0] < 0 || redPos[0] > canv.width - size || redPos[1] < 0 || redPos[1] > canv.height - size;
+	      	let blueOutOfBounds = bluePos[0] < 0 || bluePos[0] > canv.width - size|| bluePos[1] < 0 || bluePos[1] > canv.height - size;
+	      	let redCollideObj = ctx.getImageData(redPos[0] + redVel[0], redPos[1] + redVel[1], 1, 1);
+	      	let redCollide = redCollideObj.data[0] == 255 || redCollideObj.data[2] == 255;
+	      	let blueCollideObj = ctx.getImageData(bluePos[0] + blueVel[0], bluePos[1] + blueVel[1], 1, 1);
+	      	let blueCollide = blueCollideObj.data[0] == 255 || blueCollideObj.data[2] == 255;
+
+	      	if ((redOutOfBounds && blueOutOfBounds) || (redCollide && blueCollide)) {
+			redVel = blueVel = [0, 0];
+			ctx.fillText("Game Over! It's a tie!", canv.width / 2, canv.height / 2); 
+			clearInterval(loop);
+	      	} else if (redOutOfBounds || redCollide) {
+			redVel = [0, 0];
+			ctx.fillText("Game Over! Blue Wins!", canv.width / 2, canv.height / 2); 
+			clearInterval(loop);
+	      	} else if (blueOutOfBounds || blueCollide) {
+			blueVel = [0, 0];
+			ctx.fillText("Game Over! Red Wins!", canv.width / 2, canv.height / 2);
+			clearInterval(loop);
+	      	} else {
+			ctx.fillStyle = "red";
+			ctx.fillRect(redPos[0], redPos[1], size, size);
+
+			ctx.fillStyle = "blue";
+			ctx.fillRect(bluePos[0], bluePos[1], size, size);
+	      	}
+
+	      	ctx.fillStyle = "white";
+	}, 1000/50);
+}
+
+let codes = {
+ 	left: 37,
+  	right: 39,
+	up: 38,
+  	down:40,
+  	a: 65,
+  	d: 68,
+  	w: 87,
+  	s: 83,
+}
+
+//Key Presses
+function redKeyPush(evt) {
+	switch(evt.keyCode) {
+    		case codes.a:
+      			if(redVel[0] !=  booster){
+      				redVel = [-booster, 0];
+      			}
+      			break;
+    		case codes.w:
+        		if(redVel[1] != booster){
+            			redVel = [0, -booster];
+        		}
+        		break;
+	    	case codes.d:
+			if(redVel[0] != -booster){
+		    		redVel = [booster, 0];
+			}
+			break;
+	    	case codes.s:
+			if(redVel[1] != -booster){
+		    		redVel = [0, booster];
+			}
+			break;
+	}
+}
+
+//Key Presses
+function blueKeyPush(evt) {
+	switch(evt.keyCode) {
+		case codes.left:
+	      		if(blueVel[0] !=  booster){
+				blueVel = [-booster, 0];
+	      		}
+	      		break;
+	    	case codes.up:
+			if(blueVel[1] != booster){
+		    		blueVel = [0, -booster];
+			}
+			break;
+	    	case codes.right:
+			if(blueVel[0] != -booster){
+		    		blueVel = [booster, 0];
+			}
+			break;
+	    	case codes.down:
+			if(blueVel[1] != -booster){
+		    		blueVel = [0, booster];
+			}
+			break;
+		}
+}
+	
+</script>
+</body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    

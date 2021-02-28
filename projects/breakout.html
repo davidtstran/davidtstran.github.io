@@ -1,0 +1,173 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>Breakout</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+</head>
+
+<body>
+
+	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Header
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br>
+	<h2>Move Mouse to Move Paddle<br>Click Screen to Start/Continue</h2>
+	<h2 id = "lives"></h2>
+	<h2 id = "bricksCount"></h2>
+	<p align = "center">
+		<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+	</p>
+
+<script>
+window.onload = function() {
+	
+	/* Constants for bricks */
+	var NUM_ROWS = 15;
+	var BRICK_TOP_OFFSET = 10;
+	var BRICK_SPACING = 2;
+	var NUM_BRICKS_PER_ROW = 10;
+	var BRICK_HEIGHT = 10;
+	var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
+	var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
+	/* Constants for ball and paddle */
+	var PADDLE_WIDTH = 80;
+	var PADDLE_HEIGHT = 5;
+	var PADDLE_OFFSET = 10;
+	var BALL_RADIUS = 10;
+	
+	var ball;
+	var paddle;
+	var dx = 5; // 2
+	var dy = 5; // 2
+	var ballStopped = false;
+	var tries = 10;
+	var totalBricks = NUM_ROWS * NUM_BRICKS_PER_ROW;
+	var theColor = Randomizer.nextColor();
+	
+	function start() {
+		document.getElementById("lives").innerHTML = "Lives Left: " + tries.toString(10);
+		document.getElementById("bricksCount").innerHTML = "Bricks Left: " + totalBricks.toString(10);
+		brickDisplay();
+		ballStart();
+		paddleStart(); 
+		mouseMoveMethod(paddleMove);
+		setTimer(bounceBall, 1);
+	}
+	
+	function brickDisplay() {
+		for (var i = 0; i < NUM_ROWS; i++) {
+			for (var j = 0; j < NUM_BRICKS_PER_ROW; j++) {
+				var brick = new Rectangle (BRICK_WIDTH, BRICK_HEIGHT);
+				var xPos = BRICK_SPACING + j * (BRICK_WIDTH + BRICK_SPACING);
+				var yPos = BRICK_TOP_OFFSET + i * (BRICK_HEIGHT + BRICK_SPACING);
+				brick.setPosition (xPos, yPos);
+				brick.setColor(theColor);
+				add(brick);
+			}
+		}
+	}
+	
+	function ballStart() {
+		ball = new Circle (BALL_RADIUS);
+		ball.setPosition (getWidth()/2, getHeight()/2);
+		ball.setColor(theColor);
+		add(ball);
+	}
+	function paddleStart(){
+		paddle = new Rectangle (PADDLE_WIDTH, PADDLE_HEIGHT);
+		paddle.setPosition (getWidth()/2 - PADDLE_WIDTH / 2, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
+		paddle.setColor(theColor);
+		add(paddle);
+	}
+	
+	function paddleMove(e){
+		var paddleX = e.getX() - paddle.getWidth()/2;
+    
+		if (paddleX < 0){
+			paddleX = 0;
+		}
+    
+		if (paddleX + PADDLE_WIDTH > getWidth()){
+			paddleX = getWidth() - PADDLE_WIDTH;
+		}
+		paddle.setPosition (paddleX, getHeight() - PADDLE_OFFSET - PADDLE_HEIGHT);
+	}
+	
+	function bounceBall() {
+		if (!ballStopped) {
+			checkWalls();
+			checkCollide();
+			ball.move(dx, dy);
+		}
+	}
+	
+	function checkWalls() {
+		// Bounce off right wall
+		if (ball.getX() + ball.getRadius() > getWidth()) {
+			dx = -dx;
+		}
+		// Bounce off left wall
+		else if (ball.getX() - ball.getRadius() < 0) {
+			dx = -dx;
+		}
+		// Bounce off bottom wall
+		else if (ball.getY() + ball.getRadius() > getHeight()) {
+			ball.setPosition(getWidth()/2, getHeight()/2);
+			ballStopped = true;
+			tries--;
+			document.getElementById("lives").innerHTML = "Lives Left: " + tries.toString(10);
+			if (tries == 0){
+				stopTimer(bounceBall);
+				remove(ball);
+				var txt = new Text ("Game Over");
+				txt.setPosition(getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+				add(txt);
+			}
+			else {
+				mouseClickMethod(beginBall);
+			}
+		}
+		// Bounce off top wall
+		else if (ball.getY() - ball.getRadius() < 0) {
+			dy = -dy;
+		}
+	}
+	function beginBall(e){
+		ballStopped = false;
+	}
+	function checkCollide() {
+		var elem;
+		var top = getElementAt (ball.getX(), ball.getY() - ball.getRadius());
+		var bot = getElementAt (ball.getX(), ball.getY() + ball.getRadius());
+		var right = getElementAt (ball.getX() + ball.getRadius(), ball.getY());
+		var left = getElementAt (ball.getX() - ball.getRadius(), ball.getY());
+		if (top != null) { collideWith(top); }
+		else if (bot != null) { collideWith(bot); }
+		else if (right != null) { collideWith(right); }
+		else if (left != null) { collideWith(left); }
+	}
+	function collideWith(elmnt) {
+		if (elmnt != paddle) {
+			remove(elmnt);
+			totalBricks--;
+			document.getElementById("bricksCount").innerHTML = "Bricks Left: " + totalBricks.toString(10);
+			if (totalBricks == 0) {
+				stopTimer(bounceBall);
+				var txt = new Text ("You Win!");
+				txt.setPosition (getWidth()/2 - txt.getWidth()/2, getHeight()/2);
+				add(txt);
+			}
+		}
+		dy = -dy; 
+	}
+	
+	if (typeof start === 'function') {
+        	start();
+    	}
+};
+</script>
+
+	
+</body>
+</html>

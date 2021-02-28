@@ -1,0 +1,167 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css">
+	<title>Snake Game</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://static.codehs.com/gulp/a207eaf74c9a65ef1504f82657de97532616341f/chs-js-lib/chs.js"></script>
+</head>
+<body>
+	<header>(<a href = "https://davidtstran.github.io" style="color:darkgray">Home</a>)
+		David Tran Header
+		(<a href = "https://github.com/davidtstran" style="color:darkgray">GitHub</a>) </header> <br> <br> 
+	<h2>Snake (Moves Random Direction at Start)<br>Change Direction with Arrow Keys or WASD<br></h2>
+	<h2 id = "size">Snake Size: 1</h2>
+	<p align = "center">
+		<input id = "start" type = "button" value = "Start" onclick = "start()"> <br> <br>
+		<canvas width="500" height="500" class="codehs-editor-canvas" style="background-color:black"></canvas>
+	</p>
+	
+<script>
+function start() {
+	removeAll(); // clear canvas
+	
+	var TIME = 50;
+	var GRID_SIZE = 10; // 50x50 blocks
+	var direction; // DEFAULT MOVE RANDOM
+	var snakeHead;
+	var snakeColorHead = Color.white;
+	var snakeColorBody = new Color (0, 255, 255);
+	var snakeBody = [];
+	var snakeSize = 1;
+	var food;
+	var foodExists = false;
+	var FOOD_SPEED = 3000; // 3 seconds
+	var elem;
+
+	createSnake();
+	document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
+	setTimer(createFood, 1);
+	setTimer(movement, TIME);
+	setTimer(moveFood, FOOD_SPEED);
+	keyDownMethod(changeDirection);
+	
+	function createSnake() {
+		snakeHead = new Rectangle (GRID_SIZE, GRID_SIZE);
+		var shX = Randomizer.nextInt(0, 49); // 50 blocks
+		var shY = Randomizer.nextInt(0, 49); // 50 blocks
+		snakeHead.setPosition(shX * GRID_SIZE, shY * GRID_SIZE);
+		snakeHead.setColor(snakeColorHead);
+		add(snakeHead);
+		var dir = Randomizer.nextInt(0, 3); // UP, LEFT, DOWN, RIGHT
+		if (dir == 0) { direction = "UP"; }
+		else if (dir == 1) { direction = "LEFT"; }
+		else if (dir == 2) { direction = "DOWN"; }
+		else if (dir == 3) { direction = "RIGHT"; }
+	}
+	
+	function changeDirection(e) {
+		if (e.keyCode == Keyboard.UP || e.keyCode == Keyboard.letter('W'))
+			direction = "UP";
+		else if (e.keyCode == Keyboard.LEFT || e.keyCode == Keyboard.letter('A')) 
+			direction = "LEFT";
+		else if (e.keyCode == Keyboard.DOWN || e.keyCode == Keyboard.letter('S')) 
+			direction = "DOWN";
+		else if (e.keyCode == Keyboard.RIGHT || e.keyCode == Keyboard.letter('D')) 
+			direction = "RIGHT";
+	}
+	
+	function createFood() {
+		if (foodExists == false){
+			food = new Rectangle (GRID_SIZE, GRID_SIZE);
+			var fX = Randomizer.nextInt(0, 49); // 50 blocks
+			var fY = Randomizer.nextInt(0, 49); // 50 blocks
+			food.setPosition(fX * GRID_SIZE, fY * GRID_SIZE);
+			food.setColor(Color.red);
+			add(food);	
+			foodExists = true;
+		}
+		if ( (snakeHead.getX() == food.getX()) && (snakeHead.getY() == food.getY()) ){
+			remove(food);
+			snakeBody[snakeSize - 1] = new Rectangle (GRID_SIZE, GRID_SIZE);
+			snakeBody[snakeSize - 1].setPosition(snakeHead.getX(), snakeHead.getY());
+			snakeBody[snakeSize - 1].setColor(snakeColorBody);
+			add(snakeBody[snakeSize - 1]);
+			snakeSize++;
+			document.getElementById("size").innerHTML = "Snake Size: " + snakeSize.toString(10);
+			foodExists = false;
+		}
+	}
+	
+	function movement() {
+		if (direction == "UP") {
+			snakeHead.move(0, -GRID_SIZE);
+			if (snakeHead.getY() < 0 - GRID_SIZE)
+				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE/2, snakeHead.getY());
+			if (elem.getColor() == "#00ffff")
+				dead();
+		}
+		else if (direction == "LEFT") {
+			snakeHead.move(-GRID_SIZE, 0);
+			if (snakeHead.getX() < 0 - GRID_SIZE)
+				dead();
+			elem = getElementAt (snakeHead.getX(), snakeHead.getY() + GRID_SIZE/2);
+			if (elem.getColor() == "#00ffff")
+				dead();
+		}
+		else if (direction == "DOWN") {
+			snakeHead.move(0, GRID_SIZE);
+			if (snakeHead.getY() >= getHeight())
+				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE/2, snakeHead.getY() + GRID_SIZE);
+			if (elem.getColor() == "#00ffff")
+				dead();
+		}
+		else if (direction == "RIGHT") {
+			snakeHead.move(GRID_SIZE, 0);
+			if (snakeHead.getX() >= getWidth())
+				dead();
+			elem = getElementAt (snakeHead.getX() + GRID_SIZE, snakeHead.getY() + GRID_SIZE/2);
+			if (elem.getColor() == "#00ffff")
+				dead();
+		}
+	}
+	
+	function moveFood() { 
+		/*var foodMove = Randomizer.nextInt(0, 3);
+		if (foodMove == 0) { // UP
+			if (food.getY() - GRID_SIZE > 0)
+				food.move(0, -GRID_SIZE);
+			else 
+				food.move(0, 0);
+		} 
+		else if (foodMove == 1) { // LEFT
+			if (food.getX() - GRID_SIZE > 0)
+				food.move(-GRID_SIZE, 0);
+			else
+				food.move(0, 0);
+		}
+		else if (foodMove == 2) { // DOWN
+			if (food.getY() + GRID_SIZE < getHeight()) 
+				food.move(0, GRID_SIZE);
+			else 
+				food.move(0, 0);
+		}
+		else if (foodMove == 3) { // RIGHT
+			if (food.getX() + GRID_SIZE < getWidth())
+				food.move(GRID_SIZE, 0);
+			else 
+				food.move(0, 0);
+		}*/
+		var foodX = Randomizer.nextInt(0, 49); // 50 blocks
+		var foodY = Randomizer.nextInt(0, 49); // 50 blocks
+		food.setPosition(foodX * GRID_SIZE, foodY * GRID_SIZE);
+	}
+	
+	function dead() {
+		stopTimer(createFood);
+		stopTimer(movement);
+		stopTimer(moveFood);
+		document.getElementById("size").innerHTML = "Died with Snake Size of " + snakeSize.toString(10);
+	}
+}
+</script>
+	
+
+</body>
+</html>
