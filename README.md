@@ -2,9 +2,9 @@
 
 - Website: https://davidtstran.github.io
 
-- Old Website: https://davidtstran.github.io/old-website
+- Old Website: https://davidtstran.github.io/old-website (Github: https://github.com/davidtstran/davidtstran.github.io/tree/master/old-website)
 
-- React (WIP): https://davidtstran.github.io/home
+- React (WIP): https://davidtstran.github.io/home (Github: https://github.com/davidtstran/home)
 
 
 
